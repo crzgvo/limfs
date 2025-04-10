@@ -91,10 +91,14 @@
     padding: 8px;
     z-index: 100;
     transition: top 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
 }
 
 .pular-link:focus {
     top: 0;
+    opacity: 1;
+    pointer-events: all;
 }
 
 /* Responsividade */
