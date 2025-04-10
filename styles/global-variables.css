@@ -1,0 +1,35 @@
+:root {
+    /* Cores principais */
+    --primary-blue: #1E386A;
+    --secondary-green: #05B056;
+    --white: #FFFFFF;
+    --yellow: #FDB731;
+    
+    /* Cores funcionais */
+    --cor-botao-hover: #0056b3;
+    --cor-fundo: #FFFFFF;
+    --cor-texto: #333333;
+    --cor-destaque: #FDB731;
+    --cor-alerta: #F47429;
+    --cor-link: #005394;
+    
+    /* Tipografia */
+    --font-primary: 'Public Sans', sans-serif;
+    --font-secondary: 'Roboto', sans-serif;
+    --font-size-titulo: 3rem;
+    --font-size-subtitulo: 2rem;
+    --font-size-texto: 1rem;
+    --line-height-padrao: 1.6;
+    
+    /* Espaçamento */
+    --padding-padrao: 20px;
+    --gap-padrao: 20px;
+    
+    /* Layout */
+    --max-width-container: 1200px;
+    --border-radius: 5px;
+    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+    /* Transições */
+    --transition-padrao: all 0.3s ease;
+  }

@@ -1,19 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700&display=swap');
-
-:root {
-    --primary-blue: #1E386A;
-    --white: #FFFFFF;
-    --yellow: #FDB731;
-}
-
-header {
+/* Cabeçalho principal */
+.cabecalho {
     width: 100%;
     margin: 0;
     padding: 0;
     background-color: var(--primary-blue);
 }
 
-.header-container {
+/* Container do cabeçalho */
+.container-cabecalho {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -23,25 +17,27 @@ header {
     flex-wrap: nowrap;
 }
 
-.logo-section {
+/* Seção do logotipo */
+.secao-logo {
     display: flex;
     align-items: center;
 }
 
-.logo-section .logo {
+.secao-logo .logo {
     height: 40px;
     margin-right: 10px;
     max-height: 100%;
 }
 
-.logo-section h1 {
+.secao-logo h1 {
     font-size: 1.8em;
     color: var(--white);
     text-align: left;
     white-space: nowrap;
 }
 
-nav ul {
+/* Menu de navegação */
+.navegacao ul {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -52,7 +48,7 @@ nav ul {
     white-space: nowrap;
 }
 
-nav ul li a {
+.navegacao ul li a {
     text-decoration: none;
     color: var(--white);
     font-weight: 700;
@@ -61,16 +57,22 @@ nav ul li a {
     font-family: 'Public Sans', sans-serif;
 }
 
-nav ul li a:hover {
+.navegacao ul li a:hover {
     color: var(--yellow);
 }
 
-nav ul li a:focus {
-  outline: 2px solid var(--yellow);
-  outline-offset: 2px;
+.navegacao ul li a:focus {
+    outline: 2px solid var(--yellow);
+    outline-offset: 2px;
 }
 
-.centered-content {
+.navegacao ul li a[aria-current="page"] {
+    text-decoration: underline;
+    color: var(--yellow);
+}
+
+/* Container centralizado */
+.conteudo-centralizado {
     max-width: 1400px;
     margin: 0 auto;
     display: flex;
@@ -79,15 +81,32 @@ nav ul li a:focus {
     width: 100%;
 }
 
+/* Link de acessibilidade para pular navegação */
+.pular-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--primary-blue);
+    color: var(--white);
+    padding: 8px;
+    z-index: 100;
+    transition: top 0.3s ease;
+}
+
+.pular-link:focus {
+    top: 0;
+}
+
+/* Responsividade */
 @media (max-width: 768px) {
-    .header-container {
+    .container-cabecalho {
         padding: 0 20px;
         flex-direction: row;
         flex-wrap: nowrap;
         height: 68px;
     }
     
-    nav ul {
+    .navegacao ul {
         flex-direction: row;
         gap: 10px;
     }

@@ -1,31 +1,25 @@
-:root {
-  --primary-blue: #1E386A;
-  --white: #FFFFFF;
-  --yellow: #FDB731;
-  --cor-botao-hover: #0056b3;
-}
+/* Fontes */
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700&family=Roboto:wght@400;700&display=swap');
 
-:root {
-  --cor-primaria: #1E386A;
-  --cor-secundaria: #05B056;
-  --cor-fundo: #FFFFFF;
-  --cor-texto: #333333;
-  --cor-botao-fundo: #1E386A;
-  --cor-botao-hover: #0056b3;
-  --cor-destaque: #FDB731;
-  --cor-alerta: #F47429;
-  --cor-link: #005394;
-  --primary-blue: #007BFF;
-}
+/* Reset e Variáveis Globais */
+@import url('./reset.css');
+@import url('./styles/global-variables.css');
 
-@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700&display=swap');
-
+/* Componentes Base */
 @import url('./styles/menu.css');
-@import url('./styles/contato.css');
-@import url('./styles/servicos.css');
-@import url('./styles/sobre.css');
+@import url('./styles/footer.css');
 
+/* Páginas */
+@import url('./styles/home.css');
+@import url('./styles/sobre.css');
+@import url('./styles/servicos.css');
+@import url('./styles/contato.css');
+
+/* Estilos globais */
 body {
     margin: 0;
-    font-family: 'Public Sans', sans-serif;
+    font-family: var(--font-primary);
+    line-height: var(--line-height-padrao);
+    color: var(--cor-texto);
+    background-color: var(--cor-fundo);
 }

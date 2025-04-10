@@ -1,49 +1,51 @@
-@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700&display=swap');
+/* Removendo importação redundante de fontes */
 
-#sobre-hero {
+/* Seção principal sobre */
+#sobre-principal {
   padding: 80px 0;
   background-color: var(--primary-blue);
   color: var(--white);
   text-align: center;
 }
 
-#sobre-hero .hero-container {
+#sobre-principal .container-principal {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
-#sobre-hero h1 {
+#sobre-principal h1 {
   font-size: 3rem;
   margin-bottom: 20px;
 }
 
-#sobre-hero p {
+#sobre-principal p {
   font-size: 1.2rem;
   line-height: 1.6;
   max-width: 800px;
   margin: 0 auto;
 }
 
-#sobre-cards {
+/* Seção de cartões sobre */
+#cartoes-sobre {
   padding: 60px 0;
   background-color: #f9f9f9;
 }
 
-#sobre-cards .container {
+#cartoes-sobre .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
-.sobre-grid {
+.grade-sobre {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 40px;
   margin-top: 40px;
 }
 
-.sobre-item {
+.item-sobre {
   background-color: var(--cor-fundo);
   border: 1px solid #ddd;
   border-radius: 10px;
@@ -52,63 +54,64 @@
   transition: all 0.3s ease;
 }
 
-.sobre-item h2 {
+.item-sobre h2 {
   font-size: 1.8rem;
   margin-bottom: 20px;
   color: var(--primary-blue);
   text-align: center;
 }
 
-.sobre-item p {
+.item-sobre p {
   font-size: 1rem;
   line-height: 1.6;
   color: var(--cor-texto);
   text-align: center;
 }
 
-.sobre-item:hover {
+.item-sobre:hover {
   background-color: var(--primary-blue);
   transform: translateY(-5px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.sobre-item:hover h2,
-.sobre-item:hover p {
+.item-sobre:hover h2,
+.item-sobre:hover p {
   color: var(--white);
 }
 
+/* Responsividade */
 @media (max-width: 768px) {
-  #sobre-hero h1 {
+  #sobre-principal h1 {
     font-size: 2.5rem;
   }
 
-  #sobre-hero p {
+  #sobre-principal p {
     font-size: 1.1rem;
   }
 
-  .sobre-grid {
+  .grade-sobre {
     gap: 30px;
   }
 }
 
 @media (max-width: 600px) {
-  #sobre-hero {
+  #sobre-principal {
     padding: 60px 0;
   }
 
-  #sobre-hero h1 {
+  #sobre-principal h1 {
     font-size: 2rem;
   }
 
-  #sobre-hero p {
+  #sobre-principal p {
     font-size: 1rem;
   }
 
-  .sobre-item {
+  .item-sobre {
     padding: 30px 20px;
   }
 
-  .sobre-item h2 {
+  .item-sobre h2 {
     font-size: 1.5rem;
   }
 }

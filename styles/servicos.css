@@ -1,120 +1,118 @@
 @import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700&display=swap');
 
-#servicos-hero {
+/* Seção principal dos serviços */
+#servicos-principal {
   padding: 80px 0;
   background-color: var(--primary-blue);
   color: var(--white);
   text-align: center;
 }
 
-#servicos-hero .hero-container {
+#servicos-principal .container-principal {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
-#servicos-hero h1 {
+#servicos-principal h1 {
   font-size: 3rem;
   margin-bottom: 20px;
 }
 
-#servicos-hero p {
+#servicos-principal p {
   font-size: 1.2rem;
   line-height: 1.6;
   max-width: 800px;
   margin: 0 auto;
 }
 
-#servicos-cards {
+/* Seção de cartões de serviços */
+#cartoes-servicos {
   padding: 60px 0;
   background-color: #f9f9f9;
 }
 
-#servicos-cards .container {
+#cartoes-servicos .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
-.servicos-grid {
+.grade-servicos {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 80px;
+  gap: 40px;
   margin-top: 40px;
 }
 
-.servico-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
-  padding: 40px 30px;
-  width: 100%;
+.grade-servicos .item-servico {
   background-color: var(--cor-fundo);
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 40px 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
 
-.servico-item:hover {
+.item-servico:hover {
   background-color: var(--primary-blue);
   color: var(--white);
   transform: translateY(-5px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.servico-item:hover h3,
-.servico-item:hover p {
+.item-servico:hover h3,
+.item-servico:hover p {
   color: var(--white);
 }
 
-.servico-item h3 {
+.item-servico h3 {
   font-size: 1.8rem;
   margin-bottom: 10px;
-  color: var(--cor-primaria);
+  color: var(--primary-blue);
   text-align: center;
 }
 
-.servico-item p {
+.item-servico p {
   font-size: 1rem;
   line-height: 1.5;
   color: var(--cor-texto);
   text-align: center;
 }
 
+/* Responsividade */
 @media (max-width: 768px) {
-  #servicos-hero h1 {
+  #servicos-principal h1 {
     font-size: 2.5rem;
   }
 
-  #servicos-hero p {
+  #servicos-principal p {
     font-size: 1.1rem;
   }
 
-  .servicos-grid {
+  .grade-servicos {
     gap: 30px;
   }
 }
 
 @media (max-width: 600px) {
-  #servicos-hero {
+  #servicos-principal {
     padding: 60px 0;
   }
 
-  #servicos-hero h1 {
+  #servicos-principal h1 {
     font-size: 2rem;
   }
 
-  #servicos-hero p {
+  #servicos-principal p {
     font-size: 1rem;
   }
 
-  .servico-item {
+  .item-servico {
     padding: 30px 20px;
   }
 
-  .servico-item h3 {
+  .item-servico h3 {
     font-size: 1.5rem;
   }
 }

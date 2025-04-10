@@ -1,8 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700&display=swap');
-
+/* Seção de contato */
 #contato {
   padding: 60px 0;
-  background-color: #f2f2f2; /* Fundo suave */
+  background-color: #f2f2f2;
 }
 
 #contato .container {
@@ -24,7 +23,46 @@
   color: var(--cor-texto);
 }
 
-.contato-info {
+/* Seção principal de contato */
+#contato-principal {
+  padding: 80px 0;
+  background-color: var(--primary-blue);
+  color: var(--white);
+  text-align: center;
+}
+
+#contato-principal .container-principal {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+#contato-principal h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+#contato-principal p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Seção do formulário */
+#secao-formulario {
+  padding: 60px 0;
+  background-color: #f9f9f9;
+}
+
+#secao-formulario .container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Informações de contato */
+.info-contato {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -32,52 +70,135 @@
   margin-bottom: 30px;
 }
 
-.info-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 5px 0;
-}
-
-.contact-form {
+.item-info {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.contact-form label {
-  font-size: 1rem;
+.item-info h3 {
   color: var(--primary-blue);
+  margin-bottom: 5px;
 }
 
-.contact-form input,
-.contact-form textarea {
-  width: 100%;
-  padding: 10px;
+.item-info a {
+  color: var(--cor-link);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.item-info a:hover {
+  text-decoration: underline;
+}
+
+/* Estilo do formulário */
+.formulario-contato {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.formulario-contato label {
+  margin-bottom: 8px;
+  color: var(--cor-texto);
+  font-weight: bold;
+}
+
+.formulario-contato input,
+.formulario-contato textarea {
+  padding: 12px;
+  margin-bottom: 20px;
+  border-radius: 5px;
   border: 1px solid #ccc;
-  border-radius: 5px;
   font-size: 1rem;
-  background-color: #fff; /* Fundo branco para legibilidade */
+  width: 100%;
 }
 
-.contact-form button {
-  padding: 12px 20px;
-  background: var(--primary-blue);
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
+.formulario-contato input:focus,
+.formulario-contato textarea:focus {
+  outline: 2px solid var(--primary-blue);
+  border-color: var(--primary-blue);
+}
+
+.formulario-contato button {
+  align-self: center;
   cursor: pointer;
-  transition: background 0.3s ease;
+  border: none;
+  min-width: 180px;
 }
 
-.contact-form button:hover {
-  background: var(--cor-botao-hover);
+/* Grupo de campos do formulário */
+.grupo-campo {
+  margin-bottom: 20px;
+  position: relative;
 }
 
+/* Mensagem de erro */
+.mensagem-erro {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 5px;
+  display: block;
+}
+
+.formulario-contato input:invalid,
+.formulario-contato textarea:invalid {
+  border-color: #dc3545;
+}
+
+.formulario-contato input:invalid:focus,
+.formulario-contato textarea:invalid:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+/* Indicador de campo obrigatório */
+.grupo-campo label span {
+  color: #dc3545;
+}
+
+/* Responsividade */
 @media (max-width: 768px) {
-  .contato-info {
+  #contato-principal h1 {
+    font-size: 2.5rem;
+  }
+
+  #contato-principal p {
+    font-size: 1.1rem;
+  }
+  
+  .info-contato {
     flex-direction: column;
     align-items: center;
+  }
+  
+  .item-info {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  #contato-principal {
+    padding: 60px 0;
+  }
+
+  #contato-principal h1 {
+    font-size: 2rem;
+  }
+
+  #contato-principal p {
+    font-size: 1rem;
+  }
+  
+  .formulario-contato {
+    padding: 20px;
   }
 }
