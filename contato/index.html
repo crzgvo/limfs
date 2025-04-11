@@ -29,7 +29,11 @@
           <img src="../img/logo-icons-branco_Prancheta 1.png" alt="Logo LIMFS" class="logo" loading="lazy">
           <h1>LIMFS</h1>
         </div>
-        <nav role="navigation" aria-label="Menu principal" class="navegacao">
+        <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-principal">
+          <span class="hamburger"></span>
+          <span class="visually-hidden">Menu fechado</span>
+        </button>
+        <nav role="navigation" aria-label="Menu principal" class="navegacao" id="menu-principal">
           <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/sobre/">Sobre</a></li>
@@ -119,31 +123,26 @@
       const dadosFormulario = new FormData(formulario);
       let eValido = true;
 
-      // Limpa mensagens de erro anteriores
       formulario.querySelectorAll('.mensagem-erro').forEach(el => el.textContent = '');
 
-      // Validação do nome
       const nome = dadosFormulario.get('nome');
       if (!nome || nome.length < 3 || !/^[A-Za-zÀ-ÿ\s]+$/.test(nome)) {
         document.getElementById('erro-nome').textContent = 'Por favor, insira um nome válido (mínimo 3 caracteres, apenas letras)';
         eValido = false;
       }
 
-      // Validação do email
       const email = dadosFormulario.get('email');
       if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         document.getElementById('erro-email').textContent = 'Por favor, insira um email válido';
         eValido = false;
       }
 
-      // Validação do telefone (opcional)
       const telefone = dadosFormulario.get('telefone');
       if (telefone && !/^[\d\s()-]+$/.test(telefone)) {
         document.getElementById('erro-telefone').textContent = 'Por favor, insira um telefone válido';
         eValido = false;
       }
 
-      // Validação da mensagem
       const mensagem = dadosFormulario.get('mensagem');
       if (!mensagem || mensagem.trim().length < 10) {
         document.getElementById('erro-mensagem').textContent = 'Por favor, insira uma mensagem com pelo menos 10 caracteres';
@@ -151,11 +150,11 @@
       }
 
       if (eValido) {
-        // Adicionar o código para enviar o formulário
         alert('Formulário válido! Implementar envio.');
       }
     });
   </script>
+  <script src="../js/menu.js"></script>
 </body>
 
 </html>

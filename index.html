@@ -29,7 +29,11 @@
           <img src="./img/logo-icons-branco_Prancheta 1.png" alt="Logo LIMFS" class="logo" loading="lazy">
           <h1>LIMFS</h1>
         </div>
-        <nav role="navigation" aria-label="Menu principal" class="navegacao">
+        <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-principal">
+          <span class="hamburger"></span>
+          <span class="visually-hidden">Menu fechado</span>
+        </button>
+        <nav role="navigation" aria-label="Menu principal" class="navegacao" id="menu-principal">
           <ul>
             <li><a href="/" aria-current="page">Home</a></li>
             <li><a href="/sobre/">Sobre</a></li>
@@ -66,12 +70,14 @@
   <footer class="rodape">
     <p>&copy; 2025 LIMFS. Todos os direitos reservados.</p>
     <p>
-      <a href="https://www.linkedin.com/company/mosaicosfuturos" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
+      <a href="https://www.linkedin.com/company/mosaicosfuturos" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      |
       <a href="https://instagram.com/mosaicosfuturos" target="_blank" rel="noopener noreferrer">Instagram</a> |
       <a href="mailto:contato@mosaicosfuturos.com">Email</a>
     </p>
     <p>Telefone: (79) 99809-4165</p>
   </footer>
+  <script src="./js/menu.js"></script>
 </body>
 
 </html>
