@@ -4,6 +4,10 @@
     margin: 0;
     padding: 0;
     background-color: var(--primary-blue);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
 }
 
 /* Container do cabeçalho */
@@ -14,6 +18,7 @@
     height: 68px;
     width: 100%;
     padding: 0;
+    position: relative;
     flex-wrap: nowrap;
 }
 
@@ -71,6 +76,68 @@
     color: var(--yellow);
 }
 
+/* Ajuste final para o botão hambúrguer */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    padding: 10px;
+    margin: 0;
+    width: 40px;
+    height: 40px;
+}
+
+.menu-toggle .hamburger,
+.menu-toggle .hamburger::before,
+.menu-toggle .hamburger::after {
+    height: 3px;
+    background-color: var(--white);
+    border-radius: 2px;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.menu-toggle .hamburger {
+    position: relative;
+    display: block;
+    width: 24px;
+    margin: 0 auto;
+}
+
+.menu-toggle .hamburger::before,
+.menu-toggle .hamburger::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    left: 0;
+}
+
+.menu-toggle .hamburger::before {
+    top: -8px;
+}
+
+.menu-toggle .hamburger::after {
+    top: 8px;
+}
+
+/* Estado ativo do botão */
+.menu-toggle.ativo .hamburger {
+    background-color: transparent;
+}
+
+.menu-toggle.ativo .hamburger::before {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle.ativo .hamburger::after {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
 /* Container centralizado */
 .conteudo-centralizado {
     max-width: 1400px;
@@ -103,15 +170,111 @@
 
 /* Responsividade */
 @media (max-width: 768px) {
+    .cabecalho {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 999;
+        width: 100%;
+    }
+
     .container-cabecalho {
         padding: 0 20px;
-        flex-direction: row;
-        flex-wrap: nowrap;
         height: 68px;
+        position: relative;
+    }
+
+    .menu-toggle {
+        display: block;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1000;
+    }
+
+    .conteudo-centralizado {
+        justify-content: space-between;
+    }
+
+    main {
+        padding-top: 68px;
+    }
+    
+    .navegacao {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 250px;
+        background-color: var(--primary-blue);
+        transform: translateX(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        z-index: 1000;
+        padding-top: 70px;
+    }
+    
+    .navegacao.ativo {
+        transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
     }
     
     .navegacao ul {
-        flex-direction: row;
-        gap: 10px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 20px;
+    }
+    
+    .navegacao ul li {
+        width: 100%;
+    }
+    
+    .navegacao ul li a {
+        display: block;
+        padding: 10px;
+        font-size: 1.2rem;
+        color: var(--white);
+    }
+    
+    .navegacao ul li a:hover,
+    .navegacao ul li a[aria-current="page"] {
+        background-color: var(--yellow);
+        color: var(--primary-blue);
+        border-radius: 5px;
+        text-decoration: none;
+    }
+    
+    /* Overlay escuro para conteúdo ao abrir o menu */
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease;
+        z-index: 900;
+    }
+    
+    .overlay.ativo {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .menu-toggle.ativo .hamburger {
+        background-color: transparent;
+    }
+    
+    .menu-toggle.ativo .hamburger::before {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .menu-toggle.ativo .hamburger::after {
+        transform: rotate(-45deg) translate(5px, -5px);
     }
 }

@@ -15,6 +15,11 @@
 @import url('./styles/servicos.css');
 @import url('./styles/contato.css');
 
+/* Controle de scroll quando menu aberto */
+.menu-aberto {
+    overflow: hidden;
+}
+
 /* Estilos globais */
 body {
     margin: 0;
@@ -22,4 +27,8 @@ body {
     line-height: var(--line-height-padrao);
     color: var(--cor-texto);
     background-color: var(--cor-fundo);
+}
+
+main {
+    padding-top: 68px; /* altura do cabeçalho para evitar sobreposição */
 }
