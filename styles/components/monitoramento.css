@@ -1,0 +1,357 @@
+/* Estilos para sistema de monitoramento e alertas - LIMFS */
+
+/* Notificações de alerta */
+.notificacao-alerta {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    min-width: 280px;
+    max-width: 400px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    overflow: hidden;
+    animation: slideIn 0.3s ease-out forwards;
+    border-left: 4px solid #4C9F38;
+    font-size: 14px;
+}
+
+.notificacao-alerta.alerta {
+    border-left-color: #FCC30B;
+}
+
+.notificacao-alerta.critico {
+    border-left-color: #E5243B;
+}
+
+.notificacao-alerta.desconhecido {
+    border-left-color: #777777;
+}
+
+.notificacao-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.notificacao-titulo {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.fechar-notificacao {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #666;
+    line-height: 1;
+    padding: 0;
+    margin: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+.fechar-notificacao:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.notificacao-conteudo {
+    padding: 12px 15px;
+}
+
+.notificacao-conteudo p {
+    margin: 0 0 8px 0;
+    line-height: 1.4;
+}
+
+.notificacao-timestamp {
+    display: block;
+    font-size: 12px;
+    color: #777;
+    margin-top: 5px;
+}
+
+.notificacao-alerta.fechando {
+    animation: slideOut 0.3s ease-in forwards;
+}
+
+/* Painel de status do sistema */
+.status-sistema {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    padding: 15px;
+    margin: 20px 0;
+}
+
+.status-sistema-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.status-sistema-titulo {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    flex-grow: 1;
+}
+
+.status-sistema-badge {
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-weight: 500;
+}
+
+.status-sistema-badge.normal {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+
+.status-sistema-badge.alerta {
+    background-color: #fcf8e3;
+    color: #8a6d3b;
+}
+
+.status-sistema-badge.critico {
+    background-color: #f2dede;
+    color: #a94442;
+}
+
+.lista-apis {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.api-item {
+    background-color: #ffffff;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s;
+}
+
+.api-item:hover {
+    transform: translateY(-2px);
+}
+
+.api-nome {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.api-status {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    margin-top: 3px;
+}
+
+.api-status::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+
+.api-status.online::before {
+    background-color: #4CAF50;
+}
+
+.api-status.erro::before, .api-status.falha::before {
+    background-color: #F44336;
+}
+
+.api-tempo {
+    font-size: 12px;
+    color: #777;
+    margin-top: 8px;
+}
+
+.api-ultimo-check {
+    font-size: 11px;
+    color: #999;
+    margin-top: 5px;
+}
+
+.api-criticidade {
+    font-size: 11px;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 4px;
+    align-self: flex-start;
+    margin-top: 8px;
+}
+
+.api-criticidade.alta {
+    background-color: #ffebee;
+    color: #d32f2f;
+}
+
+.api-criticidade.media {
+    background-color: #fff8e1;
+    color: #ff8f00;
+}
+
+.api-criticidade.baixa {
+    background-color: #e8f5e9;
+    color: #388e3c;
+}
+
+/* Relatório de erros */
+.relatorio-erros {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    padding: 15px;
+    margin: 20px 0;
+}
+
+.relatorio-titulo {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.relatorio-titulo i {
+    margin-right: 8px;
+    color: #E5243B;
+}
+
+.erro-item {
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-left: 3px solid #E5243B;
+}
+
+.erro-timestamp {
+    font-size: 11px;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+.erro-mensagem {
+    margin: 0;
+    font-family: monospace;
+    font-size: 13px;
+    word-break: break-all;
+    line-height: 1.4;
+}
+
+.sem-erros {
+    text-align: center;
+    padding: 20px;
+    color: #4CAF50;
+    font-weight: 500;
+}
+
+/* Animações para as notificações */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* Melhorias para acessibilidade */
+.notificacao-alerta:focus-within {
+    outline: 2px solid #0056b3;
+}
+
+.fechar-notificacao:focus {
+    outline: 2px solid #0056b3;
+    outline-offset: 2px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .lista-apis {
+        grid-template-columns: 1fr;
+    }
+    
+    .notificacao-alerta {
+        max-width: 90%;
+        width: 90%;
+        left: 5%;
+        right: 5%;
+    }
+}
+
+/* Suporte a tema escuro */
+@media (prefers-color-scheme: dark) {
+    .notificacao-alerta {
+        background-color: #2c2c2c;
+        color: #e8e8e8;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    
+    .notificacao-cabecalho {
+        background-color: #333333;
+        border-bottom-color: #444444;
+    }
+    
+    .fechar-notificacao {
+        color: #bbb;
+    }
+    
+    .notificacao-timestamp {
+        color: #aaa;
+    }
+    
+    .status-sistema {
+        background-color: #2c2c2c;
+        border-color: #444444;
+        color: #e8e8e8;
+    }
+    
+    .api-item {
+        background-color: #333333;
+        color: #e8e8e8;
+    }
+    
+    .api-ultimo-check,
+    .api-tempo {
+        color: #aaa;
+    }
+    
+    .erro-item {
+        background-color: #333333;
+        color: #e8e8e8;
+    }
+}

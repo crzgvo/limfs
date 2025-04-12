@@ -258,210 +258,90 @@ async function carregarDadosAtualizados(endpoint) {
 /**
  * Gerencia cache local para reduzir requisições repetidas
  */
-function armazenarCacheLocal(endpoint, dados) {
-    try {
-        const chaveCache = `ods_sergipe_${endpoint}`;
-        const dadosCache = {
-            timestamp: new Date().getTime(),
-            dados: dados
-        };
-        
-        localStorage.setItem(chaveCache, JSON.stringify(dadosCache));
-        return true;
-    } catch (erro) {
-        console.warn(`Erro ao armazenar cache local para ${endpoint}:`, erro);
-        return false;
-    }
+function armazenarCacheLocal(chave, valor) {
+  localStorage.setItem(chave, JSON.stringify(valor));
 }
 
 /**
  * Verifica a validade do cache local antes de fazer requisições
  */
-function verificarCacheLocal(endpoint) {
-    try {
-        const chaveCache = `ods_sergipe_${endpoint}`;
-        const cacheString = localStorage.getItem(chaveCache);
-        
-        if (!cacheString) {
-            return null;
-        }
-        
-        const cache = JSON.parse(cacheString);
-        const agora = new Date().getTime();
-        
-        if ((agora - cache.timestamp) < API_CONFIG.arquivos_json.cache_expiration) {
-            console.log(`Usando cache local para ${endpoint}`);
-            return cache.dados;
-        } else {
-            console.log(`Cache local para ${endpoint} expirou`);
-            localStorage.removeItem(chaveCache);
-            return null;
-        }
-    } catch (erro) {
-        console.warn(`Erro ao verificar cache local para ${endpoint}:`, erro);
-        return null;
-    }
+function verificarCacheLocal(chave) {
+  const dado = localStorage.getItem(chave);
+  return dado ? JSON.parse(dado) : null;
 }
 
 /**
  * Analisa as respostas das APIs conforme diferentes estruturas
  * Função crítica para extrair valores de diferentes formatos de resposta
  */
-function analisarResposta(data, endpoint, endpointIndex) {
-    try {
-        let valor = null;
-        let ano = new Date().getFullYear();
+function analisarResposta(dados, endpoint, indice) {
+  if (!Array.isArray(dados) || !dados[indice] || !dados[indice + 1]) return null;
+  const valorRaw = dados[indice + 1]['V'];
+  const anoRaw = dados[indice + 1]['D2N'];
+  if (!valorRaw || isNaN(parseFloat(valorRaw))) return null;
 
-        if (endpoint !== 'energia_solar') {
-            // Processamento para APIs do IBGE
-            if (endpointIndex === 0) {
-                // Formato SIDRA
-                if (data && data.length > 0 && data[1]) {
-                    valor = parseFloat(data[1].V || data[1].valor || '0');
-                    const periodoInfo = data[1].D2N || data[1].D3N;
-                    if (periodoInfo) {
-                        ano = parseInt(periodoInfo);
-                    }
-                }
-            } else if (endpointIndex === 1) {
-                // Formato servicodados v3
-                if (data && data[0]?.resultados?.[0]?.series?.[0]?.serie) {
-                    const serie = data[0].resultados[0].series[0].serie;
-                    const ultimoPeriodo = Object.keys(serie).sort().pop();
-                    valor = parseFloat(serie[ultimoPeriodo] || '0');
-                    ano = parseInt(ultimoPeriodo) || ano;
-                }
-            } else if (endpointIndex === 2) {
-                // Formato servicodados v1
-                if (data && data[0]?.res) {
-                    const res = data[0].res;
-                    const ultimoPeriodo = Object.keys(res).sort().pop();
-                    valor = parseFloat(res[ultimoPeriodo] || '0');
-                    ano = parseInt(ultimoPeriodo) || ano;
-                }
-            }
-        } else {
-            // Processamento específico para dados da ANEEL
-            if (data && data.result?.records) {
-                const records = data.result.records;
-                const totalInstalacoes = records.length;
-                const capacidadeTotal = records.reduce(
-                    (acc, item) => acc + parseFloat(item.PotenciaKW || item.Potência || 0), 0
-                );
-                
-                valor = parseFloat(((totalInstalacoes / 14200) * 11.3).toFixed(1));
-                
-                const dadosCompletos = {
-                    instalacoes: totalInstalacoes,
-                    capacidadeKW: capacidadeTotal.toFixed(2)
-                };
-                
-                return {
-                    valor: valor,
-                    ano: ano,
-                    dadosCompletos: dadosCompletos
-                };
-            }
-        }
-
-        if (valor === null || isNaN(valor)) {
-            console.warn(`Não foi possível extrair um valor válido da resposta para ${endpoint}`);
-            return null;
-        }
-
-        return {
-            valor: valor,
-            ano: ano
-        };
-    } catch (erro) {
-        console.error(`Erro ao analisar resposta da API para ${endpoint}:`, erro);
-        return null;
-    }
+  return {
+    valor: parseFloat(valorRaw),
+    ano: anoRaw ? parseInt(anoRaw, 10) : null
+  };
 }
 
 /**
  * Implementa o pattern Circuit Breaker para evitar requisições excessivas a APIs com falha
  * Tenta múltiplos endpoints até obter sucesso
  */
-async function tentarMultiplosEndpoints(endpoint) {
-    // Verificação de circuit breaker
-    const circuitBreakerKey = `circuit_breaker_${endpoint}`;
-    const circuitBreakerData = sessionStorage.getItem(circuitBreakerKey);
-    
-    if (circuitBreakerData) {
-        const { timestamp, falhas } = JSON.parse(circuitBreakerData);
-        const tempoDecorrido = Date.now() - timestamp;
-        
-        // Circuito aberto: muitas falhas recentes
-        if (falhas >= 3 && tempoDecorrido < 300000) { // 5 minutos
-            console.log(`🔄 Circuit breaker ativo para ${endpoint}. Usando dados de fallback.`);
-            return null;
-        }
-        
-        // Reset após período de espera
-        if (tempoDecorrido > 300000) {
-            sessionStorage.removeItem(circuitBreakerKey);
-        }
-    }
-    
-    // Verificação de endpoints disponíveis
-    const endpointsDisponiveis = API_CONFIG.endpoints[endpoint] || [];
-    if (endpointsDisponiveis.length === 0) {
-        console.error(`Nenhum endpoint configurado para ${endpoint}`);
-        return null;
-    }
+async function tentarMultiplosEndpoints(endpoint, endpoints = [], maxTentativas = 3, delayInicial = 500) {
+  // Verifica e inicializa o estado do Circuit Breaker
+  const chaveCircuitBreaker = `circuit_breaker_${endpoint}`;
+  let estadoCircuitBreaker = JSON.parse(sessionStorage.getItem(chaveCircuitBreaker)) || { falhas: 0, ativo: false };
 
-    let falhas = 0;
-    
-    // Tenta cada endpoint em sequência
-    for (let i = 0; i < endpointsDisponiveis.length; i++) {
-        try {
-            let url = endpointsDisponiveis[i];
-            
-            // Constrói URL completa quando necessário
-            if (url.startsWith('/t/')) {
-                url = API_CONFIG.ibge_sidra_base + url;
-            } else if (url.startsWith('/v')) {
-                url = API_CONFIG.servicedados_base + url;
-            }
-            
-            console.log(`Tentando endpoint ${i+1}/${endpointsDisponiveis.length} para ${endpoint}: ${url}`);
-            
-            // Implementa timeout para evitar bloqueios
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), API_CONFIG.timeout);
-            
-            const response = await fetch(url, { signal: controller.signal });
-            clearTimeout(timeoutId);
-            
-            if (!response.ok) {
-                throw new Error(`Status HTTP: ${response.status}`);
-            }
-            
-            const data = await response.json();
-            
-            // Processa os dados recebidos
-            const dadosAnalisados = analisarResposta(data, endpoint, i);
-            if (dadosAnalisados) {
-                // Limpa o circuit breaker em caso de sucesso
-                sessionStorage.removeItem(circuitBreakerKey);
-                return dadosAnalisados;
-            }
-        } catch (erro) {
-            console.warn(`Falha no endpoint ${i+1} para ${endpoint}:`, erro.message);
-            falhas++;
-            
-            // Atualiza o circuit breaker
-            const circuitBreakerAtual = JSON.parse(sessionStorage.getItem(circuitBreakerKey) || '{"falhas":0}');
-            sessionStorage.setItem(circuitBreakerKey, JSON.stringify({
-                timestamp: Date.now(),
-                falhas: (circuitBreakerAtual.falhas || 0) + 1
-            }));
-        }
-    }
-    
-    console.error(`Todos os ${endpointsDisponiveis.length} endpoints falharam para ${endpoint}`);
+  if (estadoCircuitBreaker.ativo) {
+    console.warn(`Circuit Breaker ativo para ${endpoint}`);
     return null;
+  }
+
+  let tentativas = 0;
+  let delay = delayInicial;
+
+  for (const url of endpoints) {
+    while (tentativas < maxTentativas) {
+      try {
+        const resposta = await fetch(url);
+        if (resposta.ok) {
+          const dados = await resposta.json();
+          const resultado = analisarResposta(dados, endpoint, 0);
+          if (resultado) {
+            // Resetar estado do Circuit Breaker em caso de sucesso
+            estadoCircuitBreaker.falhas = 0;
+            estadoCircuitBreaker.ativo = false;
+            sessionStorage.setItem(chaveCircuitBreaker, JSON.stringify(estadoCircuitBreaker));
+            return resultado;
+          }
+        }
+        throw new Error('Resposta inválida');
+      } catch (erro) {
+        tentativas++;
+        estadoCircuitBreaker.falhas++;
+        
+        // Ativa o Circuit Breaker se atingir o limite de falhas
+        if (estadoCircuitBreaker.falhas >= 3) {
+          estadoCircuitBreaker.ativo = true;
+          sessionStorage.setItem(chaveCircuitBreaker, JSON.stringify(estadoCircuitBreaker));
+          registrarErroPersistente(endpoint, erro);
+          return null;
+        }
+
+        if (tentativas < maxTentativas) {
+          await new Promise(resolve => setTimeout(resolve, delay));
+          delay *= 2;
+        }
+      }
+    }
+  }
+  
+  // Atualiza o estado final no sessionStorage
+  sessionStorage.setItem(chaveCircuitBreaker, JSON.stringify(estadoCircuitBreaker));
+  return null;
 }
 
 /**
@@ -473,7 +353,7 @@ async function tentarMultiplosEndpoints(endpoint) {
  */
 async function buscarDadosAPI(endpoint) {
     // Camada 1: Cache local
-    const dadosCache = verificarCacheLocal(endpoint);
+    const dadosCache = verificarCacheLocal(`ods_sergipe_${endpoint}`);
     if (dadosCache) {
         console.log(`✅ Usando dados em cache local para ${endpoint}`);
         return dadosCache;
@@ -482,7 +362,7 @@ async function buscarDadosAPI(endpoint) {
     // Camada 2: Arquivos JSON
     const dadosAtualizados = await carregarDadosAtualizados(endpoint);
     if (dadosAtualizados) {
-        armazenarCacheLocal(endpoint, dadosAtualizados);
+        armazenarCacheLocal(`ods_sergipe_${endpoint}`, dadosAtualizados);
         return dadosAtualizados;
     }
     
@@ -491,7 +371,7 @@ async function buscarDadosAPI(endpoint) {
         const dadosAPI = await tentarMultiplosEndpoints(endpoint);
         if (dadosAPI) {
             dadosAPI.usouFallback = false;
-            armazenarCacheLocal(endpoint, dadosAPI);
+            armazenarCacheLocal(`ods_sergipe_${endpoint}`, dadosAPI);
             return dadosAPI;
         }
         
@@ -872,27 +752,15 @@ function atualizarDataAtualizacao() {
  * Registra erros persistentes para análise posterior
  */
 function registrarErroPersistente(endpoint, erro) {
-    try {
-        const errosKey = 'ods_sergipe_erros';
-        const errosAnteriores = JSON.parse(localStorage.getItem(errosKey) || '[]');
-        
-        errosAnteriores.push({
-            endpoint: endpoint,
-            mensagem: erro.message,
-            timestamp: new Date().toISOString(),
-            userAgent: navigator.userAgent
-        });
-        
-        // Limita a quantidade de erros armazenados
-        const errosLimitados = errosAnteriores.slice(-20);
-        localStorage.setItem(errosKey, JSON.stringify(errosLimitados));
-        
-        if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
-            console.error('Erro persistente registrado:', erro);
-        }
-    } catch (e) {
-        console.warn('Não foi possível registrar erro persistente:', e);
-    }
+  const chave = 'ods_sergipe_erros';
+  const erroFormatado = {
+    endpoint,
+    mensagem: erro.message || erro.mensagem || 'Erro desconhecido',
+    timestamp: Date.now()
+  };
+  const errosAtuais = JSON.parse(localStorage.getItem(chave)) || [];
+  errosAtuais.push(erroFormatado);
+  localStorage.setItem(chave, JSON.stringify(errosAtuais));
 }
 
 /**
@@ -941,5 +809,16 @@ async function inicializarPainel() {
     }
 }
 
-// Inicialização quando o DOM estiver pronto
-document.addEventListener('DOMContentLoaded', inicializarPainel);
+if (typeof document !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', inicializarPainel);
+}
+
+module.exports = {
+  inicializarPainel,
+  tentarMultiplosEndpoints,
+  analisarResposta,
+  verificarCacheLocal,
+  armazenarCacheLocal,
+  usarDadosFallback,
+  registrarErroPersistente
+};
