@@ -16,7 +16,7 @@ const CONFIG_MONITORAMENTO = {
     maxErrosSalvos: 50,
     chaveLocalStorage: 'limfs_monitoramento',
     chaveErrosAPI: 'limfs_erros_api',
-    endpointRelatorioCentral: '/api/monitoramento/relatorio', // Em produção, apontaria para um endpoint real
+    endpointRelatorioCentral: 'https://api.mosaicosfuturos.com/monitoramento/relatorio', // Em produção, apontaria para um endpoint real
     intervaloEnvioRelatorios: 3600000, // 1 hora
     maxTentativasEnvio: 3,
     toleranciaFalhas: {

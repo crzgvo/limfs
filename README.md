@@ -157,6 +157,6 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 ## Contato
 
-LIMFS - Laboratório de Pesquisa em Monitoramento e Avaliação de Políticas Públicas
-- Email: contato@limfs.com.br
-- Website: https://www.limfs.com.br
+LIMFS - Laboratório Inovação, Mosaicos e Futuros
+- Email: contato@mosaicosfuturos.com
+- Website: https://www.mosaicosfuturos.com
