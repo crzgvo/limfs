@@ -1,3 +1,7 @@
+/**
+ * Sistema de menu responsivo com suporte a acessibilidade
+ */
+
 const menuToggle = document.querySelector('.menu-toggle');
 const navegacao = document.querySelector('.navegacao');
 
@@ -35,6 +39,10 @@ document.addEventListener('keyup', (event) => {
     }
 });
 
+/**
+ * Focus trap para acessibilidade - garante que usuários de teclado 
+ * naveguem apenas dentro do menu quando ele estiver aberto
+ */
 navegacao.addEventListener('keydown', (event) => {
     if (!navegacao.classList.contains('ativo')) return;
 

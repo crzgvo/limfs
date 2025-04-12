@@ -1,4 +1,8 @@
-:root {
+/**
+ * Variáveis globais do sistema - Design Tokens
+ */
+
+ :root {
   /* Cores principais */
   --primary-blue: #1E386A;
   --secondary-green: #05B056;

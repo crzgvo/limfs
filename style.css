@@ -1,3 +1,7 @@
+/**
+ * Mosaicos Futuros - Sistema de importação modular
+ */
+
 /* Fontes */
 @import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700&family=Roboto:wght@400;700&display=swap');
 
@@ -14,8 +18,9 @@
 @import url('./styles/sobre.css');
 @import url('./styles/servicos.css');
 @import url('./styles/contato.css');
+@import url('./styles/painel-ods.css');
 
-/* Controle de scroll quando menu aberto */
+/* Evita scroll quando menu mobile está aberto */
 .menu-aberto {
     overflow: hidden;
 }
@@ -30,5 +35,6 @@ body {
 }
 
 main {
-    padding-top: 68px; /* altura do cabeçalho para evitar sobreposição */
+    padding-top: 68px;
+    /* Compensa altura do cabeçalho fixo */
 }

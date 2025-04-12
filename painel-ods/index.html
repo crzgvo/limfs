@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Painel ODS Sergipe - Monitoramento dos Objetivos de Desenvolvimento Sustentável">
+    <meta name="keywords" content="LIMFS, ODS, Agenda 2030, Sergipe, Sustentabilidade, Indicadores">
+    <meta name="author" content="LIMFS">
+    <meta property="og:title" content="Mosaicos Futuros - Painel ODS Sergipe">
+    <meta property="og:description" content="Acompanhe os indicadores e o progresso de Sergipe na Agenda 2030.">
+    <meta property="og:image" content="../img/logo-icons-coloridos_Prancheta 1.png">
+    <meta property="og:url" content="https://www.mosaicosfuturos.com/painel-ods">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Mosaicos Futuros - Painel ODS Sergipe</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../styles/painel-ods.css">
+    <link rel="icon" type="image/png" href="../img/logo-icons-coloridos_Prancheta 1.png">
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Adicionando Chart.js para visualizações gráficas dos indicadores -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <!-- Dados estruturados Schema.org para SEO (Dataset) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Dataset",
+      "name": "Painel ODS Sergipe - Indicadores de Desenvolvimento Sustentável",
+      "description": "Conjunto de indicadores relacionados aos Objetivos de Desenvolvimento Sustentável (ODS) para o estado de Sergipe, com foco nos ODS 1 (Erradicação da Pobreza), ODS 4 (Educação de Qualidade) e ODS 6 (Água Potável e Saneamento).",
+      "url": "https://www.mosaicosfuturos.com/painel-ods",
+      "keywords": ["ODS", "Sergipe", "Erradicação da Pobreza", "Educação", "Saneamento", "Desenvolvimento Sustentável", "Agenda 2030", "IBGE"],
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "creator": {
+        "@type": "Organization",
+        "name": "LIMFS",
+        "url": "https://www.mosaicosfuturos.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "LIMFS",
+        "url": "https://www.mosaicosfuturos.com"
+      },
+      "spatialCoverage": {
+        "@type": "Place",
+        "name": "Sergipe",
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -10.5741,
+          "longitude": -37.3857
+        }
+      },
+      "temporalCoverage": "2017-01-01/2024-12-31",
+      "variableMeasured": [
+        "Taxa de extrema pobreza",
+        "Taxa de alfabetização",
+        "Cobertura de saneamento básico"
+      ],
+      "distribution": [
+        {
+          "@type": "DataDownload",
+          "encodingFormat": "text/html",
+          "contentUrl": "https://www.mosaicosfuturos.com/painel-ods"
+        }
+      ]
+    }
+  </script>
+    <!-- Dados estruturados para cada indicador (como estatísticas) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Indicadores ODS para Sergipe",
+      "description": "Lista de indicadores-chave relacionados aos Objetivos de Desenvolvimento Sustentável em Sergipe",
+      "itemListElement": [
+        {
+          "@type": "Observation",
+          "name": "Taxa de Extrema Pobreza",
+          "observationDate": "2024",
+          "measuredValue": "8.1%",
+          "observedNode": {
+            "@type": "StatisticalPopulation",
+            "name": "População de Sergipe",
+            "populationType": "Pessoas em situação de extrema pobreza"
+          },
+          "measurementTechnique": "Pesquisa Nacional por Amostra de Domicílios Contínua (PNAD)",
+          "observationAbout": {
+            "@type": "Place",
+            "name": "Sergipe, Brasil"
+          }
+        },
+        {
+          "@type": "Observation",
+          "name": "Taxa de Alfabetização",
+          "observationDate": "2022",
+          "measuredValue": "86.9%",
+          "observedNode": {
+            "@type": "StatisticalPopulation",
+            "name": "População de Sergipe (15 anos ou mais)",
+            "populationType": "Taxa de alfabetização"
+          },
+          "measurementTechnique": "Pesquisa Nacional por Amostra de Domicílios Contínua - Educação",
+          "observationAbout": {
+            "@type": "Place",
+            "name": "Sergipe, Brasil"
+          }
+        },
+        {
+          "@type": "Observation",
+          "name": "Cobertura de Saneamento Básico",
+          "observationDate": "2022",
+          "measuredValue": "37.1%",
+          "observedNode": {
+            "@type": "StatisticalPopulation",
+            "name": "Domicílios de Sergipe",
+            "populationType": "Acesso a esgotamento sanitário por rede geral"
+          },
+          "measurementTechnique": "Pesquisa Nacional de Saneamento Básico",
+          "observationAbout": {
+            "@type": "Place",
+            "name": "Sergipe, Brasil"
+          }
+        }
+      ]
+    }
+  </script>
+</head>
+
+<body>
+    <a href="#conteudo-principal" class="pular-link">Pular para o conteúdo principal</a>
+    <header class="cabecalho">
+        <div class="container-cabecalho">
+            <div class="conteudo-centralizado">
+                <div class="secao-logo">
+                    <img src="../img/logo-icons-branco_Prancheta 1.png" alt="Logo LIMFS" class="logo" loading="lazy">
+                    <h1>LIMFS</h1>
+                </div>
+                <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false"
+                    aria-controls="menu-principal">
+                    <span class="hamburger"></span>
+                    <span class="visually-hidden">Menu fechado</span>
+                </button>
+                <nav role="navigation" aria-label="Menu principal" class="navegacao" id="menu-principal">
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/sobre/">Sobre</a></li>
+                        <li><a href="/servicos/">Serviços</a></li>
+                        <li><a href="/contato/">Contato</a></li>
+                        <li><a href="/painel-ods/" aria-current="page">Painel ODS</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main id="conteudo-principal" role="main">
+        <section id="painel-ods-principal">
+            <div class="container-principal">
+                <h1>Painel ODS Sergipe</h1>
+                <p>
+                    Acompanhe indicadores atualizados sobre os Objetivos de Desenvolvimento Sustentável em Sergipe.
+                    Nosso painel oferece uma visão transparente do progresso regional na implementação da Agenda 2030.
+                </p>
+            </div>
+        </section>
+
+        <section id="indicadores-ods">
+            <div class="container">
+                <h2>Indicadores em Destaque</h2>
+                <p>Dados atualizados que refletem o progresso de Sergipe nos Objetivos de Desenvolvimento Sustentável.
+                </p>
+
+                <div class="grade-indicadores">
+                    <div id="indicador-pobreza" class="card-indicador" aria-live="polite">
+                        <div class="ods-badge">ODS 1</div>
+                        <h3>Taxa de Extrema Pobreza</h3>
+                        <div class="conteudo-indicador">
+                            <p class="status-carregamento">Carregando dados...</p>
+                        </div>
+                        <div class="grafico-container">
+                            <canvas id="grafico-pobreza" role="img"
+                                aria-label="Gráfico da taxa de extrema pobreza"></canvas>
+                        </div>
+                    </div>
+
+                    <div id="indicador-educacao" class="card-indicador" aria-live="polite">
+                        <div class="ods-badge">ODS 4</div>
+                        <h3>Educação de Qualidade</h3>
+                        <div class="conteudo-indicador">
+                            <p class="status-carregamento">Carregando dados...</p>
+                        </div>
+                        <div class="grafico-container">
+                            <canvas id="grafico-educacao" role="img"
+                                aria-label="Gráfico da taxa de alfabetização"></canvas>
+                        </div>
+                    </div>
+
+                    <div id="indicador-saneamento" class="card-indicador" aria-live="polite">
+                        <div class="ods-badge">ODS 6</div>
+                        <h3>Água e Saneamento</h3>
+                        <div class="conteudo-indicador">
+                            <p class="status-carregamento">Carregando dados...</p>
+                        </div>
+                        <div class="grafico-container">
+                            <canvas id="grafico-saneamento" role="img"
+                                aria-label="Gráfico da cobertura de saneamento básico"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="visualizacao-comparativa">
+                    <h3>Comparativo entre Indicadores</h3>
+                    <div class="grafico-comparativo-container">
+                        <canvas id="grafico-comparativo" role="img"
+                            aria-label="Gráfico comparativo entre os indicadores ODS"></canvas>
+                    </div>
+                    <p class="legenda-grafico">Dados consolidados dos principais indicadores ODS para Sergipe</p>
+                    <div class="botoes-exportacao">
+                        <button class="botao-exportar" id="btn-exportar-todos">
+                            <i class="fas fa-download"></i> Exportar Todos os Dados (CSV)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grade-info-adicional">
+                    <div class="card-info">
+                        <h3>Sobre os Dados</h3>
+                        <p>
+                            Os indicadores exibidos são baseados em dados oficiais recentes publicados pelo IBGE,
+                            incluindo PNAD Contínua
+                            Educação (2023), Censo Demográfico IBGE (2022) e informações complementares do IDSC e G1
+                            Notícias. A atualização
+                            periódica garante transparência e confiabilidade para acompanhar o progresso de Sergipe na
+                            Agenda 2030.
+                        </p>
+                        <p>
+                            <strong>Última atualização:</strong> <span id="data-atualizacao"></span>
+                        </p>
+                    </div>
+
+                    <div class="card-info">
+                        <h3>Como Contribuir</h3>
+                        <p>
+                            Empresas, municípios e organizações podem contribuir diretamente para o avanço dos ODS em
+                            Sergipe.
+                            Acesse nossa página de serviços para conhecer como podemos ajudar na implementação de
+                            estratégias
+                            alinhadas à Agenda 2030 ou entre em contato para saber mais.
+                        </p>
+                        <div class="botoes-acao">
+                            <a href="/servicos/" class="botao-primario">Nossos Serviços</a>
+                            <a href="/contato/" class="botao-primario">Fale Conosco</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="rodape">
+        <!-- O conteúdo será inserido pelo script footer.js -->
+    </footer>
+    <script src="../js/menu.js"></script>
+    <script src="../js/painel-ods.js"></script>
+    <script src="../js/footer.js"></script>
+</body>
+
+</html>
