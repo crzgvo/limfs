@@ -1,28 +1,30 @@
 /**
- * Gerencia o cache local dos dados do painel ODS.
- * @module cache
+ * Utilitário de cache para o Painel ODS Sergipe
+ * Gerencia armazenamento temporário de dados com TTL
  */
 
 const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 horas em milissegundos
 
 /**
- * Verifica se há dados em cache válidos para um indicador.
- * @param {string} chave - Identificador único do indicador
- * @returns {Object|null} Dados do cache se válidos, null caso contrário
+ * Verifica se há dados em cache válidos
+ * @param {string} chave - Identificador do cache
+ * @returns {Object|null} Dados do cache se válidos
  */
-export function verificarCache(chave) {
+export function verificarCacheLocal(chave) {
     try {
-        const cacheStr = localStorage.getItem(`ods_cache_${chave}`);
-        if (!cacheStr) return null;
+        const dado = localStorage.getItem(chave);
+        if (!dado) return null;
 
-        const cache = JSON.parse(cacheStr);
+        const cache = JSON.parse(dado);
         const agora = new Date().getTime();
         
-        if ((agora - cache.timestamp) < CACHE_TTL) {
-            return cache.dados;
+        // Cache válido apenas se timestamp existir e estiver dentro do TTL
+        if (cache.timestamp && (agora - cache.timestamp) < CACHE_TTL) {
+            return cache;
         }
         
-        localStorage.removeItem(`ods_cache_${chave}`);
+        // Remove cache expirado automaticamente
+        localStorage.removeItem(chave);
         return null;
     } catch (erro) {
         console.warn(`Erro ao verificar cache para ${chave}:`, erro);
@@ -31,36 +33,41 @@ export function verificarCache(chave) {
 }
 
 /**
- * Armazena dados em cache com TTL.
- * @param {string} chave - Identificador único do indicador
+ * Armazena dados em cache com timestamp
+ * @param {string} chave - Identificador do cache
  * @param {Object} dados - Dados a serem armazenados
  */
-export function salvarCache(chave, dados) {
+export function armazenarCacheLocal(chave, dados) {
     try {
         const cache = {
-            timestamp: new Date().getTime(),
-            dados: dados
+            ...dados,
+            timestamp: Date.now()
         };
         
-        localStorage.setItem(`ods_cache_${chave}`, JSON.stringify(cache));
+        localStorage.setItem(chave, JSON.stringify(cache));
     } catch (erro) {
-        console.warn(`Erro ao salvar cache para ${chave}:`, erro);
+        console.warn(`Erro ao armazenar cache para ${chave}:`, erro);
     }
 }
 
 /**
- * Limpa todos os caches expirados.
+ * Limpa todos os caches expirados no localStorage
  */
 export function limparCacheExpirado() {
     try {
         const agora = new Date().getTime();
         
         Object.keys(localStorage)
-            .filter(key => key.startsWith('ods_cache_'))
-            .forEach(key => {
-                const cache = JSON.parse(localStorage.getItem(key));
-                if ((agora - cache.timestamp) >= CACHE_TTL) {
-                    localStorage.removeItem(key);
+            .filter(chave => chave.startsWith('ods_sergipe_'))
+            .forEach(chave => {
+                try {
+                    const cache = JSON.parse(localStorage.getItem(chave));
+                    if (cache && cache.timestamp && (agora - cache.timestamp) >= CACHE_TTL) {
+                        localStorage.removeItem(chave);
+                    }
+                } catch (e) {
+                    // Ignora erros de parsing em itens individuais
+                    localStorage.removeItem(chave);
                 }
             });
     } catch (erro) {

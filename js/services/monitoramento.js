@@ -1,9 +1,9 @@
 /**
  * Serviço de monitoramento para o Painel ODS Sergipe
- * Responsável pelo registro de logs e monitoramento do sistema
+ * Gerencia logs e métricas de performance
  */
 
-// Constantes para níveis de log
+// Níveis de log em ordem crescente de severidade
 const LOG_LEVELS = {
     DEBUG: 0,
     INFO: 1,
@@ -11,27 +11,21 @@ const LOG_LEVELS = {
     ERROR: 3
 };
 
-// Configuração do nível mínimo de log (pode ser alterado em tempo de execução)
+// Configuração inicial (pode ser alterada em runtime)
 let nivelAtual = LOG_LEVELS.INFO;
 
 /**
- * Classe de logger para registro de mensagens com diferentes níveis
+ * Logger para registro de mensagens com diferentes níveis de severidade
  */
 class Logger {
     constructor(prefix = '') {
         this.prefix = prefix ? `[${prefix}] ` : '';
     }
 
-    /**
-     * Obtém timestamp formatado para os logs
-     */
     getTimestamp() {
         return new Date().toISOString().replace('T', ' ').substring(0, 19);
     }
 
-    /**
-     * Registra mensagem de depuração
-     */
     debug(...args) {
         if (nivelAtual <= LOG_LEVELS.DEBUG) {
             console.debug(
@@ -43,9 +37,6 @@ class Logger {
         }
     }
 
-    /**
-     * Registra mensagem informativa
-     */
     info(...args) {
         if (nivelAtual <= LOG_LEVELS.INFO) {
             console.info(
@@ -57,9 +48,6 @@ class Logger {
         }
     }
 
-    /**
-     * Registra mensagem de aviso
-     */
     warn(...args) {
         if (nivelAtual <= LOG_LEVELS.WARN) {
             console.warn(
@@ -71,9 +59,6 @@ class Logger {
         }
     }
 
-    /**
-     * Registra mensagem de erro
-     */
     error(...args) {
         if (nivelAtual <= LOG_LEVELS.ERROR) {
             console.error(
@@ -86,16 +71,15 @@ class Logger {
     }
 
     /**
-     * Armazena logs no localStorage para persistência
+     * Armazena logs no localStorage com limite de 500 entradas
      */
     armazenarLog(nivel, mensagem) {
         try {
             const chave = 'ods_sergipe_logs';
             const logs = JSON.parse(localStorage.getItem(chave) || '[]');
             
-            // Limitar o tamanho do histórico de logs (últimos 500)
             if (logs.length > 500) {
-                logs.shift(); // Remove o log mais antigo
+                logs.shift();
             }
             
             logs.push({
@@ -111,7 +95,7 @@ class Logger {
     }
 
     /**
-     * Recupera histórico de logs armazenados
+     * Recupera histórico de logs do localStorage
      */
     obterHistoricoLogs() {
         try {
@@ -124,7 +108,7 @@ class Logger {
     }
 
     /**
-     * Exporta histórico de logs para download
+     * Exporta logs em formato CSV para download
      */
     exportarLogs() {
         const logs = this.obterHistoricoLogs();
@@ -135,7 +119,6 @@ class Logger {
         let conteudo = 'TIMESTAMP,NIVEL,MENSAGEM\n';
         logs.forEach(log => {
             const data = new Date(log.timestamp).toISOString();
-            // Escapa aspas em mensagens CSV
             const mensagemEscapada = log.mensagem.replace(/"/g, '""');
             conteudo += `${data},"${log.nivel}","${mensagemEscapada}"\n`;
         });
@@ -145,7 +128,7 @@ class Logger {
 }
 
 /**
- * Monitora e registra performance do sistema
+ * Monitor de performance para métricas de tempo de execução
  */
 class MonitorPerformance {
     constructor() {
@@ -154,9 +137,11 @@ class MonitorPerformance {
 
     /**
      * Inicia medição de uma operação
+     * @returns {Object} Token de medição para posterior finalização
      */
     iniciarMedicao(operacao) {
         if (!window.performance || !window.performance.now) return null;
+        
         return {
             operacao,
             inicio: window.performance.now()
@@ -164,14 +149,14 @@ class MonitorPerformance {
     }
 
     /**
-     * Finaliza a medição e registra o resultado
+     * Finaliza medição e registra estatísticas
+     * @returns {number} Duração em milissegundos
      */
     finalizarMedicao(medicao) {
         if (!medicao || !window.performance || !window.performance.now) return;
         
         const duracao = window.performance.now() - medicao.inicio;
         
-        // Inicializa estatísticas para a operação se necessário
         if (!this.metricas[medicao.operacao]) {
             this.metricas[medicao.operacao] = {
                 contagem: 0,
@@ -181,7 +166,6 @@ class MonitorPerformance {
             };
         }
         
-        // Atualiza estatísticas
         const stats = this.metricas[medicao.operacao];
         stats.contagem++;
         stats.total += duracao;
@@ -192,7 +176,7 @@ class MonitorPerformance {
     }
 
     /**
-     * Retorna estatísticas das operações monitoradas
+     * Retorna estatísticas agregadas das operações monitoradas
      */
     obterEstatisticas() {
         const resultado = {};
@@ -210,11 +194,15 @@ class MonitorPerformance {
     }
 }
 
-// Exporta instâncias únicas para uso em toda aplicação
+// Instâncias singleton para uso em toda aplicação
 export const logger = new Logger('LIMFS');
 export const monitorPerformance = new MonitorPerformance();
 
-// Funções para configuração global
+/**
+ * Configura o nível de log global
+ * @param {string} nivel - Nome do nível (DEBUG, INFO, WARN, ERROR)
+ * @returns {boolean} Sucesso da configuração
+ */
 export function configurarNivelLog(nivel) {
     if (LOG_LEVELS[nivel] !== undefined) {
         nivelAtual = LOG_LEVELS[nivel];
@@ -224,6 +212,10 @@ export function configurarNivelLog(nivel) {
     return false;
 }
 
+/**
+ * Retorna métricas do ambiente de execução (memória, etc)
+ * Útil para diagnóstico de problemas de performance
+ */
 export function medicoesGlobais() {
     if (!window.performance || !window.performance.memory) {
         return {};

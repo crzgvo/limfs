@@ -1,41 +1,44 @@
 /**
- * Implementa o padrão Circuit Breaker para resiliência de chamadas HTTP.
- * @module circuit-breaker
+ * Implementa o padrão Circuit Breaker para chamadas de API
+ * Protege contra falhas persistentes e evita sobrecarga em serviços instáveis
  */
 
 const CIRCUIT_BREAKER_CONFIG = {
-    FALHAS_MAX: 5,
-    PERIODO_PAUSA: 300000, // 5 minutos
-    PERIODO_VERIFICACAO: 60000 // 1 minuto
+    FALHAS_MAX: 5,          // Número máximo de falhas consecutivas antes de abrir o circuito
+    PERIODO_PAUSA: 300000,  // 5 minutos em ms - Período em que o circuito permanece aberto
+    PERIODO_VERIFICACAO: 60000 // 1 minuto em ms - Período para verificação parcial
 };
 
+// Armazena estado de todos os circuitos
 const circuitStates = new Map();
 
 /**
- * Executa uma função com proteção de Circuit Breaker.
+ * Executa uma função com proteção de Circuit Breaker
  * @param {string} chave - Identificador único do circuito
  * @param {Function} fn - Função a ser executada
- * @returns {Promise<*>} Resultado da função ou null se circuito aberto
+ * @returns {Promise<*>} Resultado da função ou erro se o circuito estiver aberto
  */
 export async function comCircuitBreaker(chave, fn) {
     const circuito = getCircuitState(chave);
     
+    // Se o circuito estiver aberto e não expirado, rejeita imediatamente
     if (circuito.ativo && !isCircuitoExpirado(circuito)) {
-        throw new Error('Circuit Breaker ativo');
+        throw new Error(`Circuit Breaker ativo para ${chave}`);
     }
 
     try {
+        // Tenta executar a função protegida
         const resultado = await fn();
-        resetCircuit(chave);
+        resetCircuit(chave); // Sucesso: reseta o circuito
         return resultado;
     } catch (erro) {
-        registrarFalha(chave);
-        throw erro;
+        registrarFalha(chave); // Falha: incrementa contador
+        throw erro; // Propaga o erro original
     }
 }
 
 /**
- * Obtém o estado atual do circuito.
+ * Recupera ou inicializa o estado de um circuito
  * @private
  */
 function getCircuitState(chave) {
@@ -51,7 +54,7 @@ function getCircuitState(chave) {
 }
 
 /**
- * Registra uma falha no circuito.
+ * Registra uma falha e possivelmente abre o circuito
  * @private
  */
 function registrarFalha(chave) {
@@ -59,6 +62,7 @@ function registrarFalha(chave) {
     circuito.falhas++;
     circuito.ultimaFalha = new Date();
     
+    // Abre o circuito se atingir o limite de falhas consecutivas
     if (circuito.falhas >= CIRCUIT_BREAKER_CONFIG.FALHAS_MAX) {
         circuito.ativo = true;
         circuito.pausaAte = new Date(Date.now() + CIRCUIT_BREAKER_CONFIG.PERIODO_PAUSA);
@@ -66,7 +70,7 @@ function registrarFalha(chave) {
 }
 
 /**
- * Verifica se o período de pausa do circuito expirou.
+ * Verifica se o período de pausa do circuito expirou
  * @private
  */
 function isCircuitoExpirado(circuito) {
@@ -74,7 +78,7 @@ function isCircuitoExpirado(circuito) {
 }
 
 /**
- * Reseta o estado do circuito após sucesso.
+ * Reseta o estado do circuito após sucesso
  * @private
  */
 function resetCircuit(chave) {
@@ -87,7 +91,7 @@ function resetCircuit(chave) {
 }
 
 /**
- * Retorna o estado atual de um circuito.
+ * Recupera o estado atual de um circuito para monitoramento
  * @param {string} chave - Identificador único do circuito
  * @returns {Object} Estado atual do circuito
  */

@@ -1,9 +1,8 @@
 /**
  * Lógica principal do front-end para o Painel ODS Sergipe.
- * Responsável por buscar, processar, exibir e permitir interações com os dados dos indicadores.
  */
 
-// --- Configurações ---
+// Configurações
 const API_CONFIG = {
     arquivos_json: {
         base_url: '../dados/',
@@ -11,7 +10,7 @@ const API_CONFIG = {
     timeout: 8000
 };
 
-// Dados históricos usados como fallback se APIs e JSON falharem
+// Dados históricos usados como fallback
 const DADOS_HISTORICOS = {
     pobreza: [
         { ano: 2019, valor: 9.5 },
@@ -67,7 +66,7 @@ const DADOS_HISTORICOS = {
     ]
 };
 
-// Cores oficiais dos ODS para gráficos e identidade visual
+// Cores oficiais dos ODS
 const CORES_ODS = {
     pobreza: {
         cor: '#E5243B',
@@ -101,7 +100,7 @@ const CORES_ODS = {
     }
 };
 
-// Textos explicativos para tooltips dos indicadores
+// Tooltips dos indicadores
 const TOOLTIPS = {
     pobreza: "Percentual da população vivendo com menos de R$ 182 por mês (linha de extrema pobreza definida pelo Banco Mundial).",
     educacao: "Percentual da população com 15 anos ou mais de idade que sabe ler e escrever.",
@@ -111,7 +110,7 @@ const TOOLTIPS = {
     residuos_reciclados: "Percentual do total de resíduos sólidos urbanos que são coletados seletivamente e reciclados."
 };
 
-// Definições dos indicadores a serem exibidos no painel
+// Definições dos indicadores
 const INDICADORES = [
     {
         id: 'indicador-pobreza',
@@ -170,10 +169,7 @@ const INDICADORES = [
 ];
 
 /**
- * Tenta carregar dados de um arquivo JSON local.
- * Usado como segunda camada na estratégia de busca de dados.
- * @param {string} endpoint - Identificador do indicador (nome do arquivo JSON).
- * @returns {Promise<object|null>} Dados do arquivo ou null se falhar.
+ * Tenta carregar dados de um arquivo JSON local (segunda camada da estratégia de busca).
  */
 async function carregarDadosAtualizados(endpoint) {
     try {
@@ -219,9 +215,7 @@ async function carregarDadosAtualizados(endpoint) {
 }
 
 /**
- * Armazena dados no localStorage para cache rápido no cliente.
- * @param {string} chave - Chave para o item no localStorage.
- * @param {any} valor - Valor a ser armazenado (será convertido para JSON).
+ * Armazena dados no localStorage para cache rápido.
  */
 function armazenarCacheLocal(chave, valor) {
   try {
@@ -232,9 +226,7 @@ function armazenarCacheLocal(chave, valor) {
 }
 
 /**
- * Recupera dados do cache local (localStorage).
- * @param {string} chave - Chave do item no localStorage.
- * @returns {any|null} Valor parseado do cache ou null se não existir/erro.
+ * Recupera dados do cache local.
  */
 function verificarCacheLocal(chave) {
   try {
@@ -251,12 +243,8 @@ function verificarCacheLocal(chave) {
 }
 
 /**
- * Analisa respostas de APIs (especialmente IBGE SIDRA/Servicodados).
- * Extrai valor e ano de diferentes formatos de resposta.
- * @param {Array|object} dados - Resposta da API.
- * @param {string} endpoint - Identificador do indicador.
- * @param {number} indice - Índice esperado para os dados na resposta (varia conforme API).
- * @returns {{valor: number, ano: number}|null} Objeto com valor e ano ou null.
+ * Analisa respostas de APIs (especialmente IBGE) extraindo valor e ano.
+ * Suporta múltiplos formatos de resposta.
  */
 function analisarResposta(dados, endpoint, indice = 0) {
     if (Array.isArray(dados) && dados.length > indice + 1) {
@@ -311,15 +299,7 @@ function analisarResposta(dados, endpoint, indice = 0) {
 
 /**
  * Implementa Circuit Breaker e Retry com Backoff para chamadas de API.
- * Tenta buscar dados de um endpoint, com retentativas e bloqueio temporário em caso de falhas.
- * NOTA: Esta função parece mais adequada para o backend (atualizar-dados.js).
- * No front-end, a complexidade pode ser excessiva e o sessionStorage é limitado.
- * A versão atual usa `buscarDadosAPI` que abstrai isso. Mantida para referência.
- * @param {string} endpoint - Identificador do indicador.
- * @param {string[]} urls - Lista de URLs a tentar para este endpoint.
- * @param {number} maxTentativas - Máximo de tentativas por URL.
- * @param {number} delayInicial - Delay inicial para backoff (ms).
- * @returns {Promise<object|null>} Dados da API ou null.
+ * NOTA: Mantida para referência, a versão atual usa `buscarDadosAPI`.
  */
 async function tentarMultiplosEndpoints(endpoint, urls = [], maxTentativas = 3, delayInicial = 500) {
     const chaveCircuitBreaker = `circuit_breaker_${endpoint}`;
@@ -398,13 +378,11 @@ async function tentarMultiplosEndpoints(endpoint, urls = [], maxTentativas = 3, 
 }
 
 /**
- * Função principal para buscar dados de um indicador, usando estratégia em camadas:
- * 1. Cache Local (localStorage): Rápido, mas pode estar desatualizado.
- * 2. Arquivo JSON (servidor): Dados pré-processados e mais recentes que o cache local.
- * 3. API Externa: Dados mais recentes, mas sujeito a falhas/lentidão (NÃO USADO DIRETAMENTE AQUI, ABSTRAÍDO).
- * 4. Dados Estáticos (fallback): Último recurso se tudo falhar.
- * @param {string} endpoint - Identificador do indicador.
- * @returns {Promise<object>} Objeto com os dados do indicador (valor, ano, usouFallback, etc.).
+ * Função principal para buscar dados com estratégia em camadas:
+ * 1. Cache Local (localStorage)
+ * 2. Arquivo JSON (servidor)
+ * 3. API Externa (abstraído)
+ * 4. Dados Estáticos (fallback)
  */
 async function buscarDadosAPI(endpoint) {
     const chaveCacheLocal = `ods_sergipe_${endpoint}`;
@@ -436,8 +414,6 @@ async function buscarDadosAPI(endpoint) {
 
 /**
  * Retorna dados históricos estáticos como fallback.
- * @param {string} endpoint - Identificador do indicador.
- * @returns {object} Objeto com o último dado histórico e flag de fallback.
  */
 function usarDadosFallback(endpoint) {
     const dadosHistoricos = DADOS_HISTORICOS[endpoint];
@@ -457,9 +433,6 @@ function usarDadosFallback(endpoint) {
 
 /**
  * Renderiza um card de indicador no DOM com os dados fornecidos.
- * Inclui valor, textos, gráfico, botão de exportação e aviso de fallback.
- * @param {object} indicador - Objeto de configuração do indicador (de INDICADORES).
- * @param {object} dados - Dados a serem exibidos (resultado de buscarDadosAPI).
  */
 function renderizarIndicador(indicador, dados) {
     const container = document.getElementById(indicador.id);
@@ -625,8 +598,6 @@ function renderizarIndicador(indicador, dados) {
 
 /**
  * Gera ou atualiza o gráfico de linha para um indicador específico.
- * @param {string} endpoint - Identificador do indicador.
- * @param {object} cores - Objeto com cores primária e secundária do ODS.
  */
 function gerarGrafico(endpoint, cores) {
     const dadosHistoricos = DADOS_HISTORICOS[endpoint];
@@ -860,7 +831,7 @@ function mostrarMensagemSucesso(texto) {
 }
 
 /**
- * Atualiza o elemento no DOM que exibe a data da última atualização.
+ * Atualiza o elemento que exibe a data da última atualização.
  */
 function atualizarDataAtualizacao() {
     const dataElement = document.getElementById('data-atualizacao');
@@ -881,10 +852,7 @@ function atualizarDataAtualizacao() {
 }
 
 /**
- * Registra erros persistentes no localStorage para depuração posterior.
- * Limita o número de erros armazenados para não lotar o localStorage.
- * @param {string} endpoint - Indicador associado ao erro.
- * @param {Error} erro - Objeto de erro.
+ * Registra erros persistentes no localStorage para depuração.
  */
 function registrarErroPersistente(endpoint, erro) {
   const chave = 'ods_sergipe_erros';
@@ -923,8 +891,7 @@ function registrarErroPersistente(endpoint, erro) {
 }
 
 /**
- * Função de inicialização principal do painel.
- * Carrega e renderiza todos os indicadores e o gráfico comparativo.
+ * Inicializa o painel: carrega e renderiza indicadores e gráfico comparativo.
  */
 async function inicializarPainel() {
     console.log("🚀 Inicializando Painel ODS...");
