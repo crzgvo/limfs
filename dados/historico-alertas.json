@@ -1,241 +1,346 @@
 {
   "falhas": {
-    "total": 21,
+    "total": 42,
     "consecutivas": 0,
     "porIndicador": {
       "pobreza-endpoint-1": {
-        "total": 1,
-        "ultimaFalha": "2025-04-12T05:21:42.692Z",
+        "total": 2,
+        "ultimaFalha": "2025-04-12T05:44:05.314Z",
         "erros": [
           {
             "data": "2025-04-12T05:21:42.692Z",
+            "mensagem": "Status Code: 500",
+            "stack": "Error: Status Code: 500\n    at ClientRequest.<anonymous> (/workspaces/limfs/js/atualizar-dados.js:37:31)\n    at Object.onceWrapper (node:events:639:26)\n    at ClientRequest.emit (node:events:524:28)\n    at HTTPParser.parserOnIncomingClient (node:_http_client:702:27)\n    at HTTPParser.parserOnHeadersComplete (node:_http_common:118:17)\n    at TLSSocket.socketOnData (node:_http_client:544:22)\n    at TLSSocket.emit (node:events:524:28)\n    at addChunk (node:internal/streams/readable:561:12)\n    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)\n    at Readable.push (node:internal/streams/readable:392:5)"
+          },
+          {
+            "data": "2025-04-12T05:44:05.314Z",
             "mensagem": "Status Code: 500",
             "stack": "Error: Status Code: 500\n    at ClientRequest.<anonymous> (/workspaces/limfs/js/atualizar-dados.js:37:31)\n    at Object.onceWrapper (node:events:639:26)\n    at ClientRequest.emit (node:events:524:28)\n    at HTTPParser.parserOnIncomingClient (node:_http_client:702:27)\n    at HTTPParser.parserOnHeadersComplete (node:_http_common:118:17)\n    at TLSSocket.socketOnData (node:_http_client:544:22)\n    at TLSSocket.emit (node:events:524:28)\n    at addChunk (node:internal/streams/readable:561:12)\n    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)\n    at Readable.push (node:internal/streams/readable:392:5)"
           }
         ]
       },
       "educacao-endpoint-1": {
-        "total": 1,
-        "ultimaFalha": "2025-04-12T05:21:42.695Z",
+        "total": 2,
+        "ultimaFalha": "2025-04-12T05:44:05.316Z",
         "erros": [
           {
             "data": "2025-04-12T05:21:42.695Z",
+            "mensagem": "Status Code: 500",
+            "stack": "Error: Status Code: 500\n    at ClientRequest.<anonymous> (/workspaces/limfs/js/atualizar-dados.js:37:31)\n    at Object.onceWrapper (node:events:639:26)\n    at ClientRequest.emit (node:events:524:28)\n    at HTTPParser.parserOnIncomingClient (node:_http_client:702:27)\n    at HTTPParser.parserOnHeadersComplete (node:_http_common:118:17)\n    at TLSSocket.socketOnData (node:_http_client:544:22)\n    at TLSSocket.emit (node:events:524:28)\n    at addChunk (node:internal/streams/readable:561:12)\n    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)\n    at Readable.push (node:internal/streams/readable:392:5)"
+          },
+          {
+            "data": "2025-04-12T05:44:05.316Z",
             "mensagem": "Status Code: 500",
             "stack": "Error: Status Code: 500\n    at ClientRequest.<anonymous> (/workspaces/limfs/js/atualizar-dados.js:37:31)\n    at Object.onceWrapper (node:events:639:26)\n    at ClientRequest.emit (node:events:524:28)\n    at HTTPParser.parserOnIncomingClient (node:_http_client:702:27)\n    at HTTPParser.parserOnHeadersComplete (node:_http_common:118:17)\n    at TLSSocket.socketOnData (node:_http_client:544:22)\n    at TLSSocket.emit (node:events:524:28)\n    at addChunk (node:internal/streams/readable:561:12)\n    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)\n    at Readable.push (node:internal/streams/readable:392:5)"
           }
         ]
       },
       "saneamento-endpoint-1": {
-        "total": 1,
-        "ultimaFalha": "2025-04-12T05:21:43.990Z",
+        "total": 2,
+        "ultimaFalha": "2025-04-12T05:44:05.699Z",
         "erros": [
           {
             "data": "2025-04-12T05:21:43.990Z",
+            "mensagem": "Status Code: 500",
+            "stack": "Error: Status Code: 500\n    at ClientRequest.<anonymous> (/workspaces/limfs/js/atualizar-dados.js:37:31)\n    at Object.onceWrapper (node:events:639:26)\n    at ClientRequest.emit (node:events:524:28)\n    at HTTPParser.parserOnIncomingClient (node:_http_client:702:27)\n    at HTTPParser.parserOnHeadersComplete (node:_http_common:118:17)\n    at TLSSocket.socketOnData (node:_http_client:544:22)\n    at TLSSocket.emit (node:events:524:28)\n    at addChunk (node:internal/streams/readable:561:12)\n    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)\n    at Readable.push (node:internal/streams/readable:392:5)"
+          },
+          {
+            "data": "2025-04-12T05:44:05.699Z",
             "mensagem": "Status Code: 500",
             "stack": "Error: Status Code: 500\n    at ClientRequest.<anonymous> (/workspaces/limfs/js/atualizar-dados.js:37:31)\n    at Object.onceWrapper (node:events:639:26)\n    at ClientRequest.emit (node:events:524:28)\n    at HTTPParser.parserOnIncomingClient (node:_http_client:702:27)\n    at HTTPParser.parserOnHeadersComplete (node:_http_common:118:17)\n    at TLSSocket.socketOnData (node:_http_client:544:22)\n    at TLSSocket.emit (node:events:524:28)\n    at addChunk (node:internal/streams/readable:561:12)\n    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)\n    at Readable.push (node:internal/streams/readable:392:5)"
           }
         ]
       },
       "mortalidade_infantil-endpoint-1": {
-        "total": 1,
-        "ultimaFalha": "2025-04-12T05:21:44.248Z",
+        "total": 2,
+        "ultimaFalha": "2025-04-12T05:44:05.676Z",
         "erros": [
           {
             "data": "2025-04-12T05:21:44.248Z",
+            "mensagem": "Status Code: 500",
+            "stack": "Error: Status Code: 500\n    at ClientRequest.<anonymous> (/workspaces/limfs/js/atualizar-dados.js:37:31)\n    at Object.onceWrapper (node:events:639:26)\n    at ClientRequest.emit (node:events:524:28)\n    at HTTPParser.parserOnIncomingClient (node:_http_client:702:27)\n    at HTTPParser.parserOnHeadersComplete (node:_http_common:118:17)\n    at TLSSocket.socketOnData (node:_http_client:544:22)\n    at TLSSocket.emit (node:events:524:28)\n    at addChunk (node:internal/streams/readable:561:12)\n    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)\n    at Readable.push (node:internal/streams/readable:392:5)"
+          },
+          {
+            "data": "2025-04-12T05:44:05.676Z",
             "mensagem": "Status Code: 500",
             "stack": "Error: Status Code: 500\n    at ClientRequest.<anonymous> (/workspaces/limfs/js/atualizar-dados.js:37:31)\n    at Object.onceWrapper (node:events:639:26)\n    at ClientRequest.emit (node:events:524:28)\n    at HTTPParser.parserOnIncomingClient (node:_http_client:702:27)\n    at HTTPParser.parserOnHeadersComplete (node:_http_common:118:17)\n    at TLSSocket.socketOnData (node:_http_client:544:22)\n    at TLSSocket.emit (node:events:524:28)\n    at addChunk (node:internal/streams/readable:561:12)\n    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)\n    at Readable.push (node:internal/streams/readable:392:5)"
           }
         ]
       },
       "educacao-endpoint-2": {
-        "total": 1,
-        "ultimaFalha": "2025-04-12T05:21:47.158Z",
+        "total": 2,
+        "ultimaFalha": "2025-04-12T05:44:09.877Z",
         "erros": [
           {
             "data": "2025-04-12T05:21:47.158Z",
+            "mensagem": "Status Code: 400",
+            "stack": "Error: Status Code: 400\n    at ClientRequest.<anonymous> (/workspaces/limfs/js/atualizar-dados.js:37:31)\n    at Object.onceWrapper (node:events:639:26)\n    at ClientRequest.emit (node:events:524:28)\n    at HTTPParser.parserOnIncomingClient (node:_http_client:702:27)\n    at HTTPParser.parserOnHeadersComplete (node:_http_common:118:17)\n    at TLSSocket.socketOnData (node:_http_client:544:22)\n    at TLSSocket.emit (node:events:524:28)\n    at addChunk (node:internal/streams/readable:561:12)\n    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)\n    at Readable.push (node:internal/streams/readable:392:5)"
+          },
+          {
+            "data": "2025-04-12T05:44:09.877Z",
             "mensagem": "Status Code: 400",
             "stack": "Error: Status Code: 400\n    at ClientRequest.<anonymous> (/workspaces/limfs/js/atualizar-dados.js:37:31)\n    at Object.onceWrapper (node:events:639:26)\n    at ClientRequest.emit (node:events:524:28)\n    at HTTPParser.parserOnIncomingClient (node:_http_client:702:27)\n    at HTTPParser.parserOnHeadersComplete (node:_http_common:118:17)\n    at TLSSocket.socketOnData (node:_http_client:544:22)\n    at TLSSocket.emit (node:events:524:28)\n    at addChunk (node:internal/streams/readable:561:12)\n    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)\n    at Readable.push (node:internal/streams/readable:392:5)"
           }
         ]
       },
       "pobreza-endpoint-2": {
-        "total": 1,
-        "ultimaFalha": "2025-04-12T05:21:47.275Z",
+        "total": 2,
+        "ultimaFalha": "2025-04-12T05:44:09.882Z",
         "erros": [
           {
             "data": "2025-04-12T05:21:47.275Z",
+            "mensagem": "Status Code: 400",
+            "stack": "Error: Status Code: 400\n    at ClientRequest.<anonymous> (/workspaces/limfs/js/atualizar-dados.js:37:31)\n    at Object.onceWrapper (node:events:639:26)\n    at ClientRequest.emit (node:events:524:28)\n    at HTTPParser.parserOnIncomingClient (node:_http_client:702:27)\n    at HTTPParser.parserOnHeadersComplete (node:_http_common:118:17)\n    at TLSSocket.socketOnData (node:_http_client:544:22)\n    at TLSSocket.emit (node:events:524:28)\n    at addChunk (node:internal/streams/readable:561:12)\n    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)\n    at Readable.push (node:internal/streams/readable:392:5)"
+          },
+          {
+            "data": "2025-04-12T05:44:09.882Z",
             "mensagem": "Status Code: 400",
             "stack": "Error: Status Code: 400\n    at ClientRequest.<anonymous> (/workspaces/limfs/js/atualizar-dados.js:37:31)\n    at Object.onceWrapper (node:events:639:26)\n    at ClientRequest.emit (node:events:524:28)\n    at HTTPParser.parserOnIncomingClient (node:_http_client:702:27)\n    at HTTPParser.parserOnHeadersComplete (node:_http_common:118:17)\n    at TLSSocket.socketOnData (node:_http_client:544:22)\n    at TLSSocket.emit (node:events:524:28)\n    at addChunk (node:internal/streams/readable:561:12)\n    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)\n    at Readable.push (node:internal/streams/readable:392:5)"
           }
         ]
       },
       "saneamento-endpoint-2": {
-        "total": 1,
-        "ultimaFalha": "2025-04-12T05:21:48.487Z",
+        "total": 2,
+        "ultimaFalha": "2025-04-12T05:44:10.145Z",
         "erros": [
           {
             "data": "2025-04-12T05:21:48.487Z",
+            "mensagem": "Status Code: 400",
+            "stack": "Error: Status Code: 400\n    at ClientRequest.<anonymous> (/workspaces/limfs/js/atualizar-dados.js:37:31)\n    at Object.onceWrapper (node:events:639:26)\n    at ClientRequest.emit (node:events:524:28)\n    at HTTPParser.parserOnIncomingClient (node:_http_client:702:27)\n    at HTTPParser.parserOnHeadersComplete (node:_http_common:118:17)\n    at TLSSocket.socketOnData (node:_http_client:544:22)\n    at TLSSocket.emit (node:events:524:28)\n    at addChunk (node:internal/streams/readable:561:12)\n    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)\n    at Readable.push (node:internal/streams/readable:392:5)"
+          },
+          {
+            "data": "2025-04-12T05:44:10.145Z",
             "mensagem": "Status Code: 400",
             "stack": "Error: Status Code: 400\n    at ClientRequest.<anonymous> (/workspaces/limfs/js/atualizar-dados.js:37:31)\n    at Object.onceWrapper (node:events:639:26)\n    at ClientRequest.emit (node:events:524:28)\n    at HTTPParser.parserOnIncomingClient (node:_http_client:702:27)\n    at HTTPParser.parserOnHeadersComplete (node:_http_common:118:17)\n    at TLSSocket.socketOnData (node:_http_client:544:22)\n    at TLSSocket.emit (node:events:524:28)\n    at addChunk (node:internal/streams/readable:561:12)\n    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)\n    at Readable.push (node:internal/streams/readable:392:5)"
           }
         ]
       },
       "mortalidade_infantil-endpoint-2": {
-        "total": 1,
-        "ultimaFalha": "2025-04-12T05:21:48.665Z",
+        "total": 2,
+        "ultimaFalha": "2025-04-12T05:44:10.138Z",
         "erros": [
           {
             "data": "2025-04-12T05:21:48.665Z",
+            "mensagem": "Status Code: 400",
+            "stack": "Error: Status Code: 400\n    at ClientRequest.<anonymous> (/workspaces/limfs/js/atualizar-dados.js:37:31)\n    at Object.onceWrapper (node:events:639:26)\n    at ClientRequest.emit (node:events:524:28)\n    at HTTPParser.parserOnIncomingClient (node:_http_client:702:27)\n    at HTTPParser.parserOnHeadersComplete (node:_http_common:118:17)\n    at TLSSocket.socketOnData (node:_http_client:544:22)\n    at TLSSocket.emit (node:events:524:28)\n    at addChunk (node:internal/streams/readable:561:12)\n    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)\n    at Readable.push (node:internal/streams/readable:392:5)"
+          },
+          {
+            "data": "2025-04-12T05:44:10.138Z",
             "mensagem": "Status Code: 400",
             "stack": "Error: Status Code: 400\n    at ClientRequest.<anonymous> (/workspaces/limfs/js/atualizar-dados.js:37:31)\n    at Object.onceWrapper (node:events:639:26)\n    at ClientRequest.emit (node:events:524:28)\n    at HTTPParser.parserOnIncomingClient (node:_http_client:702:27)\n    at HTTPParser.parserOnHeadersComplete (node:_http_common:118:17)\n    at TLSSocket.socketOnData (node:_http_client:544:22)\n    at TLSSocket.emit (node:events:524:28)\n    at addChunk (node:internal/streams/readable:561:12)\n    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)\n    at Readable.push (node:internal/streams/readable:392:5)"
           }
         ]
       },
       "educacao-endpoint-3": {
-        "total": 1,
-        "ultimaFalha": "2025-04-12T05:21:51.400Z",
+        "total": 2,
+        "ultimaFalha": "2025-04-12T05:44:13.815Z",
         "erros": [
           {
             "data": "2025-04-12T05:21:51.400Z",
+            "mensagem": "Status Code: 400",
+            "stack": "Error: Status Code: 400\n    at ClientRequest.<anonymous> (/workspaces/limfs/js/atualizar-dados.js:37:31)\n    at Object.onceWrapper (node:events:639:26)\n    at ClientRequest.emit (node:events:524:28)\n    at HTTPParser.parserOnIncomingClient (node:_http_client:702:27)\n    at HTTPParser.parserOnHeadersComplete (node:_http_common:118:17)\n    at TLSSocket.socketOnData (node:_http_client:544:22)\n    at TLSSocket.emit (node:events:524:28)\n    at addChunk (node:internal/streams/readable:561:12)\n    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)\n    at Readable.push (node:internal/streams/readable:392:5)"
+          },
+          {
+            "data": "2025-04-12T05:44:13.815Z",
             "mensagem": "Status Code: 400",
             "stack": "Error: Status Code: 400\n    at ClientRequest.<anonymous> (/workspaces/limfs/js/atualizar-dados.js:37:31)\n    at Object.onceWrapper (node:events:639:26)\n    at ClientRequest.emit (node:events:524:28)\n    at HTTPParser.parserOnIncomingClient (node:_http_client:702:27)\n    at HTTPParser.parserOnHeadersComplete (node:_http_common:118:17)\n    at TLSSocket.socketOnData (node:_http_client:544:22)\n    at TLSSocket.emit (node:events:524:28)\n    at addChunk (node:internal/streams/readable:561:12)\n    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)\n    at Readable.push (node:internal/streams/readable:392:5)"
           }
         ]
       },
       "educacao-todos-endpoints": {
-        "total": 1,
-        "ultimaFalha": "2025-04-12T05:21:51.401Z",
+        "total": 2,
+        "ultimaFalha": "2025-04-12T05:44:13.817Z",
         "erros": [
           {
             "data": "2025-04-12T05:21:51.401Z",
+            "mensagem": "Todos os endpoints falharam",
+            "stack": "Error: Todos os endpoints falharam\n    at acessarEndpointsAlternativos (/workspaces/limfs/js/atualizar-dados.js:175:60)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async Object.educacao (/workspaces/limfs/js/atualizar-dados.js:237:31)\n    at async Promise.allSettled (index 1)\n    at async atualizarTodosDados (/workspaces/limfs/js/atualizar-dados.js:469:24)"
+          },
+          {
+            "data": "2025-04-12T05:44:13.817Z",
             "mensagem": "Todos os endpoints falharam",
             "stack": "Error: Todos os endpoints falharam\n    at acessarEndpointsAlternativos (/workspaces/limfs/js/atualizar-dados.js:175:60)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async Object.educacao (/workspaces/limfs/js/atualizar-dados.js:237:31)\n    at async Promise.allSettled (index 1)\n    at async atualizarTodosDados (/workspaces/limfs/js/atualizar-dados.js:469:24)"
           }
         ]
       },
       "educacao": {
-        "total": 1,
-        "ultimaFalha": "2025-04-12T05:21:51.405Z",
+        "total": 2,
+        "ultimaFalha": "2025-04-12T05:44:13.821Z",
         "erros": [
           {
             "data": "2025-04-12T05:21:51.405Z",
+            "mensagem": "Todos os endpoints falharam",
+            "stack": "Error: Todos os endpoints falharam\n    at Object.educacao (/workspaces/limfs/js/atualizar-dados.js:239:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async Promise.allSettled (index 1)\n    at async atualizarTodosDados (/workspaces/limfs/js/atualizar-dados.js:469:24)"
+          },
+          {
+            "data": "2025-04-12T05:44:13.821Z",
             "mensagem": "Todos os endpoints falharam",
             "stack": "Error: Todos os endpoints falharam\n    at Object.educacao (/workspaces/limfs/js/atualizar-dados.js:239:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async Promise.allSettled (index 1)\n    at async atualizarTodosDados (/workspaces/limfs/js/atualizar-dados.js:469:24)"
           }
         ]
       },
       "pobreza-endpoint-3": {
-        "total": 1,
-        "ultimaFalha": "2025-04-12T05:21:51.528Z",
+        "total": 2,
+        "ultimaFalha": "2025-04-12T05:44:14.456Z",
         "erros": [
           {
             "data": "2025-04-12T05:21:51.528Z",
+            "mensagem": "Status Code: 500",
+            "stack": "Error: Status Code: 500\n    at ClientRequest.<anonymous> (/workspaces/limfs/js/atualizar-dados.js:37:31)\n    at Object.onceWrapper (node:events:639:26)\n    at ClientRequest.emit (node:events:524:28)\n    at HTTPParser.parserOnIncomingClient (node:_http_client:702:27)\n    at HTTPParser.parserOnHeadersComplete (node:_http_common:118:17)\n    at TLSSocket.socketOnData (node:_http_client:544:22)\n    at TLSSocket.emit (node:events:524:28)\n    at addChunk (node:internal/streams/readable:561:12)\n    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)\n    at Readable.push (node:internal/streams/readable:392:5)"
+          },
+          {
+            "data": "2025-04-12T05:44:14.456Z",
             "mensagem": "Status Code: 500",
             "stack": "Error: Status Code: 500\n    at ClientRequest.<anonymous> (/workspaces/limfs/js/atualizar-dados.js:37:31)\n    at Object.onceWrapper (node:events:639:26)\n    at ClientRequest.emit (node:events:524:28)\n    at HTTPParser.parserOnIncomingClient (node:_http_client:702:27)\n    at HTTPParser.parserOnHeadersComplete (node:_http_common:118:17)\n    at TLSSocket.socketOnData (node:_http_client:544:22)\n    at TLSSocket.emit (node:events:524:28)\n    at addChunk (node:internal/streams/readable:561:12)\n    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)\n    at Readable.push (node:internal/streams/readable:392:5)"
           }
         ]
       },
       "pobreza-todos-endpoints": {
-        "total": 1,
-        "ultimaFalha": "2025-04-12T05:21:51.530Z",
+        "total": 2,
+        "ultimaFalha": "2025-04-12T05:44:14.457Z",
         "erros": [
           {
             "data": "2025-04-12T05:21:51.530Z",
+            "mensagem": "Todos os endpoints falharam",
+            "stack": "Error: Todos os endpoints falharam\n    at acessarEndpointsAlternativos (/workspaces/limfs/js/atualizar-dados.js:175:60)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async Object.pobreza (/workspaces/limfs/js/atualizar-dados.js:186:31)\n    at async Promise.allSettled (index 0)\n    at async atualizarTodosDados (/workspaces/limfs/js/atualizar-dados.js:469:24)"
+          },
+          {
+            "data": "2025-04-12T05:44:14.457Z",
             "mensagem": "Todos os endpoints falharam",
             "stack": "Error: Todos os endpoints falharam\n    at acessarEndpointsAlternativos (/workspaces/limfs/js/atualizar-dados.js:175:60)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async Object.pobreza (/workspaces/limfs/js/atualizar-dados.js:186:31)\n    at async Promise.allSettled (index 0)\n    at async atualizarTodosDados (/workspaces/limfs/js/atualizar-dados.js:469:24)"
           }
         ]
       },
       "pobreza": {
-        "total": 1,
-        "ultimaFalha": "2025-04-12T05:21:51.532Z",
+        "total": 2,
+        "ultimaFalha": "2025-04-12T05:44:14.459Z",
         "erros": [
           {
             "data": "2025-04-12T05:21:51.532Z",
+            "mensagem": "Todos os endpoints falharam",
+            "stack": "Error: Todos os endpoints falharam\n    at Object.pobreza (/workspaces/limfs/js/atualizar-dados.js:188:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async Promise.allSettled (index 0)\n    at async atualizarTodosDados (/workspaces/limfs/js/atualizar-dados.js:469:24)"
+          },
+          {
+            "data": "2025-04-12T05:44:14.459Z",
             "mensagem": "Todos os endpoints falharam",
             "stack": "Error: Todos os endpoints falharam\n    at Object.pobreza (/workspaces/limfs/js/atualizar-dados.js:188:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async Promise.allSettled (index 0)\n    at async atualizarTodosDados (/workspaces/limfs/js/atualizar-dados.js:469:24)"
           }
         ]
       },
       "saneamento-endpoint-3": {
-        "total": 1,
-        "ultimaFalha": "2025-04-12T05:21:52.516Z",
+        "total": 2,
+        "ultimaFalha": "2025-04-12T05:44:14.334Z",
         "erros": [
           {
             "data": "2025-04-12T05:21:52.516Z",
+            "mensagem": "Status Code: 400",
+            "stack": "Error: Status Code: 400\n    at ClientRequest.<anonymous> (/workspaces/limfs/js/atualizar-dados.js:37:31)\n    at Object.onceWrapper (node:events:639:26)\n    at ClientRequest.emit (node:events:524:28)\n    at HTTPParser.parserOnIncomingClient (node:_http_client:702:27)\n    at HTTPParser.parserOnHeadersComplete (node:_http_common:118:17)\n    at TLSSocket.socketOnData (node:_http_client:544:22)\n    at TLSSocket.emit (node:events:524:28)\n    at addChunk (node:internal/streams/readable:561:12)\n    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)\n    at Readable.push (node:internal/streams/readable:392:5)"
+          },
+          {
+            "data": "2025-04-12T05:44:14.334Z",
             "mensagem": "Status Code: 400",
             "stack": "Error: Status Code: 400\n    at ClientRequest.<anonymous> (/workspaces/limfs/js/atualizar-dados.js:37:31)\n    at Object.onceWrapper (node:events:639:26)\n    at ClientRequest.emit (node:events:524:28)\n    at HTTPParser.parserOnIncomingClient (node:_http_client:702:27)\n    at HTTPParser.parserOnHeadersComplete (node:_http_common:118:17)\n    at TLSSocket.socketOnData (node:_http_client:544:22)\n    at TLSSocket.emit (node:events:524:28)\n    at addChunk (node:internal/streams/readable:561:12)\n    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)\n    at Readable.push (node:internal/streams/readable:392:5)"
           }
         ]
       },
       "saneamento-todos-endpoints": {
-        "total": 1,
-        "ultimaFalha": "2025-04-12T05:21:52.518Z",
+        "total": 2,
+        "ultimaFalha": "2025-04-12T05:44:14.336Z",
         "erros": [
           {
             "data": "2025-04-12T05:21:52.518Z",
+            "mensagem": "Todos os endpoints falharam",
+            "stack": "Error: Todos os endpoints falharam\n    at acessarEndpointsAlternativos (/workspaces/limfs/js/atualizar-dados.js:175:60)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async Object.saneamento (/workspaces/limfs/js/atualizar-dados.js:288:31)\n    at async Promise.allSettled (index 2)\n    at async atualizarTodosDados (/workspaces/limfs/js/atualizar-dados.js:469:24)"
+          },
+          {
+            "data": "2025-04-12T05:44:14.336Z",
             "mensagem": "Todos os endpoints falharam",
             "stack": "Error: Todos os endpoints falharam\n    at acessarEndpointsAlternativos (/workspaces/limfs/js/atualizar-dados.js:175:60)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async Object.saneamento (/workspaces/limfs/js/atualizar-dados.js:288:31)\n    at async Promise.allSettled (index 2)\n    at async atualizarTodosDados (/workspaces/limfs/js/atualizar-dados.js:469:24)"
           }
         ]
       },
       "saneamento": {
-        "total": 1,
-        "ultimaFalha": "2025-04-12T05:21:52.520Z",
+        "total": 2,
+        "ultimaFalha": "2025-04-12T05:44:14.339Z",
         "erros": [
           {
             "data": "2025-04-12T05:21:52.520Z",
+            "mensagem": "Todos os endpoints falharam",
+            "stack": "Error: Todos os endpoints falharam\n    at Object.saneamento (/workspaces/limfs/js/atualizar-dados.js:290:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async Promise.allSettled (index 2)\n    at async atualizarTodosDados (/workspaces/limfs/js/atualizar-dados.js:469:24)"
+          },
+          {
+            "data": "2025-04-12T05:44:14.339Z",
             "mensagem": "Todos os endpoints falharam",
             "stack": "Error: Todos os endpoints falharam\n    at Object.saneamento (/workspaces/limfs/js/atualizar-dados.js:290:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async Promise.allSettled (index 2)\n    at async atualizarTodosDados (/workspaces/limfs/js/atualizar-dados.js:469:24)"
           }
         ]
       },
       "energia_solar-endpoint-1": {
-        "total": 1,
-        "ultimaFalha": "2025-04-12T05:21:57.450Z",
+        "total": 2,
+        "ultimaFalha": "2025-04-12T05:44:19.355Z",
         "erros": [
           {
             "data": "2025-04-12T05:21:57.450Z",
+            "mensagem": "Timeout ao acessar: https://dadosabertos.aneel.gov.br/api/3/action/datastore_search?resource_id=b1bd71e7-d0ad-4214-9053-cbd58e9564a7&q=Sergipe",
+            "stack": "Error: Timeout ao acessar: https://dadosabertos.aneel.gov.br/api/3/action/datastore_search?resource_id=b1bd71e7-d0ad-4214-9053-cbd58e9564a7&q=Sergipe\n    at ClientRequest.<anonymous> (/workspaces/limfs/js/atualizar-dados.js:76:20)\n    at Object.onceWrapper (node:events:638:28)\n    at ClientRequest.emit (node:events:524:28)\n    at TLSSocket.emitRequestTimeout (node:_http_client:849:9)\n    at Object.onceWrapper (node:events:638:28)\n    at TLSSocket.emit (node:events:536:35)\n    at Socket._onTimeout (node:net:595:8)\n    at listOnTimeout (node:internal/timers:581:17)\n    at process.processTimers (node:internal/timers:519:7)"
+          },
+          {
+            "data": "2025-04-12T05:44:19.355Z",
             "mensagem": "Timeout ao acessar: https://dadosabertos.aneel.gov.br/api/3/action/datastore_search?resource_id=b1bd71e7-d0ad-4214-9053-cbd58e9564a7&q=Sergipe",
             "stack": "Error: Timeout ao acessar: https://dadosabertos.aneel.gov.br/api/3/action/datastore_search?resource_id=b1bd71e7-d0ad-4214-9053-cbd58e9564a7&q=Sergipe\n    at ClientRequest.<anonymous> (/workspaces/limfs/js/atualizar-dados.js:76:20)\n    at Object.onceWrapper (node:events:638:28)\n    at ClientRequest.emit (node:events:524:28)\n    at TLSSocket.emitRequestTimeout (node:_http_client:849:9)\n    at Object.onceWrapper (node:events:638:28)\n    at TLSSocket.emit (node:events:536:35)\n    at Socket._onTimeout (node:net:595:8)\n    at listOnTimeout (node:internal/timers:581:17)\n    at process.processTimers (node:internal/timers:519:7)"
           }
         ]
       },
       "energia_solar-endpoint-2": {
-        "total": 1,
-        "ultimaFalha": "2025-04-12T05:22:15.480Z",
+        "total": 2,
+        "ultimaFalha": "2025-04-12T05:44:37.392Z",
         "erros": [
           {
             "data": "2025-04-12T05:22:15.480Z",
+            "mensagem": "Timeout ao acessar: https://dadosabertos.aneel.gov.br/dataset/b1bd71e7-d0ad-4214-9053-cbd58e9564a7/resource/b1bd71e7-d0ad-4214-9053-cbd58e9564a7/download/geracao-distribuida.csv",
+            "stack": "Error: Timeout ao acessar: https://dadosabertos.aneel.gov.br/dataset/b1bd71e7-d0ad-4214-9053-cbd58e9564a7/resource/b1bd71e7-d0ad-4214-9053-cbd58e9564a7/download/geracao-distribuida.csv\n    at ClientRequest.<anonymous> (/workspaces/limfs/js/atualizar-dados.js:76:20)\n    at Object.onceWrapper (node:events:638:28)\n    at ClientRequest.emit (node:events:524:28)\n    at TLSSocket.emitRequestTimeout (node:_http_client:849:9)\n    at Object.onceWrapper (node:events:638:28)\n    at TLSSocket.emit (node:events:536:35)\n    at Socket._onTimeout (node:net:595:8)\n    at listOnTimeout (node:internal/timers:581:17)\n    at process.processTimers (node:internal/timers:519:7)"
+          },
+          {
+            "data": "2025-04-12T05:44:37.392Z",
             "mensagem": "Timeout ao acessar: https://dadosabertos.aneel.gov.br/dataset/b1bd71e7-d0ad-4214-9053-cbd58e9564a7/resource/b1bd71e7-d0ad-4214-9053-cbd58e9564a7/download/geracao-distribuida.csv",
             "stack": "Error: Timeout ao acessar: https://dadosabertos.aneel.gov.br/dataset/b1bd71e7-d0ad-4214-9053-cbd58e9564a7/resource/b1bd71e7-d0ad-4214-9053-cbd58e9564a7/download/geracao-distribuida.csv\n    at ClientRequest.<anonymous> (/workspaces/limfs/js/atualizar-dados.js:76:20)\n    at Object.onceWrapper (node:events:638:28)\n    at ClientRequest.emit (node:events:524:28)\n    at TLSSocket.emitRequestTimeout (node:_http_client:849:9)\n    at Object.onceWrapper (node:events:638:28)\n    at TLSSocket.emit (node:events:536:35)\n    at Socket._onTimeout (node:net:595:8)\n    at listOnTimeout (node:internal/timers:581:17)\n    at process.processTimers (node:internal/timers:519:7)"
           }
         ]
       },
       "energia_solar-todos-endpoints": {
-        "total": 1,
-        "ultimaFalha": "2025-04-12T05:22:15.481Z",
+        "total": 2,
+        "ultimaFalha": "2025-04-12T05:44:37.395Z",
         "erros": [
           {
             "data": "2025-04-12T05:22:15.481Z",
             "mensagem": "Todos os endpoints falharam",
             "stack": "Error: Todos os endpoints falharam\n    at acessarEndpointsAlternativos (/workspaces/limfs/js/atualizar-dados.js:175:60)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async Object.energia_solar (/workspaces/limfs/js/atualizar-dados.js:391:31)\n    at async Promise.allSettled (index 4)\n    at async atualizarTodosDados (/workspaces/limfs/js/atualizar-dados.js:469:24)"
+          },
+          {
+            "data": "2025-04-12T05:44:37.395Z",
+            "mensagem": "Todos os endpoints falharam",
+            "stack": "Error: Todos os endpoints falharam\n    at acessarEndpointsAlternativos (/workspaces/limfs/js/atualizar-dados.js:175:60)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at runNextTicks (node:internal/process/task_queues:64:3)\n    at listOnTimeout (node:internal/timers:545:9)\n    at process.processTimers (node:internal/timers:519:7)\n    at async Object.energia_solar (/workspaces/limfs/js/atualizar-dados.js:391:31)\n    at async Promise.allSettled (index 4)\n    at async atualizarTodosDados (/workspaces/limfs/js/atualizar-dados.js:469:24)"
           }
         ]
       },
       "energia_solar": {
-        "total": 1,
-        "ultimaFalha": "2025-04-12T05:22:15.483Z",
+        "total": 2,
+        "ultimaFalha": "2025-04-12T05:44:37.397Z",
         "erros": [
           {
             "data": "2025-04-12T05:22:15.483Z",
             "mensagem": "Todos os endpoints falharam",
             "stack": "Error: Todos os endpoints falharam\n    at Object.energia_solar (/workspaces/limfs/js/atualizar-dados.js:393:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async Promise.allSettled (index 4)\n    at async atualizarTodosDados (/workspaces/limfs/js/atualizar-dados.js:469:24)"
+          },
+          {
+            "data": "2025-04-12T05:44:37.397Z",
+            "mensagem": "Todos os endpoints falharam",
+            "stack": "Error: Todos os endpoints falharam\n    at Object.energia_solar (/workspaces/limfs/js/atualizar-dados.js:393:23)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at runNextTicks (node:internal/process/task_queues:64:3)\n    at listOnTimeout (node:internal/timers:545:9)\n    at process.processTimers (node:internal/timers:519:7)\n    at async Promise.allSettled (index 4)\n    at async atualizarTodosDados (/workspaces/limfs/js/atualizar-dados.js:469:24)"
           }
         ]
       }
     },
-    "ultimaFalha": "2025-04-12T05:22:15.483Z"
+    "ultimaFalha": "2025-04-12T05:44:37.397Z"
   },
   "alertas": {
     "total": 0,

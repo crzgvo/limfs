@@ -1,408 +1,320 @@
 /**
- * Módulo de alertas e monitoramento para o Painel ODS Sergipe
+ * Sistema de alertas para o Painel ODS Sergipe
  * 
- * Este módulo gerencia notificações por e-mail para alertar sobre 
- * falhas nas atualizações de dados e problemas com as APIs.
+ * Este módulo gerencia o registro de falhas, envio de alertas por e-mail
+ * e geração de relatórios sobre o estado do sistema.
  */
 
-const nodemailer = require('nodemailer');
 const fs = require('fs');
 const path = require('path');
+const nodemailer = require('nodemailer');
 
-// Caminho para o arquivo de histórico de falhas
-const ARQUIVO_HISTORICO = path.join(__dirname, '..', 'dados', 'historico-alertas.json');
-// Número máximo de falhas consecutivas antes de enviar alerta
-const MAX_FALHAS_CONSECUTIVAS = 3;
+// Configurações
+const HISTORICO_ALERTAS = path.join(__dirname, '..', 'dados', 'historico-alertas.json');
+const RELATORIO_STATUS = path.join(__dirname, '..', 'dados', 'status-sistema.html');
+const MAX_FALHAS_CONSECUTIVAS = 3; // Número de falhas consecutivas para disparar um alerta
+
 // Intervalo mínimo entre alertas (em horas)
-const INTERVALO_MINIMO_ALERTAS = 24; 
+const MIN_INTERVALO_ALERTAS = 24;
 
-/**
- * Configura o transporter do Nodemailer
- * Nota: As credenciais devem ser configuradas em variáveis de ambiente
- */
-function criarTransporter() {
-    // Primeiro verifica se as variáveis de ambiente estão configuradas
-    // Se não, usa configurações padrão para desenvolvimento
-    const host = process.env.EMAIL_HOST || 'smtp.gmail.com';
-    const porta = process.env.EMAIL_PORT || 587;
-    const usuario = process.env.EMAIL_USER || 'exemplo@gmail.com';
-    const senha = process.env.EMAIL_PASSWORD || 'sua_senha_app';
-    
-    return nodemailer.createTransport({
-        host: host,
-        port: porta,
-        secure: porta === 465,
-        auth: {
-            user: usuario,
-            pass: senha,
-        },
-    });
-}
+// Carrega ou cria o histórico de alertas
+let historico = { falhas: { total: 0, consecutivas: 0, porIndicador: {}, ultimaFalha: null }, alertas: { total: 0, ultimoAlerta: null } };
 
-/**
- * Carrega o histórico de falhas e alertas
- */
-function carregarHistorico() {
-    try {
-        if (fs.existsSync(ARQUIVO_HISTORICO)) {
-            const dados = fs.readFileSync(ARQUIVO_HISTORICO, 'utf8');
-            return JSON.parse(dados);
-        }
-    } catch (erro) {
-        console.error(`Erro ao carregar histórico de alertas: ${erro.message}`);
+try {
+    if (fs.existsSync(HISTORICO_ALERTAS)) {
+        historico = JSON.parse(fs.readFileSync(HISTORICO_ALERTAS, 'utf8'));
     }
-    
-    // Se o arquivo não existe ou há um erro, cria um histórico novo
-    return {
-        falhas: {
-            total: 0,
-            consecutivas: 0,
-            porIndicador: {},
-            ultimaFalha: null
-        },
-        alertas: {
-            total: 0,
-            ultimoAlerta: null
-        }
-    };
+} catch (erro) {
+    console.error('Erro ao carregar histórico de alertas:', erro);
 }
 
 /**
- * Salva o histórico de falhas e alertas
- * @param {Object} historico - O objeto de histórico a ser salvo
+ * Configurar o transportador de e-mail usando as variáveis de ambiente
  */
-function salvarHistorico(historico) {
-    try {
-        const diretorio = path.dirname(ARQUIVO_HISTORICO);
-        if (!fs.existsSync(diretorio)) {
-            fs.mkdirSync(diretorio, { recursive: true });
-        }
-        
-        fs.writeFileSync(ARQUIVO_HISTORICO, JSON.stringify(historico, null, 2));
-    } catch (erro) {
-        console.error(`Erro ao salvar histórico de alertas: ${erro.message}`);
+const transporter = nodemailer.createTransport({
+    host: process.env.EMAIL_HOST || 'smtp.gmail.com',
+    port: parseInt(process.env.EMAIL_PORT || '587'),
+    secure: parseInt(process.env.EMAIL_PORT || '587') === 465,
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASSWORD
     }
-}
+});
 
 /**
- * Registra uma falha na atualização de dados
+ * Registra uma falha no sistema
  * @param {string} indicador - Nome do indicador que falhou
- * @param {Error} erro - Objeto de erro capturado
+ * @param {Error} erro - Objeto de erro com detalhes
  */
 function registrarFalha(indicador, erro) {
-    const historico = carregarHistorico();
-    const agora = new Date();
+    const agora = new Date().toISOString();
     
-    // Incrementa contadores
+    // Incrementar contadores
     historico.falhas.total++;
     historico.falhas.consecutivas++;
-    historico.falhas.ultimaFalha = agora.toISOString();
+    historico.falhas.ultimaFalha = agora;
     
-    // Registra falha por indicador
+    // Inicializar ou atualizar contador específico do indicador
     if (!historico.falhas.porIndicador[indicador]) {
-        historico.falhas.porIndicador[indicador] = {
-            total: 0,
-            ultimaFalha: null,
-            erros: []
-        };
+        historico.falhas.porIndicador[indicador] = { total: 0, ultimaFalha: null };
     }
-    
     historico.falhas.porIndicador[indicador].total++;
-    historico.falhas.porIndicador[indicador].ultimaFalha = agora.toISOString();
+    historico.falhas.porIndicador[indicador].ultimaFalha = agora;
     
-    // Guarda os últimos 10 erros para este indicador
-    const erroInfo = {
-        data: agora.toISOString(),
-        mensagem: erro.message,
-        stack: erro.stack
-    };
+    // Salvar histórico atualizado
+    salvarHistorico();
     
-    historico.falhas.porIndicador[indicador].erros.push(erroInfo);
-    // Mantém apenas os 10 erros mais recentes
-    if (historico.falhas.porIndicador[indicador].erros.length > 10) {
-        historico.falhas.porIndicador[indicador].erros.shift();
+    // Verificar se deve enviar alerta
+    if (historico.falhas.consecutivas >= MAX_FALHAS_CONSECUTIVAS) {
+        // Verifica se já passou o intervalo mínimo desde o último alerta
+        const podeEnviarAlerta = !historico.alertas.ultimoAlerta || 
+            (new Date() - new Date(historico.alertas.ultimoAlerta)) / (1000 * 60 * 60) >= MIN_INTERVALO_ALERTAS;
+        
+        if (podeEnviarAlerta) {
+            enviarAlerta(indicador, erro);
+        }
     }
-    
-    // Verifica se deve enviar alerta
-    const deveEnviarAlerta = verificarNecessidadeAlerta(historico);
-    
-    // Salva o histórico atualizado
-    salvarHistorico(historico);
-    
-    // Envia alerta se necessário
-    if (deveEnviarAlerta) {
-        enviarAlertaEmail(historico);
-    }
-    
-    return historico;
 }
 
 /**
  * Registra uma atualização bem-sucedida
  */
 function registrarSucesso() {
-    const historico = carregarHistorico();
-    
-    // Reseta contador de falhas consecutivas
+    // Resetar contador de falhas consecutivas
     historico.falhas.consecutivas = 0;
-    
-    // Salva o histórico atualizado
-    salvarHistorico(historico);
-    
-    return historico;
+    salvarHistorico();
 }
 
 /**
- * Verifica se é necessário enviar um alerta
- * @param {Object} historico - O histórico de falhas e alertas
- * @returns {boolean} - Se deve ou não enviar um alerta
+ * Salva o histórico de alertas em um arquivo JSON
  */
-function verificarNecessidadeAlerta(historico) {
-    // Verifica se há falhas consecutivas suficientes
-    if (historico.falhas.consecutivas < MAX_FALHAS_CONSECUTIVAS) {
-        return false;
+function salvarHistorico() {
+    try {
+        fs.writeFileSync(HISTORICO_ALERTAS, JSON.stringify(historico, null, 2));
+    } catch (erro) {
+        console.error('Erro ao salvar histórico de alertas:', erro);
     }
-    
-    // Verifica se já foi enviado um alerta recentemente
-    if (historico.alertas.ultimoAlerta) {
-        const ultimoAlerta = new Date(historico.alertas.ultimoAlerta);
-        const agora = new Date();
-        const horasDesdeUltimoAlerta = (agora - ultimoAlerta) / (1000 * 60 * 60);
-        
-        // Se o último alerta foi enviado há menos tempo que o intervalo mínimo
-        if (horasDesdeUltimoAlerta < INTERVALO_MINIMO_ALERTAS) {
-            return false;
-        }
-    }
-    
-    return true;
 }
 
 /**
  * Envia um alerta por e-mail
- * @param {Object} historico - O histórico de falhas e alertas
+ * @param {string} indicador - Nome do indicador que falhou
+ * @param {Error} erro - Objeto de erro com detalhes
  */
-async function enviarAlertaEmail(historico) {
+async function enviarAlerta(indicador, erro) {
     try {
-        const transporter = criarTransporter();
-        const destinatarios = process.env.EMAIL_ALERT_TO || 'admin@limfs.org';
+        const destinatarios = process.env.EMAIL_ALERT_TO || '';
+        if (!destinatarios) {
+            console.log('⚠️ Nenhum destinatário configurado para alertas. Configure EMAIL_ALERT_TO no .env');
+            return;
+        }
         
-        // Prepara a mensagem de e-mail
-        const assunto = `🚨 ALERTA: Falhas na atualização do Painel ODS Sergipe`;
-        const conteudo = `
-            <h2>🚨 ALERTA: Falhas na atualização do Painel ODS</h2>
-            
-            <p>O sistema de atualização automática do Painel ODS Sergipe registrou <strong>${historico.falhas.consecutivas} falhas consecutivas</strong>.</p>
-            
-            <h3>Resumo das falhas:</h3>
-            <ul>
-                <li><strong>Total de falhas registradas:</strong> ${historico.falhas.total}</li>
-                <li><strong>Falhas consecutivas:</strong> ${historico.falhas.consecutivas}</li>
-                <li><strong>Última falha registrada:</strong> ${new Date(historico.falhas.ultimaFalha).toLocaleString('pt-BR')}</li>
-            </ul>
-            
-            <h3>Falhas por indicador:</h3>
-            <table style="border-collapse: collapse; width: 100%;">
-                <tr style="background-color: #f2f2f2;">
-                    <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Indicador</th>
-                    <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Total de falhas</th>
-                    <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Última falha</th>
-                </tr>
-                ${Object.entries(historico.falhas.porIndicador).map(([indicador, info]) => `
-                    <tr>
-                        <td style="border: 1px solid #ddd; padding: 8px;">${indicador}</td>
-                        <td style="border: 1px solid #ddd; padding: 8px;">${info.total}</td>
-                        <td style="border: 1px solid #ddd; padding: 8px;">${new Date(info.ultimaFalha).toLocaleString('pt-BR')}</td>
-                    </tr>
-                `).join('')}
-            </table>
-            
-            <h3>Últimas mensagens de erro:</h3>
-            ${Object.entries(historico.falhas.porIndicador).map(([indicador, info]) => `
-                <details style="margin-bottom: 10px;">
-                    <summary style="cursor: pointer; padding: 5px; background-color: #f8f8f8;">
-                        <strong>${indicador}</strong> (${info.erros.length} erros recentes)
-                    </summary>
-                    <div style="padding: 10px; background-color: #f9f9f9; border: 1px solid #eee; margin-top: 5px;">
-                        ${info.erros.map((erro, index) => `
-                            <div style="margin-bottom: 8px; ${index < info.erros.length - 1 ? 'border-bottom: 1px dashed #ddd;' : ''} padding-bottom: 8px;">
-                                <strong>Data:</strong> ${new Date(erro.data).toLocaleString('pt-BR')}<br>
-                                <strong>Mensagem:</strong> ${erro.mensagem}
-                            </div>
-                        `).join('')}
-                    </div>
-                </details>
-            `).join('')}
-            
-            <p>Por favor, verifique o funcionamento das APIs e a conexão do servidor.</p>
-            
-            <hr>
-            <p style="color: #666; font-size: 12px;">
-                Este é um e-mail automático enviado pelo sistema de monitoramento do Painel ODS Sergipe.<br>
-                Não responda a este e-mail.
-            </p>
+        const dataFormatada = new Date().toLocaleString('pt-BR');
+        const assunto = `🚨 ALERTA: Falha na atualização de dados do Painel ODS Sergipe`;
+        
+        const mensagemHTML = `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
+                <h2 style="color: #dc3545; margin-top: 0;">🚨 Alerta de Falha no Sistema</h2>
+                <p style="margin-bottom: 20px; font-size: 16px;">Foi detectada uma sequência de falhas na atualização de dados do Painel ODS Sergipe.</p>
+                
+                <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+                    <h3 style="margin-top: 0; color: #333;">Detalhes da Falha:</h3>
+                    <ul style="padding-left: 20px;">
+                        <li><strong>Indicador:</strong> ${indicador}</li>
+                        <li><strong>Erro:</strong> ${erro.message}</li>
+                        <li><strong>Data/Hora:</strong> ${dataFormatada}</li>
+                        <li><strong>Falhas consecutivas:</strong> ${historico.falhas.consecutivas}</li>
+                        <li><strong>Total de falhas:</strong> ${historico.falhas.total}</li>
+                    </ul>
+                </div>
+                
+                <p style="font-size: 14px; color: #555;">Este é um e-mail automático do sistema de monitoramento do Painel ODS Sergipe. Por favor, verifique o problema e tome as medidas necessárias.</p>
+                
+                <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; font-size: 12px; color: #777;">
+                    <p>Painel ODS Sergipe - Sistema de Monitoramento Automático</p>
+                    <p>LIMFS - Laboratório de Inovação em Mosaicos Futuros Sustentáveis</p>
+                </div>
+            </div>
         `;
         
-        // Envia o e-mail
-        const info = await transporter.sendMail({
-            from: `"Sistema Painel ODS" <${process.env.EMAIL_USER || 'sistema@limfs.org'}>`,
+        await transporter.sendMail({
+            from: `"Sistema de Monitoramento ODS" <${process.env.EMAIL_USER}>`,
             to: destinatarios,
             subject: assunto,
-            html: conteudo
+            html: mensagemHTML
         });
         
-        console.log(`✉️ Alerta enviado: ${info.messageId}`);
+        console.log('✅ Alerta por e-mail enviado com sucesso!');
         
-        // Atualiza o histórico de alertas
+        // Registra o envio do alerta no histórico
         historico.alertas.total++;
         historico.alertas.ultimoAlerta = new Date().toISOString();
-        salvarHistorico(historico);
+        salvarHistorico();
         
-        return true;
     } catch (erro) {
-        console.error(`Erro ao enviar alerta por e-mail: ${erro.message}`);
-        return false;
+        console.error('Erro ao enviar alerta por e-mail:', erro);
     }
 }
 
 /**
- * Gera um relatório de status em HTML para monitoramento
- * @returns {string} - HTML do relatório
+ * Gera um relatório detalhado do status do sistema e salva como HTML
+ * @returns {string} Caminho do arquivo de relatório
  */
-function gerarRelatorioHTML() {
-    const historico = carregarHistorico();
-    const agora = new Date();
-    
-    return `
+function salvarRelatorioStatus() {
+    try {
+        const agora = new Date();
+        const dataFormatada = agora.toLocaleString('pt-BR');
+        
+        // Status geral do sistema baseado na quantidade de falhas consecutivas
+        let statusGeral = 'normal';
+        let corStatus = '#28a745';
+        let mensagemStatus = 'Sistema funcionando normalmente';
+        
+        if (historico.falhas.consecutivas > 0 && historico.falhas.consecutivas < MAX_FALHAS_CONSECUTIVAS) {
+            statusGeral = 'atencao';
+            corStatus = '#ffc107';
+            mensagemStatus = 'Sistema funcionando com alerta de atenção';
+        } else if (historico.falhas.consecutivas >= MAX_FALHAS_CONSECUTIVAS) {
+            statusGeral = 'critico';
+            corStatus = '#dc3545';
+            mensagemStatus = 'Sistema em estado crítico';
+        }
+        
+        // Listagem de falhas por indicador
+        let listaFalhas = '';
+        for (const [indicador, dados] of Object.entries(historico.falhas.porIndicador)) {
+            const dataFalha = dados.ultimaFalha ? new Date(dados.ultimaFalha).toLocaleString('pt-BR') : 'N/A';
+            listaFalhas += `
+                <tr>
+                    <td>${indicador}</td>
+                    <td>${dados.total}</td>
+                    <td>${dataFalha}</td>
+                </tr>
+            `;
+        }
+        
+        // Cria o HTML do relatório
+        const htmlRelatorio = `
         <!DOCTYPE html>
         <html lang="pt-BR">
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Status do Sistema - Painel ODS Sergipe</title>
+            <title>Relatório de Status - Painel ODS Sergipe</title>
             <style>
-                body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 1200px; margin: 0 auto; padding: 20px; }
-                h1 { color: #0056b3; border-bottom: 2px solid #0056b3; padding-bottom: 10px; }
-                h2 { color: #0056b3; margin-top: 30px; }
-                .card { background-color: #f9f9f9; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 15px; margin-bottom: 20px; }
-                .status-ok { color: #28a745; }
-                .status-warning { color: #ffc107; }
-                .status-error { color: #dc3545; }
-                table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-                th, td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd; }
-                th { background-color: #f2f2f2; }
-                tr:hover { background-color: #f5f5f5; }
-                .timestamp { color: #777; font-size: 13px; margin-top: 30px; }
+                body {
+                    font-family: Arial, sans-serif;
+                    line-height: 1.6;
+                    color: #333;
+                    max-width: 1200px;
+                    margin: 0 auto;
+                    padding: 20px;
+                }
+                .header {
+                    text-align: center;
+                    margin-bottom: 30px;
+                    padding-bottom: 20px;
+                    border-bottom: 1px solid #eee;
+                }
+                .status-badge {
+                    display: inline-block;
+                    padding: 8px 15px;
+                    border-radius: 4px;
+                    color: white;
+                    font-weight: bold;
+                }
+                .normal { background-color: #28a745; }
+                .atencao { background-color: #ffc107; color: #333; }
+                .critico { background-color: #dc3545; }
+                
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-bottom: 30px;
+                }
+                th, td {
+                    padding: 12px 15px;
+                    border-bottom: 1px solid #ddd;
+                    text-align: left;
+                }
+                th {
+                    background-color: #f8f9fa;
+                    font-weight: bold;
+                }
+                tr:hover {
+                    background-color: #f5f5f5;
+                }
+                .summary-box {
+                    background-color: #f8f9fa;
+                    border-radius: 5px;
+                    padding: 20px;
+                    margin-bottom: 30px;
+                }
+                .footer {
+                    margin-top: 50px;
+                    padding-top: 20px;
+                    border-top: 1px solid #eee;
+                    font-size: 0.9em;
+                    color: #666;
+                    text-align: center;
+                }
             </style>
         </head>
         <body>
-            <h1>Status do Sistema - Painel ODS Sergipe</h1>
-            
-            <div class="card">
-                <h2>Resumo</h2>
-                <p>
-                    <strong>Status do sistema:</strong> 
-                    ${historico.falhas.consecutivas > 0 
-                        ? historico.falhas.consecutivas >= MAX_FALHAS_CONSECUTIVAS 
-                            ? '<span class="status-error">⚠️ CRÍTICO - Múltiplas falhas consecutivas</span>' 
-                            : '<span class="status-warning">⚠️ ATENÇÃO - Falhas recentes detectadas</span>'
-                        : '<span class="status-ok">✅ NORMAL - Sistema operando normalmente</span>'}
-                </p>
-                <p><strong>Total de falhas registradas:</strong> ${historico.falhas.total}</p>
-                <p><strong>Falhas consecutivas atuais:</strong> ${historico.falhas.consecutivas}</p>
-                <p><strong>Total de alertas enviados:</strong> ${historico.alertas.total}</p>
-                ${historico.falhas.ultimaFalha 
-                    ? `<p><strong>Última falha registrada:</strong> ${new Date(historico.falhas.ultimaFalha).toLocaleString('pt-BR')}</p>` 
-                    : ''}
-                ${historico.alertas.ultimoAlerta 
-                    ? `<p><strong>Último alerta enviado:</strong> ${new Date(historico.alertas.ultimoAlerta).toLocaleString('pt-BR')}</p>` 
-                    : ''}
+            <div class="header">
+                <h1>Relatório de Status do Sistema</h1>
+                <p>Painel ODS Sergipe - Monitoramento Automático</p>
+                <p><strong>Gerado em:</strong> ${dataFormatada}</p>
             </div>
             
-            <h2>Detalhes por Indicador</h2>
+            <div class="summary-box">
+                <h2>Status Atual: <span class="status-badge ${statusGeral}" style="background-color: ${corStatus};">${mensagemStatus}</span></h2>
+                <p>Este relatório apresenta o status do sistema de atualização automática de dados do Painel ODS Sergipe.</p>
+                <ul>
+                    <li><strong>Total de falhas registradas:</strong> ${historico.falhas.total}</li>
+                    <li><strong>Falhas consecutivas:</strong> ${historico.falhas.consecutivas}</li>
+                    <li><strong>Última falha:</strong> ${historico.falhas.ultimaFalha ? new Date(historico.falhas.ultimaFalha).toLocaleString('pt-BR') : 'N/A'}</li>
+                    <li><strong>Alertas enviados:</strong> ${historico.alertas.total}</li>
+                    <li><strong>Último alerta:</strong> ${historico.alertas.ultimoAlerta ? new Date(historico.alertas.ultimoAlerta).toLocaleString('pt-BR') : 'N/A'}</li>
+                </ul>
+            </div>
             
+            <h2>Falhas por Indicador</h2>
             <table>
-                <tr>
-                    <th>Indicador</th>
-                    <th>Total de falhas</th>
-                    <th>Última falha</th>
-                    <th>Status</th>
-                </tr>
-                ${Object.entries(historico.falhas.porIndicador).map(([indicador, info]) => {
-                    // Calcula se a falha é recente (nas últimas 24h)
-                    const ultimaFalha = new Date(info.ultimaFalha);
-                    const horasDesdeUltimaFalha = (agora - ultimaFalha) / (1000 * 60 * 60);
-                    const falhaRecente = horasDesdeUltimaFalha < 24;
-                    
-                    let statusClass = 'status-ok';
-                    let statusText = 'Normal';
-                    
-                    if (falhaRecente) {
-                        statusClass = 'status-warning';
-                        statusText = 'Atenção';
-                    }
-                    
-                    if (info.erros.length >= 3 && falhaRecente) {
-                        statusClass = 'status-error';
-                        statusText = 'Crítico';
-                    }
-                    
-                    return `
-                        <tr>
-                            <td>${indicador}</td>
-                            <td>${info.total}</td>
-                            <td>${new Date(info.ultimaFalha).toLocaleString('pt-BR')}</td>
-                            <td class="${statusClass}">${statusText}</td>
-                        </tr>
-                    `;
-                }).join('')}
+                <thead>
+                    <tr>
+                        <th>Indicador</th>
+                        <th>Total de Falhas</th>
+                        <th>Última Falha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${listaFalhas || '<tr><td colspan="3">Nenhuma falha registrada</td></tr>'}
+                </tbody>
             </table>
             
-            <h2>Últimas Mensagens de Erro</h2>
+            <div class="summary-box">
+                <h2>Recomendações</h2>
+                <ul>
+                    <li>Se o número de falhas consecutivas for maior que ${MAX_FALHAS_CONSECUTIVAS}, verifique a conectividade com as APIs externas.</li>
+                    <li>Verifique se houve mudanças nas estruturas de dados das APIs utilizadas.</li>
+                    <li>Em caso de persistência do problema, considere atualizar os endpoints alternativos.</li>
+                </ul>
+            </div>
             
-            ${Object.entries(historico.falhas.porIndicador).map(([indicador, info]) => {
-                if (info.erros.length === 0) return '';
-                
-                return `
-                    <div class="card">
-                        <h3>${indicador}</h3>
-                        <table>
-                            <tr>
-                                <th>Data</th>
-                                <th>Mensagem</th>
-                            </tr>
-                            ${info.erros.slice().reverse().map(erro => `
-                                <tr>
-                                    <td>${new Date(erro.data).toLocaleString('pt-BR')}</td>
-                                    <td>${erro.mensagem}</td>
-                                </tr>
-                            `).join('')}
-                        </table>
-                    </div>
-                `;
-            }).join('')}
-            
-            <p class="timestamp">Relatório gerado em: ${agora.toLocaleString('pt-BR')}</p>
+            <div class="footer">
+                <p>LIMFS - Laboratório de Inovação em Mosaicos Futuros Sustentáveis</p>
+                <p>Relatório gerado automaticamente pelo sistema de monitoramento.</p>
+            </div>
         </body>
         </html>
-    `;
-}
-
-/**
- * Gera e salva um relatório de status para monitoramento
- * @returns {string} - Caminho do arquivo salvo
- */
-function salvarRelatorioStatus() {
-    try {
-        const htmlRelatorio = gerarRelatorioHTML();
-        const caminhoRelatorio = path.join(__dirname, '..', 'dados', 'status-sistema.html');
+        `;
         
-        fs.writeFileSync(caminhoRelatorio, htmlRelatorio);
-        console.log(`Relatório de status salvo em: ${caminhoRelatorio}`);
+        fs.writeFileSync(RELATORIO_STATUS, htmlRelatorio);
+        return RELATORIO_STATUS;
         
-        return caminhoRelatorio;
     } catch (erro) {
-        console.error(`Erro ao salvar relatório de status: ${erro.message}`);
+        console.error('Erro ao gerar relatório de status:', erro);
         return null;
     }
 }
@@ -410,7 +322,5 @@ function salvarRelatorioStatus() {
 module.exports = {
     registrarFalha,
     registrarSucesso,
-    enviarAlertaEmail,
-    salvarRelatorioStatus,
-    gerarRelatorioHTML
+    salvarRelatorioStatus
 };
