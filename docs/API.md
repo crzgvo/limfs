@@ -2,63 +2,105 @@
 
 ## Visão Geral
 
-A API do LIMFS integra múltiplas fontes de dados para fornecer indicadores atualizados dos ODS em Sergipe.
+A API (ou conjunto de APIs consumidas) pelo LIMFS integra múltiplas fontes de dados para fornecer indicadores atualizados dos ODS em Sergipe. Esta documentação descreve os principais endpoints externos utilizados.
 
-## Endpoints
+## Endpoints Externos Utilizados
 
 ### IBGE SIDRA
 
-#### Taxa de Pobreza
+API principal do IBGE para dados agregados.
+
+#### Taxa de Pobreza (Exemplo)
 ```http
 GET https://apisidra.ibge.gov.br/values/t/6691/n6/28/v/1836/p/last/c2/6794/d/v1836%201
 ```
 
 **Parâmetros:**
-- `n6/28`: Código de Sergipe
-- `v/1836`: Variável de pobreza
-- `p/last`: Último período disponível
+- `t/6691`: Tabela de origem (PNAD Contínua - Rendimento de todas as fontes)
+- `n6/28`: Nível geográfico (N6 = Unidade da Federação) e código (28 = Sergipe)
+- `v/1836`: Variável (Pessoas abaixo da linha de extrema pobreza)
+- `p/last`: Período (último disponível)
+- `c2/6794`: Classificação (Sexo - Total)
+- `d/v1836%201`: Formato da variável (valor)
 
-**Resposta:**
+**Resposta Esperada (Exemplo):**
 ```json
 [
   {
-    "D2N": "2024",
-    "D3N": "Total",
-    "D4N": "Percentual",
-    "V": "8.1"
+    "NC": "Nível Territorial (Código)",
+    "NN": "Nível Territorial",
+    "MC": "Unidade de Medida (Código)",
+    "MN": "Unidade de Medida",
+    "V": "Valor",
+    "D1C": "Ano (Código)",
+    "D1N": "Ano",
+    "D2C": "Sexo (Código)",
+    "D2N": "Sexo",
+    "D3C": "Unidade da Federação (Código)",
+    "D3N": "Unidade da Federação",
+    "D4C": "Variável (Código)",
+    "D4N": "Variável"
+  },
+  {
+    "NC": "3",
+    "NN": "Unidade da Federação",
+    "MC": "33",
+    "MN": "%",
+    "V": "8.1", // <- Valor do indicador
+    "D1C": "2024",
+    "D1N": "2024",
+    "D2C": "6794",
+    "D2N": "Total",
+    "D3C": "28",
+    "D3N": "Sergipe",
+    "D4C": "1836",
+    "D4N": "Pessoas abaixo da linha de extrema pobreza"
   }
 ]
 ```
 
-#### Taxa de Alfabetização
+*(Nota: Outros endpoints do SIDRA e ServiceDados são usados para diferentes indicadores, seguindo estrutura similar. Veja `js/atualizar-dados.js` para a lista completa)*
+
+### ANEEL Dados Abertos
+
+API para dados de geração distribuída (energia solar).
+
+#### Geração Distribuída em Sergipe
 ```http
-GET https://apisidra.ibge.gov.br/values/t/7218/n6/28/v/1641/p/last
-```
-
-**Resposta:**
-```json
-[
-  {
-    "D2N": "2023",
-    "V": "88.8"
-  }
-]
-```
-
-### ANEEL
-
-#### Energia Solar
-```http
-GET https://dadosabertos.aneel.gov.br/api/3/action/datastore_search
+GET https://dadosabertos.aneel.gov.br/api/3/action/datastore_search?resource_id=b1bd71e7-d0ad-4214-9053-cbd58e9564a7&q=Sergipe
 ```
 
 **Parâmetros:**
+- `resource_id`: Identificador do conjunto de dados na plataforma.
+- `q=Sergipe`: Filtro de busca textual (pode não ser o ideal, verificar se há filtros por UF).
+
+**Resposta Esperada (Estrutura):**
 ```json
 {
-  "resource_id": "b1bd71e7-d0ad-4214-9053-cbd58e9564a7",
-  "q": "Sergipe"
+  "help": "...",
+  "success": true,
+  "result": {
+    "resource_id": "b1bd71e7-d0ad-4214-9053-cbd58e9564a7",
+    "fields": [ ... ],
+    "records": [
+      {
+        "_id": 1,
+        "DatGeracaoConjuntoDados": "...",
+        "AnmPeriodoReferencia": "...",
+        // ... outros campos ...
+        "SigUF": "SE", // <- Campo importante para filtrar
+        "MdaPotenciaInstaladaKW": "5.5", // <- Potência
+        // ... outros campos ...
+      },
+      // ... mais registros ...
+    ],
+    "_links": { ... },
+    "total": 14200 // Exemplo de total de registros para Sergipe
+  }
 }
 ```
+
+*(Nota: A qualidade e estrutura dos dados da ANEEL podem variar. O script `atualizar-dados.js` realiza o processamento necessário.)*
 
 ## Estrutura de Dados
 

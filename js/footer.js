@@ -1,10 +1,11 @@
 /**
- * Insere o conteúdo do rodapé em todas as páginas
+ * Insere dinamicamente o conteúdo do rodapé padrão nas páginas.
  */
 document.addEventListener('DOMContentLoaded', function () {
     const rodapeElemento = document.querySelector('.rodape');
 
     if (rodapeElemento) {
+        // Define o HTML do rodapé, incluindo o ano atual dinamicamente
         rodapeElemento.innerHTML = `
         <div class="container-rodape">
           <div class="secao-rodape info-institucional">
@@ -18,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p>Telefone: (79) 99809-4165</p>
           </div>
           <div class="secao-rodape fontes-dados">
+            {/* A data aqui é estática, considerar atualizar dinamicamente se necessário */}
             <h4>Fontes de Dados (Atualizado em 12/04/2025)</h4>
             <ul>
               <li>IBGE - PNAD Contínua 2023-2024</li>
