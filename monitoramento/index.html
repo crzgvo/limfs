@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow"> <!-- Evita indexação por motores de busca -->
+    <title>Dashboard de Monitoramento - Painel ODS Sergipe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #0056b3;
+            --secondary-green: #05b056;
+            --light-gray: #f9f9f9;
+            --border-color: #ddd;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --success: #28a745;
+            --text-color: #333;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f5f7fa;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1, h2, h3 {
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--primary-blue);
+        }
+        
+        header h1 {
+            color: white;
+            margin-bottom: 0;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .stat-card {
+            flex: 1;
+            min-width: 200px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card .value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .stat-card .label {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .status-normal {
+            color: var(--success);
+        }
+        
+        .status-warning {
+            color: var(--warning);
+        }
+        
+        .status-error {
+            color: var(--danger);
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+        
+        .status-badge.normal {
+            background-color: rgba(40, 167, 69, 0.2);
+            color: var(--success);
+        }
+        
+        .status-badge.warning {
+            background-color: rgba(255, 193, 7, 0.2);
+            color: #856404;
+        }
+        
+        .status-badge.error {
+            background-color: rgba(220, 53, 69, 0.2);
+            color: var(--danger);
+        }
+        
+        .icon-large {
+            font-size: 3rem;
+            margin: 10px 0;
+        }
+        
+        .action-button {
+            display: inline-block;
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .action-button:hover {
+            background-color: #003d7a;
+        }
+        
+        .action-button.warning {
+            background-color: var(--warning);
+            color: #333;
+        }
+        
+        .action-button.warning:hover {
+            background-color: #e0a800;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        th {
+            background-color: var(--light-gray);
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+        
+        tr:hover {
+            background-color: rgba(0, 86, 179, 0.05);
+        }
+        
+        .tab-container {
+            margin-top: 20px;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .tab:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .tab.active {
+            border-bottom-color: var(--primary-blue);
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+        
+        .tab-content {
+            padding: 20px 0;
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .refresh-button {
+            float: right;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--secondary-green);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+        
+        .refresh-button:hover {
+            background-color: #049048;
+        }
+        
+        .timestamp {
+            color: #777;
+            font-size: 0.9rem;
+            margin-top: 20px;
+            font-style: italic;
+        }
+        
+        .top-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        
+        .iframe-container {
+            width: 100%;
+            height: 800px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        footer {
+            background-color: var(--primary-blue);
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 30px;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .flex-container {
+                flex-direction: column;
+            }
+            
+            .stat-card {
+                width: 100%;
+            }
+            
+            .tab {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-chart-line"></i> Dashboard de Monitoramento - Painel ODS Sergipe</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="top-actions">
+            <h2>Status do Sistema</h2>
+            <button class="refresh-button" onclick="atualizarPagina()">
+                <i class="fas fa-sync-alt"></i> Atualizar Dados
+            </button>
+        </div>
+
+        <div class="flex-container">
+            <div class="stat-card">
+                <i class="fas fa-server icon-large status-normal" id="icon-status"></i>
+                <div class="value" id="status-sistema">OK</div>
+                <div class="label">Status do Sistema</div>
+                <div class="status-badge normal" id="badge-status">Sistema Operando Normalmente</div>
+            </div>
+
+            <div class="stat-card">
+                <i class="fas fa-exclamation-triangle icon-large status-warning"></i>
+                <div class="value" id="total-falhas">0</div>
+                <div class="label">Total de Falhas</div>
+                <div class="status-badge warning">Registradas no Sistema</div>
+            </div>
+
+            <div class="stat-card">
+                <i class="fas fa-envelope icon-large" style="color: var(--primary-blue)"></i>
+                <div class="value" id="total-alertas">0</div>
+                <div class="label">Alertas Enviados</div>
+                <div class="status-badge normal" id="ultimo-alerta">Nenhum Recente</div>
+            </div>
+        </div>
+
+        <div class="tab-container">
+            <div class="tabs">
+                <div class="tab active" data-tab="relatorio">Relatório de Status</div>
+                <div class="tab" data-tab="acoes">Ações Rápidas</div>
+                <div class="tab" data-tab="configuracoes">Configurações</div>
+            </div>
+
+            <div class="tab-content active" id="relatorio">
+                <div class="card">
+                    <h3>Relatório Detalhado de Status</h3>
+                    <div class="iframe-container">
+                        <iframe src="../dados/status-sistema.html" id="frame-relatorio"
+                            title="Relatório de Status do Sistema"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="acoes">
+                <div class="card">
+                    <h3>Ações de Manutenção</h3>
+                    <p>Execute ações rápidas para gerenciar o sistema de atualização do Painel ODS.</p>
+
+                    <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px;">
+                        <button class="action-button" onclick="atualizarDados()">
+                            <i class="fas fa-sync-alt"></i> Forçar Atualização de Dados
+                        </button>
+
+                        <button class="action-button warning" onclick="limparHistorico()">
+                            <i class="fas fa-eraser"></i> Limpar Histórico de Falhas
+                        </button>
+
+                        <button class="action-button" onclick="testarEmail()">
+                            <i class="fas fa-envelope"></i> Testar Envio de Alertas
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Logs do Sistema</h3>
+                    <div class="log-container" style="max-height: 300px; overflow-y: auto; background-color: #f5f5f5; padding: 15px; border-radius: 5px; font-family: monospace; margin-top: 15px;">
+                        <pre id="logs">Carregando logs do sistema...</pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="configuracoes">
+                <div class="card">
+                    <h3>Configurações de Alertas</h3>
+                    <p>Configure as opções para o sistema de alertas automáticos.</p>
+                    
+                    <form id="config-form" style="margin-top: 20px;">
+                        <div style="margin-bottom: 15px;">
+                            <label for="email-to" style="display: block; margin-bottom: 5px; font-weight: bold;">
+                                Destinatários dos Alertas:
+                            </label>
+                            <input type="text" id="email-to" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" 
+                                placeholder="example@email.com, another@email.com">
+                        </div>
+                        
+                        <div style="margin-bottom: 15px;">
+                            <label for="falhas-consecutivas" style="display: block; margin-bottom: 5px; font-weight: bold;">
+                                Número de Falhas Consecutivas para Alertar:
+                            </label>
+                            <input type="number" id="falhas-consecutivas" min="1" max="10" value="3" 
+                                style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        
+                        <div style="margin-bottom: 15px;">
+                            <label for="intervalo-alertas" style="display: block; margin-bottom: 5px; font-weight: bold;">
+                                Intervalo Mínimo Entre Alertas (horas):
+                            </label>
+                            <input type="number" id="intervalo-alertas" min="1" max="72" value="24" 
+                                style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        
+                        <button type="submit" class="action-button" style="margin-top: 15px;">
+                            <i class="fas fa-save"></i> Salvar Configurações
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="card">
+                    <h3>Status dos Arquivos de Dados</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Arquivo</th>
+                                <th>Última Atualização</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-arquivos">
+                            <tr>
+                                <td colspan="4">Carregando informações dos arquivos...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <p class="timestamp">Última verificação: <span id="ultima-verificacao">-</span></p>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Painel ODS Sergipe &copy; LIMFS <span id="ano-atual">2025</span> - Monitoramento Interno</p>
+        </div>
+    </footer>
+
+    <script>
+        // Implementação das abas
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+                    
+                    // Remove classe ativa de todas as abas
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Adiciona classe ativa na aba clicada
+                    tab.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Inicializa a página
+            carregarDados();
+            
+            // Atualiza o ano atual no rodapé
+            document.getElementById('ano-atual').textContent = new Date().getFullYear();
+        });
+        
+        // Função para atualizar a página
+        function atualizarPagina() {
+            location.reload();
+        }
+        
+        // Função para carregar dados
+        async function carregarDados() {
+            try {
+                // Simulação de carregamento de dados - em produção, substitua por chamadas reais à API
+                await simularCarregamento();
+                
+                // Busca e carrega o histórico de alertas
+                const historico = await buscarDadosHistorico();
+                atualizarInterface(historico);
+                
+                // Carrega lista de arquivos
+                await carregarArquivosDados();
+                
+                // Carrega logs simulados
+                carregarLogs();
+                
+                // Atualiza o timestamp
+                document.getElementById('ultima-verificacao').textContent = new Date().toLocaleString();
+            } catch (erro) {
+                console.error('Erro ao carregar dados:', erro);
+                alert('Ocorreu um erro ao carregar os dados. Tente novamente mais tarde.');
+            }
+        }
+        
+        // Função auxiliar para simular carregamento
+        function simularCarregamento() {
+            return new Promise(resolve => {
+                setTimeout(resolve, 500);
+            });
+        }
+        
+        // Função para buscar dados do histórico de alertas
+        async function buscarDadosHistorico() {
+            // Em produção, isso seria uma chamada real à API ou a um arquivo JSON
+            // Retornando dados simulados por enquanto
+            return {
+                falhas: {
+                    total: 23,
+                    consecutivas: 0,
+                    porIndicador: {
+                        'pobreza': { total: 5, ultimaFalha: '2025-03-15T10:30:00' },
+                        'educacao': { total: 4, ultimaFalha: '2025-04-01T08:15:00' },
+                        'saneamento': { total: 2, ultimaFalha: '2025-04-05T14:20:00' },
+                        'mortalidade_infantil': { total: 6, ultimaFalha: '2025-04-02T11:45:00' },
+                        'energia_solar': { total: 6, ultimaFalha: '2025-04-10T09:30:00' }
+                    },
+                    ultimaFalha: '2025-04-10T09:30:00'
+                },
+                alertas: {
+                    total: 2,
+                    ultimoAlerta: '2025-03-20T08:00:00'
+                }
+            };
+        }
+        
+        // Função para atualizar a interface com os dados carregados
+        function atualizarInterface(historico) {
+            // Atualiza total de falhas
+            document.getElementById('total-falhas').textContent = historico.falhas.total;
+            
+            // Atualiza total de alertas
+            document.getElementById('total-alertas').textContent = historico.alertas.total;
+            
+            // Atualiza status do sistema
+            const statusElement = document.getElementById('status-sistema');
+            const iconElement = document.getElementById('icon-status');
+            const badgeElement = document.getElementById('badge-status');
+            
+            if (historico.falhas.consecutivas >= 3) {
+                statusElement.textContent = 'CRÍTICO';
+                statusElement.className = 'value status-error';
+                iconElement.className = 'fas fa-exclamation-circle icon-large status-error';
+                badgeElement.textContent = 'Múltiplas Falhas Detectadas';
+                badgeElement.className = 'status-badge error';
+            } else if (historico.falhas.consecutivas > 0) {
+                statusElement.textContent = 'ATENÇÃO';
+                statusElement.className = 'value status-warning';
+                iconElement.className = 'fas fa-exclamation-triangle icon-large status-warning';
+                badgeElement.textContent = 'Falhas Recentes Detectadas';
+                badgeElement.className = 'status-badge warning';
+            } else {
+                statusElement.textContent = 'NORMAL';
+                statusElement.className = 'value status-normal';
+                iconElement.className = 'fas fa-check-circle icon-large status-normal';
+                badgeElement.textContent = 'Sistema Operando Normalmente';
+                badgeElement.className = 'status-badge normal';
+            }
+            
+            // Atualiza último alerta
+            const ultimoAlertaElement = document.getElementById('ultimo-alerta');
+            if (historico.alertas.ultimoAlerta) {
+                const dataAlerta = new Date(historico.alertas.ultimoAlerta);
+                ultimoAlertaElement.textContent = `Último: ${dataAlerta.toLocaleDateString()}`;
+            } else {
+                ultimoAlertaElement.textContent = 'Nenhum Enviado';
+            }
+        }
+        
+        // Função para carregar informações dos arquivos de dados
+        async function carregarArquivosDados() {
+            // Em produção, isso seria uma chamada real à API ou ao sistema de arquivos
+            // Simulando dados por enquanto
+            const arquivos = [
+                { nome: 'pobreza.json', atualizacao: '12/04/2025 04:35', status: 'Atualizado' },
+                { nome: 'educacao.json', atualizacao: '12/04/2025 04:35', status: 'Atualizado' },
+                { nome: 'saneamento.json', atualizacao: '12/04/2025 04:35', status: 'Atualizado' },
+                { nome: 'mortalidade_infantil.json', atualizacao: '12/04/2025 04:36', status: 'Atualizado' },
+                { nome: 'energia_solar.json', atualizacao: '12/04/2025 04:36', status: 'Atualizado' },
+                { nome: 'residuos_reciclados.json', atualizacao: '12/04/2025 04:36', status: 'Atualizado' }
+            ];
+            
+            const tbody = document.getElementById('tabela-arquivos');
+            tbody.innerHTML = '';
+            
+            arquivos.forEach(arquivo => {
+                const row = document.createElement('tr');
+                
+                // Nome do arquivo
+                const tdNome = document.createElement('td');
+                tdNome.textContent = arquivo.nome;
+                
+                // Última atualização
+                const tdAtualizacao = document.createElement('td');
+                tdAtualizacao.textContent = arquivo.atualizacao;
+                
+                // Status
+                const tdStatus = document.createElement('td');
+                const statusBadge = document.createElement('span');
+                statusBadge.className = 'status-badge normal';
+                statusBadge.textContent = arquivo.status;
+                tdStatus.appendChild(statusBadge);
+                
+                // Ações
+                const tdAcoes = document.createElement('td');
+                const btnPreview = document.createElement('button');
+                btnPreview.className = 'action-button';
+                btnPreview.style.padding = '5px 10px';
+                btnPreview.style.fontSize = '0.8rem';
+                btnPreview.innerHTML = '<i class="fas fa-eye"></i> Ver';
+                btnPreview.onclick = () => visualizarArquivo(arquivo.nome);
+                tdAcoes.appendChild(btnPreview);
+                
+                row.appendChild(tdNome);
+                row.appendChild(tdAtualizacao);
+                row.appendChild(tdStatus);
+                row.appendChild(tdAcoes);
+                
+                tbody.appendChild(row);
+            });
+        }
+        
+        // Função para carregar logs simulados
+        function carregarLogs() {
+            const logs = `
+[2025-04-12 04:33:15] INFO: Iniciando atualização de dados do Painel ODS Sergipe
+[2025-04-12 04:33:16] INFO: Processando indicador: pobreza
+[2025-04-12 04:33:18] ERROR: Endpoint #1 para pobreza falhou: Status Code: 500
+[2025-04-12 04:33:20] ERROR: Endpoint #2 para pobreza falhou: Status Code: 400
+[2025-04-12 04:33:24] ERROR: Endpoint #3 para pobreza falhou: Status Code: 500
+[2025-04-12 04:33:24] INFO: Usando dados estáticos para pobreza
+[2025-04-12 04:33:25] INFO: Dados de pobreza atualizados com sucesso!
+[2025-04-12 04:33:25] INFO: Processando indicador: educacao
+[2025-04-12 04:33:35] INFO: Dados de educacao atualizados com sucesso!
+[2025-04-12 04:33:36] INFO: Processando indicador: saneamento
+[2025-04-12 04:33:40] INFO: Dados de saneamento atualizados com sucesso!
+[2025-04-12 04:33:42] INFO: Processando indicador: mortalidade_infantil
+[2025-04-12 04:33:48] INFO: Dados de mortalidade_infantil atualizados com sucesso!
+[2025-04-12 04:33:50] INFO: Processando indicador: energia_solar
+[2025-04-12 04:34:05] INFO: Dados de energia_solar atualizados com sucesso!
+[2025-04-12 04:34:06] INFO: Processando indicador: residuos_reciclados
+[2025-04-12 04:34:07] INFO: Dados de residuos_reciclados atualizados com sucesso!
+[2025-04-12 04:34:08] INFO: Relatório de status salvo em: /dados/status-sistema.html
+[2025-04-12 04:34:09] INFO: Atualização finalizada. 6 indicadores processados (0 falhas)
+            `;
+            
+            document.getElementById('logs').textContent = logs;
+        }
+        
+        // Funções para as ações rápidas
+        function atualizarDados() {
+            if (confirm('Deseja realmente forçar a atualização imediata dos dados?')) {
+                alert('Atualização de dados iniciada! Isso pode levar alguns minutos.');
+                // Aqui seria implementada a chamada real para a API ou script de atualização
+            }
+        }
+        
+        function limparHistorico() {
+            if (confirm('Deseja realmente limpar todo o histórico de falhas? Esta ação não pode ser desfeita.')) {
+                alert('Histórico de falhas limpo com sucesso!');
+                // Aqui seria implementada a chamada real para a API ou script de limpeza
+                location.reload();
+            }
+        }
+        
+        function testarEmail() {
+            alert('Enviando e-mail de teste. Verifique a caixa de entrada dos destinatários configurados.');
+            // Aqui seria implementada a chamada real para a API ou script de envio de e-mail de teste
+        }
+        
+        function visualizarArquivo(nome) {
+            alert(`Visualizando arquivo: ${nome}`);
+            // Aqui seria implementada a visualização do arquivo ou redirecionamento para ele
+        }
+        
+        // Handler para o formulário de configurações
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('config-form');
+            
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const emailTo = document.getElementById('email-to').value;
+                    const falhasConsecutivas = document.getElementById('falhas-consecutivas').value;
+                    const intervaloAlertas = document.getElementById('intervalo-alertas').value;
+                    
+                    alert(`Configurações salvas com sucesso!\n
+                        Destinatários: ${emailTo}\n
+                        Falhas consecutivas para alertar: ${falhasConsecutivas}\n
+                        Intervalo mínimo entre alertas: ${intervaloAlertas} horas`);
+                    
+                    // Aqui seria implementada a chamada real para salvar as configurações
+                });
+            }
+        });
+    </script>
+</body>
+</html>

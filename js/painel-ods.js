@@ -13,7 +13,10 @@ const API_CONFIG = {
         energia_solar: 'https://dadosabertos.aneel.gov.br/api/3/action/datastore_search?resource_id=b1bd71e7-d0ad-4214-9053-cbd58e9564a7',
         residuos_reciclados: '/t/1400/n6/28/v/1000100/p/last'
     },
-    cache_expiration: 86400000, // 24 horas em milissegundos
+    arquivos_json: {
+        base_url: '../dados/',
+        cache_expiration: 86400000, // 24 horas em milissegundos
+    },
     timeout: 5000 // 5 segundos para timeout da API
 };
 
@@ -175,10 +178,57 @@ const INDICADORES = [
 ];
 
 /**
+ * Verifica se existem dados atualizados em JSON e os carrega
+ * @param {string} endpoint - Nome do endpoint/indicador
+ * @returns {Promise<Object|null>} - Dados atualizados ou null se indisponível
+ */
+async function carregarDadosAtualizados(endpoint) {
+    try {
+        const url = `${API_CONFIG.arquivos_json.base_url}${endpoint}.json`;
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+            console.log(`Arquivo de dados para ${endpoint} não encontrado, usando API ou fallback.`);
+            return null;
+        }
+        
+        const dadosAtualizados = await response.json();
+        
+        // Verificar data de atualização para garantir que não são dados muito antigos
+        const ultimaAtualizacao = new Date(dadosAtualizados.ultimaAtualizacao);
+        const agora = new Date();
+        const diferencaDias = Math.floor((agora - ultimaAtualizacao) / (1000 * 60 * 60 * 24));
+        
+        // Se os dados têm mais de 30 dias, tenta atualizar via API
+        if (diferencaDias > 30) {
+            console.log(`Dados de ${endpoint} têm mais de 30 dias, tentando atualizar via API.`);
+            return null;
+        }
+        
+        console.log(`Usando dados atualizados de ${endpoint} (${dadosAtualizados.ultimaAtualizacao})`);
+        return {
+            valor: dadosAtualizados.dados.valor,
+            ano: dadosAtualizados.dados.ano,
+            usouFallback: false,
+            dadosCompletos: dadosAtualizados.dados
+        };
+    } catch (erro) {
+        console.warn(`Erro ao carregar dados atualizados de ${endpoint}:`, erro);
+        return null;
+    }
+}
+
+/**
  * Busca dados na API do IBGE e implementa mecanismo de fallback
  * em caso de falha na requisição ou timeout
  */
 async function buscarDadosAPI(endpoint) {
+    // Primeiro tenta carregar dados atualizados do arquivo JSON
+    const dadosAtualizados = await carregarDadosAtualizados(endpoint);
+    if (dadosAtualizados) {
+        return dadosAtualizados;
+    }
+    
     try {
         const url = `${API_CONFIG.ibge_sidra_base}${API_CONFIG.endpoints[endpoint]}`;
 

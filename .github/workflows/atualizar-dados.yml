@@ -13,16 +13,38 @@ jobs:
       - name: Checkout do repositório
         uses: actions/checkout@v4
 
-      - name: Atualizar dados Mortalidade Infantil (exemplo IBGE)
-        run: |
-          curl "https://servicodados.ibge.gov.br/api/v3/agregados/793/periodos/-1/variaveis/104?localidades=N6[28]" -o dados/mortalidade_infantil.json
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
 
-      # Adicione outros indicadores aqui seguindo o mesmo padrão acima
+      - name: Instalar dependências
+        run: npm ci || npm install
+        
+      - name: Verificar diretório de dados
+        run: mkdir -p dados
+
+      - name: Executar script de atualização de dados
+        run: node js/atualizar-dados.js
+        
+      - name: Verificar alterações nos dados
+        id: verificar-alteracoes
+        run: |
+          git status --porcelain dados/ | wc -l > alteracoes.txt
+          ALTERACOES=$(cat alteracoes.txt)
+          echo "total_alteracoes=$ALTERACOES" >> $GITHUB_OUTPUT
+          echo "Total de alterações encontradas: $ALTERACOES"
 
       - name: Commit e Push dos dados atualizados
+        if: steps.verificar-alteracoes.outputs.total_alteracoes != '0'
         run: |
-          git config user.name "github-actions"  
-          git config user.email "github-actions@github.com"  
+          git config user.name "github-actions[bot]"  
+          git config user.email "github-actions[bot]@users.noreply.github.com"  
           git add dados/*.json  
-          git commit -m "Atualização automática dos dados ODS" || echo "Nenhuma alteração para commitar"  
+          git commit -m "Atualização automática dos dados ODS - $(date +'%d/%m/%Y')"
           git push
+          
+      - name: Exibir status - Sem alterações
+        if: steps.verificar-alteracoes.outputs.total_alteracoes == '0'
+        run: echo "✅ Nenhuma alteração nos dados foi detectada. Dados já estão atualizados!"
