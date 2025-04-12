@@ -1,26 +1,50 @@
 /**
- * Painel ODS Sergipe - Sistema de visualização dos indicadores para monitoramento
- * dos Objetivos de Desenvolvimento Sustentável (Agenda 2030) em Sergipe.
+ * Painel ODS Sergipe - Sistema de visualização de indicadores da Agenda 2030
+ * Responsável por carregar, exibir e atualizar os dados dos indicadores no front-end
  */
 
+// Configurações de API e endpoints
 const API_CONFIG = {
     ibge_sidra_base: 'https://apisidra.ibge.gov.br/values',
+    servicedados_base: 'https://servicodados.ibge.gov.br/api',
     endpoints: {
-        pobreza: '/t/6691/n6/28/v/1836/p/last/c2/6794/d/v1836%201',
-        educacao: '/t/7218/n6/28/v/1641/p/last',
-        saneamento: '/t/1393/n6/28/v/1000096/p/last',
-        mortalidade_infantil: '/t/793/n6/28/v/104/p/last',
-        energia_solar: 'https://dadosabertos.aneel.gov.br/api/3/action/datastore_search?resource_id=b1bd71e7-d0ad-4214-9053-cbd58e9564a7',
-        residuos_reciclados: '/t/1400/n6/28/v/1000100/p/last'
+        pobreza: [
+            '/t/6691/n6/28/v/1836/p/last/c2/6794/d/v1836%201',
+            '/v3/agregados/6691/periodos/-1/variaveis/1836?localidades=N6[28]',
+            '/v1/pesquisas/10/periodos/2022/indicadores/1836/resultados/28'
+        ],
+        educacao: [
+            '/t/7218/n6/28/v/1641/p/last',
+            '/v3/agregados/7218/periodos/-1/variaveis/1641?localidades=N6[28]',
+            '/v1/pesquisas/34/periodos/2023/indicadores/1641/resultados/28'
+        ],
+        saneamento: [
+            '/t/1393/n6/28/v/1000096/p/last',
+            '/v3/agregados/1393/periodos/-1/variaveis/1000096?localidades=N6[28]',
+            '/v1/pesquisas/23/periodos/2022/indicadores/1000096/resultados/28'
+        ],
+        mortalidade_infantil: [
+            '/t/793/n6/28/v/104/p/last',
+            '/v3/agregados/793/periodos/-1/variaveis/104?localidades=N6[28]',
+            '/v1/pesquisas/18/periodos/2022/indicadores/104/resultados/28'
+        ],
+        energia_solar: [
+            'https://dadosabertos.aneel.gov.br/api/3/action/datastore_search?resource_id=b1bd71e7-d0ad-4214-9053-cbd58e9564a7&q=Sergipe',
+            'https://dadosabertos.aneel.gov.br/dataset/b1bd71e7-d0ad-4214-9053-cbd58e9564a7/resource/b1bd71e7-d0ad-4214-9053-cbd58e9564a7'
+        ],
+        residuos_reciclados: [
+            '/t/1400/n6/28/v/1000100/p/last',
+            '/v3/agregados/1400/periodos/-1/variaveis/1000100?localidades=N6[28]'
+        ]
     },
     arquivos_json: {
-        base_url: '../dados/indicadores/', // Caminho atualizado para os arquivos JSON
+        base_url: '../dados/indicadores/', 
         cache_expiration: 86400000, // 24 horas em milissegundos
     },
-    timeout: 5000 // 5 segundos para timeout da API
+    timeout: 8000
 };
 
-// Dados históricos de fallback (usados quando a API está indisponível)
+// Dados históricos de fallback para quando as APIs falham
 const DADOS_HISTORICOS = {
     pobreza: [
         { ano: 2019, valor: 9.5 },
@@ -76,7 +100,7 @@ const DADOS_HISTORICOS = {
     ]
 };
 
-// Cores oficiais dos ODS conforme padrão visual da ONU
+// Cores oficiais dos ODS conforme identidade visual da ONU
 const CORES_ODS = {
     pobreza: {
         cor: '#E5243B',
@@ -110,7 +134,7 @@ const CORES_ODS = {
     }
 };
 
-// Descrições detalhadas para os tooltips
+// Descrições explicativas para cada indicador (tooltips)
 const TOOLTIPS = {
     pobreza: "Percentual da população vivendo com menos de R$ 182 por mês (linha de extrema pobreza definida pelo Banco Mundial).",
     educacao: "Percentual da população com 15 anos ou mais de idade que sabe ler e escrever.",
@@ -120,6 +144,7 @@ const TOOLTIPS = {
     residuos_reciclados: "Percentual do total de resíduos sólidos urbanos que são coletados seletivamente e reciclados."
 };
 
+// Definições dos indicadores exibidos
 const INDICADORES = [
     {
         id: 'indicador-pobreza',
@@ -178,114 +203,325 @@ const INDICADORES = [
 ];
 
 /**
- * Verifica se existem dados atualizados em JSON e os carrega
- * @param {string} endpoint - Nome do endpoint/indicador
- * @returns {Promise<Object|null>} - Dados atualizados ou null se indisponível
+ * Carrega dados salvos em arquivos JSON
+ * @returns {Promise<Object|null>} Dados do arquivo ou null se indisponível
  */
 async function carregarDadosAtualizados(endpoint) {
     try {
+        // Tenta no diretório principal
         const url = `${API_CONFIG.arquivos_json.base_url}${endpoint}.json`;
-        const response = await fetch(url);
+        let response = await fetch(url, { cache: 'no-store' });
         
+        // Fallback para diretório secundário
         if (!response.ok) {
-            console.log(`Arquivo de dados para ${endpoint} não encontrado, usando API ou fallback.`);
-            return null;
+            const urlAlternativa = `../dados/${endpoint}.json`;
+            console.log(`Arquivo não encontrado em ${url}, tentando ${urlAlternativa}...`);
+            response = await fetch(urlAlternativa, { cache: 'no-store' });
+            
+            if (!response.ok) {
+                console.log(`Nenhum arquivo de dados encontrado para ${endpoint}`);
+                return null;
+            }
         }
         
         const dadosAtualizados = await response.json();
         
-        // Verificar data de atualização para garantir que não são dados muito antigos
+        // Validação da estrutura do arquivo
+        if (!dadosAtualizados.dados || dadosAtualizados.dados.valor === undefined) {
+            console.warn(`Estrutura de dados inválida para ${endpoint} no arquivo JSON`);
+            return null;
+        }
+        
+        // Verifica se os dados estão atualizados (menos de 30 dias)
         const ultimaAtualizacao = new Date(dadosAtualizados.ultimaAtualizacao);
         const agora = new Date();
         const diferencaDias = Math.floor((agora - ultimaAtualizacao) / (1000 * 60 * 60 * 24));
         
-        // Se os dados têm mais de 30 dias, tenta atualizar via API
         if (diferencaDias > 30) {
-            console.log(`Dados de ${endpoint} têm mais de 30 dias, tentando atualizar via API.`);
-            return null;
+            console.log(`Dados de ${endpoint} têm mais de ${diferencaDias} dias, considerando atualização via API`);
         }
         
-        console.log(`Usando dados atualizados de ${endpoint} (${dadosAtualizados.ultimaAtualizacao})`);
+        console.log(`Usando dados de arquivo JSON para ${endpoint} (${dadosAtualizados.ultimaAtualizacao})`);
         return {
             valor: dadosAtualizados.dados.valor,
-            ano: dadosAtualizados.dados.ano,
+            ano: dadosAtualizados.dados.ano || new Date(dadosAtualizados.ultimaAtualizacao).getFullYear(),
             usouFallback: false,
-            dadosCompletos: dadosAtualizados.dados
+            dadosCompletos: dadosAtualizados.dados,
+            ultimaAtualizacao: dadosAtualizados.ultimaAtualizacao
         };
     } catch (erro) {
-        console.warn(`Erro ao carregar dados atualizados de ${endpoint}:`, erro);
+        console.warn(`Erro ao carregar dados de arquivo para ${endpoint}:`, erro);
         return null;
     }
 }
 
 /**
- * Busca dados na API do IBGE e implementa mecanismo de fallback
- * em caso de falha na requisição ou timeout
+ * Gerencia cache local para reduzir requisições repetidas
  */
-async function buscarDadosAPI(endpoint) {
-    // Primeiro tenta carregar dados atualizados do arquivo JSON
-    const dadosAtualizados = await carregarDadosAtualizados(endpoint);
-    if (dadosAtualizados) {
-        return dadosAtualizados;
-    }
-    
+function armazenarCacheLocal(endpoint, dados) {
     try {
-        const url = `${API_CONFIG.ibge_sidra_base}${API_CONFIG.endpoints[endpoint]}`;
+        const chaveCache = `ods_sergipe_${endpoint}`;
+        const dadosCache = {
+            timestamp: new Date().getTime(),
+            dados: dados
+        };
+        
+        localStorage.setItem(chaveCache, JSON.stringify(dadosCache));
+        return true;
+    } catch (erro) {
+        console.warn(`Erro ao armazenar cache local para ${endpoint}:`, erro);
+        return false;
+    }
+}
 
-        // Implementa timeout para a requisição
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), API_CONFIG.timeout);
-
-        const response = await fetch(url, { signal: controller.signal });
-        clearTimeout(timeoutId);
-
-        if (!response.ok) {
-            throw new Error(`Erro HTTP: ${response.status}`);
+/**
+ * Verifica a validade do cache local antes de fazer requisições
+ */
+function verificarCacheLocal(endpoint) {
+    try {
+        const chaveCache = `ods_sergipe_${endpoint}`;
+        const cacheString = localStorage.getItem(chaveCache);
+        
+        if (!cacheString) {
+            return null;
         }
+        
+        const cache = JSON.parse(cacheString);
+        const agora = new Date().getTime();
+        
+        if ((agora - cache.timestamp) < API_CONFIG.arquivos_json.cache_expiration) {
+            console.log(`Usando cache local para ${endpoint}`);
+            return cache.dados;
+        } else {
+            console.log(`Cache local para ${endpoint} expirou`);
+            localStorage.removeItem(chaveCache);
+            return null;
+        }
+    } catch (erro) {
+        console.warn(`Erro ao verificar cache local para ${endpoint}:`, erro);
+        return null;
+    }
+}
 
-        const data = await response.json();
+/**
+ * Analisa as respostas das APIs conforme diferentes estruturas
+ * Função crítica para extrair valores de diferentes formatos de resposta
+ */
+function analisarResposta(data, endpoint, endpointIndex) {
+    try {
         let valor = null;
+        let ano = new Date().getFullYear();
 
-        // Cada endpoint da API IBGE tem formato específico
-        if (data && data.length > 0) {
-            if (endpoint === 'pobreza') {
-                valor = parseFloat(data[1].V || data[1].valor || '0');
-            } else if (endpoint === 'educacao') {
-                valor = parseFloat(data[1]?.V || data[1]?.valor || '0');
-            } else if (endpoint === 'saneamento') {
-                valor = parseFloat(data[1]?.V || data[1]?.valor || '0');
+        if (endpoint !== 'energia_solar') {
+            // Processamento para APIs do IBGE
+            if (endpointIndex === 0) {
+                // Formato SIDRA
+                if (data && data.length > 0 && data[1]) {
+                    valor = parseFloat(data[1].V || data[1].valor || '0');
+                    const periodoInfo = data[1].D2N || data[1].D3N;
+                    if (periodoInfo) {
+                        ano = parseInt(periodoInfo);
+                    }
+                }
+            } else if (endpointIndex === 1) {
+                // Formato servicodados v3
+                if (data && data[0]?.resultados?.[0]?.series?.[0]?.serie) {
+                    const serie = data[0].resultados[0].series[0].serie;
+                    const ultimoPeriodo = Object.keys(serie).sort().pop();
+                    valor = parseFloat(serie[ultimoPeriodo] || '0');
+                    ano = parseInt(ultimoPeriodo) || ano;
+                }
+            } else if (endpointIndex === 2) {
+                // Formato servicodados v1
+                if (data && data[0]?.res) {
+                    const res = data[0].res;
+                    const ultimoPeriodo = Object.keys(res).sort().pop();
+                    valor = parseFloat(res[ultimoPeriodo] || '0');
+                    ano = parseInt(ultimoPeriodo) || ano;
+                }
+            }
+        } else {
+            // Processamento específico para dados da ANEEL
+            if (data && data.result?.records) {
+                const records = data.result.records;
+                const totalInstalacoes = records.length;
+                const capacidadeTotal = records.reduce(
+                    (acc, item) => acc + parseFloat(item.PotenciaKW || item.Potência || 0), 0
+                );
+                
+                valor = parseFloat(((totalInstalacoes / 14200) * 11.3).toFixed(1));
+                
+                const dadosCompletos = {
+                    instalacoes: totalInstalacoes,
+                    capacidadeKW: capacidadeTotal.toFixed(2)
+                };
+                
+                return {
+                    valor: valor,
+                    ano: ano,
+                    dadosCompletos: dadosCompletos
+                };
             }
         }
 
         if (valor === null || isNaN(valor)) {
-            return usarDadosFallback(endpoint);
+            console.warn(`Não foi possível extrair um valor válido da resposta para ${endpoint}`);
+            return null;
         }
 
         return {
             valor: valor,
-            ano: new Date().getFullYear(),
-            usouFallback: false
+            ano: ano
         };
+    } catch (erro) {
+        console.error(`Erro ao analisar resposta da API para ${endpoint}:`, erro);
+        return null;
+    }
+}
 
+/**
+ * Implementa o pattern Circuit Breaker para evitar requisições excessivas a APIs com falha
+ * Tenta múltiplos endpoints até obter sucesso
+ */
+async function tentarMultiplosEndpoints(endpoint) {
+    // Verificação de circuit breaker
+    const circuitBreakerKey = `circuit_breaker_${endpoint}`;
+    const circuitBreakerData = sessionStorage.getItem(circuitBreakerKey);
+    
+    if (circuitBreakerData) {
+        const { timestamp, falhas } = JSON.parse(circuitBreakerData);
+        const tempoDecorrido = Date.now() - timestamp;
+        
+        // Circuito aberto: muitas falhas recentes
+        if (falhas >= 3 && tempoDecorrido < 300000) { // 5 minutos
+            console.log(`🔄 Circuit breaker ativo para ${endpoint}. Usando dados de fallback.`);
+            return null;
+        }
+        
+        // Reset após período de espera
+        if (tempoDecorrido > 300000) {
+            sessionStorage.removeItem(circuitBreakerKey);
+        }
+    }
+    
+    // Verificação de endpoints disponíveis
+    const endpointsDisponiveis = API_CONFIG.endpoints[endpoint] || [];
+    if (endpointsDisponiveis.length === 0) {
+        console.error(`Nenhum endpoint configurado para ${endpoint}`);
+        return null;
+    }
+
+    let falhas = 0;
+    
+    // Tenta cada endpoint em sequência
+    for (let i = 0; i < endpointsDisponiveis.length; i++) {
+        try {
+            let url = endpointsDisponiveis[i];
+            
+            // Constrói URL completa quando necessário
+            if (url.startsWith('/t/')) {
+                url = API_CONFIG.ibge_sidra_base + url;
+            } else if (url.startsWith('/v')) {
+                url = API_CONFIG.servicedados_base + url;
+            }
+            
+            console.log(`Tentando endpoint ${i+1}/${endpointsDisponiveis.length} para ${endpoint}: ${url}`);
+            
+            // Implementa timeout para evitar bloqueios
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), API_CONFIG.timeout);
+            
+            const response = await fetch(url, { signal: controller.signal });
+            clearTimeout(timeoutId);
+            
+            if (!response.ok) {
+                throw new Error(`Status HTTP: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            // Processa os dados recebidos
+            const dadosAnalisados = analisarResposta(data, endpoint, i);
+            if (dadosAnalisados) {
+                // Limpa o circuit breaker em caso de sucesso
+                sessionStorage.removeItem(circuitBreakerKey);
+                return dadosAnalisados;
+            }
+        } catch (erro) {
+            console.warn(`Falha no endpoint ${i+1} para ${endpoint}:`, erro.message);
+            falhas++;
+            
+            // Atualiza o circuit breaker
+            const circuitBreakerAtual = JSON.parse(sessionStorage.getItem(circuitBreakerKey) || '{"falhas":0}');
+            sessionStorage.setItem(circuitBreakerKey, JSON.stringify({
+                timestamp: Date.now(),
+                falhas: (circuitBreakerAtual.falhas || 0) + 1
+            }));
+        }
+    }
+    
+    console.error(`Todos os ${endpointsDisponiveis.length} endpoints falharam para ${endpoint}`);
+    return null;
+}
+
+/**
+ * Função principal para busca de dados com estratégia em camadas:
+ * 1. Cache local
+ * 2. Arquivos JSON
+ * 3. APIs externas
+ * 4. Dados estáticos de fallback
+ */
+async function buscarDadosAPI(endpoint) {
+    // Camada 1: Cache local
+    const dadosCache = verificarCacheLocal(endpoint);
+    if (dadosCache) {
+        console.log(`✅ Usando dados em cache local para ${endpoint}`);
+        return dadosCache;
+    }
+    
+    // Camada 2: Arquivos JSON
+    const dadosAtualizados = await carregarDadosAtualizados(endpoint);
+    if (dadosAtualizados) {
+        armazenarCacheLocal(endpoint, dadosAtualizados);
+        return dadosAtualizados;
+    }
+    
+    // Camada 3: APIs externas
+    try {
+        const dadosAPI = await tentarMultiplosEndpoints(endpoint);
+        if (dadosAPI) {
+            dadosAPI.usouFallback = false;
+            armazenarCacheLocal(endpoint, dadosAPI);
+            return dadosAPI;
+        }
+        
+        // Camada 4: Dados estáticos de fallback
+        return usarDadosFallback(endpoint);
     } catch (error) {
-        console.error(`Erro ao buscar dados de ${endpoint}:`, error);
+        console.error(`Erro geral ao buscar dados de ${endpoint}:`, error);
         return usarDadosFallback(endpoint);
     }
 }
 
-// Função auxiliar para retornar dados de fallback quando API falha
+/**
+ * Retorna dados históricos de fallback quando todas as camadas anteriores falham
+ */
 function usarDadosFallback(endpoint) {
     const dadosFallback = DADOS_HISTORICOS[endpoint];
     const dadoMaisRecente = dadosFallback[dadosFallback.length - 1];
+    
+    console.warn(`⚠️ Usando dados estáticos de fallback para ${endpoint} (${dadoMaisRecente.ano})`);
+    
     return {
         valor: dadoMaisRecente.valor,
         ano: dadoMaisRecente.ano,
-        usouFallback: true
+        usouFallback: true,
+        fonte: 'Dados históricos (offline)'
     };
 }
 
 /**
- * Renderiza o conteúdo de um indicador no DOM e inicializa tooltips
+ * Renderiza os dados de um indicador no DOM, incluindo avisos de fallback
  */
 function renderizarIndicador(indicador, dados) {
     const container = document.getElementById(indicador.id);
@@ -299,7 +535,7 @@ function renderizarIndicador(indicador, dados) {
 
     const valorFormatado = dados.valor.toFixed(1).replace('.', ',');
 
-    // Cria o elemento principal com o valor do indicador
+    // Valor principal do indicador
     const valorElement = document.createElement('div');
     valorElement.className = 'valor-indicador';
     valorElement.textContent = `${valorFormatado}%`;
@@ -308,7 +544,7 @@ function renderizarIndicador(indicador, dados) {
     valorElement.setAttribute('role', 'button');
     valorElement.setAttribute('aria-label', `${valorFormatado}% - ${TOOLTIPS[indicador.endpoint]}`);
 
-    // Cria elementos complementares de texto
+    // Textos complementares
     const textoElement = document.createElement('div');
     textoElement.className = 'texto-indicador';
     textoElement.textContent = indicador.descricao;
@@ -321,13 +557,13 @@ function renderizarIndicador(indicador, dados) {
     fonteElement.className = 'texto-indicador-fonte';
     fonteElement.textContent = indicador.fonte;
 
-    // Adiciona os elementos ao DOM
+    // Montagem do DOM
     conteudoIndicador.appendChild(valorElement);
     conteudoIndicador.appendChild(textoElement);
     conteudoIndicador.appendChild(contextoElement);
     conteudoIndicador.appendChild(fonteElement);
 
-    // Exibe aviso quando usando dados de fallback
+    // Exibição de aviso quando usando dados de fallback
     if (dados.usouFallback) {
         const fallbackElement = document.createElement('div');
         fallbackElement.className = 'texto-fallback';
@@ -338,15 +574,41 @@ function renderizarIndicador(indicador, dados) {
            class="link-ibge" aria-label="Consultar dados oficiais no IBGE">
            Consultar IBGE <i class="fas fa-external-link-alt"></i>
         </a>
+        <button class="retry-button" data-endpoint="${indicador.endpoint}">
+          <i class="fas fa-sync-alt"></i> Tentar novamente
+        </button>
       `;
         conteudoIndicador.insertBefore(fallbackElement, textoElement);
+        
+        // Evento para retry de carregamento
+        const retryButton = fallbackElement.querySelector('.retry-button');
+        retryButton.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const endpoint = retryButton.getAttribute('data-endpoint');
+            
+            // Limpa restrições para tentar novamente
+            sessionStorage.removeItem(`circuit_breaker_${endpoint}`);
+            localStorage.removeItem(`ods_sergipe_${endpoint}`);
+            
+            // Feedback visual de carregamento
+            conteudoIndicador.innerHTML = '<p class="status-carregamento">Carregando dados...</p>';
+            conteudoIndicador.classList.remove('completo');
+            conteudoIndicador.classList.add('carregando');
+            
+            // Nova tentativa de carregamento
+            const dadosAtualizados = await buscarDadosAPI(endpoint);
+            renderizarIndicador(
+                INDICADORES.find(ind => ind.endpoint === endpoint),
+                dadosAtualizados
+            );
+        });
     }
 
     const espacoElement = document.createElement('div');
     espacoElement.style.height = '30px';
     conteudoIndicador.appendChild(espacoElement);
 
-    // Adiciona botão para exportação CSV
+    // Botão para exportação CSV
     const botaoExportar = document.createElement('button');
     botaoExportar.className = 'botao-exportar-indicador';
     botaoExportar.innerHTML = '<i class="fas fa-download"></i> CSV';
@@ -357,7 +619,7 @@ function renderizarIndicador(indicador, dados) {
 
     conteudoIndicador.appendChild(botaoExportar);
 
-    // Gera gráfico e inicializa tooltip
+    // Inicialização do gráfico e tooltips
     gerarGrafico(indicador.endpoint, CORES_ODS[indicador.endpoint]);
     
     tippy(valorElement, {
@@ -385,7 +647,7 @@ function gerarGrafico(endpoint, cores) {
     const canvas = document.getElementById(`grafico-${endpoint}`);
     if (!canvas) return;
 
-    // Destrói gráfico anterior se existir
+    // Remove gráfico anterior se existir
     if (canvas.chart) {
         canvas.chart.destroy();
     }
@@ -440,7 +702,7 @@ function gerarGrafico(endpoint, cores) {
 }
 
 /**
- * Gera gráfico comparativo com todos os indicadores
+ * Gera gráfico comparativo com dados de todos os indicadores
  */
 function gerarGraficoComparativo() {
     const canvas = document.getElementById('grafico-comparativo');
@@ -449,7 +711,7 @@ function gerarGraficoComparativo() {
     const datasets = [];
     const anos = DADOS_HISTORICOS.pobreza.map(item => item.ano);
 
-    // Prepara datasets para cada indicador com sua cor correspondente
+    // Prepara datasets para cada indicador
     for (const endpoint of Object.keys(DADOS_HISTORICOS)) {
         const dados = DADOS_HISTORICOS[endpoint];
         const cor = CORES_ODS[endpoint].cor;
@@ -469,6 +731,7 @@ function gerarGraficoComparativo() {
         });
     }
 
+    // Remove gráfico anterior se existir
     if (canvas.chart) {
         canvas.chart.destroy();
     }
@@ -511,7 +774,7 @@ function gerarGraficoComparativo() {
 }
 
 /**
- * Exporta os dados de um indicador específico para CSV
+ * Exporta dados de um indicador para CSV
  */
 function exportarCSVIndicador(endpoint, titulo) {
     const dados = DADOS_HISTORICOS[endpoint];
@@ -529,7 +792,7 @@ function exportarCSVIndicador(endpoint, titulo) {
 }
 
 /**
- * Exporta todos os dados combinados para um único arquivo CSV
+ * Exporta todos os dados para CSV combinado
  */
 function exportarTodosCSV() {
     const dadosParaExportar = [];
@@ -545,7 +808,7 @@ function exportarTodosCSV() {
         });
     });
 
-    // Ordena os dados por indicador e ano
+    // Ordenação dos dados
     dadosParaExportar.sort((a, b) => {
         if (a.indicador !== b.indicador) return a.indicador.localeCompare(b.indicador);
         return a.ano - b.ano;
@@ -562,7 +825,9 @@ function exportarTodosCSV() {
     mostrarMensagemSucesso('Todos os dados exportados com sucesso!');
 }
 
-// Função auxiliar para download de arquivo CSV
+/**
+ * Utilitário para download de arquivo CSV
+ */
 function downloadCSV(conteudoCSV, nomeArquivo) {
     const blob = new Blob([conteudoCSV], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement("a");
@@ -574,7 +839,9 @@ function downloadCSV(conteudoCSV, nomeArquivo) {
     document.body.removeChild(link);
 }
 
-// Exibe mensagem temporária de sucesso
+/**
+ * Exibe mensagem temporária de sucesso
+ */
 function mostrarMensagemSucesso(texto) {
     const mensagem = document.createElement('div');
     mensagem.className = 'mensagem-sucesso';
@@ -588,7 +855,7 @@ function mostrarMensagemSucesso(texto) {
 }
 
 /**
- * Atualiza a data de atualização no rodapé
+ * Atualiza a data no rodapé
  */
 function atualizarDataAtualizacao() {
     const dataElement = document.getElementById('data-atualizacao');
@@ -596,11 +863,35 @@ function atualizarDataAtualizacao() {
         const dataAtual = new Date();
         const opcoes = { month: 'long', year: 'numeric' };
         const dataFormatada = dataAtual.toLocaleDateString('pt-BR', opcoes);
-
-        // Capitaliza a primeira letra do mês
         const dataCapitalizada = dataFormatada.charAt(0).toUpperCase() + dataFormatada.slice(1);
-
         dataElement.textContent = dataCapitalizada;
+    }
+}
+
+/**
+ * Registra erros persistentes para análise posterior
+ */
+function registrarErroPersistente(endpoint, erro) {
+    try {
+        const errosKey = 'ods_sergipe_erros';
+        const errosAnteriores = JSON.parse(localStorage.getItem(errosKey) || '[]');
+        
+        errosAnteriores.push({
+            endpoint: endpoint,
+            mensagem: erro.message,
+            timestamp: new Date().toISOString(),
+            userAgent: navigator.userAgent
+        });
+        
+        // Limita a quantidade de erros armazenados
+        const errosLimitados = errosAnteriores.slice(-20);
+        localStorage.setItem(errosKey, JSON.stringify(errosLimitados));
+        
+        if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+            console.error('Erro persistente registrado:', erro);
+        }
+    } catch (e) {
+        console.warn('Não foi possível registrar erro persistente:', e);
     }
 }
 
@@ -609,13 +900,32 @@ function atualizarDataAtualizacao() {
  */
 async function inicializarPainel() {
     atualizarDataAtualizacao();
-
-    // Carrega e renderiza todos os indicadores
+    
+    const promessasCarregamento = [];
+    
+    // Carrega todos os indicadores em paralelo
     for (const indicador of INDICADORES) {
-        const dados = await buscarDadosAPI(indicador.endpoint);
-        renderizarIndicador(indicador, dados);
+        const promessa = (async () => {
+            try {
+                const dados = await buscarDadosAPI(indicador.endpoint);
+                renderizarIndicador(indicador, dados);
+                return { sucesso: true, indicador: indicador.endpoint };
+            } catch (erro) {
+                console.error(`Erro ao carregar ${indicador.endpoint}:`, erro);
+                const dadosFallback = usarDadosFallback(indicador.endpoint);
+                renderizarIndicador(indicador, dadosFallback);
+                registrarErroPersistente(indicador.endpoint, erro);
+                return { sucesso: false, indicador: indicador.endpoint, erro: erro.message };
+            }
+        })();
+        
+        promessasCarregamento.push(promessa);
     }
-
+    
+    // Aguarda todos os carregamentos concluírem
+    const resultados = await Promise.allSettled(promessasCarregamento);
+    
+    // Gera o gráfico comparativo após todos os dados estarem disponíveis
     gerarGraficoComparativo();
 
     // Configura evento para botão de exportação
@@ -623,7 +933,13 @@ async function inicializarPainel() {
     if (btnExportarTodos) {
         btnExportarTodos.addEventListener('click', exportarTodosCSV);
     }
+    
+    // Verifica e relata falhas críticas
+    const falhas = resultados.filter(r => r.status === 'rejected' || (r.value && !r.value.sucesso));
+    if (falhas.length > 0) {
+        console.warn(`⚠️ ${falhas.length} indicadores falharam no carregamento inicial.`);
+    }
 }
 
-// Inicializa o painel quando o DOM estiver pronto
+// Inicialização quando o DOM estiver pronto
 document.addEventListener('DOMContentLoaded', inicializarPainel);

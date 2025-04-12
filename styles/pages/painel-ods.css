@@ -286,15 +286,18 @@
     background-color: rgba(255, 193, 7, 0.15);
     border: 1px solid #ffc107;
     border-radius: 4px;
-    padding: 6px 10px;
+    padding: 10px 12px;
     font-size: 0.85rem;
-    margin: 10px auto;
+    margin: 15px auto;
     text-align: center;
     font-weight: 500;
-    display: block;
+    display: flex;
     width: 100%;
     max-width: 90%;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
 }
 
 .texto-fallback i {
@@ -645,4 +648,66 @@
     .visualizacao-comparativa {
         padding: 15px;
     }
+}
+
+/* Botão de retry */
+.retry-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 12px;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.retry-button:hover {
+    background-color: #138496;
+    transform: translateY(-1px);
+}
+
+.retry-button:focus {
+    outline: 2px solid #138496;
+    outline-offset: 2px;
+}
+
+.retry-button i {
+    font-size: 0.8rem;
+    color: white;
+}
+
+.retry-button[disabled] {
+    background-color: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Animações para o botão de retry */
+@keyframes girar-circle {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.retry-button.carregando i {
+    animation: girar-circle 1s linear infinite;
+}
+
+/* Estilo para o indicador de carga nos cards */
+.card-indicador .conteudo-indicador.carregando {
+    position: relative;
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
