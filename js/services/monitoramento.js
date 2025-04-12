@@ -50,7 +50,7 @@ function extrairStatusDoHTML(html) {
         status = 'alerta';
         // Extrair mensagem entre as tags <div class="alerta">MENSAGEM</div>
         const match = html.match(/<div class="alerta">(.*?)<\/div>/);
-        if (match && match[1]) {
+        if (match?.[1]) {
             mensagem = match[1].trim();
         } else {
             mensagem = 'Atenção: Existem alertas no sistema';
@@ -58,7 +58,7 @@ function extrairStatusDoHTML(html) {
     } else if (html.includes('class="critico"')) {
         status = 'critico';
         const match = html.match(/<div class="critico">(.*?)<\/div>/);
-        if (match && match[1]) {
+        if (match?.[1]) {
             mensagem = match[1].trim();
         } else {
             mensagem = 'CRÍTICO: Sistema com problemas graves';
