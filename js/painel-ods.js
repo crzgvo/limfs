@@ -1,5 +1,6 @@
 /**
- * Painel ODS Sergipe - Monitoramento dos indicadores da Agenda 2030
+ * Painel ODS Sergipe - Sistema de visualização dos indicadores para monitoramento
+ * dos Objetivos de Desenvolvimento Sustentável (Agenda 2030) em Sergipe.
  */
 
 const API_CONFIG = {
@@ -7,13 +8,16 @@ const API_CONFIG = {
     endpoints: {
         pobreza: '/t/6691/n6/28/v/1836/p/last/c2/6794/d/v1836%201',
         educacao: '/t/7218/n6/28/v/1641/p/last',
-        saneamento: '/t/1393/n6/28/v/1000096/p/last'
+        saneamento: '/t/1393/n6/28/v/1000096/p/last',
+        mortalidade_infantil: '/t/793/n6/28/v/104/p/last',
+        energia_solar: 'https://dadosabertos.aneel.gov.br/api/3/action/datastore_search?resource_id=b1bd71e7-d0ad-4214-9053-cbd58e9564a7',
+        residuos_reciclados: '/t/1400/n6/28/v/1000100/p/last'
     },
-    cache_expiration: 86400000,
-    timeout: 5000
+    cache_expiration: 86400000, // 24 horas em milissegundos
+    timeout: 5000 // 5 segundos para timeout da API
 };
 
-// Dados históricos utilizados como fallback quando a API não está disponível
+// Dados históricos de fallback (usados quando a API está indisponível)
 const DADOS_HISTORICOS = {
     pobreza: [
         { ano: 2019, valor: 9.5 },
@@ -39,10 +43,37 @@ const DADOS_HISTORICOS = {
         { ano: 2020, valor: 35.1 },
         { ano: 2021, valor: 36.2 },
         { ano: 2022, valor: 54.2 }
+    ],
+    mortalidade_infantil: [
+        { ano: 2017, valor: 15.2 },
+        { ano: 2018, valor: 14.8 },
+        { ano: 2019, valor: 14.1 },
+        { ano: 2020, valor: 13.7 },
+        { ano: 2021, valor: 13.2 },
+        { ano: 2022, valor: 12.8 }
+    ],
+    energia_solar: [
+        { ano: 2018, valor: 1.2 },
+        { ano: 2019, valor: 2.8 },
+        { ano: 2020, valor: 4.5 },
+        { ano: 2021, valor: 5.9 },
+        { ano: 2022, valor: 7.5 },
+        { ano: 2023, valor: 9.2 },
+        { ano: 2024, valor: 11.3 }
+    ],
+    residuos_reciclados: [
+        { ano: 2017, valor: 2.1 },
+        { ano: 2018, valor: 2.5 },
+        { ano: 2019, valor: 3.2 },
+        { ano: 2020, valor: 3.8 },
+        { ano: 2021, valor: 4.3 },
+        { ano: 2022, valor: 5.0 },
+        { ano: 2023, valor: 5.7 },
+        { ano: 2024, valor: 6.2 }
     ]
 };
 
-// Definição das cores oficiais dos ODS para padronização visual
+// Cores oficiais dos ODS conforme padrão visual da ONU
 const CORES_ODS = {
     pobreza: {
         cor: '#E5243B',
@@ -58,10 +89,34 @@ const CORES_ODS = {
         cor: '#26BDE2',
         corSecundaria: 'rgba(38, 189, 226, 0.2)',
         nomeLegenda: 'Saneamento Básico'
+    },
+    mortalidade_infantil: {
+        cor: '#4C9F38',
+        corSecundaria: 'rgba(76, 159, 56, 0.2)',
+        nomeLegenda: 'Mortalidade Infantil'
+    },
+    energia_solar: {
+        cor: '#FCC30B',
+        corSecundaria: 'rgba(252, 195, 11, 0.2)',
+        nomeLegenda: 'Energia Solar'
+    },
+    residuos_reciclados: {
+        cor: '#FD9D24',
+        corSecundaria: 'rgba(253, 157, 36, 0.2)',
+        nomeLegenda: 'Resíduos Reciclados'
     }
 };
 
-// Configuração dos indicadores com metadados
+// Descrições detalhadas para os tooltips
+const TOOLTIPS = {
+    pobreza: "Percentual da população vivendo com menos de R$ 182 por mês (linha de extrema pobreza definida pelo Banco Mundial).",
+    educacao: "Percentual da população com 15 anos ou mais de idade que sabe ler e escrever.",
+    saneamento: "Percentual de domicílios que possuem acesso à rede geral de esgotamento sanitário.",
+    mortalidade_infantil: "Número de óbitos de crianças menores de 1 ano de idade por mil nascidos vivos.",
+    energia_solar: "Percentual de domicílios que possuem sistemas de energia solar fotovoltaica instalada.",
+    residuos_reciclados: "Percentual do total de resíduos sólidos urbanos que são coletados seletivamente e reciclados."
+};
+
 const INDICADORES = [
     {
         id: 'indicador-pobreza',
@@ -89,16 +144,45 @@ const INDICADORES = [
         tendencia: 'crescente',
         contexto: 'Sergipe lidera o Nordeste com 54,2% dos domicílios conectados à rede geral de esgoto (Censo IBGE 2022).',
         fonte: 'Fonte: IBGE - Censo Demográfico 2022'
+    },
+    {
+        id: 'indicador-mortalidade-infantil',
+        endpoint: 'mortalidade_infantil',
+        titulo: 'Taxa de Mortalidade Infantil',
+        descricao: 'óbitos por mil nascidos vivos em Sergipe.',
+        tendencia: 'decrescente',
+        contexto: 'Redução gradual da mortalidade infantil reflete melhorias na saúde pública e atenção básica.',
+        fonte: 'Fonte: DATASUS/IBGE'
+    },
+    {
+        id: 'indicador-energia-solar',
+        endpoint: 'energia_solar',
+        titulo: 'Energia Solar Fotovoltaica',
+        descricao: 'dos domicílios de Sergipe possuem energia solar fotovoltaica instalada.',
+        tendencia: 'crescente',
+        contexto: 'Crescimento acelerado devido a incentivos e maior conscientização ambiental.',
+        fonte: 'Fonte: ANEEL - Dados Abertos'
+    },
+    {
+        id: 'indicador-residuos-reciclados',
+        endpoint: 'residuos_reciclados',
+        titulo: 'Resíduos Sólidos Reciclados',
+        descricao: 'dos resíduos sólidos urbanos são reciclados ou coletados seletivamente em Sergipe.',
+        tendencia: 'crescente',
+        contexto: 'Aumento gradual devido à expansão de programas municipais de coleta seletiva.',
+        fonte: 'Fonte: IBGE / SNIS'
     }
 ];
 
 /**
- * Busca dados na API do IBGE com sistema de fallback
+ * Busca dados na API do IBGE e implementa mecanismo de fallback
+ * em caso de falha na requisição ou timeout
  */
 async function buscarDadosAPI(endpoint) {
     try {
         const url = `${API_CONFIG.ibge_sidra_base}${API_CONFIG.endpoints[endpoint]}`;
 
+        // Implementa timeout para a requisição
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), API_CONFIG.timeout);
 
@@ -112,7 +196,7 @@ async function buscarDadosAPI(endpoint) {
         const data = await response.json();
         let valor = null;
 
-        // Extração do valor do indicador conforme formato específico de cada endpoint
+        // Cada endpoint da API IBGE tem formato específico
         if (data && data.length > 0) {
             if (endpoint === 'pobreza') {
                 valor = parseFloat(data[1].V || data[1].valor || '0');
@@ -123,15 +207,8 @@ async function buscarDadosAPI(endpoint) {
             }
         }
 
-        // Verifica se o valor é válido ou usa dados de fallback
         if (valor === null || isNaN(valor)) {
-            const dadosFallback = DADOS_HISTORICOS[endpoint];
-            const dadoMaisRecente = dadosFallback[dadosFallback.length - 1];
-            return {
-                valor: dadoMaisRecente.valor,
-                ano: dadoMaisRecente.ano,
-                usouFallback: true
-            };
+            return usarDadosFallback(endpoint);
         }
 
         return {
@@ -142,21 +219,23 @@ async function buscarDadosAPI(endpoint) {
 
     } catch (error) {
         console.error(`Erro ao buscar dados de ${endpoint}:`, error);
-
-        // Em caso de erro, usa o dado mais recente do fallback
-        const dadosFallback = DADOS_HISTORICOS[endpoint];
-        const dadoMaisRecente = dadosFallback[dadosFallback.length - 1];
-
-        return {
-            valor: dadoMaisRecente.valor,
-            ano: dadoMaisRecente.ano,
-            usouFallback: true
-        };
+        return usarDadosFallback(endpoint);
     }
 }
 
+// Função auxiliar para retornar dados de fallback quando API falha
+function usarDadosFallback(endpoint) {
+    const dadosFallback = DADOS_HISTORICOS[endpoint];
+    const dadoMaisRecente = dadosFallback[dadosFallback.length - 1];
+    return {
+        valor: dadoMaisRecente.valor,
+        ano: dadoMaisRecente.ano,
+        usouFallback: true
+    };
+}
+
 /**
- * Renderiza o conteúdo de um indicador no DOM
+ * Renderiza o conteúdo de um indicador no DOM e inicializa tooltips
  */
 function renderizarIndicador(indicador, dados) {
     const container = document.getElementById(indicador.id);
@@ -170,11 +249,16 @@ function renderizarIndicador(indicador, dados) {
 
     const valorFormatado = dados.valor.toFixed(1).replace('.', ',');
 
-    // Criação dos elementos de conteúdo
+    // Cria o elemento principal com o valor do indicador
     const valorElement = document.createElement('div');
     valorElement.className = 'valor-indicador';
     valorElement.textContent = `${valorFormatado}%`;
+    valorElement.setAttribute('data-tooltip', TOOLTIPS[indicador.endpoint]);
+    valorElement.setAttribute('tabindex', '0');
+    valorElement.setAttribute('role', 'button');
+    valorElement.setAttribute('aria-label', `${valorFormatado}% - ${TOOLTIPS[indicador.endpoint]}`);
 
+    // Cria elementos complementares de texto
     const textoElement = document.createElement('div');
     textoElement.className = 'texto-indicador';
     textoElement.textContent = indicador.descricao;
@@ -187,12 +271,13 @@ function renderizarIndicador(indicador, dados) {
     fonteElement.className = 'texto-indicador-fonte';
     fonteElement.textContent = indicador.fonte;
 
+    // Adiciona os elementos ao DOM
     conteudoIndicador.appendChild(valorElement);
     conteudoIndicador.appendChild(textoElement);
     conteudoIndicador.appendChild(contextoElement);
     conteudoIndicador.appendChild(fonteElement);
 
-    // Exibe mensagem de fallback se necessário
+    // Exibe aviso quando usando dados de fallback
     if (dados.usouFallback) {
         const fallbackElement = document.createElement('div');
         fallbackElement.className = 'texto-fallback';
@@ -211,7 +296,7 @@ function renderizarIndicador(indicador, dados) {
     espacoElement.style.height = '30px';
     conteudoIndicador.appendChild(espacoElement);
 
-    // Botão de exportação CSV
+    // Adiciona botão para exportação CSV
     const botaoExportar = document.createElement('button');
     botaoExportar.className = 'botao-exportar-indicador';
     botaoExportar.innerHTML = '<i class="fas fa-download"></i> CSV';
@@ -222,9 +307,26 @@ function renderizarIndicador(indicador, dados) {
 
     conteudoIndicador.appendChild(botaoExportar);
 
+    // Gera gráfico e inicializa tooltip
     gerarGrafico(indicador.endpoint, CORES_ODS[indicador.endpoint]);
+    
+    tippy(valorElement, {
+        content: TOOLTIPS[indicador.endpoint],
+        animation: 'scale',
+        theme: 'light-border',
+        placement: 'top',
+        arrow: true,
+        appendTo: () => document.body,
+        allowHTML: false,
+        a11y: true,
+        touch: 'hold',
+        maxWidth: 300
+    });
 }
 
+/**
+ * Gera gráfico de linha para um indicador usando Chart.js
+ */
 function gerarGrafico(endpoint, cores) {
     const dados = DADOS_HISTORICOS[endpoint];
     const anos = dados.map(item => item.ano);
@@ -233,6 +335,7 @@ function gerarGrafico(endpoint, cores) {
     const canvas = document.getElementById(`grafico-${endpoint}`);
     if (!canvas) return;
 
+    // Destrói gráfico anterior se existir
     if (canvas.chart) {
         canvas.chart.destroy();
     }
@@ -287,7 +390,7 @@ function gerarGrafico(endpoint, cores) {
 }
 
 /**
- * Gera gráfico comparativo entre todos os indicadores
+ * Gera gráfico comparativo com todos os indicadores
  */
 function gerarGraficoComparativo() {
     const canvas = document.getElementById('grafico-comparativo');
@@ -296,7 +399,7 @@ function gerarGraficoComparativo() {
     const datasets = [];
     const anos = DADOS_HISTORICOS.pobreza.map(item => item.ano);
 
-    // Prepara os datasets para cada indicador
+    // Prepara datasets para cada indicador com sua cor correspondente
     for (const endpoint of Object.keys(DADOS_HISTORICOS)) {
         const dados = DADOS_HISTORICOS[endpoint];
         const cor = CORES_ODS[endpoint].cor;
@@ -358,7 +461,7 @@ function gerarGraficoComparativo() {
 }
 
 /**
- * Exporta os dados de um indicador para CSV
+ * Exporta os dados de um indicador específico para CSV
  */
 function exportarCSVIndicador(endpoint, titulo) {
     const dados = DADOS_HISTORICOS[endpoint];
@@ -371,30 +474,12 @@ function exportarCSVIndicador(endpoint, titulo) {
         .map(e => e.join(","))
         .join("\n");
 
-    // Cria o download do arquivo CSV
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = nomeArquivo;
-    link.style.display = 'none';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    // Exibe mensagem de sucesso
-    const mensagem = document.createElement('div');
-    mensagem.className = 'mensagem-sucesso';
-    mensagem.textContent = `Dados de ${titulo} exportados com sucesso!`;
-    document.body.appendChild(mensagem);
-
-    setTimeout(() => {
-        mensagem.style.opacity = '0';
-        setTimeout(() => document.body.removeChild(mensagem), 500);
-    }, 3000);
+    downloadCSV(csv, nomeArquivo);
+    mostrarMensagemSucesso(`Dados de ${titulo} exportados com sucesso!`);
 }
 
 /**
- * Exporta todos os dados para um único arquivo CSV
+ * Exporta todos os dados combinados para um único arquivo CSV
  */
 function exportarTodosCSV() {
     const dadosParaExportar = [];
@@ -410,7 +495,7 @@ function exportarTodosCSV() {
         });
     });
 
-    // Ordena por indicador e ano
+    // Ordena os dados por indicador e ano
     dadosParaExportar.sort((a, b) => {
         if (a.indicador !== b.indicador) return a.indicador.localeCompare(b.indicador);
         return a.ano - b.ano;
@@ -423,20 +508,27 @@ function exportarTodosCSV() {
         .map(e => e.join(","))
         .join("\n");
 
-    // Download do arquivo
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    downloadCSV(csv, 'indicadores-ods-sergipe.csv');
+    mostrarMensagemSucesso('Todos os dados exportados com sucesso!');
+}
+
+// Função auxiliar para download de arquivo CSV
+function downloadCSV(conteudoCSV, nomeArquivo) {
+    const blob = new Blob([conteudoCSV], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
-    link.download = 'indicadores-ods-sergipe.csv';
+    link.download = nomeArquivo;
     link.style.display = 'none';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+}
 
-    // Exibe mensagem de sucesso
+// Exibe mensagem temporária de sucesso
+function mostrarMensagemSucesso(texto) {
     const mensagem = document.createElement('div');
     mensagem.className = 'mensagem-sucesso';
-    mensagem.textContent = 'Todos os dados exportados com sucesso!';
+    mensagem.textContent = texto;
     document.body.appendChild(mensagem);
 
     setTimeout(() => {
@@ -446,7 +538,7 @@ function exportarTodosCSV() {
 }
 
 /**
- * Atualiza a data no rodapé para a data atual
+ * Atualiza a data de atualização no rodapé
  */
 function atualizarDataAtualizacao() {
     const dataElement = document.getElementById('data-atualizacao');
@@ -463,12 +555,12 @@ function atualizarDataAtualizacao() {
 }
 
 /**
- * Inicializa o painel ODS com dados e gráficos
+ * Inicializa o painel ODS completo
  */
 async function inicializarPainel() {
     atualizarDataAtualizacao();
 
-    // Carrega dados para cada indicador
+    // Carrega e renderiza todos os indicadores
     for (const indicador of INDICADORES) {
         const dados = await buscarDadosAPI(indicador.endpoint);
         renderizarIndicador(indicador, dados);
@@ -476,12 +568,12 @@ async function inicializarPainel() {
 
     gerarGraficoComparativo();
 
-    // Configura evento de exportação
+    // Configura evento para botão de exportação
     const btnExportarTodos = document.getElementById('btn-exportar-todos');
     if (btnExportarTodos) {
         btnExportarTodos.addEventListener('click', exportarTodosCSV);
     }
 }
 
-// Inicia o painel quando o DOM estiver pronto
+// Inicializa o painel quando o DOM estiver pronto
 document.addEventListener('DOMContentLoaded', inicializarPainel);

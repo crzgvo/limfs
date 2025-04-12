@@ -20,6 +20,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Adicionando Chart.js para visualizações gráficas dos indicadores -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <!-- Biblioteca Tippy.js para tooltips acessíveis e elegantes -->
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/themes/light-border.css"/>
     <!-- Dados estruturados Schema.org para SEO (Dataset) -->
     <script type="application/ld+json">
     {
@@ -182,6 +187,18 @@
                         </div>
                     </div>
 
+                    <div id="indicador-mortalidade-infantil" class="card-indicador" aria-live="polite">
+                        <div class="ods-badge">ODS 3</div>
+                        <h3>Saúde e Bem-estar</h3>
+                        <div class="conteudo-indicador">
+                            <p class="status-carregamento">Carregando dados...</p>
+                        </div>
+                        <div class="grafico-container">
+                            <canvas id="grafico-mortalidade_infantil" role="img"
+                                aria-label="Gráfico da taxa de mortalidade infantil"></canvas>
+                        </div>
+                    </div>
+
                     <div id="indicador-educacao" class="card-indicador" aria-live="polite">
                         <div class="ods-badge">ODS 4</div>
                         <h3>Educação de Qualidade</h3>
@@ -203,6 +220,30 @@
                         <div class="grafico-container">
                             <canvas id="grafico-saneamento" role="img"
                                 aria-label="Gráfico da cobertura de saneamento básico"></canvas>
+                        </div>
+                    </div>
+
+                    <div id="indicador-energia-solar" class="card-indicador" aria-live="polite">
+                        <div class="ods-badge">ODS 7</div>
+                        <h3>Energia Limpa e Acessível</h3>
+                        <div class="conteudo-indicador">
+                            <p class="status-carregamento">Carregando dados...</p>
+                        </div>
+                        <div class="grafico-container">
+                            <canvas id="grafico-energia_solar" role="img"
+                                aria-label="Gráfico do percentual de domicílios com energia solar"></canvas>
+                        </div>
+                    </div>
+
+                    <div id="indicador-residuos-reciclados" class="card-indicador" aria-live="polite">
+                        <div class="ods-badge">ODS 11</div>
+                        <h3>Cidades e Comunidades Sustentáveis</h3>
+                        <div class="conteudo-indicador">
+                            <p class="status-carregamento">Carregando dados...</p>
+                        </div>
+                        <div class="grafico-container">
+                            <canvas id="grafico-residuos_reciclados" role="img"
+                                aria-label="Gráfico do percentual de resíduos reciclados"></canvas>
                         </div>
                     </div>
                 </div>

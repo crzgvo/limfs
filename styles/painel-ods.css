@@ -102,6 +102,33 @@
     background-color: #26BDE2;
 }
 
+#indicador-mortalidade-infantil {
+    border-top-color: #4C9F38;
+    /* ODS 3 */
+}
+
+#indicador-mortalidade-infantil .ods-badge {
+    background-color: #4C9F38;
+}
+
+#indicador-energia-solar {
+    border-top-color: #FCC30B;
+    /* ODS 7 */
+}
+
+#indicador-energia-solar .ods-badge {
+    background-color: #FCC30B;
+}
+
+#indicador-residuos-reciclados {
+    border-top-color: #FD9D24;
+    /* ODS 11 */
+}
+
+#indicador-residuos-reciclados .ods-badge {
+    background-color: #FD9D24;
+}
+
 .card-indicador:hover {
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
@@ -462,6 +489,55 @@
     font-size: 0.9rem;
 }
 
+/* Melhorias de Acessibilidade */
+:focus {
+    outline: 3px solid #0056b3;
+    outline-offset: 2px;
+}
+
+.pular-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #0056b3;
+    color: white;
+    padding: 8px;
+    z-index: 100;
+    transition: top 0.3s;
+}
+
+.pular-link:focus {
+    top: 0;
+}
+
+.botao-exportar:focus, 
+.botao-exportar-indicador:focus, 
+.botoes-acao .botao-primario:focus,
+.link-ibge:focus {
+    outline: 3px solid #0056b3;
+    outline-offset: 2px;
+}
+
+.valor-indicador:focus {
+    outline: 2px dashed #0056b3;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* High contrast mode improvements */
+@media (forced-colors: active) {
+    .card-indicador {
+        border: 2px solid CanvasText;
+    }
+    
+    .valor-indicador,
+    .botao-exportar,
+    .botao-exportar-indicador,
+    .botoes-acao .botao-primario {
+        border: 1px solid CanvasText;
+    }
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
     #painel-ods-principal h1 {
@@ -477,11 +553,20 @@
     }
 
     .grade-indicadores {
+        grid-template-columns: 1fr;
         gap: 20px;
+    }
+
+    .card-indicador {
+        padding: 20px;
     }
 
     .valor-indicador {
         font-size: 2rem;
+    }
+
+    .grafico-container {
+        height: 180px;
     }
 
     .grafico-comparativo-container {
@@ -490,6 +575,10 @@
 
     .botoes-exportacao {
         justify-content: center;
+    }
+    
+    .texto-indicador-complementar {
+        max-width: 100%;
     }
 }
 
@@ -515,11 +604,24 @@
     }
 
     .card-indicador {
-        padding: 20px;
+        padding: 15px;
     }
 
     .card-indicador h3 {
         font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+    
+    .valor-indicador {
+        font-size: 1.8rem;
+    }
+
+    .texto-indicador {
+        font-size: 0.9rem;
+    }
+
+    .texto-indicador-complementar {
+        font-size: 0.85rem;
     }
 
     .botoes-acao {
@@ -529,13 +631,18 @@
     .botoes-acao .botao-primario {
         width: 100%;
         text-align: center;
+        margin-bottom: 10px;
     }
 
     .grafico-container {
-        height: 180px;
+        height: 160px;
     }
 
     .grafico-comparativo-container {
         height: 220px;
+    }
+    
+    .visualizacao-comparativa {
+        padding: 15px;
     }
 }
