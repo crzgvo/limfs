@@ -1,0 +1,189 @@
+/* Reset básico */
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Classe botao-primario para padronização dos botões */
+.botao-primario {
+  padding: 12px 25px;
+  background-color: var(--primary-blue);
+  color: var(--white);
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  font-size: 1.1em;
+}
+
+.botao-primario:hover {
+  background-color: var(--cor-botao-hover);
+}
+
+.botao-primario:focus {
+  outline: 2px solid var(--primary-blue);
+  outline-offset: 2px;
+}
+
+/* Seção principal (hero) */
+.principal {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  overflow: hidden;
+  padding: 80px 0;
+}
+
+.principal::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 0;
+}
+
+.video-principal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.principal .container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 1000px;
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+  color: #fff;
+  padding: var(--padding-padrao);
+  animation: aparecer 1.5s ease-out forwards;
+}
+
+.principal h2 {
+  font-size: var(--font-size-titulo);
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.principal p {
+  font-size: 1.25rem;
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.grupo-botoes {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Botão padrão usando a classe botao-primario */
+.principal .botao {
+  padding: 12px 25px;
+  background-color: var(--primary-blue);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  font-size: 1.1em;
+}
+
+.principal .botao:hover {
+  background-color: var(--cor-botao-hover);
+}
+
+.principal .botao:focus {
+  outline: 2px solid var(--primary-blue);
+  outline-offset: 2px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .principal {
+    padding-top: 100px; 
+    padding-bottom: 60px; 
+  }
+  
+  .principal .container {
+    margin-top: 20px; 
+  }
+
+  .principal h2 {
+    font-size: 2.5rem;
+  }
+
+  .principal p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .principal .container {
+    padding: 15px;
+  }
+
+  .principal h2 {
+    font-size: 2rem;
+  }
+
+  .principal p {
+    font-size: 1rem;
+  }
+
+  .principal .botao {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .principal h2 {
+    font-size: 1.8rem;
+  }
+
+  .principal p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+
+  .grupo-botoes {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .botao-primario {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

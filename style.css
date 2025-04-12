@@ -35,6 +35,5 @@ body {
 }
 
 main {
-    padding-top: 68px;
-    /* Compensa altura do cabeçalho fixo */
+    padding-top: 68px; /* Compensa altura do cabeçalho fixo */
 }

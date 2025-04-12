@@ -1,4 +1,6 @@
-/* Painel ODS Sergipe - Estilos para visualização de indicadores e gráficos */
+/**
+ * Painel ODS Sergipe - Estilos para visualização de indicadores e gráficos
+ */
 
 /* Layout principal */
 #painel-ods-principal {
@@ -72,9 +74,10 @@
     border-top: 4px solid var(--primary-blue);
 }
 
-/* Cores identificadoras dos ODS conforme padrão oficial da ONU */
+/* Cores específicas para cada ODS */
 #indicador-pobreza {
-    border-top-color: #E5243B; /* ODS 1 */
+    border-top-color: #E5243B;
+    /* ODS 1 */
 }
 
 #indicador-pobreza .ods-badge {
@@ -82,7 +85,8 @@
 }
 
 #indicador-educacao {
-    border-top-color: #C5192D; /* ODS 4 */
+    border-top-color: #C5192D;
+    /* ODS 4 */
 }
 
 #indicador-educacao .ods-badge {
@@ -90,7 +94,8 @@
 }
 
 #indicador-saneamento {
-    border-top-color: #26BDE2; /* ODS 6 */
+    border-top-color: #26BDE2;
+    /* ODS 6 */
 }
 
 #indicador-saneamento .ods-badge {
@@ -98,7 +103,8 @@
 }
 
 #indicador-mortalidade-infantil {
-    border-top-color: #4C9F38; /* ODS 3 */
+    border-top-color: #4C9F38;
+    /* ODS 3 */
 }
 
 #indicador-mortalidade-infantil .ods-badge {
@@ -106,7 +112,8 @@
 }
 
 #indicador-energia-solar {
-    border-top-color: #FCC30B; /* ODS 7 */
+    border-top-color: #FCC30B;
+    /* ODS 7 */
 }
 
 #indicador-energia-solar .ods-badge {
@@ -114,7 +121,8 @@
 }
 
 #indicador-residuos-reciclados {
-    border-top-color: #FD9D24; /* ODS 11 */
+    border-top-color: #FD9D24;
+    /* ODS 11 */
 }
 
 #indicador-residuos-reciclados .ods-badge {
@@ -133,6 +141,7 @@
     padding-top: 10px;
 }
 
+/* Conteúdo interno do card */
 .conteudo-indicador {
     min-height: 120px;
     display: flex;
@@ -140,10 +149,11 @@
     justify-content: center;
     transition: opacity 0.3s ease;
     position: relative;
-    padding-bottom: 40px; /* Espaço para o botão de exportação */
+    padding-bottom: 40px;
+    /* Espaço para o botão de exportação */
 }
 
-/* Estados de carregamento e transições */
+/* Estados de carregamento */
 .conteudo-indicador.carregando {
     opacity: 0;
     transform: translateY(10px);
@@ -164,7 +174,6 @@
     padding-bottom: 30px;
 }
 
-/* Loader circular de carregamento */
 .status-carregamento::after {
     content: "";
     position: absolute;
@@ -192,7 +201,7 @@
     font-size: 0.9rem;
 }
 
-/* Componentes visuais dos indicadores */
+/* Exibição dos valores dos indicadores */
 .valor-indicador {
     font-size: 2.5rem;
     font-weight: bold;
@@ -253,6 +262,7 @@
     line-height: 1.6;
 }
 
+/* Botões de ação */
 .botoes-acao {
     display: flex;
     flex-wrap: wrap;
@@ -260,7 +270,7 @@
     margin-top: 20px;
 }
 
-/* Estados de erro e fallback */
+/* Estado de erro */
 .erro-dados {
     color: #dc3545;
     text-align: center;
@@ -270,6 +280,7 @@
     background-color: rgba(220, 53, 69, 0.1);
 }
 
+/* Mensagem de fallback */
 .texto-fallback {
     color: #856404;
     background-color: rgba(255, 193, 7, 0.15);
@@ -291,6 +302,7 @@
     color: #e0a800;
 }
 
+/* Link para o IBGE */
 .link-ibge {
     display: inline-block;
     margin-top: 5px;
@@ -315,6 +327,7 @@
     color: inherit;
 }
 
+/* Contêiner para gráficos */
 .grafico-container {
     margin-top: 20px;
     padding-top: 20px;
@@ -324,6 +337,7 @@
     margin-bottom: 10px;
 }
 
+/* Visualização comparativa */
 .visualizacao-comparativa {
     background-color: #fff;
     border-radius: 8px;
@@ -354,7 +368,7 @@
     font-style: italic;
 }
 
-/* Definições de animações */
+/* Animações */
 @keyframes aparecer {
     from {
         opacity: 0;
@@ -393,7 +407,7 @@
     }
 }
 
-/* Componentes de exportação */
+/* Botões de exportação */
 .botoes-exportacao {
     display: flex;
     justify-content: flex-end;
@@ -428,6 +442,7 @@
     font-size: 0.9rem;
 }
 
+/* Botão de exportação individual por indicador */
 .botao-exportar-indicador {
     position: absolute;
     bottom: 10px;
@@ -458,6 +473,7 @@
     font-size: 0.8rem;
 }
 
+/* Mensagem de sucesso flutuante */
 .mensagem-sucesso {
     position: fixed;
     bottom: 20px;
@@ -508,7 +524,7 @@
     border-radius: 4px;
 }
 
-/* Suporte a modo de alto contraste */
+/* High contrast mode improvements */
 @media (forced-colors: active) {
     .card-indicador {
         border: 2px solid CanvasText;

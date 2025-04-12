@@ -10,8 +10,8 @@ const path = require('path');
 const nodemailer = require('nodemailer');
 
 // Configurações
-const HISTORICO_ALERTAS = path.join(__dirname, '..', 'dados', 'historico-alertas.json');
-const RELATORIO_STATUS = path.join(__dirname, '..', 'dados', 'status-sistema.html');
+const HISTORICO_ALERTAS = path.join(__dirname, '..', 'dados', 'sistema', 'historico-alertas.json');
+const RELATORIO_STATUS = path.join(__dirname, '..', 'dados', 'sistema', 'status-sistema.html');
 const MAX_FALHAS_CONSECUTIVAS = 3; // Número de falhas consecutivas para disparar um alerta
 
 // Intervalo mínimo entre alertas (em horas)

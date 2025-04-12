@@ -14,7 +14,7 @@ const API_CONFIG = {
         residuos_reciclados: '/t/1400/n6/28/v/1000100/p/last'
     },
     arquivos_json: {
-        base_url: '../dados/',
+        base_url: '../dados/indicadores/', // Caminho atualizado para os arquivos JSON
         cache_expiration: 86400000, // 24 horas em milissegundos
     },
     timeout: 5000 // 5 segundos para timeout da API
@@ -145,7 +145,7 @@ const INDICADORES = [
         titulo: 'Cobertura de Saneamento Básico',
         descricao: 'dos domicílios de Sergipe possuem esgotamento sanitário adequado.',
         tendencia: 'crescente',
-        contexto: 'Sergipe lidera o Nordeste com 54,2% dos domicílios conectados à rede geral de esgoto (Censo IBGE 2022).',
+        contexto: 'Sergipe apresenta um aumento significativo de 54,2% na cobertura de saneamento em 2022.',
         fonte: 'Fonte: IBGE - Censo Demográfico 2022'
     },
     {
@@ -154,7 +154,7 @@ const INDICADORES = [
         titulo: 'Taxa de Mortalidade Infantil',
         descricao: 'óbitos por mil nascidos vivos em Sergipe.',
         tendencia: 'decrescente',
-        contexto: 'Redução gradual da mortalidade infantil reflete melhorias na saúde pública e atenção básica.',
+        contexto: 'Redução gradual da mortalidade infantil para 12,8 em 2022, refletindo melhorias na saúde pública e atenção básica.',
         fonte: 'Fonte: DATASUS/IBGE'
     },
     {
@@ -163,7 +163,7 @@ const INDICADORES = [
         titulo: 'Energia Solar Fotovoltaica',
         descricao: 'dos domicílios de Sergipe possuem energia solar fotovoltaica instalada.',
         tendencia: 'crescente',
-        contexto: 'Crescimento acelerado devido a incentivos e maior conscientização ambiental.',
+        contexto: 'Crescimento acelerado para 11,3% em 2024, com 14.200 instalações e capacidade de 355.000 kW no estado.',
         fonte: 'Fonte: ANEEL - Dados Abertos'
     },
     {
@@ -172,7 +172,7 @@ const INDICADORES = [
         titulo: 'Resíduos Sólidos Reciclados',
         descricao: 'dos resíduos sólidos urbanos são reciclados ou coletados seletivamente em Sergipe.',
         tendencia: 'crescente',
-        contexto: 'Aumento gradual devido à expansão de programas municipais de coleta seletiva.',
+        contexto: 'Aumento para 6,2% em 2024, mostrando progressos graduais na gestão de resíduos no estado.',
         fonte: 'Fonte: IBGE / SNIS'
     }
 ];
