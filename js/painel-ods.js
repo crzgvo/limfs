@@ -291,56 +291,46 @@ function analisarResposta(dados, endpoint, indice) {
  * Tenta múltiplos endpoints até obter sucesso
  */
 async function tentarMultiplosEndpoints(endpoint, endpoints = [], maxTentativas = 3, delayInicial = 500) {
-  // Verifica e inicializa o estado do Circuit Breaker
   const chaveCircuitBreaker = `circuit_breaker_${endpoint}`;
   let estadoCircuitBreaker = JSON.parse(sessionStorage.getItem(chaveCircuitBreaker)) || { falhas: 0, ativo: false };
 
   if (estadoCircuitBreaker.ativo) {
-    console.warn(`Circuit Breaker ativo para ${endpoint}`);
     return null;
   }
 
   let tentativas = 0;
-  let delay = delayInicial;
+  estadoCircuitBreaker.falhas = 0; // Reseta o contador de falhas no início
 
-  for (const url of endpoints) {
-    while (tentativas < maxTentativas) {
-      try {
-        const resposta = await fetch(url);
-        if (resposta.ok) {
-          const dados = await resposta.json();
-          const resultado = analisarResposta(dados, endpoint, 0);
-          if (resultado) {
-            // Resetar estado do Circuit Breaker em caso de sucesso
-            estadoCircuitBreaker.falhas = 0;
-            estadoCircuitBreaker.ativo = false;
-            sessionStorage.setItem(chaveCircuitBreaker, JSON.stringify(estadoCircuitBreaker));
-            return resultado;
-          }
-        }
-        throw new Error('Resposta inválida');
-      } catch (erro) {
-        tentativas++;
-        estadoCircuitBreaker.falhas++;
-        
-        // Ativa o Circuit Breaker se atingir o limite de falhas
-        if (estadoCircuitBreaker.falhas >= 3) {
-          estadoCircuitBreaker.ativo = true;
-          sessionStorage.setItem(chaveCircuitBreaker, JSON.stringify(estadoCircuitBreaker));
-          registrarErroPersistente(endpoint, erro);
-          return null;
-        }
-
-        if (tentativas < maxTentativas) {
-          await new Promise(resolve => setTimeout(resolve, delay));
-          delay *= 2;
+  while (tentativas < maxTentativas) {
+    try {
+      const response = await fetch(endpoints[0]);
+      if (response.ok) {
+        const dados = await response.json();
+        const resultado = analisarResposta(dados, endpoint, 0);
+        if (resultado) {
+          sessionStorage.removeItem(chaveCircuitBreaker);
+          return resultado;
         }
       }
+      throw new Error('Resposta inválida');
+    } catch (erro) {
+      tentativas++;
+      estadoCircuitBreaker.falhas++;
+      
+      if (tentativas >= maxTentativas) {
+        estadoCircuitBreaker.ativo = true;
+        sessionStorage.setItem(chaveCircuitBreaker, JSON.stringify(estadoCircuitBreaker));
+        registrarErroPersistente(endpoint, erro);
+        return null;
+      }
+
+      const delay = delayInicial * Math.pow(2, tentativas - 1);
+      await new Promise(resolve => setTimeout(resolve, delay));
+      
+      sessionStorage.setItem(chaveCircuitBreaker, JSON.stringify(estadoCircuitBreaker));
     }
   }
-  
-  // Atualiza o estado final no sessionStorage
-  sessionStorage.setItem(chaveCircuitBreaker, JSON.stringify(estadoCircuitBreaker));
+
   return null;
 }
 
