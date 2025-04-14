@@ -1,0 +1,37 @@
+{
+    "id": "gini",
+    "nome": "Coeficiente de Gini",
+    "descricao": "Medida de desigualdade de renda que varia de 0 (igualdade perfeita) a 1 (desigualdade máxima)",
+    "fonte": "IBGE/PNAD Contínua",
+    "unidade": "índice",
+    "ultimaAtualizacao": "2023-12-15",
+    "periodicidade": "anual",
+    "dados": [
+        {"ano": "2015", "valor": "0.524", "regiao": "Brasil"},
+        {"ano": "2016", "valor": "0.537", "regiao": "Brasil"},
+        {"ano": "2017", "valor": "0.533", "regiao": "Brasil"},
+        {"ano": "2018", "valor": "0.527", "regiao": "Brasil"},
+        {"ano": "2019", "valor": "0.519", "regiao": "Brasil"},
+        {"ano": "2020", "valor": "0.517", "regiao": "Brasil"},
+        {"ano": "2021", "valor": "0.514", "regiao": "Brasil"},
+        {"ano": "2022", "valor": "0.518", "regiao": "Brasil"},
+        {"ano": "2023", "valor": "0.506", "regiao": "Brasil"}
+    ],
+    "dadosRegionais": [
+        {"ano": "2023", "regiao": "Norte", "valor": "0.517"},
+        {"ano": "2023", "regiao": "Nordeste", "valor": "0.528"},
+        {"ano": "2023", "regiao": "Sudeste", "valor": "0.497"},
+        {"ano": "2023", "regiao": "Sul", "valor": "0.465"},
+        {"ano": "2023", "regiao": "Centro-Oeste", "valor": "0.503"}
+    ],
+    "metadados": {
+        "metodologia": "Calculado a partir da curva de Lorenz, que representa a distribuição acumulada da renda em relação à distribuição acumulada da população.",
+        "limitacoes": "Não captura todas as dimensões da desigualdade social e econômica.",
+        "interpretacao": "Quanto mais próximo de 0, menor a desigualdade de renda; quanto mais próximo de 1, maior a desigualdade."
+    },
+    "indicadorODS": {
+        "objetivo": 1,
+        "meta": "1.2",
+        "indicador": "1.2.3"
+    }
+}

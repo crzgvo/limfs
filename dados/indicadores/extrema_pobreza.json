@@ -1,0 +1,37 @@
+{
+    "id": "extrema_pobreza",
+    "nome": "População em situação de extrema pobreza",
+    "descricao": "Percentual da população vivendo abaixo da linha internacional de extrema pobreza",
+    "fonte": "IBGE/PNAD Contínua",
+    "unidade": "percentual",
+    "ultimaAtualizacao": "2024-01-20",
+    "periodicidade": "anual",
+    "dados": [
+        {"ano": "2015", "valor": "4.7", "regiao": "Brasil"},
+        {"ano": "2016", "valor": "5.2", "regiao": "Brasil"},
+        {"ano": "2017", "valor": "6.4", "regiao": "Brasil"},
+        {"ano": "2018", "valor": "6.5", "regiao": "Brasil"},
+        {"ano": "2019", "valor": "6.7", "regiao": "Brasil"},
+        {"ano": "2020", "valor": "5.7", "regiao": "Brasil"},
+        {"ano": "2021", "valor": "5.9", "regiao": "Brasil"},
+        {"ano": "2022", "valor": "5.3", "regiao": "Brasil"},
+        {"ano": "2023", "valor": "4.8", "regiao": "Brasil"}
+    ],
+    "dadosRegionais": [
+        {"ano": "2023", "regiao": "Norte", "valor": "7.6"},
+        {"ano": "2023", "regiao": "Nordeste", "valor": "9.2"},
+        {"ano": "2023", "regiao": "Sudeste", "valor": "2.8"},
+        {"ano": "2023", "regiao": "Sul", "valor": "1.9"},
+        {"ano": "2023", "regiao": "Centro-Oeste", "valor": "3.2"}
+    ],
+    "metadados": {
+        "metodologia": "Calculado com base na linha internacional de extrema pobreza estabelecida pelo Banco Mundial (US$ 2,15 por dia por pessoa).",
+        "limitacoes": "Não considera outras dimensões da pobreza além da renda.",
+        "interpretacao": "Valores menores indicam melhoria na redução da extrema pobreza."
+    },
+    "indicadorODS": {
+        "objetivo": 1,
+        "meta": "1.1",
+        "indicador": "1.1.1"
+    }
+}

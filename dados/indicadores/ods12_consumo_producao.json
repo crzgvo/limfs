@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "titulo": "ODS 12 - Consumo e Produção Responsáveis",
+    "descricao": "Assegurar padrões de produção e de consumo sustentáveis",
+    "ultima_atualizacao": "2025-04-12",
+    "cor_primaria": "#BF8B2E",
+    "cor_secundaria": "rgba(191, 139, 46, 0.2)"
+  },
+  "dados": {
+    "valor": 6.2,
+    "unidade": "%",
+    "descricao": "Taxa de reciclagem de resíduos sólidos urbanos"
+  },
+  "historico": [
+    {"ano": 2017, "valor": 2.1},
+    {"ano": 2018, "valor": 2.5},
+    {"ano": 2019, "valor": 3.2},
+    {"ano": 2020, "valor": 3.8},
+    {"ano": 2021, "valor": 4.3},
+    {"ano": 2022, "valor": 5.0},
+    {"ano": 2023, "valor": 5.7},
+    {"ano": 2024, "valor": 6.2}
+  ],
+  "indicadores_detalhados": [
+    {
+      "nome": "Consumo consciente de água",
+      "valor": 152,
+      "unidade": "L/hab/dia",
+      "tendencia": "decrescente"
+    },
+    {
+      "nome": "Eficiência energética industrial",
+      "valor": 28.4,
+      "unidade": "%",
+      "tendencia": "crescente"
+    },
+    {
+      "nome": "Empresas com certificação ambiental",
+      "valor": 12.6,
+      "unidade": "%",
+      "tendencia": "crescente"
+    },
+    {
+      "nome": "Redução do desperdício alimentar",
+      "valor": 17.5,
+      "unidade": "%",
+      "tendencia": "crescente"
+    }
+  ]
+}

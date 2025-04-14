@@ -1,0 +1,194 @@
+/**
+ * Componente de Grade de Indicadores - LIMFS
+ * Implementação responsiva usando CSS Grid
+ */
+
+.grade-indicadores {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+  margin-bottom: 40px;
+}
+
+.card-indicador {
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.card-indicador:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card-indicador h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  position: relative;
+  padding-right: 60px; /* Espaço para o badge ODS */
+  color: var(--cor-texto);
+}
+
+.ods-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.conteudo-indicador {
+  margin-bottom: 15px;
+  flex-grow: 1;
+}
+
+.grafico-container {
+  width: 100%;
+  height: 180px;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.status-carregamento {
+  color: #666;
+  font-style: italic;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.btn-ver-mais {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  padding: 8px 0;
+  background-color: #f0f0f0;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background-color 0.2s;
+  font-weight: 500;
+}
+
+.btn-ver-mais:hover {
+  background-color: #e0e0e0;
+}
+
+/* Cores específicas para cada ODS conforme padrão da ONU */
+#indicador-pobreza .ods-badge { background-color: #E5243B; } /* ODS 1 */
+#indicador-fome .ods-badge { background-color: #DDA63A; } /* ODS 2 */
+#indicador-mortalidade-infantil .ods-badge { background-color: #4C9F38; } /* ODS 3 */
+#indicador-educacao .ods-badge { background-color: #C5192D; } /* ODS 4 */
+#indicador-igualdade-genero .ods-badge { background-color: #FF3A21; } /* ODS 5 */
+#indicador-saneamento .ods-badge { background-color: #26BDE2; } /* ODS 6 */
+#indicador-energia-solar .ods-badge { background-color: #FCC30B; } /* ODS 7 */
+#indicador-trabalho .ods-badge { background-color: #A21942; } /* ODS 8 */
+#indicador-industria .ods-badge { background-color: #FD6925; } /* ODS 9 */
+#indicador-desigualdade .ods-badge { background-color: #DD1367; } /* ODS 10 */
+#indicador-residuos-reciclados .ods-badge { background-color: #FD9D24; } /* ODS 11 */
+#indicador-consumo .ods-badge { background-color: #BF8B2E; } /* ODS 12 */
+#indicador-clima .ods-badge { background-color: #3F7E44; } /* ODS 13 */
+#indicador-vida-aquatica .ods-badge { background-color: #0A97D9; } /* ODS 14 */
+#indicador-vida-terrestre .ods-badge { background-color: #56C02B; } /* ODS 15 */
+#indicador-paz .ods-badge { background-color: #00689D; } /* ODS 16 */
+#indicador-parcerias .ods-badge { background-color: #19486A; } /* ODS 17 */
+
+/* Estilos para valores e tendências */
+.valor-principal {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.valor-descricao {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.tendencia-alta {
+  color: #4C9F38; /* Verde */
+}
+
+.tendencia-baixa {
+  color: #E5243B; /* Vermelho */
+}
+
+.tendencia-estavel {
+  color: #FCC30B; /* Amarelo */
+}
+
+/* Melhorias de acessibilidade */
+.grafico-container canvas {
+  width: 100% !important;
+}
+
+/* Loader animado para indicador de carregamento */
+.loader {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: #3498db;
+  animation: spin 1s ease-in-out infinite;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Indicadores visuais de acessibilidade */
+.screen-reader-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Responsividade adicional para telas pequenas */
+@media (max-width: 768px) {
+  .grade-indicadores {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 15px;
+  }
+  
+  .grafico-container {
+    height: 160px;
+  }
+
+  .valor-principal {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .grade-indicadores {
+    grid-template-columns: 1fr;
+  }
+
+  .card-indicador {
+    padding: 12px;
+  }
+}

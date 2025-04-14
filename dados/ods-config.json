@@ -1,0 +1,156 @@
+{
+  "meta": {
+    "versao": "2.0.0",
+    "ultima_atualizacao": "2025-04-13",
+    "responsavel": "LIMFS - Laboratório de Indicadores para Monitoramento das Famílias Sergipanas",
+    "descricao": "Configuração centralizada dos ODS para Painel LIMFS"
+  },
+  "objetivos_desenvolvimento_sustentavel": [
+    {
+      "id": 1,
+      "codigo": "ods1",
+      "titulo": "Erradicação da Pobreza",
+      "descricao": "Acabar com a pobreza em todas as suas formas, em todos os lugares",
+      "cor_primaria": "#e5243b",
+      "cor_secundaria": "rgba(229, 36, 59, 0.2)",
+      "imagem": "logo-icons-coloridos-01.png",
+      "indicadores": [
+        {
+          "id": "principal",
+          "nome": "Taxa de extrema pobreza",
+          "descricao": "Percentual da população vivendo abaixo da linha de extrema pobreza",
+          "endpoint_json": "indicadores/ods1_pobreza.json",
+          "endpoint_api": "indicadores/ods1_pobreza.json"
+        },
+        {
+          "id": "gini",
+          "nome": "Índice de Gini",
+          "descricao": "Medida de desigualdade de distribuição de renda",
+          "endpoint_json": "indicadores/ods1_gini.json",
+          "endpoint_api": "indicadores/ods1_gini.json"
+        },
+        {
+          "id": "programas_sociais",
+          "nome": "Cobertura de programas sociais",
+          "descricao": "Percentual de famílias atendidas por programas sociais",
+          "endpoint_json": "indicadores/ods1_programas_sociais.json",
+          "endpoint_api": "indicadores/ods1_programas_sociais.json"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "codigo": "ods4",
+      "titulo": "Educação de Qualidade",
+      "descricao": "Garantir educação inclusiva e de qualidade para todos",
+      "cor_primaria": "#c5192d",
+      "cor_secundaria": "rgba(197, 25, 45, 0.2)",
+      "imagem": "logo-icons-coloridos-04.png",
+      "indicadores": [
+        {
+          "id": "principal",
+          "nome": "Taxa de alfabetização",
+          "descricao": "Percentual da população alfabetizada",
+          "endpoint_json": "indicadores/ods4_educacao.json",
+          "endpoint_api": "indicadores/ods4_educacao.json"
+        },
+        {
+          "id": "evasao",
+          "nome": "Taxa de evasão escolar",
+          "descricao": "Percentual de estudantes que abandonam os estudos",
+          "endpoint_json": "indicadores/ods4_evasao.json",
+          "endpoint_api": "indicadores/ods4_evasao.json"
+        },
+        {
+          "id": "internet",
+          "nome": "Acesso à internet nas escolas",
+          "descricao": "Percentual de escolas com acesso à internet",
+          "endpoint_json": "indicadores/ods4_internet.json",
+          "endpoint_api": "indicadores/ods4_internet.json"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "codigo": "ods5",
+      "titulo": "Igualdade de Gênero",
+      "descricao": "Alcançar a igualdade de gênero e empoderar todas as mulheres e meninas",
+      "cor_primaria": "#ff3a21",
+      "cor_secundaria": "rgba(255, 58, 33, 0.2)",
+      "imagem": "logo-icons-coloridos-03.png",
+      "indicadores": [
+        {
+          "id": "principal",
+          "nome": "Representação feminina em cargos de liderança",
+          "descricao": "Percentual de cargos de liderança ocupados por mulheres",
+          "endpoint_json": "indicadores/ods5_genero.json",
+          "endpoint_api": "indicadores/ods5_genero.json"
+        },
+        {
+          "id": "salarios",
+          "nome": "Diferença salarial entre gêneros",
+          "descricao": "Diferença percentual entre salários de homens e mulheres",
+          "endpoint_json": "indicadores/ods5_salarios.json",
+          "endpoint_api": "indicadores/ods5_salarios.json"
+        },
+        {
+          "id": "politica",
+          "nome": "Participação feminina na política",
+          "descricao": "Percentual de cargos políticos ocupados por mulheres",
+          "endpoint_json": "indicadores/ods5_politica.json",
+          "endpoint_api": "indicadores/ods5_politica.json"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "codigo": "ods8",
+      "titulo": "Trabalho Decente e Crescimento Econômico",
+      "descricao": "Promover o crescimento econômico sustentado, inclusivo e sustentável, o emprego pleno e produtivo e o trabalho decente para todos",
+      "cor_primaria": "#a21942",
+      "cor_secundaria": "rgba(162, 25, 66, 0.2)",
+      "imagem": "logo-icons-coloridos-02.png",
+      "indicadores": [
+        {
+          "id": "principal",
+          "nome": "Taxa de desemprego",
+          "descricao": "Percentual da população economicamente ativa desempregada",
+          "endpoint_json": "indicadores/ods8_trabalho.json",
+          "endpoint_api": "indicadores/ods8_trabalho.json"
+        },
+        {
+          "id": "informalidade",
+          "nome": "Taxa de informalidade",
+          "descricao": "Percentual de trabalhadores no mercado informal",
+          "endpoint_json": "indicadores/ods8_informalidade.json",
+          "endpoint_api": "indicadores/ods8_informalidade.json"
+        },
+        {
+          "id": "jovens",
+          "nome": "Jovens nem-nem",
+          "descricao": "Percentual de jovens que não estudam nem trabalham",
+          "endpoint_json": "indicadores/ods8_jovens.json",
+          "endpoint_api": "indicadores/ods8_jovens.json"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "codigo": "ods13",
+      "titulo": "Ação Climática",
+      "descricao": "Tomar medidas urgentes para combater a mudança climática e seus impactos",
+      "cor_primaria": "#3F7E44",
+      "cor_secundaria": "rgba(63, 126, 68, 0.2)",
+      "imagem": "logo-icons-coloridos-13.png",
+      "indicadores": [
+        {
+          "id": "emissoes_co2",
+          "nome": "Emissões de CO2 per capita",
+          "descricao": "Volume de emissões de CO2 per capita",
+          "endpoint_json": "indicadores/ods13_emissoes.json",
+          "endpoint_api": "indicadores/ods13_emissoes.json"
+        }
+      ]
+    }
+  ]
+}
