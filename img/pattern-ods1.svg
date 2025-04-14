@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="ods1-pattern" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+      <circle cx="10" cy="10" r="3" fill="white" opacity="0.15"/>
+      <circle cx="30" cy="30" r="8" fill="white" opacity="0.1"/>
+      <circle cx="50" cy="50" r="5" fill="white" opacity="0.2"/>
+      <path d="M0,15 L60,15" stroke="white" stroke-width="0.5" opacity="0.2" />
+      <path d="M15,0 L15,60" stroke="white" stroke-width="0.5" opacity="0.2" />
+      <path d="M45,0 L45,60" stroke="white" stroke-width="0.5" opacity="0.2" />
+      <path d="M0,45 L60,45" stroke="white" stroke-width="0.5" opacity="0.2" />
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#ods1-pattern)" />
+</svg>

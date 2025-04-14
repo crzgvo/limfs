@@ -1,162 +1,96 @@
-# LIMFS - Sistema de Monitoramento de Indicadores ODS Sergipe
+# Painel ODS Sergipe - LIMFS
 
-## Sobre o Projeto
+## 📖 Sobre o Projeto
+O **Painel ODS Sergipe** é uma plataforma interativa desenvolvida pelo **Laboratório de Inovação, Mosaicos e Futuros Sustentáveis (LIMFS)** para monitorar os indicadores relacionados aos Objetivos de Desenvolvimento Sustentável (ODS) no estado de Sergipe. O projeto visa promover a transparência, acessibilidade e engajamento com os dados da Agenda 2030.
 
-O LIMFS é um sistema web para monitoramento e visualização dos indicadores dos Objetivos de Desenvolvimento Sustentável (ODS) em Sergipe. O sistema coleta, processa e exibe dados atualizados de diferentes fontes oficiais, fornecendo uma visão transparente do progresso regional na implementação da Agenda 2030.
+## 🌟 Funcionalidades Principais
+- **Visualização de Indicadores:**
+  - Indicadores como Taxa de Extrema Pobreza, Taxa de Alfabetização, Cobertura de Saneamento Básico, entre outros.
+  - Gráficos interativos para análise de séries históricas.
+  - Comparação entre indicadores.
+- **Dashboards Específicos:**
+  - Páginas dedicadas para cada ODS com informações detalhadas.
+- **Exportação de Dados:**
+  - Exportação de dados em formato CSV para análise offline.
+- **Acessibilidade:**
+  - Compatível com leitores de tela e navegação por teclado.
+  - Contraste adequado e tooltips informativos.
 
-### Funcionalidades Principais
+## 🛠️ Tecnologias Utilizadas
+- **Frontend:**
+  - HTML5, CSS3, JavaScript (ES6+).
+  - Bibliotecas: [Chart.js](https://www.chartjs.org/) para gráficos, [Tippy.js](https://atomiks.github.io/tippyjs/) para tooltips.
+- **Backend:**
+  - Dados estáticos em formato JSON.
+- **SEO e Dados Estruturados:**
+  - Schema.org para melhorar a indexação e visibilidade nos motores de busca.
 
-- 📊 Visualização interativa de indicadores ODS
-- 📈 Gráficos comparativos de evolução temporal
-- 💾 Exportação de dados em formato CSV
-- 🔄 Atualização automática via APIs oficiais
-- 🛡️ Sistema robusto de resiliência e fallback
-- 📱 Interface responsiva e acessível
+## 📂 Estrutura do Projeto
+```
+/workspaces/limfs
+├── dados/                # Dados JSON para os indicadores
+├── docs/                 # Documentação técnica
+├── img/                  # Imagens e ícones
+├── js/                   # Scripts JavaScript
+│   ├── components/       # Componentes reutilizáveis
+│   ├── services/         # Serviços para manipulação de dados
+│   ├── utils/            # Utilitários (cache, retry, etc.)
+├── styles/               # Arquivos CSS
+│   ├── components/       # Estilos de componentes
+│   ├── pages/            # Estilos específicos de páginas
+├── painel-ods/           # Páginas HTML do painel
+├── __tests__/            # Testes unitários
+└── README.md             # Documentação do projeto
+```
 
-## Arquitetura
-
-O sistema foi desenvolvido com foco em:
-
-### Resiliência
-- Circuit Breaker para prevenção de sobrecarga
-- Retry com backoff exponencial
-- Cache multinível (localStorage, arquivos JSON, dados de fallback)
-- Tratamento robusto de erros
-
-### Monitoramento
-- Sistema completo de logs (INFO, WARN, ERROR, CRITICAL)
-- Rastreamento detalhado de falhas em APIs
-- Notificações em tempo real
-- Histórico persistente de erros
-
-### Performance
-- Carregamento assíncrono
-- Otimização de requisições
-- Cache local inteligente
-- Compressão de dados
-
-### Acessibilidade
-- Suporte a leitores de tela
-- Alto contraste
-- Navegação por teclado
-- Mensagens claras de feedback
-
-## Tecnologias Utilizadas
-
-- HTML5, CSS3 e JavaScript moderno
-- Chart.js para visualizações gráficas
-- APIs REST (IBGE, ANEEL)
-- Jest para testes automatizados
-- GitHub Actions para CI/CD
-
-## Estrutura do Projeto
-
-\`\`\`
-limfs/
-├── js/                      # Lógica principal
-│   ├── painel-ods.js       # Core do sistema
-│   ├── services/           # Serviços
-│   │   ├── monitoramento.js    # Sistema de monitoramento
-│   │   └── atualizar-dados.js  # Atualização automática
-│   └── components/         # Componentes reutilizáveis
-├── styles/                 # Estilos CSS
-├── dados/                  # Arquivos JSON de dados
-├── __tests__/             # Testes automatizados
-└── .github/workflows/     # Configurações CI/CD
-\`\`\`
-
-## APIs e Integrações
-
-### IBGE
-- PNAD Contínua
-- Censo Demográfico
-- SIDRA
-
-### Outras Fontes
-- ANEEL (dados de energia solar)
-- DATASUS (dados de saúde)
-- SNIS (dados de saneamento)
-
-## Instalação e Execução
-
+## 🚀 Como Executar o Projeto
 1. Clone o repositório:
-\`\`\`bash
-git clone https://github.com/seu-usuario/limfs.git
-cd limfs
-\`\`\`
+   ```bash
+   git clone <URL_DO_REPOSITORIO>
+   ```
+2. Navegue até o diretório do projeto:
+   ```bash
+   cd limfs
+   ```
+3. Abra o arquivo `index.html` no navegador para visualizar o painel.
 
-2. Instale as dependências:
-\`\`\`bash
-npm install
-\`\`\`
+## 🧪 Testes
+- Os testes unitários estão localizados na pasta `__tests__/` e cobrem funcionalidades como validação de APIs, manipulação de cache e lógica de gráficos.
+- Para executar os testes, utilize o framework [Jest](https://jestjs.io/):
+  ```bash
+  npm test
+  ```
 
-3. Execute os testes:
-\`\`\`bash
-npm test
-\`\`\`
+## 📊 Indicadores Monitorados
+- **ODS 1:** Taxa de Extrema Pobreza
+- **ODS 4:** Taxa de Alfabetização
+- **ODS 6:** Cobertura de Saneamento Básico
+- **ODS 7:** Energia Solar Fotovoltaica
+- **ODS 8:** Taxa de Desemprego
+- **ODS 11:** Resíduos Sólidos Reciclados
 
-4. Para desenvolvimento local:
-\`\`\`bash
-# Use um servidor local como Live Server do VS Code
-# ou http-server do Node.js
-\`\`\`
+## 📈 Dados e Fontes
+Os dados utilizados no painel são provenientes de fontes confiáveis, como:
+- **IBGE:** Pesquisa Nacional por Amostra de Domicílios Contínua (PNAD).
+- **ANEEL:** Dados Abertos sobre Energia Solar.
+- **SNIS:** Sistema Nacional de Informações sobre Saneamento.
+- **DATASUS:** Informações de Saúde Pública.
 
-## Testes
+## 🔒 Boas Práticas Implementadas
+- **Acessibilidade:**
+  - Uso de atributos `aria-*` e navegação por teclado.
+- **Desempenho:**
+  - Cache local para reduzir chamadas de rede.
+  - Estratégias de fallback para dados indisponíveis.
+- **Segurança:**
+  - Sanitização de dados antes de renderizar no DOM.
 
-O sistema possui uma suíte completa de testes cobrindo:
+## 📌 Contribuição
+Contribuições são bem-vindas! Siga as diretrizes no arquivo `CONTRIBUTING.md` para enviar sugestões ou corrigir problemas.
 
-- Circuit Breaker e retry
-- Cache e persistência
-- Validação de APIs
-- Logging de erros
-- Testes de DOM
+## 📄 Licença
+Este projeto está licenciado sob a [Licença Creative Commons BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
-Execute os testes com:
-\`\`\`bash
-npm test                 # Executa todos os testes
-npm run test:coverage    # Executa testes com relatório de cobertura
-npm run test:watch      # Executa testes em modo watch
-\`\`\`
+---
 
-## CI/CD
-
-O projeto utiliza GitHub Actions para:
-
-- Execução automática de testes
-- Verificação de cobertura de código
-- Validação de qualidade
-- Deploy automatizado
-
-## Contribuindo
-
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature (\`git checkout -b feature/nova-feature\`)
-3. Commit suas mudanças (\`git commit -am 'Adiciona nova feature'\`)
-4. Push para a branch (\`git push origin feature/nova-feature\`)
-5. Crie um Pull Request
-
-### Padrões de Código
-
-- Use ESLint para padrões JavaScript
-- Mantenha 100% de cobertura de testes
-- Documente novas funcionalidades
-- Siga o padrão de commits semânticos
-
-## Monitoramento em Produção
-
-O sistema inclui ferramentas robustas para monitoramento:
-
-- Logs detalhados de erros
-- Métricas de performance
-- Alertas automáticos
-- Status de APIs
-
-## Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
-## Contato
-
-LIMFS - Laboratório Inovação, Mosaicos e Futuros
-- Email: contato@mosaicosfuturos.com
-- Website: https://www.mosaicosfuturos.com
+**Desenvolvido por LIMFS - Laboratório de Inovação, Mosaicos e Futuros Sustentáveis**

@@ -3,11 +3,12 @@
  */
 
 /* Fontes */
-@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700&family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Roboto:wght@400;700&display=swap');
 
 /* Reset e Variáveis Globais */
 @import url('./reset.css');
 @import url('./styles/global-variables.css');
+@import url('./styles/typography.css');
 
 /* Componentes Base */
 @import url('./styles/menu.css');
@@ -28,9 +29,6 @@
 /* Estilos globais */
 body {
     margin: 0;
-    font-family: var(--font-primary);
-    line-height: var(--line-height-padrao);
-    color: var(--cor-texto);
     background-color: var(--cor-fundo);
 }
 

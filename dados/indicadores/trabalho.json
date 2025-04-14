@@ -1,0 +1,19 @@
+{
+  "id": "trabalho",
+  "titulo": "Taxa de Desemprego",
+  "descricao": "Taxa de desemprego da população economicamente ativa",
+  "ultimaAtualizacao": "2025-04-02",
+  "dados": {
+    "valor": 14.3,
+    "unidade": "%",
+    "descricao": "Taxa de desemprego"
+  },
+  "historico": [
+    {"ano": 2019, "valor": 16.2},
+    {"ano": 2020, "valor": 18.4},
+    {"ano": 2021, "valor": 17.6},
+    {"ano": 2022, "valor": 16.5},
+    {"ano": 2023, "valor": 15.1},
+    {"ano": 2024, "valor": 14.3}
+  ]
+}

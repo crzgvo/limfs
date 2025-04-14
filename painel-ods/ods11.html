@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dashboard ODS 11 - Cidades e Comunidades Sustentáveis | LIMFS - Laboratório de Indicadores para Monitoramento das Famílias Sergipanas">
+  <!-- Content Security Policy adicionada -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://cdnjs.cloudflare.com;
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com https://fonts.googleapis.com;
+    img-src 'self' data:;
+    font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com;
+    connect-src 'self' https://api.mosaicosfuturos.com;
+    object-src 'none';
+    frame-ancestors 'none';
+  ">
+  <!-- Headers HTTP adicionais de segurança -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="no-referrer">
+  <title>ODS 11 - Cidades e Comunidades Sustentáveis | LIMFS</title>
+  <link rel="stylesheet" href="../styles/global-variables.css">
+  <link rel="stylesheet" href="../styles/painel-ods.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module" src="../js/painel-ods.js"></script>
+  <!-- Metadados para compartilhamento social -->
+  <meta property="og:title" content="ODS 11 - Cidades e Comunidades Sustentáveis | LIMFS">
+  <meta property="og:description" content="Conheça os indicadores de cidades e comunidades sustentáveis em Sergipe e contribua para o desenvolvimento urbano inclusivo">
+  <meta property="og:image" content="../img/logo-icons-coloridos-11.png">
+  <meta property="og:url" content="https://www.mosaicosfuturos.com/painel-ods/ods11.html">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+<body data-pagina="ods11">
+  <a href="#conteudo-principal" class="pular-link">Pular para o conteúdo principal</a>
+  <header>
+    <div class="container">
+      <h1>Laboratório de Indicadores para Monitoramento das Famílias Sergipanas</h1>
+      <nav aria-label="Menu principal">
+        <ul role="menubar">
+          <li role="menuitem"><a href="../index.html">Início</a></li>
+          <li role="menuitem"><a href="../painel-ods/index.html">Painel Geral</a></li>
+          <li role="menuitem"><a href="../sobre/index.html">Sobre</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo-principal" role="main" class="container">
+    <div class="ods-header">
+      <img src="../img/logo-icons-coloridos-11.png" alt="Ícone ODS 11" class="ods-icon">
+      <div>
+        <h1 id="ods-titulo">ODS 11 - Cidades e Comunidades Sustentáveis</h1>
+        <p id="ods-descricao">Tornar as cidades e os assentamentos humanos inclusivos, seguros, resilientes e sustentáveis</p>
+        <p id="ultima-atualizacao" class="small">Carregando informações...</p>
+      </div>
+    </div>
+
+    <!-- Seção explicativa sobre o ODS 11 -->
+    <section class="ods-explicativo">
+      <div class="card info-card">
+        <h2>Cidades e Comunidades Sustentáveis em Sergipe</h2>
+        <p>O ODS 11 busca garantir que as cidades e assentamentos humanos sejam inclusivos, seguros, resilientes e sustentáveis. Em Sergipe, os esforços se concentram na melhoria da mobilidade urbana, habitação de qualidade, espaços públicos acessíveis e gestão integrada dos resíduos urbanos.</p>
+        <div class="destaque-info">
+          <i class="fas fa-city" aria-hidden="true"></i>
+          <div>
+            <strong>Perspectiva Urbana:</strong> 
+            <span>Com mais de 73% da população vivendo em áreas urbanas, Sergipe enfrenta desafios específicos de urbanização acelerada, especialmente na região metropolitana de Aracaju.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="loading-indicator" class="loader" role="status" aria-live="polite">Carregando dados...</div>
+    <div id="error-message" class="error" style="display: none;" role="alert" aria-live="assertive"></div>
+
+    <section class="dashboard-container">
+      <div class="card valor-principal-card">
+        <h2>Indicador Principal</h2>
+        <div class="valor-principal-container">
+          <span id="valor-principal" class="valor-principal" aria-live="polite">--</span>
+          <span id="valor-descricao" class="valor-descricao" aria-live="polite">Carregando...</span>
+        </div>
+      </div>
+
+      <div class="card grafico-card">
+        <h2>Evolução Histórica e Metas</h2>
+        <div class="grafico-container" style="height: 300px;">
+          <canvas id="grafico-principal" role="img" aria-label="Gráfico de evolução histórica do acesso a espaços públicos de qualidade em Sergipe"></canvas>
+        </div>
+        <p id="grafico-descricao" class="screen-reader-only">Este gráfico mostra a evolução do acesso a espaços públicos de qualidade em Sergipe em comparação com as metas estabelecidas.</p>
+        <button id="btn-exportar" class="btn-exportar" aria-label="Exportar dados em CSV">
+          <i class="fas fa-download" aria-hidden="true"></i> Exportar Dados (CSV)
+        </button>
+      </div>
+    </section>
+
+    <section class="indicadores-detalhados-container">
+      <h2>Indicadores Detalhados</h2>
+      <div id="indicadores-detalhados" class="indicadores-grid" aria-live="polite">
+        <!-- Os indicadores detalhados serão injetados dinamicamente aqui -->
+      </div>
+    </section>
+
+    <!-- Seção de foco temático -->
+    <section class="foco-tematico">
+      <h2>Foco Temático em Cidades Sustentáveis</h2>
+      <p class="descricao-foco">Distribuição dos investimentos e iniciativas por área temática</p>
+      <div class="grafico-container" style="height: 350px;">
+        <canvas id="grafico-pizza" 
+                aria-label="Gráfico de distribuição de foco temático em Cidades Sustentáveis em Sergipe"
+                role="img"></canvas>
+      </div>
+      <div class="legenda-foco">
+        <div class="legenda-item"><span class="cor-legenda" style="background-color: #F99D26;"></span> Mobilidade Urbana (28%)</div>
+        <div class="legenda-item"><span class="cor-legenda" style="background-color: #FBB167;"></span> Habitação (24%)</div>
+        <div class="legenda-item"><span class="cor-legenda" style="background-color: #FCC59E;"></span> Resiliência Climática (18%)</div>
+        <div class="legenda-item"><span class="cor-legenda" style="background-color: #FDD9C6;"></span> Gestão de Resíduos (16%)</div>
+        <div class="legenda-item"><span class="cor-legenda" style="background-color: #FEE9DA;"></span> Espaços Verdes (14%)</div>
+      </div>
+    </section>
+
+    <!-- Nova seção de mapa de ações -->
+    <section class="mapa-acoes">
+      <h2>Distribuição Regional dos Indicadores</h2>
+      <p class="descricao-mapa">Percentual da população com acesso a espaços públicos de qualidade por município</p>
+      <div class="mapa-sergipe">
+        <img src="../img/mapa-sergipe.png" alt="Mapa de Sergipe com indicadores por município" class="img-mapa" usemap="#mapa-municipios">
+        <map name="mapa-municipios">
+          <area shape="poly" coords="120,80,150,90,145,120,115,110" alt="Aracaju" 
+                title="Aracaju: 84,5%" href="#" data-municipio="Aracaju" data-valor="84.5">
+          <area shape="poly" coords="125,130,155,140,150,170,120,160" alt="São Cristóvão" 
+                title="São Cristóvão: 78,9%" href="#" data-municipio="São Cristóvão" data-valor="78.9">
+          <!-- Outras áreas do mapa seriam definidas aqui -->
+        </map>
+      </div>
+      <div id="info-municipio" class="info-municipio">
+        <h3>Selecione um município no mapa</h3>
+        <p class="valor-municipio"></p>
+        <div class="grafico-municipio-container">
+          <canvas id="grafico-municipio"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section class="desafios-oportunidades">
+      <h2>Desafios e Oportunidades</h2>
+      <div class="cards-container">
+        <div class="desafio-card">
+          <h3><i class="fas fa-exclamation-triangle"></i> Desafios</h3>
+          <ul>
+            <li>Crescimento desordenado das áreas periféricas</li>
+            <li>Habitações em áreas de risco e precariedade habitacional</li>
+            <li>Congestionamentos e mobilidade urbana fragmentada</li>
+            <li>Gestão integrada de resíduos sólidos</li>
+            <li>Adaptação às mudanças climáticas e eventos extremos</li>
+          </ul>
+        </div>
+        <div class="oportunidade-card">
+          <h3><i class="fas fa-lightbulb"></i> Oportunidades</h3>
+          <ul>
+            <li>Implementação de novas tecnologias para cidades inteligentes</li>
+            <li>Expansão das ciclovias e do transporte público de baixa emissão</li>
+            <li>Revitalização de áreas verdes e espaços públicos abandonados</li>
+            <li>Implementação de soluções baseadas na natureza para resiliência urbana</li>
+            <li>Planejamento urbano participativo e inclusivo</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção de programas vinculados -->
+    <section class="programas-vinculados">
+      <h2>Programas em Andamento</h2>
+      <div class="programas-grid">
+        <div class="programa-card programa-alto">
+          <div class="programa-header">
+            <h3>Cidade para Todos</h3>
+            <span class="impacto-badge">Alto Impacto</span>
+          </div>
+          <p>Programa de melhorias em acessibilidade urbana, focado na adaptação de calçadas, travessias e espaços públicos para pessoas com deficiência ou mobilidade reduzida.</p>
+          <ul class="programa-dados">
+            <li><strong>Municípios atendidos:</strong> 12</li>
+            <li><strong>Beneficiários diretos:</strong> 85.000 pessoas</li>
+            <li><strong>Investimento 2024:</strong> R$ 12,8 milhões</li>
+          </ul>
+          <a href="https://www.exemplo.gov.br/cidadeparatodos" target="_blank" rel="noopener noreferrer" class="btn-programa">Conheça o programa</a>
+        </div>
+
+        <div class="programa-card programa-medio">
+          <div class="programa-header">
+            <h3>Parques Urbanos</h3>
+            <span class="impacto-badge">Médio Impacto</span>
+          </div>
+          <p>Criação e revitalização de áreas verdes em zonas urbanas, com implantação de equipamentos de lazer, esporte e cultura para a população.</p>
+          <ul class="programa-dados">
+            <li><strong>Parques implantados:</strong> 8</li>
+            <li><strong>Parques revitalizados:</strong> 14</li>
+            <li><strong>Área verde adicionada:</strong> 325.000 m²</li>
+          </ul>
+          <a href="https://www.exemplo.gov.br/parquesurbanos" target="_blank" rel="noopener noreferrer" class="btn-programa">Conheça o programa</a>
+        </div>
+
+        <div class="programa-card programa-alto">
+          <div class="programa-header">
+            <h3>Mobilidade Sustentável</h3>
+            <span class="impacto-badge">Alto Impacto</span>
+          </div>
+          <p>Ampliação de ciclovias e corredores de ônibus, com integração entre modais de transporte e redução de emissões por passageiro transportado.</p>
+          <ul class="programa-dados">
+            <li><strong>Km de ciclovias implementadas:</strong> 78 km</li>
+            <li><strong>Corredores exclusivos:</strong> 15 km</li>
+            <li><strong>Redução estimada de emissões:</strong> 28.500 tCO₂e/ano</li>
+          </ul>
+          <a href="https://www.exemplo.gov.br/mobilidade" target="_blank" rel="noopener noreferrer" class="btn-programa">Conheça o programa</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="acoes-impacto">
+      <h2>Ações de Impacto</h2>
+      <div class="acoes-grid">
+        <div class="acao-card">
+          <h3>Ciclomobilidade</h3>
+          <p>Implementação de 78 km de ciclovias interligadas com bicicletários públicos e sistema de compartilhamento de bicicletas em pontos estratégicos das cidades.</p>
+          <a href="#" class="btn-saiba-mais" aria-label="Saiba mais sobre o programa de Ciclomobilidade">Saiba mais</a>
+        </div>
+        <div class="acao-card">
+          <h3>Habitação Sustentável</h3>
+          <p>Construção de 1.200 unidades habitacionais com tecnologias sustentáveis como captação de água de chuva, energia solar e materiais de baixo impacto ambiental.</p>
+          <a href="#" class="btn-saiba-mais" aria-label="Saiba mais sobre o programa de Habitação Sustentável">Saiba mais</a>
+        </div>
+        <div class="acao-card">
+          <h3>Cidade Inteligente</h3>
+          <p>Implementação de sensores urbanos para monitoramento de tráfego, qualidade do ar e enchentes em tempo real, com alertas antecipados para a população.</p>
+          <a href="#" class="btn-saiba-mais" aria-label="Saiba mais sobre a iniciativa Cidade Inteligente">Saiba mais</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="recomendacoes-politicas">
+      <h2>Recomendações de Políticas Públicas</h2>
+      <div class="recomendacoes-lista">
+        <div class="recomendacao-item">
+          <h3>1. Mobilidade Urbana Integrada</h3>
+          <p>Desenvolver planos de mobilidade que integrem diferentes modais de transporte, priorizando meios coletivos e não motorizados, com foco na acessibilidade universal e redução das emissões de carbono.</p>
+          <div class="links-documentos">
+            <a href="#" class="link-documento-oficial" aria-label="Ver estudo sobre mobilidade urbana integrada">
+              <i class="fas fa-file-pdf" aria-hidden="true"></i> Estudo Completo
+            </a>
+            <a href="#" class="link-documento-oficial" aria-label="Ver plano de implementação de mobilidade urbana">
+              <i class="fas fa-tasks" aria-hidden="true"></i> Plano de Implementação
+            </a>
+          </div>
+        </div>
+        <div class="recomendacao-item">
+          <h3>2. Planejamento Urbano Resiliente ao Clima</h3>
+          <p>Incorporar estratégias de adaptação às mudanças climáticas no planejamento urbano, com implementação de infraestrutura verde, sistemas de drenagem sustentável e medidas de prevenção a desastres naturais.</p>
+          <a href="#" class="link-documento-oficial" aria-label="Ver guia de planejamento urbano resiliente">
+            <i class="fas fa-file-pdf" aria-hidden="true"></i> Guia de Planejamento Resiliente
+          </a>
+        </div>
+        <div class="recomendacao-item">
+          <h3>3. Revitalização de Áreas Centrais</h3>
+          <p>Implementar programas de requalificação e aproveitamento de imóveis ociosos em áreas centrais, fomentando o uso misto (residencial e comercial) e criando zonas urbanas mais compactas, eficientes e com melhor qualidade de vida.</p>
+          <a href="#" class="link-documento-oficial" aria-label="Ver proposta de revitalização de áreas centrais">
+            <i class="fas fa-file-pdf" aria-hidden="true"></i> Proposta de Revitalização
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nova seção de compartilhamento social -->
+    <section class="compartilhamento-social">
+      <h2>Compartilhe Estes Dados</h2>
+      <p>Ajude a promover a conscientização sobre cidades e comunidades sustentáveis em Sergipe</p>
+      <div class="botoes-sociais">
+        <a href="#" target="_blank" rel="noopener noreferrer" class="btn-social btn-twitter" id="twitter-share" aria-label="Compartilhar no Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i> Twitter
+        </a>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="btn-social btn-facebook" id="facebook-share" aria-label="Compartilhar no Facebook">
+          <i class="fab fa-facebook-f" aria-hidden="true"></i> Facebook
+        </a>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="btn-social btn-linkedin" id="linkedin-share" aria-label="Compartilhar no LinkedIn">
+          <i class="fab fa-linkedin-in" aria-hidden="true"></i> LinkedIn
+        </a>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="btn-social btn-whatsapp" id="whatsapp-share" aria-label="Compartilhar no WhatsApp">
+          <i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp
+        </a>
+      </div>
+    </section>
+
+    <!-- Nova seção de participação cidadã -->
+    <section class="participacao-cidada">
+      <h2>Sua Opinião Importa</h2>
+      <p>Ajude-nos a melhorar as cidades e comunidades em Sergipe</p>
+      <form id="form-enquete" class="form-enquete">
+        <fieldset>
+          <legend>Na sua opinião, qual deve ser a prioridade para o desenvolvimento urbano sustentável em sua região?</legend>
+          <div class="opcoes-enquete">
+            <div class="opcao-radio">
+              <input type="radio" id="opcao1" name="avaliacao" value="mobilidade">
+              <label for="opcao1">Melhorar a mobilidade urbana</label>
+            </div>
+            <div class="opcao-radio">
+              <input type="radio" id="opcao2" name="avaliacao" value="habitacao">
+              <label for="opcao2">Ampliar o acesso à habitação de qualidade</label>
+            </div>
+            <div class="opcao-radio">
+              <input type="radio" id="opcao3" name="avaliacao" value="areasverdes">
+              <label for="opcao3">Aumentar áreas verdes e de lazer</label>
+            </div>
+            <div class="opcao-radio">
+              <input type="radio" id="opcao4" name="avaliacao" value="residuos">
+              <label for="opcao4">Aprimorar a gestão de resíduos</label>
+            </div>
+            <div class="opcao-radio">
+              <input type="radio" id="opcao5" name="avaliacao" value="seguranca">
+              <label for="opcao5">Melhorar a segurança urbana</label>
+            </div>
+          </div>
+          <button type="submit" class="btn-enviar">Enviar Resposta</button>
+        </fieldset>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 LIMFS - Laboratório de Indicadores para Monitoramento das Famílias Sergipanas</p>
+      <p>Dados atualizados em <span id="data-atualizacao">Abril de 2025</span></p>
+      <p><a href="/acessibilidade.html">Política de Acessibilidade</a> | <a href="/privacidade.html">Política de Privacidade</a></p>
+    </div>
+  </footer>
+
+  <style>
+    /* Estilo específico para o ODS 11 com sua cor oficial (laranja) */
+    .valor-principal, .indicador-card h3 {
+      color: #F99D26;
+    }
+    
+    .acao-card {
+      border-left: 4px solid #F99D26;
+    }
+    
+    .acao-card h3 {
+      color: #F99D26;
+    }
+    
+    .btn-saiba-mais {
+      background-color: #F99D26;
+    }
+    
+    .btn-saiba-mais:hover {
+      background-color: #e08e22;
+    }
+    
+    .recomendacao-item {
+      border-left: 4px solid #F99D26;
+    }
+
+    /* Seção explicativa do ODS */
+    .ods-explicativo {
+      margin: 20px 0 30px;
+    }
+    
+    .info-card {
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      padding: 25px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-left: 4px solid #F99D26;
+    }
+    
+    .destaque-info {
+      display: flex;
+      align-items: center;
+      background-color: rgba(249, 157, 38, 0.1);
+      padding: 15px;
+      border-radius: 6px;
+      margin-top: 15px;
+      gap: 15px;
+    }
+    
+    .destaque-info i {
+      font-size: 2rem;
+      color: #F99D26;
+    }
+
+    /* Foco temático */
+    .foco-tematico {
+      margin: 30px 0;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 25px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .descricao-foco {
+      color: #666;
+      margin-bottom: 20px;
+    }
+    
+    .legenda-foco {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .legenda-foco .legenda-item {
+      display: flex;
+      align-items: center;
+      margin: 5px;
+      font-size: 0.9rem;
+    }
+    
+    .cor-legenda {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      margin-right: 5px;
+      border-radius: 3px;
+    }
+
+    /* Mapa de ações */
+    .mapa-acoes {
+      margin: 30px 0;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 25px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .descricao-mapa {
+      color: #666;
+      margin-bottom: 20px;
+    }
+    
+    .mapa-sergipe {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+      position: relative;
+    }
+    
+    .img-mapa {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #eee;
+      border-radius: 8px;
+    }
+    
+    .info-municipio {
+      background-color: #f8f9fa;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+      text-align: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .info-municipio h3 {
+      margin-top: 0;
+      color: #444;
+      font-size: 1.2rem;
+    }
+    
+    .valor-municipio {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #F99D26;
+      margin: 10px 0;
+    }
+    
+    .grafico-municipio-container {
+      height: 200px;
+      margin-top: 15px;
+    }
+
+    /* Programas vinculados */
+    .programas-vinculados {
+      margin: 30px 0;
+    }
+    
+    .programas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    
+    .programa-card {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .programa-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .programa-card h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: #333;
+    }
+    
+    .impacto-badge {
+      font-size: 0.8rem;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-weight: 600;
+      color: white;
+    }
+    
+    .programa-alto .impacto-badge {
+      background-color: #28a745;
+    }
+    
+    .programa-medio .impacto-badge {
+      background-color: #ffc107;
+      color: #343a40;
+    }
+    
+    .programa-baixo .impacto-badge {
+      background-color: #6c757d;
+    }
+    
+    .programa-dados {
+      list-style: none;
+      padding: 0;
+      margin: 15px 0;
+      font-size: 0.9rem;
+    }
+    
+    .programa-dados li {
+      margin-bottom: 5px;
+      padding-left: 10px;
+      border-left: 2px solid #F99D26;
+    }
+    
+    .btn-programa {
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: #F99D26;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      text-align: center;
+      margin-top: auto;
+      transition: background-color 0.3s;
+    }
+    
+    .btn-programa:hover {
+      background-color: #e08e22;
+    }
+
+    /* Estilos para compartilhamento social e participação cidadã */
+    .compartilhamento-social,
+    .participacao-cidada {
+      margin: 30px 0;
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    
+    .botoes-sociais {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+    
+    .btn-social {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 20px;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      gap: 8px;
+      transition: opacity 0.3s;
+    }
+    
+    .btn-social:hover {
+      opacity: 0.9;
+    }
+    
+    .btn-twitter {
+      background-color: #1DA1F2;
+    }
+    
+    .btn-facebook {
+      background-color: #4267B2;
+    }
+    
+    .btn-linkedin {
+      background-color: #0077B5;
+    }
+    
+    .btn-whatsapp {
+      background-color: #25D366;
+    }
+    
+    /* Formulário de enquete */
+    .form-enquete {
+      margin-top: 20px;
+      text-align: left;
+    }
+    
+    .form-enquete fieldset {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+    }
+    
+    .form-enquete legend {
+      font-weight: bold;
+      padding: 0 10px;
+    }
+    
+    .opcoes-enquete {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    
+    .opcao-radio {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .opcao-radio input[type="radio"] {
+      margin: 0;
+    }
+    
+    .btn-enviar {
+      background-color: #F99D26;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .btn-enviar:hover {
+      background-color: #e08e22;
+    }
+
+    /* Classes para acessibilidade */
+    .screen-reader-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+    
+    .pular-link {
+      position: absolute;
+      left: -999px;
+      width: 1px;
+      height: 1px;
+      top: auto;
+      background-color: #F99D26;
+      color: white;
+      padding: 10px 15px;
+      z-index: 999;
+      transition: left 0s;
+    }
+    
+    .pular-link:focus {
+      left: 10px;
+      top: 10px;
+      width: auto;
+      height: auto;
+    }
+    
+    /* Melhoria de foco para acessibilidade */
+    a:focus,
+    button:focus,
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: 3px solid rgba(249, 157, 38, 0.5);
+      outline-offset: 2px;
+    }
+    
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .botoes-sociais {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .btn-social {
+        width: 80%;
+      }
+      
+      .cards-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .opcoes-enquete {
+        grid-template-columns: 1fr;
+      }
+      
+      .destaque-info {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .programas-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .legenda-foco {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</body>
+</html>

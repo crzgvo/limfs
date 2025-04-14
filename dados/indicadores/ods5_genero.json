@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "titulo": "ODS 5 - Igualdade de Gênero",
+    "descricao": "Alcançar a igualdade de gênero e empoderar todas as mulheres e meninas",
+    "ultima_atualizacao": "2025-04-08"
+  },
+  "dados": {
+    "valor": 35.2,
+    "unidade": "%",
+    "descricao": "Representação feminina em cargos de liderança"
+  },
+  "historico": [
+    {"ano": 2020, "valor": 28.5},
+    {"ano": 2021, "valor": 30.2},
+    {"ano": 2022, "valor": 31.8},
+    {"ano": 2023, "valor": 33.1},
+    {"ano": 2024, "valor": 34.5},
+    {"ano": 2025, "valor": 35.2}
+  ],
+  "indicadores_detalhados": [
+    {
+      "nome": "Diferença salarial entre gêneros",
+      "valor": 17.8,
+      "unidade": "%",
+      "tendencia": "decrescente"
+    },
+    {
+      "nome": "Participação feminina em cargos políticos",
+      "valor": 24.6,
+      "unidade": "%",
+      "tendencia": "crescente"
+    },
+    {
+      "nome": "Taxa de escolarização superior entre mulheres",
+      "valor": 58.2,
+      "unidade": "%",
+      "tendencia": "crescente"
+    }
+  ]
+}

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Gráfico Comparativo</title>
+    
+    <!-- Chart.js é necessário para os gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        #resultado {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            min-height: 100px;
+        }
+        .grafico-comparativo-container {
+            height: 400px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Teste de Validação - Gráfico Comparativo ODS</h1>
+        
+        <div>
+            <button id="btn-testar">Executar Teste</button>
+        </div>
+        
+        <!-- Container para o resultado do teste -->
+        <div id="resultado">
+            <p>Os resultados do teste aparecerão aqui...</p>
+        </div>
+        
+        <!-- Container para o gráfico comparativo -->
+        <div class="grafico-comparativo-container">
+            <canvas id="grafico-comparativo"></canvas>
+        </div>
+    </div>
+
+    <!-- Importar módulos necessários -->
+    <script>
+        // Redirecionar logs para a área de resultado
+        const resultadoDiv = document.getElementById('resultado');
+        const consoleLogs = [];
+        
+        // Substituir console.log para capturar mensagens
+        const originalLog = console.log;
+        const originalError = console.error;
+        const originalWarn = console.warn;
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            const msg = args.map(arg => {
+                if (typeof arg === 'object') return JSON.stringify(arg, null, 2);
+                return arg;
+            }).join(' ');
+            consoleLogs.push(`<p><span style="color:green">✓</span> ${msg}</p>`);
+            atualizarResultado();
+        };
+        
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            const msg = args.map(arg => {
+                if (typeof arg === 'object') return JSON.stringify(arg, null, 2);
+                return arg;
+            }).join(' ');
+            consoleLogs.push(`<p><span style="color:red">✗</span> ${msg}</p>`);
+            atualizarResultado();
+        };
+        
+        console.warn = function(...args) {
+            originalWarn.apply(console, args);
+            const msg = args.map(arg => {
+                if (typeof arg === 'object') return JSON.stringify(arg, null, 2);
+                return arg;
+            }).join(' ');
+            consoleLogs.push(`<p><span style="color:orange">⚠</span> ${msg}</p>`);
+            atualizarResultado();
+        };
+        
+        function atualizarResultado() {
+            resultadoDiv.innerHTML = consoleLogs.join('');
+        }
+        
+        // Mock para dados e funções necessárias
+        window.odsService = {
+            getDadosIndicador: async (codigoODS, indicador) => {
+                // Simula dados históricos para o teste
+                // Para o ODS 18 (Igualdade Racial), incluímos dados específicos
+                if (codigoODS === 'ods18') {
+                    return {
+                        historico: [
+                            { ano: 2018, valor: 24.3 },
+                            { ano: 2019, valor: 25.7 },
+                            { ano: 2020, valor: 27.5 },
+                            { ano: 2021, valor: 29.2 },
+                            { ano: 2022, valor: 31.0 },
+                            { ano: 2023, valor: 32.5 },
+                            { ano: 2024, valor: 34.8 }
+                        ]
+                    };
+                }
+                return {
+                    historico: [
+                        { ano: 2020, valor: Math.floor(Math.random() * 30) + 50 },
+                        { ano: 2021, valor: Math.floor(Math.random() * 30) + 55 },
+                        { ano: 2022, valor: Math.floor(Math.random() * 30) + 60 },
+                        { ano: 2023, valor: Math.floor(Math.random() * 30) + 65 },
+                        { ano: 2024, valor: Math.floor(Math.random() * 30) + 70 }
+                    ]
+                };
+            },
+            getODS: async (codigoODS) => {
+                const cores = {
+                    ods1: { cor_primaria: '#e5243b', cor_secundaria: 'rgba(229, 36, 59, 0.2)', titulo: 'Erradicação da Pobreza' },
+                    ods4: { cor_primaria: '#c5192d', cor_secundaria: 'rgba(197, 25, 45, 0.2)', titulo: 'Educação de Qualidade' },
+                    ods5: { cor_primaria: '#ff3a21', cor_secundaria: 'rgba(255, 58, 33, 0.2)', titulo: 'Igualdade de Gênero' },
+                    ods8: { cor_primaria: '#a21942', cor_secundaria: 'rgba(162, 25, 66, 0.2)', titulo: 'Trabalho Decente' },
+                    ods18: { cor_primaria: '#6F1D78', cor_secundaria: 'rgba(111, 29, 120, 0.2)', titulo: 'Igualdade Racial' }
+                };
+                return cores[codigoODS] || { cor_primaria: '#333333', cor_secundaria: 'rgba(51, 51, 51, 0.2)', titulo: 'ODS Desconhecido' };
+            }
+        };
+        
+        // Função de gráfico comparativo a ser testada
+        async function gerarGraficoComparativo(odsSelecionados) {
+            console.log(`Gerando gráfico comparativo para: ${odsSelecionados.join(', ')}`);
+            
+            const datasets = await Promise.all(odsSelecionados.map(async codigoODS => {
+                const dados = await odsService.getDadosIndicador(codigoODS, 'principal');
+                const ods = await odsService.getODS(codigoODS);
+                return {
+                    label: ods.titulo,
+                    data: dados.historico.map(h => h.valor),
+                    borderColor: ods.cor_primaria,
+                    backgroundColor: ods.cor_secundaria,
+                    tension: 0.3
+                };
+            }));
+            
+            const anos = ['2020', '2021', '2022', '2023', '2024'];
+            
+            const ctx = document.getElementById('grafico-comparativo').getContext('2d');
+            
+            // Destruir gráfico anterior se existir
+            if (window.graficoComparativo) {
+                window.graficoComparativo.destroy();
+            }
+            
+            window.graficoComparativo = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: anos,
+                    datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: ${context.raw}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            console.log('✅ Gráfico comparativo gerado com sucesso!');
+            return true;
+        }
+        
+        // Executar o teste quando o botão for clicado
+        document.getElementById('btn-testar').addEventListener('click', async () => {
+            consoleLogs.length = 0;
+            atualizarResultado();
+            
+            console.log('🧪 Iniciando teste do gráfico comparativo dinâmico...');
+            
+            try {
+                // Incluindo o ODS 18 (Igualdade Racial) no teste
+                await gerarGraficoComparativo(['ods1', 'ods4', 'ods5', 'ods18']);
+                console.log('✅ Teste concluído com sucesso!');
+            } catch (erro) {
+                console.error('❌ Erro ao executar teste:', erro);
+            }
+        });
+    </script>
+</body>
+</html>
