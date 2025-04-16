@@ -7,34 +7,15 @@
     <meta name="description" content="Painel ODS Sergipe - Monitoramento dos Objetivos de Desenvolvimento Sustentável">
     <meta name="keywords" content="LIMFS, ODS, Agenda 2030, Sergipe, Sustentabilidade, Indicadores">
     <meta name="author" content="LIMFS">
-    <!-- Content Security Policy atualizada para permitir Google Fonts e scripts necessários -->
-    <meta http-equiv="Content-Security-Policy" content="
-        default-src 'self';
-        script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://cdnjs.cloudflare.com;
-        style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com https://fonts.googleapis.com;
-        img-src 'self' data:;
-        font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com;
-        connect-src 'self' https://apisidra.ibge.gov.br https://servicodados.ibge.gov.br https://dadosabertos.aneel.gov.br;
-        object-src 'none';
-        base-uri 'self';
-        form-action 'self';
-        frame-ancestors 'self';
-        block-all-mixed-content;
-    ">
-    <!-- Preconnect para melhorar performance -->
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="preconnect" href="https://unpkg.com">
-    
+    <meta property="og:title" content="Mosaicos Futuros - Painel ODS Sergipe">
+    <meta property="og:description" content="Acompanhe os indicadores e o progresso de Sergipe na Agenda 2030.">
+    <meta property="og:image" content="../img/logo-icons-coloridos_Prancheta 1.png">
+    <meta property="og:url" content="https://www.mosaicosfuturos.com/painel-ods">
+    <meta name="twitter:card" content="summary_large_image">
     <title>Mosaicos Futuros - Painel ODS Sergipe</title>
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../styles/pages/painel-ods.css">
-    <link rel="stylesheet" href="../styles/components/acessibilidade.css">
     <link rel="icon" type="image/png" href="../img/logo-icons-coloridos_Prancheta 1.png">
-    <!-- Google Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700&family=Roboto:wght@400;700&display=swap">
     <!-- Font Awesome para ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Adicionando Chart.js para visualizações gráficas dos indicadores -->
@@ -147,45 +128,6 @@
       ]
     }
   </script>
-    <!-- Script para detecção de recursos do navegador -->
-    <script>
-        function detectarRecursos() {
-            // Verifica suporte a módulos ES6
-            const suportaModulos = 'noModule' in HTMLScriptElement.prototype;
-            
-            // Verifica suporte a IndexedDB
-            const suportaIndexedDB = 'indexedDB' in window;
-            
-            // Verifica suporte a localStorage
-            const suportaLocalStorage = (() => {
-                try {
-                    localStorage.setItem('test', 'test');
-                    localStorage.removeItem('test');
-                    return true;
-                } catch (e) {
-                    return false;
-                }
-            })();
-            
-            // Define atributos para uso posterior
-            document.documentElement.setAttribute('data-suporta-modulos', suportaModulos);
-            document.documentElement.setAttribute('data-suporta-indexeddb', suportaIndexedDB);
-            document.documentElement.setAttribute('data-suporta-localstorage', suportaLocalStorage);
-            
-            // Cria elemento para leitores de tela
-            if (!document.getElementById('recursos-navegador-info')) {
-                const info = document.createElement('div');
-                info.id = 'recursos-navegador-info';
-                info.className = 'screen-reader-only';
-                info.setAttribute('role', 'status');
-                info.setAttribute('aria-live', 'polite');
-                document.body.appendChild(info);
-            }
-        }
-        
-        // Executa a detecção imediatamente
-        detectarRecursos();
-    </script>
 </head>
 
 <body>
@@ -223,266 +165,127 @@
                     Acompanhe indicadores atualizados sobre os Objetivos de Desenvolvimento Sustentável em Sergipe.
                     Nosso painel oferece uma visão transparente do progresso regional na implementação da Agenda 2030.
                 </p>
-                
-                <div class="ods-dashboard-links">
-                    <h2>Dashboards Específicos</h2>
-                    <p>Acesse os dashboards detalhados para cada ODS:</p>
-                    <div class="ods-links-grid">
-                        <a href="ods1.html" class="ods-link ods1">
-                            <div class="ods-number">1</div>
-                            <span>Erradicação da Pobreza</span>
-                        </a>
-                        <a href="ods2.html" class="ods-link ods2">
-                            <div class="ods-number">2</div>
-                            <span>Fome Zero</span>
-                        </a>
-                        <a href="ods3.html" class="ods-link ods3">
-                            <div class="ods-number">3</div>
-                            <span>Saúde e Bem-estar</span>
-                        </a>
-                        <a href="ods4.html" class="ods-link ods4">
-                            <div class="ods-number">4</div>
-                            <span>Educação de Qualidade</span>
-                        </a>
-                        <a href="ods5.html" class="ods-link ods5">
-                            <div class="ods-number">5</div>
-                            <span>Igualdade de Gênero</span>
-                        </a>
-                        <a href="ods6.html" class="ods-link ods6">
-                            <div class="ods-number">6</div>
-                            <span>Água Potável e Saneamento</span>
-                        </a>
-                        <a href="ods7.html" class="ods-link ods7">
-                            <div class="ods-number">7</div>
-                            <span>Energia Limpa e Acessível</span>
-                        </a>
-                        <a href="ods8.html" class="ods-link ods8">
-                            <div class="ods-number">8</div>
-                            <span>Trabalho Decente</span>
-                        </a>
-                        <a href="ods9.html" class="ods-link ods9">
-                            <div class="ods-number">9</div>
-                            <span>Indústria, Inovação e Infraestrutura</span>
-                        </a>
-                        <a href="ods10.html" class="ods-link ods10">
-                            <div class="ods-number">10</div>
-                            <span>Redução das Desigualdades</span>
-                        </a>
-                        <a href="ods11.html" class="ods-link ods11">
-                            <div class="ods-number">11</div>
-                            <span>Cidades e Comunidades Sustentáveis</span>
-                        </a>
-                        <a href="ods12.html" class="ods-link ods12">
-                            <div class="ods-number">12</div>
-                            <span>Consumo e Produção Responsáveis</span>
-                        </a>
-                        <a href="ods13.html" class="ods-link ods13">
-                            <div class="ods-number">13</div>
-                            <span>Ação Contra a Mudança Global do Clima</span>
-                        </a>
-                        <a href="ods14.html" class="ods-link ods14">
-                            <div class="ods-number">14</div>
-                            <span>Vida na Água</span>
-                        </a>
-                        <a href="ods15.html" class="ods-link ods15">
-                            <div class="ods-number">15</div>
-                            <span>Vida Terrestre</span>
-                        </a>
-                        <a href="ods16.html" class="ods-link ods16">
-                            <div class="ods-number">16</div>
-                            <span>Paz, Justiça e Instituições Eficazes</span>
-                        </a>
-                        <a href="ods17.html" class="ods-link ods17">
-                            <div class="ods-number">17</div>
-                            <span>Parcerias e Meios de Implementação</span>
-                        </a>
-                        <a href="ods18.html" class="ods-link ods18">
-                            <div class="ods-number">18</div>
-                            <span>Igualdade Racial (Brasil)</span>
-                        </a>
-                    </div>
-                </div>
             </div>
         </section>
 
         <section id="indicadores-ods">
             <div class="container">
-                <h2>Indicadores de Desenvolvimento Sustentável</h2>
-                <p>Acompanhe os principais indicadores ODS para o estado de Sergipe. Dados atualizados periodicamente.</p>
-                
-                <!-- Indicador de carregamento global -->
-                <div id="loading-indicator" class="loader-container" aria-hidden="false" role="status">
-                    <div class="loader-animation"></div>
-                    <p>Carregando indicadores...</p>
-                </div>
-                
-                <!-- Área para mensagens de erro -->
-                <div class="error-message" style="display: none;" role="alert"></div>
-                
-                <!-- Grade de indicadores -->
+                <h2>Indicadores em Destaque</h2>
+                <p>Dados atualizados que refletem o progresso de Sergipe nos Objetivos de Desenvolvimento Sustentável.
+                </p>
+
                 <div class="grade-indicadores">
-                    <!-- ODS 1 - Erradicação da Pobreza -->
                     <div id="indicador-pobreza" class="card-indicador" aria-live="polite">
                         <div class="ods-badge">ODS 1</div>
                         <h3>Taxa de Extrema Pobreza</h3>
                         <div class="conteudo-indicador">
-                            <p class="status-carregamento">Carregando dados... <span class="loader"></span></p>
+                            <p class="status-carregamento">Carregando dados...</p>
                         </div>
                         <div class="grafico-container">
-                            <canvas id="grafico-pobreza" role="img" 
-                                   aria-label="Gráfico da evolução da taxa de extrema pobreza em Sergipe"></canvas>
+                            <canvas id="grafico-pobreza" role="img"
+                                aria-label="Gráfico da taxa de extrema pobreza"></canvas>
                         </div>
-                        <a href="ods1.html" class="btn-ver-mais">Ver dashboard completo</a>
                     </div>
 
-                    <!-- ODS 3 - Saúde e Bem-estar -->
                     <div id="indicador-mortalidade-infantil" class="card-indicador" aria-live="polite">
                         <div class="ods-badge">ODS 3</div>
-                        <h3>Mortalidade Infantil</h3>
+                        <h3>Saúde e Bem-estar</h3>
                         <div class="conteudo-indicador">
-                            <p class="status-carregamento">Carregando dados... <span class="loader"></span></p>
+                            <p class="status-carregamento">Carregando dados...</p>
                         </div>
                         <div class="grafico-container">
-                            <canvas id="grafico-mortalidade-infantil" role="img" 
-                                   aria-label="Gráfico da evolução da mortalidade infantil em Sergipe"></canvas>
+                            <canvas id="grafico-mortalidade_infantil" role="img"
+                                aria-label="Gráfico da taxa de mortalidade infantil"></canvas>
                         </div>
-                        <a href="ods3.html" class="btn-ver-mais">Ver dashboard completo</a>
                     </div>
 
-                    <!-- ODS 4 - Educação de Qualidade -->
                     <div id="indicador-educacao" class="card-indicador" aria-live="polite">
                         <div class="ods-badge">ODS 4</div>
-                        <h3>Taxa de Alfabetização</h3>
+                        <h3>Educação de Qualidade</h3>
                         <div class="conteudo-indicador">
-                            <p class="status-carregamento">Carregando dados... <span class="loader"></span></p>
+                            <p class="status-carregamento">Carregando dados...</p>
                         </div>
                         <div class="grafico-container">
-                            <canvas id="grafico-educacao" role="img" 
-                                   aria-label="Gráfico da evolução da taxa de alfabetização em Sergipe"></canvas>
+                            <canvas id="grafico-educacao" role="img"
+                                aria-label="Gráfico da taxa de alfabetização"></canvas>
                         </div>
-                        <a href="ods4.html" class="btn-ver-mais">Ver dashboard completo</a>
                     </div>
 
-                    <!-- ODS 6 - Água Potável e Saneamento -->
                     <div id="indicador-saneamento" class="card-indicador" aria-live="polite">
                         <div class="ods-badge">ODS 6</div>
-                        <h3>Cobertura de Saneamento</h3>
+                        <h3>Água e Saneamento</h3>
                         <div class="conteudo-indicador">
-                            <p class="status-carregamento">Carregando dados... <span class="loader"></span></p>
+                            <p class="status-carregamento">Carregando dados...</p>
                         </div>
                         <div class="grafico-container">
-                            <canvas id="grafico-saneamento" role="img" 
-                                   aria-label="Gráfico da evolução da cobertura de saneamento em Sergipe"></canvas>
+                            <canvas id="grafico-saneamento" role="img"
+                                aria-label="Gráfico da cobertura de saneamento básico"></canvas>
                         </div>
-                        <a href="ods6.html" class="btn-ver-mais">Ver dashboard completo</a>
                     </div>
 
-                    <!-- ODS 7 - Energia Limpa e Acessível -->
                     <div id="indicador-energia-solar" class="card-indicador" aria-live="polite">
                         <div class="ods-badge">ODS 7</div>
-                        <h3>Energia Solar</h3>
+                        <h3>Energia Limpa e Acessível</h3>
                         <div class="conteudo-indicador">
-                            <p class="status-carregamento">Carregando dados... <span class="loader"></span></p>
+                            <p class="status-carregamento">Carregando dados...</p>
                         </div>
                         <div class="grafico-container">
-                            <canvas id="grafico-energia-solar" role="img" 
-                                   aria-label="Gráfico da evolução da energia solar em Sergipe"></canvas>
+                            <canvas id="grafico-energia_solar" role="img"
+                                aria-label="Gráfico do percentual de domicílios com energia solar"></canvas>
                         </div>
-                        <a href="ods7.html" class="btn-ver-mais">Ver dashboard completo</a>
                     </div>
 
-                    <!-- ODS 8 - Trabalho Decente -->
-                    <div id="indicador-trabalho" class="card-indicador" aria-live="polite">
-                        <div class="ods-badge">ODS 8</div>
-                        <h3>Taxa de Desemprego</h3>
-                        <div class="conteudo-indicador">
-                            <p class="status-carregamento">Carregando dados... <span class="loader"></span></p>
-                        </div>
-                        <div class="grafico-container">
-                            <canvas id="grafico-trabalho" role="img" 
-                                   aria-label="Gráfico da evolução da taxa de desemprego em Sergipe"></canvas>
-                        </div>
-                        <a href="ods8.html" class="btn-ver-mais">Ver dashboard completo</a>
-                    </div>
-
-                    <!-- ODS 10 - Redução das Desigualdades -->
-                    <div id="indicador-desigualdade" class="card-indicador" aria-live="polite">
-                        <div class="ods-badge">ODS 10</div>
-                        <h3>Índice de Gini</h3>
-                        <div class="conteudo-indicador">
-                            <p class="status-carregamento">Carregando dados... <span class="loader"></span></p>
-                        </div>
-                        <div class="grafico-container">
-                            <canvas id="grafico-desigualdade" role="img" 
-                                   aria-label="Gráfico da evolução do Índice de Gini em Sergipe"></canvas>
-                        </div>
-                        <a href="ods10.html" class="btn-ver-mais">Ver dashboard completo</a>
-                    </div>
-
-                    <!-- ODS 11 - Cidades e Comunidades Sustentáveis -->
                     <div id="indicador-residuos-reciclados" class="card-indicador" aria-live="polite">
                         <div class="ods-badge">ODS 11</div>
-                        <h3>Resíduos Reciclados</h3>
+                        <h3>Cidades e Comunidades Sustentáveis</h3>
                         <div class="conteudo-indicador">
-                            <p class="status-carregamento">Carregando dados... <span class="loader"></span></p>
+                            <p class="status-carregamento">Carregando dados...</p>
                         </div>
                         <div class="grafico-container">
-                            <canvas id="grafico-residuos-reciclados" role="img" 
-                                   aria-label="Gráfico da evolução dos resíduos reciclados em Sergipe"></canvas>
+                            <canvas id="grafico-residuos_reciclados" role="img"
+                                aria-label="Gráfico do percentual de resíduos reciclados"></canvas>
                         </div>
-                        <a href="ods11.html" class="btn-ver-mais">Ver dashboard completo</a>
-                    </div>
-
-                    <!-- ODS 13 - Ação Contra a Mudança Global do Clima -->
-                    <div id="indicador-clima" class="card-indicador" aria-live="polite">
-                        <div class="ods-badge">ODS 13</div>
-                        <h3>Emissão de CO2</h3>
-                        <div class="conteudo-indicador">
-                            <p class="status-carregamento">Carregando dados... <span class="loader"></span></p>
-                        </div>
-                        <div class="grafico-container">
-                            <canvas id="grafico-clima" role="img" 
-                                   aria-label="Gráfico da evolução da emissão de CO2 em Sergipe"></canvas>
-                        </div>
-                        <a href="ods13.html" class="btn-ver-mais">Ver dashboard completo</a>
                     </div>
                 </div>
-                
-                <!-- Visualização comparativa -->
+
                 <div class="visualizacao-comparativa">
                     <h3>Comparativo entre Indicadores</h3>
                     <div class="grafico-comparativo-container">
-                        <canvas id="grafico-comparativo" 
-                               role="img" aria-label="Gráfico comparativo entre os indicadores ODS"></canvas>
+                        <canvas id="grafico-comparativo" role="img"
+                            aria-label="Gráfico comparativo entre os indicadores ODS"></canvas>
                     </div>
-                    <p class="legenda-grafico">Comparativo dos dados mais recentes de cada indicador</p>
+                    <p class="legenda-grafico">Dados consolidados dos principais indicadores ODS para Sergipe</p>
                     <div class="botoes-exportacao">
-                        <button id="btn-exportar-todos" class="botao-exportar">
+                        <button class="botao-exportar" id="btn-exportar-todos">
                             <i class="fas fa-download"></i> Exportar Todos os Dados (CSV)
                         </button>
                     </div>
                 </div>
 
-                <!-- Informações adicionais -->
                 <div class="grade-info-adicional">
                     <div class="card-info">
                         <h3>Sobre os Dados</h3>
                         <p>
-                            Os indicadores exibidos são baseados em dados oficiais de fontes governamentais, incluindo 
-                            IBGE, Ministério da Saúde, SNIS e outros órgãos. A atualização periódica garante transparência 
-                            e confiabilidade para acompanhar o progresso de Sergipe na implementação da Agenda 2030.
+                            Os indicadores exibidos são baseados em dados oficiais recentes publicados pelo IBGE,
+                            incluindo PNAD Contínua
+                            Educação (2023), Censo Demográfico IBGE (2022) e informações complementares do IDSC e G1
+                            Notícias. A atualização
+                            periódica garante transparência e confiabilidade para acompanhar o progresso de Sergipe na
+                            Agenda 2030.
                         </p>
                         <p>
-                            <strong>Última atualização:</strong> <span id="data-atualizacao">Carregando...</span>
+                            <strong>Última atualização:</strong> <span id="data-atualizacao"></span>
                         </p>
                     </div>
-                    
+
                     <div class="card-info">
                         <h3>Como Contribuir</h3>
                         <p>
-                            Empresas, municípios e organizações podem contribuir diretamente para o avanço dos ODS em Sergipe.
-                            Acesse nossa página de serviços para conhecer como podemos ajudar sua organização a implementar 
-                            estratégias alinhadas à Agenda 2030.
+                            Empresas, municípios e organizações podem contribuir diretamente para o avanço dos ODS em
+                            Sergipe.
+                            Acesse nossa página de serviços para conhecer como podemos ajudar na implementação de
+                            estratégias
+                            alinhadas à Agenda 2030 ou entre em contato para saber mais.
                         </p>
                         <div class="botoes-acao">
                             <a href="/servicos/" class="botao-primario">Nossos Serviços</a>
@@ -498,130 +301,8 @@
         <!-- O conteúdo será inserido pelo script footer.js -->
     </footer>
     <script src="../js/components/menu.js"></script>
-    <script src="../js/painel-ods.js" type="module"></script>
+    <script src="../js/painel-ods.js"></script>
     <script src="../js/components/footer.js"></script>
-    
-    <style>
-        .ods-dashboard-links {
-            margin: 2rem 0;
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .ods-links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-        
-        .ods-link {
-            display: flex;
-            align-items: center;
-            padding: 12px 15px;
-            border-radius: 6px;
-            text-decoration: none;
-            color: #333;
-            background-color: #f8f9fa;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .ods-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-        }
-        
-        /* Cores oficiais para cada ODS */
-        .ods-link.ods1 { border-left: 4px solid #e5243b; } /* Vermelho */
-        .ods-link.ods2 { border-left: 4px solid #DDA63A; } /* Amarelo */
-        .ods-link.ods3 { border-left: 4px solid #4C9F38; } /* Verde */
-        .ods-link.ods4 { border-left: 4px solid #C5192D; } /* Vermelho escuro */
-        .ods-link.ods5 { border-left: 4px solid #FF3A21; } /* Laranja avermelhado */
-        .ods-link.ods6 { border-left: 4px solid #26BDE2; } /* Azul claro */
-        .ods-link.ods7 { border-left: 4px solid #FCC30B; } /* Amarelo mostarda */
-        .ods-link.ods8 { border-left: 4px solid #A21942; } /* Bordô */
-        .ods-link.ods9 { border-left: 4px solid #FD6925; } /* Laranja */
-        .ods-link.ods10 { border-left: 4px solid #DD1367; } /* Rosa */
-        .ods-link.ods11 { border-left: 4px solid #FD9D24; } /* Laranja amarelado */
-        .ods-link.ods12 { border-left: 4px solid #BF8B2E; } /* Marrom dourado */
-        .ods-link.ods13 { border-left: 4px solid #3F7E44; } /* Verde escuro */
-        .ods-link.ods14 { border-left: 4px solid #0A97D9; } /* Azul */
-        .ods-link.ods15 { border-left: 4px solid #56C02B; } /* Verde lima */
-        .ods-link.ods16 { border-left: 4px solid #00689D; } /* Azul marinho */
-        .ods-link.ods17 { border-left: 4px solid #19486A; } /* Azul muito escuro */
-        .ods-link.ods18 { border-left: 4px solid #6F1D78; } /* Roxo (ODS Brasileiro) */
-        
-        .ods-number {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            font-weight: bold;
-            margin-right: 12px;
-            color: white;
-            font-size: 16px;
-        }
-        
-        .ods1 .ods-number { background-color: #e5243b; }
-        .ods2 .ods-number { background-color: #DDA63A; }
-        .ods3 .ods-number { background-color: #4C9F38; }
-        .ods4 .ods-number { background-color: #C5192D; }
-        .ods5 .ods-number { background-color: #FF3A21; }
-        .ods6 .ods-number { background-color: #26BDE2; }
-        .ods7 .ods-number { background-color: #FCC30B; }
-        .ods8 .ods-number { background-color: #A21942; }
-        .ods9 .ods-number { background-color: #FD6925; }
-        .ods10 .ods-number { background-color: #DD1367; }
-        .ods11 .ods-number { background-color: #FD9D24; }
-        .ods12 .ods-number { background-color: #BF8B2E; }
-        .ods13 .ods-number { background-color: #3F7E44; }
-        .ods14 .ods-number { background-color: #0A97D9; }
-        .ods15 .ods-number { background-color: #56C02B; }
-        .ods16 .ods-number { background-color: #00689D; }
-        .ods17 .ods-number { background-color: #19486A; }
-        .ods18 .ods-number { background-color: #6F1D78; }
-        
-        .ods-icon-mini {
-            width: 30px;
-            height: auto;
-            margin-right: 10px;
-        }
-        
-        .btn-ver-mais {
-            display: block;
-            text-align: center;
-            margin-top: 10px;
-            padding: 8px 0;
-            background-color: #f0f0f0;
-            color: #333;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 14px;
-            transition: background-color 0.2s;
-        }
-        
-        .btn-ver-mais:hover {
-            background-color: #e0e0e0;
-        }
-
-        /* Responsividade para dispositivos móveis */
-        @media (max-width: 768px) {
-            .ods-links-grid {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            }
-        }
-
-        @media (max-width: 480px) {
-            .ods-links-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
 </body>
 
 </html>
