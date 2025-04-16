@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "titulo": "ODS 8 - Trabalho Decente e Crescimento Econômico",
+    "descricao": "Promover o crescimento econômico sustentado, inclusivo e sustentável, o emprego pleno e produtivo e o trabalho decente para todos",
+    "ultima_atualizacao": "2025-04-02"
+  },
+  "dados": {
+    "valor": 14.3,
+    "unidade": "%",
+    "descricao": "Taxa de desemprego"
+  },
+  "historico": [
+    {"ano": 2019, "valor": 16.2},
+    {"ano": 2020, "valor": 18.4},
+    {"ano": 2021, "valor": 17.6},
+    {"ano": 2022, "valor": 16.5},
+    {"ano": 2023, "valor": 15.1},
+    {"ano": 2024, "valor": 14.3}
+  ],
+  "indicadores_detalhados": [
+    {
+      "nome": "PIB per capita",
+      "valor": 19854,
+      "unidade": "R$",
+      "tendencia": "crescente"
+    },
+    {
+      "nome": "Taxa de informalidade",
+      "valor": 41.2,
+      "unidade": "%",
+      "tendencia": "decrescente"
+    },
+    {
+      "nome": "Jovens nem-nem (15-29 anos)",
+      "valor": 28.6,
+      "unidade": "%",
+      "tendencia": "decrescente"
+    }
+  ]
+}

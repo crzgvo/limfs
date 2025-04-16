@@ -1,0 +1,280 @@
+/* Cabeçalho principal */
+.cabecalho {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: var(--primary-blue);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+/* Container do cabeçalho */
+.container-cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;
+    width: 100%;
+    padding: 0;
+    position: relative;
+    flex-wrap: nowrap;
+}
+
+/* Seção do logotipo */
+.secao-logo {
+    display: flex;
+    align-items: center;
+}
+
+.secao-logo .logo {
+    height: 40px;
+    margin-right: 10px;
+    max-height: 100%;
+}
+
+.secao-logo h1 {
+    font-size: 1.8em;
+    color: var(--white);
+    text-align: left;
+    white-space: nowrap;
+}
+
+/* Menu de navegação */
+.navegacao ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    white-space: nowrap;
+}
+
+.navegacao ul li a {
+    text-decoration: none;
+    color: var(--white);
+    font-weight: 700;
+    font-size: 1em;
+    white-space: nowrap;
+    font-family: 'Public Sans', sans-serif;
+}
+
+.navegacao ul li a:hover {
+    color: var(--yellow);
+}
+
+.navegacao ul li a:focus {
+    outline: 2px solid var(--yellow);
+    outline-offset: 2px;
+}
+
+.navegacao ul li a[aria-current="page"] {
+    text-decoration: underline;
+    color: var(--yellow);
+}
+
+/* Ajuste final para o botão hambúrguer */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    padding: 10px;
+    margin: 0;
+    width: 40px;
+    height: 40px;
+}
+
+.menu-toggle .hamburger,
+.menu-toggle .hamburger::before,
+.menu-toggle .hamburger::after {
+    height: 3px;
+    background-color: var(--white);
+    border-radius: 2px;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.menu-toggle .hamburger {
+    position: relative;
+    display: block;
+    width: 24px;
+    margin: 0 auto;
+}
+
+.menu-toggle .hamburger::before,
+.menu-toggle .hamburger::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    left: 0;
+}
+
+.menu-toggle .hamburger::before {
+    top: -8px;
+}
+
+.menu-toggle .hamburger::after {
+    top: 8px;
+}
+
+/* Estado ativo do botão */
+.menu-toggle.ativo .hamburger {
+    background-color: transparent;
+}
+
+.menu-toggle.ativo .hamburger::before {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle.ativo .hamburger::after {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Container centralizado */
+.conteudo-centralizado {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Link de acessibilidade para pular navegação */
+.pular-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--primary-blue);
+    color: var(--white);
+    padding: 8px;
+    z-index: 100;
+    transition: top 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.pular-link:focus {
+    top: 0;
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .cabecalho {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 999;
+        width: 100%;
+    }
+
+    .container-cabecalho {
+        padding: 0 20px;
+        height: 68px;
+        position: relative;
+    }
+
+    .menu-toggle {
+        display: block;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1000;
+    }
+
+    .conteudo-centralizado {
+        justify-content: space-between;
+    }
+
+    main {
+        padding-top: 68px;
+    }
+
+    .navegacao {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 250px;
+        background-color: var(--primary-blue);
+        transform: translateX(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        z-index: 1000;
+        padding-top: 70px;
+    }
+
+    .navegacao.ativo {
+        transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .navegacao ul {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .navegacao ul li {
+        width: 100%;
+    }
+
+    .navegacao ul li a {
+        display: block;
+        padding: 10px;
+        font-size: 1.2rem;
+        color: var(--white);
+    }
+
+    .navegacao ul li a:hover,
+    .navegacao ul li a[aria-current="page"] {
+        background-color: var(--yellow);
+        color: var(--primary-blue);
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    /* Overlay escuro para conteúdo ao abrir o menu */
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease;
+        z-index: 900;
+    }
+
+    .overlay.ativo {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .menu-toggle.ativo .hamburger {
+        background-color: transparent;
+    }
+
+    .menu-toggle.ativo .hamburger::before {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-toggle.ativo .hamburger::after {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+}

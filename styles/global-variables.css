@@ -40,7 +40,16 @@
   
   /* Transições */
   --transition-padrao: all 0.3s ease;
+
+  /* ODS 13 - Verde escuro */
+  --ods13: #3F7E44;
+  --ods13-medium: #4CAF50;
+  --ods13-light: #e8f5e9;
+  --ods13-shadow: rgba(63, 126, 68, 0.15);
+  --ods13-shadow-hover: 0 6px 18px rgba(63, 126, 68, 0.18);
 }
+
+/* Adicione aqui variáveis de outros ODS conforme necessário */
 
 /* Classe de acessibilidade para esconder visualmente elementos */
 .visually-hidden {

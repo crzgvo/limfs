@@ -1,0 +1,45 @@
+/* Movendo estilos inline da página ODS 15 */
+.valor-principal, .indicador-card h3 {
+  color: var(--ods15-cor-primaria);
+}
+
+.acao-card {
+  border-left: 4px solid var(--ods15-cor-primaria);
+}
+
+.acao-card h3 {
+  color: var(--ods15-cor-primaria);
+}
+
+.btn-saiba-mais {
+  background-color: var(--ods15-cor-primaria);
+}
+
+.btn-saiba-mais:hover {
+  background-color: var(--ods15-cor-secundaria);
+}
+
+.recomendacao-item {
+  border-left: 4px solid var(--ods15-cor-primaria);
+}
+
+/* Estilos de layout */
+.indicadores-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.acao-card {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos de acessibilidade */
+a:focus, button:focus, input:focus, select:focus, textarea:focus {
+  outline: 3px solid var(--ods15-cor-secundaria);
+  outline-offset: 2px;
+}

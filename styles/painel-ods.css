@@ -2,6 +2,7 @@
 
 /* Importação de componentes */
 @import url('../styles/components/indicadores-grid.css');
+@import url('../styles/components/ods-colors.css'); /* Importação das cores oficiais dos ODS */
 @import url('../styles/components/ods1.css'); /* Importação dos estilos específicos do ODS 1 */
 
 /* Painel ODS Sergipe - Estilos para visualização de indicadores e gráficos */
@@ -85,56 +86,56 @@
 
 /* Cores identificadoras dos ODS conforme padrão oficial da ONU */
 #indicador-pobreza {
-    border-top-color: #E5243B; /* ODS 1 */
+    border-top-color: var(--ods1-cor-primaria); /* ODS 1 */
 }
 
 #indicador-pobreza .ods-badge {
-    background-color: #E5243B;
+    background-color: var(--ods1-cor-primaria);
 }
 
 #indicador-educacao {
-    border-top-color: #C5192D; /* ODS 4 */
+    border-top-color: var(--ods4-cor-primaria); /* ODS 4 */
 }
 
 #indicador-educacao .ods-badge {
-    background-color: #C5192D;
+    background-color: var(--ods4-cor-primaria);
 }
 
 #indicador-saneamento {
-    border-top-color: #26BDE2; /* ODS 6 */
+    border-top-color: var(--ods6-cor-primaria); /* ODS 6 */
 }
 
 #indicador-saneamento .ods-badge {
-    background-color: #26BDE2;
+    background-color: var(--ods6-cor-primaria);
 }
 
 #indicador-mortalidade-infantil {
-    border-top-color: #4C9F38; /* ODS 3 */
+    border-top-color: var(--ods3-cor-primaria); /* ODS 3 */
 }
 
 #indicador-mortalidade-infantil .ods-badge {
-    background-color: #4C9F38;
+    background-color: var(--ods3-cor-primaria);
 }
 
 #indicador-energia-solar {
-    border-top-color: #FCC30B; /* ODS 7 */
+    border-top-color: var(--ods7-cor-primaria); /* ODS 7 */
 }
 
 #indicador-energia-solar .ods-badge {
-    background-color: #FCC30B;
+    background-color: var(--ods7-cor-primaria);
 }
 
 #indicador-residuos-reciclados {
-    border-top-color: #FD9D24; /* ODS 11 */
+    border-top-color: var(--ods11-cor-primaria); /* ODS 11 */
 }
 
 #indicador-residuos-reciclados .ods-badge {
-    background-color: #FD9D24;
+    background-color: var(--ods11-cor-primaria);
 }
 
 .card-indicador:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
 .card-indicador h3 {
@@ -568,6 +569,188 @@
     outline-offset: 3px;
 }
 
+/* Estilos específicos para foco em cada ODS */
+.ods1-page :focus {
+    outline: 3px solid var(--ods1-cor-secundaria);
+    outline-offset: 3px;
+}
+
+.ods2-page :focus {
+    outline: 3px solid var(--ods2-cor-secundaria);
+    outline-offset: 3px;
+}
+
+.ods3-page :focus {
+    outline: 3px solid var(--ods3-cor-secundaria);
+    outline-offset: 3px;
+}
+
+.ods4-page :focus {
+    outline: 3px solid var(--ods4-cor-secundaria);
+    outline-offset: 3px;
+}
+
+.ods5-page :focus {
+    outline: 3px solid var(--ods5-cor-secundaria);
+    outline-offset: 3px;
+}
+
+.ods6-page :focus {
+    outline: 3px solid var(--ods6-cor-secundaria);
+    outline-offset: 3px;
+}
+
+.ods7-page :focus {
+    outline: 3px solid var(--ods7-cor-secundaria);
+    outline-offset: 3px;
+}
+
+.ods8-page :focus {
+    outline: 3px solid var(--ods8-cor-secundaria);
+    outline-offset: 3px;
+}
+
+.ods9-page :focus {
+    outline: 3px solid var(--ods9-cor-secundaria);
+    outline-offset: 3px;
+}
+
+.ods10-page :focus {
+    outline: 3px solid var(--ods10-cor-secundaria);
+    outline-offset: 3px;
+}
+
+.ods11-page :focus {
+    outline: 3px solid var(--ods11-cor-secundaria);
+    outline-offset: 3px;
+}
+
+.ods12-page :focus {
+    outline: 3px solid var(--ods12-cor-secundaria);
+    outline-offset: 3px;
+}
+
+.ods13-page :focus {
+    outline: 3px solid var(--ods13-cor-secundaria);
+    outline-offset: 3px;
+}
+
+.ods14-page :focus {
+    outline: 3px solid var(--ods14-cor-secundaria);
+    outline-offset: 3px;
+}
+
+.ods15-page :focus {
+    outline: 3px solid var(--ods15-cor-secundaria);
+    outline-offset: 3px;
+}
+
+.ods16-page :focus {
+    outline: 3px solid var(--ods16-cor-secundaria);
+    outline-offset: 3px;
+}
+
+.ods17-page :focus {
+    outline: 3px solid var(--ods17-cor-secundaria);
+    outline-offset: 3px;
+}
+
+.ods18-page :focus {
+    outline: 3px solid var(--ods18-cor-secundaria);
+    outline-offset: 3px;
+}
+
+/* Melhoria dos efeitos hover dos cartões usando as variáveis de sombra específicas */
+.ods1-page .card-indicador:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ods1-sombra-hover);
+}
+
+.ods2-page .card-indicador:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ods2-sombra-hover);
+}
+
+.ods3-page .card-indicador:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ods3-sombra-hover);
+}
+
+.ods4-page .card-indicador:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ods4-sombra-hover);
+}
+
+.ods5-page .card-indicador:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ods5-sombra-hover);
+}
+
+.ods6-page .card-indicador:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ods6-sombra-hover);
+}
+
+.ods7-page .card-indicador:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ods7-sombra-hover);
+}
+
+.ods8-page .card-indicador:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ods8-sombra-hover);
+}
+
+.ods9-page .card-indicador:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ods9-sombra-hover);
+}
+
+.ods10-page .card-indicador:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ods10-sombra-hover);
+}
+
+.ods11-page .card-indicador:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ods11-sombra-hover);
+}
+
+.ods12-page .card-indicador:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ods12-sombra-hover);
+}
+
+.ods13-page .card-indicador:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ods13-sombra-hover);
+}
+
+.ods14-page .card-indicador:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ods14-sombra-hover);
+}
+
+.ods15-page .card-indicador:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ods15-sombra-hover);
+}
+
+.ods16-page .card-indicador:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ods16-sombra-hover);
+}
+
+.ods17-page .card-indicador:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ods17-sombra-hover);
+}
+
+.ods18-page .card-indicador:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ods18-sombra-hover);
+}
+
 .pular-link {
     position: absolute;
     top: -50px;
@@ -583,14 +766,6 @@
 
 .pular-link:focus {
     top: 0;
-}
-
-.botao-exportar:focus, 
-.botao-exportar-indicador:focus, 
-.botoes-acao .botao-primario:focus,
-.link-ibge:focus {
-    outline: 3px solid rgba(0, 86, 179, 0.5);
-    outline-offset: 3px;
 }
 
 /* Suporte a modo de alto contraste */

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dashboard ODS 4 - Educação de Qualidade | LIMFS - Laboratório de Indicadores para Monitoramento das Famílias Sergipanas">
+  <title>ODS 4 - Educação de Qualidade | LIMFS</title>
+  <link rel="stylesheet" href="../styles/global-variables.css">
+  <link rel="stylesheet" href="../styles/painel-ods.css">
+  <link rel="stylesheet" href="../styles/components/ods4.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module" src="../js/painel-ods.js"></script>
+</head>
+<body data-pagina="ods4">
+  <header>
+    <div class="container">
+      <h1>Laboratório de Indicadores para Monitoramento das Famílias Sergipanas</h1>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Início</a></li>
+          <li><a href="../painel-ods/index.html">Painel Geral</a></li>
+          <li><a href="../sobre/index.html">Sobre</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="ods-header">
+      <img src="../img/logo-icons-coloridos-04.png" alt="ODS 4" class="ods-icon">
+      <div>
+        <h1 id="ods-titulo">ODS 4 - Educação de Qualidade</h1>
+        <p id="ods-descricao">Garantir educação inclusiva e de qualidade para todos</p>
+        <p id="ultima-atualizacao" class="small">Carregando informações...</p>
+      </div>
+    </div>
+
+    <div id="loading-indicator" class="loader">Carregando dados...</div>
+    <div id="error-message" class="error" style="display: none;"></div>
+
+    <section class="dashboard-container">
+      <div class="card valor-principal-card">
+        <h2>Indicador Principal</h2>
+        <div class="valor-principal-container">
+          <span id="valor-principal" class="valor-principal">--</span>
+          <span id="valor-descricao" class="valor-descricao">Carregando...</span>
+        </div>
+      </div>
+
+      <div class="card grafico-card">
+        <h2>Evolução Histórica</h2>
+        <div class="grafico-container" style="height: 300px;">
+          <canvas id="grafico-principal"></canvas>
+        </div>
+        <button id="btn-exportar" class="btn-exportar">
+          <i class="fas fa-download"></i> Exportar Dados (CSV)
+        </button>
+      </div>
+    </section>
+
+    <section class="indicadores-detalhados-container">
+      <h2>Indicadores Detalhados</h2>
+      <div id="indicadores-detalhados" class="indicadores-grid">
+        <!-- Os indicadores serão injetados dinamicamente aqui -->
+      </div>
+    </section>
+
+    <section class="acoes-impacto">
+      <h2>Ações de Impacto</h2>
+      <div class="acoes-grid">
+        <div class="acao-card">
+          <h3>Programa de Alfabetização Digital</h3>
+          <p>Iniciativa para capacitar educadores e estudantes com habilidades digitais essenciais para o século XXI.</p>
+          <a href="#" class="btn-saiba-mais">Saiba mais</a>
+        </div>
+        <div class="acao-card">
+          <h3>Biblioteca Móvel</h3>
+          <p>Projeto que leva acervo literário para comunidades rurais e periféricas de Sergipe, incentivando a leitura.</p>
+          <a href="#" class="btn-saiba-mais">Saiba mais</a>
+        </div>
+        <div class="acao-card">
+          <h3>Mentoria Educacional</h3>
+          <p>Programa de apoio a estudantes de baixa renda com dificuldades de aprendizagem, oferecendo suporte pedagógico.</p>
+          <a href="#" class="btn-saiba-mais">Saiba mais</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="recomendacoes-politicas">
+      <h2>Recomendações de Políticas Públicas</h2>
+      <div class="recomendacoes-lista">
+        <div class="recomendacao-item">
+          <h3>1. Ampliação da Educação em Tempo Integral</h3>
+          <p>Investir na expansão da educação em tempo integral, priorizando escolas em áreas de vulnerabilidade social.</p>
+        </div>
+        <div class="recomendacao-item">
+          <h3>2. Capacitação Continuada de Professores</h3>
+          <p>Implementar programas de formação continuada para professores, com foco em metodologias ativas e tecnologias educacionais.</p>
+        </div>
+        <div class="recomendacao-item">
+          <h3>3. Inclusão Educacional</h3>
+          <p>Fortalecer políticas de inclusão para pessoas com deficiência nas escolas regulares, garantindo acessibilidade e suporte especializado.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 LIMFS - Laboratório de Indicadores para Monitoramento das Famílias Sergipanas</p>
+      <p>Dados atualizados em <span id="data-atualizacao">Abril de 2025</span></p>
+    </div>
+  </footer>
+</body>
+</html>

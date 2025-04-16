@@ -1,0 +1,75 @@
+/**
+ * Cores específicas e personalizações para o ODS14 - Vida na Água
+ * Este arquivo contém apenas as cores e personalizações específicas para o ODS14
+ * Para ser usado em conjunto com o ods-layout-global.css
+ */
+
+:root {
+  --ods14: #0a97d9;
+  --ods14-light: #cde9f6;
+  --ods14-dark: #0879ae;
+  --ods14-gradient: linear-gradient(135deg, #0a97d9 0%, #0879ae 100%);
+}
+
+/* Cabeçalho específico para ODS14 */
+.header-ods14 {
+  background-color: var(--ods14);
+  background-image: var(--ods14-gradient);
+}
+
+/* Botões e elementos de destaque */
+.botao-filtrar.ods14-botao,
+.btn-contribuir.ods14-botao,
+.btn-atualizar.ods14-botao,
+.btn-exportar.ods14-botao {
+  background-color: var(--ods14);
+}
+
+.botao-filtrar.ods14-botao:hover,
+.btn-contribuir.ods14-botao:hover,
+.btn-atualizar.ods14-botao:hover,
+.btn-exportar.ods14-botao:hover {
+  background-color: var(--ods14-dark);
+}
+
+/* Botão período ativo */
+.botao-periodo.ativo.ods14-periodo {
+  background-color: var(--ods14);
+  color: white;
+}
+
+/* Cores para títulos de seções */
+.secao-recomendacoes h2.ods14-titulo, 
+.secao-acoes-impacto h3.ods14-titulo,
+.visualizacao-comparativa h3.ods14-titulo {
+  color: var(--ods14);
+}
+
+/* Cores para links e elementos destacados */
+.link-acao.ods14-link {
+  color: var(--ods14);
+}
+
+/* Elementos visuais específicos */
+.case-tag.ods14-tag {
+  background-color: var(--ods14-light);
+  color: var(--ods14);
+}
+
+.metric-value.ods14-metric {
+  color: var(--ods14);
+}
+
+/* Foco para acessibilidade específico para ODS14 */
+.ods14-page a:focus,
+.ods14-page button:focus,
+.ods14-page input:focus,
+.ods14-page select:focus,
+.ods14-page textarea:focus {
+  outline: 3px solid rgba(10, 151, 217, 0.5);
+}
+
+/* Classes específicas para melhor identificação ODS14 */
+.ods14-background { background-color: var(--ods14); }
+.ods14-color { color: var(--ods14); }
+.ods14-border { border-color: var(--ods14); }

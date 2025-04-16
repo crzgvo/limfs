@@ -1,0 +1,219 @@
+/**
+ * Estilos específicos para o Dashboard ODS 16 - Paz, Justiça e Instituições Eficazes
+ * 
+ * @autor LIMFS - Laboratório de Indicadores para Monitoramento das Famílias Sergipanas
+ * @versão 3.0.0 (14/04/2025)
+ * 
+ * Este arquivo contém apenas os estilos específicos do ODS 16,
+ * utilizando e estendendo as classes compartilhadas do dashboard-ods.css
+ */
+
+/* ===== APLICAÇÃO DE CORES ESPECÍFICAS DO ODS 16 ===== */
+.header-ods16 {
+  background-color: var(--ods16);
+  box-shadow: 0 6px 18px var(--ods16-shadow);
+}
+
+.header-ods16::before {
+  background-image: url('../img/pattern-ods16.svg');
+}
+
+/* Sobreescreve o estilo padrão para aplicar as cores do ODS 16 */
+.ods16-page .ods-badge {
+  background-color: var(--ods16);
+  box-shadow: -2px 2px 8px var(--ods16-medium);
+}
+
+.ods16-page .card-indicador {
+  border-top: 4px solid var(--ods16);
+}
+
+.ods16-page .card-indicador:hover,
+.ods16-page .card-indicador:focus-within {
+  box-shadow: var(--ods16-shadow-hover);
+}
+
+.ods16-page .card-indicador:focus-within {
+  outline: var(--foco-outline-largura, 3px) solid var(--ods16);
+}
+
+.ods16-page .card-indicador .valor {
+  color: var(--ods16);
+}
+
+/* Personalização dos filtros para ODS 16 */
+.ods16-page .filtros-container {
+  background-color: var(--ods16-light);
+}
+
+.ods16-page .filtro-select:focus,
+.ods16-page .filtro-input:focus {
+  border-color: var(--ods16);
+  outline: var(--foco-outline-largura, 3px) solid var(--ods16-light);
+}
+
+.ods16-page .botao-filtrar {
+  background-color: var(--ods16);
+}
+
+.ods16-page .botao-filtrar:hover {
+  background-color: var(--ods16-medium);
+}
+
+.ods16-page .botao-filtrar:focus {
+  outline: var(--foco-outline-largura, 3px) solid var(--ods16-light);
+}
+
+/* Personalização das recomendações */
+.ods16-page .secao-recomendacoes h3,
+.ods16-page .secao-acoes-impacto h3 {
+  border-bottom: 2px solid var(--ods16);
+}
+
+.ods16-page .card-recomendacao {
+  border-left: 4px solid var(--ods16);
+}
+
+.ods16-page .card-recomendacao:hover,
+.ods16-page .card-recomendacao:focus-within {
+  box-shadow: var(--ods16-shadow-hover);
+}
+
+.ods16-page .card-recomendacao:focus-within {
+  outline: var(--foco-outline-largura, 3px) solid var(--ods16);
+}
+
+/* Personalização das ações de impacto */
+.ods16-page .card-acao {
+  border-bottom: 4px solid var(--ods16);
+}
+
+.ods16-page .card-acao:hover,
+.ods16-page .card-acao:focus-within {
+  box-shadow: var(--ods16-shadow-hover);
+}
+
+.ods16-page .card-acao:focus-within {
+  outline: var(--foco-outline-largura, 3px) solid var(--ods16);
+}
+
+.ods16-page .link-acao {
+  color: var(--ods16);
+}
+
+.ods16-page .link-acao:hover,
+.ods16-page .link-acao:focus {
+  color: var(--ods16-medium);
+}
+
+.ods16-page .link-acao:focus {
+  outline: var(--foco-outline-largura, 3px) solid var(--ods16);
+  text-decoration: underline;
+}
+
+/* Personalização das visualizações comparativas */
+.ods16-page .visualizacao-comparativa::before {
+  background: var(--ods16-gradient);
+}
+
+.ods16-page .botao-periodo.ativo {
+  background-color: var(--ods16);
+  border-color: var(--ods16);
+}
+
+.ods16-page .botao-periodo:hover {
+  background-color: var(--ods16-light);
+}
+
+.ods16-page .botao-periodo:focus {
+  outline: var(--foco-outline-largura, 3px) solid var(--ods16-light);
+}
+
+/* Personalização do skip-to-content */
+.ods16-page .skip-to-content {
+  background: var(--ods16);
+}
+
+/* Personalização do indicador principal */
+.ods16-page #indicador-justica::before {
+  background: var(--ods16-gradient);
+}
+
+.ods16-page #indicador-justica h3 {
+  color: var(--ods16);
+  border-left: 3px solid var(--ods16);
+}
+
+.ods16-page #indicador-justica .valor-indicador {
+  color: var(--ods16);
+}
+
+.ods16-page #indicador-justica .texto-indicador-complementar {
+  background-color: var(--ods16-light);
+  border-left: 3px solid var(--ods16);
+}
+
+/* Personalização da legenda do mapa */
+.ods16-page .mapa-legenda {
+  background-color: var(--ods16-light);
+}
+
+/* Estilos específicos para legenda do mapa no ODS 16 */
+.ods16-page .legenda-item .legenda-cor[data-nivel="alto"] {
+  background-color: #005380;
+}
+
+.ods16-page .legenda-item .legenda-cor[data-nivel="medio"] {
+  background-color: #00689D;
+}
+
+.ods16-page .legenda-item .legenda-cor[data-nivel="baixo"] {
+  background-color: #0099CC;
+}
+
+.ods16-page .legenda-item .legenda-cor[data-nivel="muito-baixo"] {
+  background-color: #7FCCE3;
+}
+
+/* Estilos específicos para a seção de participação cidadã */
+.ods16-page .secao-participacao h3 {
+  color: var(--ods16);
+  border-bottom: 2px solid var(--ods16);
+}
+
+.ods16-page .btn-contribuir {
+  background-color: var(--ods16);
+  transition: var(--transicao-padrao, all 0.3s ease);
+}
+
+.ods16-page .btn-contribuir:hover,
+.ods16-page .btn-contribuir:focus {
+  background-color: #005380;
+  text-decoration: none;
+}
+
+.ods16-page .btn-contribuir:focus,
+.ods16-page .btn-participativo:focus {
+  outline: var(--foco-outline-largura, 3px) solid var(--ods16-light);
+  outline-offset: var(--foco-outline-offset, 3px);
+}
+
+/* Estilos do modal */
+.ods16-page .btn-enviar-denuncia {
+  background-color: var(--ods16);
+  transition: var(--transicao-padrao, all 0.3s ease);
+}
+
+.ods16-page .btn-enviar-denuncia:hover,
+.ods16-page .btn-enviar-denuncia:focus {
+  background-color: #005380;
+}
+
+.ods16-page .info-box {
+  background-color: var(--ods16-light);
+}
+
+.ods16-page .info-box i,
+.ods16-page .info-box p {
+  color: var(--ods16);
+}

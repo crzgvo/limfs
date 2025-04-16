@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Análise comparativa entre indicadores dos Objetivos de Desenvolvimento Sustentável (ODS) em Sergipe - LIMFS">
+  <title>Comparativo de Indicadores ODS | LIMFS - Laboratório de Inovação Mosaicos e Futuros</title>
+  
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" href="/reset.css">
+  <link rel="stylesheet" href="/styles/global-variables.css">
+  <link rel="stylesheet" href="/styles/typography.css">
+  <link rel="stylesheet" href="/styles/menu.css">
+  <link rel="stylesheet" href="/styles/footer.css">
+  <link rel="stylesheet" href="/styles/painel-ods.css">
+  <link rel="stylesheet" href="/styles/components/acessibilidade.css">
+  <link rel="stylesheet" href="/styles/components/dashboard-ods.css">
+  <link rel="stylesheet" href="/styles/components/dashboard-comparativo.css">
+  
+  <!-- Font Awesome para ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  
+  <!-- Chart.js para gráficos -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+</head>
+<body data-pagina="comparativo-ods">
+  <!-- Cabeçalho e navegação principal -->
+  <header class="cabecalho">
+    <div class="container">
+      <div class="logo-container">
+        <a href="/" class="logo">
+          <img src="/img/logo-icons-branco_Prancheta 1.png" alt="Logo LIMFS" width="180">
+        </a>
+      </div>
+      <nav class="navegacao-principal" aria-label="Navegação principal">
+        <ul class="menu">
+          <li><a href="/">Início</a></li>
+          <li class="ativo">
+            <a href="/painel-ods/">Painel ODS</a>
+            <ul class="submenu">
+              <li><a href="/painel-ods/ods1.html">ODS 1</a></li>
+              <li><a href="/painel-ods/ods2.html">ODS 2</a></li>
+              <li><a href="/painel-ods/ods3.html">ODS 3</a></li>
+              <!-- Outros ODS -->
+              <li class="ativo"><a href="/painel-ods/comparativo.html">Comparativo</a></li>
+            </ul>
+          </li>
+          <li><a href="/monitoramento/">Monitoramento</a></li>
+          <li><a href="/servicos/">Serviços</a></li>
+          <li><a href="/sobre/">Sobre</a></li>
+          <li><a href="/contato/">Contato</a></li>
+        </ul>
+      </nav>
+      <button class="menu-toggle" aria-label="Abrir menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </header>
+  
+  <!-- Conteúdo principal -->
+  <main class="pagina-comparativo">
+    <div class="container">
+      <div class="cabecalho-pagina">
+        <h1>Análise Comparativa de Indicadores ODS</h1>
+        <p class="descricao-pagina">Compare indicadores entre diferentes Objetivos de Desenvolvimento Sustentável para identificar correlações e tendências.</p>
+      </div>
+      
+      <!-- Seleção de ODS para comparação -->
+      <section class="selecao-ods">
+        <h2>Selecione os ODS para comparação</h2>
+        <p class="texto-instrucao">Escolha até 4 ODS para visualizar seus indicadores em conjunto</p>
+        
+        <div class="ods-grid" id="seletor-ods">
+          <!-- Script gerará os itens de seleção dinamicamente -->
+        </div>
+      </section>
+      
+      <!-- Seleção de indicadores -->
+      <section class="selecao-indicadores" id="area-indicadores" style="display: none;">
+        <h2>Indicadores selecionados</h2>
+        <p class="texto-instrucao">Escolha os indicadores específicos de cada ODS para comparação</p>
+        
+        <div class="ods-indicadores" id="lista-indicadores">
+          <!-- Script preencherá com base nos ODS selecionados -->
+        </div>
+        
+        <div class="acoes-comparativo">
+          <button id="btn-comparar" class="btn-primario" disabled>Gerar Comparativo</button>
+          <button id="btn-limpar" class="btn-secundario">Limpar Seleção</button>
+        </div>
+      </section>
+      
+      <!-- Área do dashboard comparativo -->
+      <section class="dashboard-area" id="area-dashboard" style="display: none;">
+        <div id="dashboard-comparativo">
+          <!-- O módulo visualizaçãoIntegrada.js preencherá este espaço -->
+        </div>
+      </section>
+      
+      <!-- Recomendações políticas baseadas em correlações -->
+      <section class="recomendacoes-area" id="area-recomendacoes" style="display: none;">
+        <h2>Recomendações de Políticas Integradas</h2>
+        <p class="texto-instrucao">Baseadas nas correlações identificadas entre os indicadores</p>
+        
+        <div class="recomendacoes-lista" id="lista-recomendacoes">
+          <!-- Script preencherá com base nas correlações detectadas -->
+        </div>
+      </section>
+    </div>
+  </main>
+  
+  <!-- Barra de acessibilidade -->
+  <div class="barra-acessibilidade" id="barra-acessibilidade">
+    <div class="container">
+      <h2>Opções de Acessibilidade</h2>
+      <div class="controles-acessibilidade">
+        <div class="controle-wrapper">
+          <input type="checkbox" id="toggle-contraste" aria-label="Ativar alto contraste">
+          <label for="toggle-contraste">Alto Contraste</label>
+        </div>
+        <div class="controle-wrapper">
+          <input type="checkbox" id="toggle-fonte-grande" aria-label="Aumentar fonte">
+          <label for="toggle-fonte-grande">Aumentar Fonte</label>
+        </div>
+        <div class="controle-wrapper">
+          <input type="checkbox" id="toggle-simplificado" aria-label="Modo simplificado">
+          <label for="toggle-simplificado">Modo Simplificado</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <button class="botao-alternar botao-acessibilidade" id="btn-acessibilidade" aria-label="Opções de acessibilidade">
+    <i class="fas fa-universal-access"></i>
+    <span>Acessibilidade</span>
+  </button>
+  
+  <!-- Rodapé -->
+  <footer class="rodape">
+    <div class="container">
+      <div class="rodape-grid">
+        <div class="rodape-coluna">
+          <h3>LIMFS</h3>
+          <p>Laboratório de Inovação Mosaicos e Futuros de Sergipe</p>
+          <p>Monitoramento dos Objetivos de Desenvolvimento Sustentável</p>
+        </div>
+        <div class="rodape-coluna">
+          <h3>Navegação</h3>
+          <ul>
+            <li><a href="/">Início</a></li>
+            <li><a href="/painel-ods/">Painel ODS</a></li>
+            <li><a href="/monitoramento/">Monitoramento</a></li>
+            <li><a href="/servicos/">Serviços</a></li>
+            <li><a href="/sobre/">Sobre</a></li>
+            <li><a href="/contato/">Contato</a></li>
+          </ul>
+        </div>
+        <div class="rodape-coluna">
+          <h3>Contato</h3>
+          <address>
+            <p><i class="fas fa-map-marker-alt"></i> Av. Desembargador Maynard, 1200<br>Aracaju, SE - CEP 49035-090</p>
+            <p><i class="fas fa-envelope"></i> contato@limfs.org.br</p>
+            <p><i class="fas fa-phone"></i> (79) 3198-2700</p>
+          </address>
+        </div>
+      </div>
+      <div class="rodape-inferior">
+        <p>&copy; 2025 LIMFS - Todos os direitos reservados</p>
+        <div class="redes-sociais">
+          <a href="https://facebook.com" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="https://twitter.com" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://instagram.com" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://youtube.com" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts JS -->
+  <script src="/js/menu.js"></script>
+  <script src="/js/footer.js"></script>
+  <script type="module" src="/js/comparativo-ods.js"></script>
+  <script src="/js/acessibilidade.js"></script>
+</body>
+</html>

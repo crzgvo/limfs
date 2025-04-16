@@ -1,0 +1,323 @@
+/**
+ * Estilos específicos para o ODS 12 - Consumo e Produção Responsáveis
+ * Aplicados apenas na página do ODS 12
+ */
+
+/* Importação da base de estilos ODS */
+@import url('./base-ods.css');
+
+/* Estilos específicos para a página ODS 12 */
+.ods12-page {
+  /* Cores específicas ODS 12 */
+  --cor-primaria: var(--ods12-cor-primaria);
+  --cor-secundaria: var(--ods12-cor-secundaria);
+  --sombra-hover: var(--ods12-sombra-hover);
+}
+
+/* Cabeçalho e título */
+.ods12-page .ods-header h1 {
+  color: var(--cor-primaria);
+}
+
+.ods12-header {
+  background: var(--ods12);
+  color: var(--white);
+  font-family: var(--font-primary);
+}
+
+.ods12-content {
+  background: var(--cinza-100);
+  color: var(--cor-texto);
+  font-family: var(--font-primary);
+}
+
+/* Estilizações específicas para cards de indicadores */
+.ods12-page .indicador-card {
+  border-left: 4px solid var(--cor-primaria);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-left 0.3s ease;
+}
+
+.ods12-page .indicador-card:hover,
+.ods12-page .indicador-card:focus {
+  border-left: 8px solid var(--cor-primaria);
+  transform: translateY(-5px);
+  box-shadow: var(--sombra-hover);
+}
+
+/* Personalização dos botões */
+.ods12-page .btn-saiba-mais {
+  background-color: var(--cor-primaria);
+}
+
+.ods12-page .btn-saiba-mais:hover,
+.ods12-page .btn-saiba-mais:focus {
+  background-color: #a77a28;
+  transform: translateY(-2px);
+}
+
+/* Estilizações específicas para seções */
+.ods12-page .ods-explicativo .info-card {
+  border-left: 4px solid var(--cor-primaria);
+  background-color: var(--cor-secundaria);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.ods12-page .destaque-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 15px;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+}
+
+.ods12-page .destaque-info i {
+  font-size: 2rem;
+  color: var(--cor-primaria);
+}
+
+/* Botões específicos do ODS 12 */
+.ods12-page .btn-exportar {
+  background-color: var(--cor-primaria);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+.ods12-page .btn-exportar:hover,
+.ods12-page .btn-exportar:focus {
+  background-color: #a77a28;
+  transform: translateY(-2px);
+}
+
+.ods12-page .botao-exportar-indicador {
+  background-color: transparent;
+  color: var(--cor-primaria);
+  border: 1px solid var(--cor-primaria);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ods12-page .botao-exportar-indicador:hover,
+.ods12-page .botao-exportar-indicador:focus {
+  background-color: var(--cor-primaria);
+  color: white;
+  transform: rotate(360deg);
+}
+
+/* Customização do valor principal */
+.ods12-page .valor-principal {
+  color: var(--cor-primaria);
+  animation: pulsar 1s ease-in-out;
+}
+
+/* Estilização da seção de mapa */
+.ods12-page .mapa-interativo {
+  background-color: var(--cor-secundaria);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 30px 0;
+}
+
+.ods12-page .mapa-placeholder {
+  background-color: white;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.ods12-page .mapa-placeholder i {
+  font-size: 3rem;
+  color: var(--cor-primaria);
+  margin-bottom: 15px;
+}
+
+.ods12-page .mapa-legenda {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.ods12-page .legenda-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9rem;
+}
+
+.ods12-page .cor-legenda {
+  width: 15px;
+  height: 15px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.ods12-page .coleta-seletiva {
+  background-color: #BF8B2E;
+}
+
+.ods12-page .cooperativas {
+  background-color: #a77a28;
+}
+
+.ods12-page .ecopontos {
+  background-color: #d39c33;
+}
+
+.ods12-page .compostagem {
+  background-color: #e7ad45;
+}
+
+/* Customização da seção de compartilhamento */
+.ods12-page .compartilhamento,
+.ods12-page .participacao-cidada {
+  border: 1px solid rgba(191, 139, 46, 0.3);
+  background-color: var(--cor-secundaria);
+}
+
+.ods12-page .btn-contribuir,
+.ods12-page .btn-participativo {
+  border: 1px solid var(--cor-primaria);
+  background-color: white;
+}
+
+.ods12-page .btn-contribuir:hover,
+.ods12-page .btn-participativo:hover,
+.ods12-page .btn-contribuir:focus,
+.ods12-page .btn-participativo:focus {
+  background-color: var(--cor-primaria);
+  color: white;
+}
+
+/* Modal customizado */
+.ods12-page .modal-conteudo {
+  border-top: 5px solid var(--cor-primaria);
+}
+
+.ods12-page .info-box {
+  background-color: var(--cor-secundaria);
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.ods12-page .info-box i {
+  color: var(--cor-primaria);
+  font-size: 1.5rem;
+}
+
+.ods12-page .btn-enviar-denuncia {
+  background-color: var(--cor-primaria);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.ods12-page .btn-enviar-denuncia:hover,
+.ods12-page .btn-enviar-denuncia:focus {
+  background-color: #a77a28;
+}
+
+/* Recomendações específicas */
+.ods12-page .recomendacao-item {
+  border-left: 4px solid var(--cor-primaria);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-left 0.3s ease;
+}
+
+.ods12-page .recomendacao-item:hover {
+  border-left: 8px solid var(--cor-primaria);
+}
+
+.ods12-page .links-documentos {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.ods12-page .link-documento-oficial {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background-color: var(--cor-secundaria);
+  color: #333;
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.ods12-page .link-documento-oficial:hover,
+.ods12-page .link-documento-oficial:focus {
+  background-color: var(--cor-primaria);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Efeitos de acessibilidade específicos para foco */
+.ods12-page a:focus,
+.ods12-page button:focus {
+  outline: 3px solid rgba(191, 139, 46, 0.5);
+}
+
+/* Animações específicas */
+@keyframes aparecer-ods12 {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ods12-page .animado {
+  animation: aparecer-ods12 0.5s ease-out forwards;
+}
+
+/* Responsividade específica */
+@media (max-width: 768px) {
+  .ods12-page .destaque-info {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .ods12-page .links-documentos {
+    flex-direction: column;
+  }
+}

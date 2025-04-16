@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Dashboard ODS 16 - Paz, Justiça e Instituições Eficazes - Indicadores para Sergipe">
+    <meta name="author" content="LIMFS - Laboratório de Indicadores para Monitoramento das Famílias Sergipanas">
+    <meta name="theme-color" content="#00689D">
+    
+    <!-- Política de segurança de conteúdo -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://cdnjs.cloudflare.com 'unsafe-inline';
+        style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://unpkg.com 'unsafe-inline';
+        font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+        img-src 'self' data: https://unpkg.com https://tile.openstreetmap.org;
+        connect-src 'self' https://apisidra.ibge.gov.br https://servicodados.ibge.gov.br https://dadosabertos.aneel.gov.br https://a.tile.openstreetmap.org https://b.tile.openstreetmap.org https://c.tile.openstreetmap.org;
+        object-src 'none';
+        base-uri 'self';
+        form-action 'self';
+        block-all-mixed-content;
+    ">
+    
+    <!-- Preconnect para melhorar performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://unpkg.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://a.tile.openstreetmap.org">
+    
+    <title>ODS 16 - Paz, Justiça e Instituições Eficazes | Mosaicos Futuros</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <!-- Dependências CSS ODS -->
+    <link rel="stylesheet" href="../styles/ods-colors.css">
+    <link rel="stylesheet" href="../styles/components/dashboard-ods.css">
+    <link rel="stylesheet" href="../styles/components/acessibilidade.css">
+    <link rel="stylesheet" href="../styles/components/ods16.css">
+    <link rel="icon" type="image/png" href="../img/logo-icons-coloridos_Prancheta 1.png">
+    
+    <!-- Chart.js para gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    
+    <!-- Leaflet.js para mapas geográficos -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- Tippy.js para tooltips -->
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/themes/light-border.css"/>
+</head>
+
+<body data-pagina="ods16" class="ods16-page ods-page">
+    <a href="#conteudo-principal" id="pular-para-conteudo" class="skip-to-content">Pular para o conteúdo principal</a>
+
+    <!-- Cabeçalho -->
+    <header id="cabecalho">
+        <!-- Menu será carregado via JavaScript -->
+        <div id="menu-container"></div>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <main id="conteudo-principal">
+        <div class="container-principal">
+            <!-- Header ODS 16 -->
+            <div class="header-ods16 header-ods" aria-labelledby="titulo-ods16">
+                <div class="header-content">
+                    <span class="ods-numero" aria-hidden="true">16</span>
+                    <h1 id="titulo-ods16">Paz, Justiça e Instituições Eficazes</h1>
+                    <p>Promover sociedades pacíficas e inclusivas para o desenvolvimento sustentável, proporcionar o acesso à justiça para todos e construir instituições eficazes, responsáveis e inclusivas em todos os níveis</p>
+                    <div class="meta-ods">Meta até 2030: Reduzir significativamente todas as formas de violência e as taxas de mortalidade relacionada</div>
+                </div>
+            </div>
+            
+            <!-- Filtros Interativos -->
+            <div class="filtros-container" aria-labelledby="titulo-filtros">
+                <h2 id="titulo-filtros" class="visually-hidden">Filtros de Dados</h2>
+                <div class="filtro-grupo">
+                    <label for="filtro-regiao" class="filtro-label">Região:</label>
+                    <select id="filtro-regiao" class="filtro-select" aria-describedby="descricao-filtro-regiao">
+                        <option value="todas">Todas as regiões</option>
+                        <option value="grande-aracaju">Grande Aracaju</option>
+                        <option value="agreste">Agreste</option>
+                        <option value="sertao">Sertão</option>
+                        <option value="sul">Sul</option>
+                    </select>
+                    <span id="descricao-filtro-regiao" class="visually-hidden">Filtrar dados por região de Sergipe</span>
+                </div>
+                
+                <div class="filtro-grupo">
+                    <label for="filtro-periodo" class="filtro-label">Período:</label>
+                    <select id="filtro-periodo" class="filtro-select" aria-describedby="descricao-filtro-periodo">
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                        <option value="todos">Todos os anos</option>
+                    </select>
+                    <span id="descricao-filtro-periodo" class="visually-hidden">Filtrar dados por período anual</span>
+                </div>
+                
+                <div class="filtro-grupo">
+                    <label for="filtro-indicador" class="filtro-label">Indicador:</label>
+                    <select id="filtro-indicador" class="filtro-select" aria-describedby="descricao-filtro-indicador">
+                        <option value="todos">Todos os indicadores</option>
+                        <option value="violencia">Índice de violência</option>
+                        <option value="seguranca">Segurança pública</option>
+                        <option value="inclusao">Inclusão social</option>
+                        <option value="judiciario">Acesso à justiça</option>
+                    </select>
+                    <span id="descricao-filtro-indicador" class="visually-hidden">Filtrar por tipo de indicador</span>
+                </div>
+                
+                <button id="aplicar-filtros" class="botao-filtrar">
+                    <i class="fas fa-filter" aria-hidden="true"></i>
+                    Aplicar Filtros
+                </button>
+            </div>
+
+            <!-- Container para o dashboard -->
+            <div id="dashboard-ods16" class="dashboard-container" data-ods-id="16" data-indicador-principal="justica">
+                <!-- O dashboard será carregado dinamicamente via JavaScript -->
+                <div class="loading-container">
+                    <div class="loading-spinner" role="status" aria-label="Carregando dados"></div>
+                    <p>Carregando dashboard...</p>
+                </div>
+            </div>
+            
+            <!-- Container para o mapa geográfico -->
+            <div class="mapa-container">
+                <h3>Mapa de Acesso à Justiça em Sergipe</h3>
+                <div id="mapa-sergipe" class="mapa-sergipe" aria-label="Mapa de índice de acesso à justiça nos municípios de Sergipe" role="img"></div>
+                <div class="mapa-legenda" aria-label="Legenda do mapa">
+                    <h4 class="visually-hidden">Legenda</h4>
+                    <div class="legenda-item">
+                        <div class="legenda-cor" data-nivel="alto"></div>
+                        <span>Alto acesso</span>
+                    </div>
+                    <div class="legenda-item">
+                        <div class="legenda-cor" data-nivel="medio"></div>
+                        <span>Médio acesso</span>
+                    </div>
+                    <div class="legenda-item">
+                        <div class="legenda-cor" data-nivel="baixo"></div>
+                        <span>Baixo acesso</span>
+                    </div>
+                    <div class="legenda-item">
+                        <div class="legenda-cor" data-nivel="muito-baixo"></div>
+                        <span>Muito baixo acesso</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Análises Comparativas -->
+            <div class="visualizacao-comparativa">
+                <h3>Análise Comparativa: Índices de Segurança ao Longo do Tempo</h3>
+                <div id="grafico-comparativo" class="grafico-comparativo-container" aria-label="Gráfico de evolução dos índices de segurança pública em Sergipe"></div>
+                <div class="controles-grafico">
+                    <button class="botao-periodo ativo" data-periodo="1-ano">Último ano</button>
+                    <button class="botao-periodo" data-periodo="5-anos">5 anos</button>
+                    <button class="botao-periodo" data-periodo="10-anos">10 anos</button>
+                </div>
+            </div>
+            
+            <!-- Recomendações de políticas -->
+            <div class="secao-recomendacoes">
+                <h3>Recomendações de Políticas Públicas</h3>
+                <div class="lista-recomendacoes">
+                    <div class="card-recomendacao">
+                        <h4>Fortalecimento da Segurança Pública</h4>
+                        <p>Implementar políticas de capacitação contínua para forças policiais com foco no policiamento comunitário e na prevenção da violência em áreas vulneráveis.</p>
+                    </div>
+                    <div class="card-recomendacao">
+                        <h4>Acesso à Justiça para Comunidades Vulneráveis</h4>
+                        <p>Criar núcleos de assistência jurídica gratuita em regiões com baixo acesso ao judiciário, garantindo atendimento especializado a comunidades periféricas.</p>
+                    </div>
+                    <div class="card-recomendacao">
+                        <h4>Monitoramento e Prevenção da Violência</h4>
+                        <p>Desenvolver sistemas integrados de dados sobre violência e criminalidade que permitam ações direcionadas de prevenção baseadas em evidências.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ações de impacto -->
+            <div class="secao-acoes-impacto">
+                <h3>Ações de Impacto</h3>
+                <div class="lista-acoes">
+                    <div class="card-acao">
+                        <h4>Justiça Itinerante</h4>
+                        <p>Programa que leva serviços judiciais a comunidades remotas e de difícil acesso, como mutirões de conciliação, registro civil e orientação jurídica.</p>
+                        <a href="#" class="link-acao">Conheça a iniciativa <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="card-acao">
+                        <h4>Mediação de Conflitos Comunitários</h4>
+                        <p>Formação de mediadores comunitários para resolução pacífica de conflitos, evitando sua judicialização e promovendo cultura de paz nos bairros.</p>
+                        <a href="#" class="link-acao">Saiba como participar <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="card-acao">
+                        <h4>Transparência e Controle Social</h4>
+                        <p>Portal integrado de transparência para monitoramento cidadão das políticas de segurança pública e acompanhamento em tempo real de dados de violência.</p>
+                        <a href="#" class="link-acao">Acessar portal <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Seção de participação cidadã -->
+            <div class="secao-participacao">
+                <h3>Participe</h3>
+                <p class="descricao-participacao">Contribua com ideias e projetos para melhorar a segurança, o acesso à justiça e a capacidade institucional em Sergipe.</p>
+                
+                <div class="opcoes-participacao">
+                    <a href="#" class="btn-contribuir">
+                        <i class="fas fa-lightbulb" aria-hidden="true"></i>
+                        Enviar sugestão de política
+                    </a>
+                    
+                    <button class="btn-participativo" id="btn-abrir-denuncia">
+                        <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
+                        Reportar violação de direitos
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Modal para denúncias -->
+    <div id="modal-denuncia" class="modal" aria-hidden="true">
+        <div class="modal-conteudo" role="dialog" aria-labelledby="titulo-modal-denuncia">
+            <span class="fechar-modal" id="fechar-modal" aria-label="Fechar formulário">&times;</span>
+            <h2 id="titulo-modal-denuncia">Reportar Violação de Direitos</h2>
+            
+            <div class="info-box">
+                <i class="fas fa-info-circle" aria-hidden="true"></i>
+                <p>As informações enviadas serão tratadas com confidencialidade e encaminhadas aos órgãos competentes. Não é necessário se identificar.</p>
+            </div>
+            
+            <form class="form-denuncia" id="form-denuncia">
+                <div class="form-grupo">
+                    <label for="tipo-violacao">Tipo de violação:</label>
+                    <select id="tipo-violacao" required>
+                        <option value="">Selecione o tipo</option>
+                        <option value="violencia">Violência</option>
+                        <option value="discriminacao">Discriminação</option>
+                        <option value="abuso-autoridade">Abuso de autoridade</option>
+                        <option value="corrupcao">Corrupção</option>
+                        <option value="outro">Outro</option>
+                    </select>
+                </div>
+                
+                <div class="form-grupo">
+                    <label for="localizacao">Localização:</label>
+                    <input type="text" id="localizacao" placeholder="Bairro ou município onde ocorreu">
+                </div>
+                
+                <div class="form-grupo">
+                    <label for="descricao-ocorrencia">Descrição da ocorrência:</label>
+                    <textarea id="descricao-ocorrencia" rows="5" placeholder="Descreva o que aconteceu" required></textarea>
+                </div>
+                
+                <div class="form-contato">
+                    <p>Contato (opcional):</p>
+                    <div>
+                        <input type="email" id="email-contato" placeholder="Email para contato">
+                    </div>
+                    <div class="form-checkbox">
+                        <input type="checkbox" id="contato-anonimo">
+                        <label for="contato-anonimo">Quero permanecer anônimo</label>
+                    </div>
+                </div>
+                
+                <div class="form-acoes">
+                    <button type="submit" class="btn-enviar-denuncia">
+                        <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                        Enviar denúncia
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer id="rodape">
+        <!-- Rodapé será carregado via JavaScript -->
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/menu.js" type="module"></script>
+    <script src="../js/footer.js" type="module"></script>
+    <script type="module">
+        /**
+         * Script principal do Dashboard ODS 16 - Paz, Justiça e Instituições Eficazes
+         */
+        import { inicializarDashboard } from '../js/modules/dashboardTemplate.js';
+        import configODS16 from '../js/modules/ods16Config.js';
+        import { criarGraficoIndicador } from '../js/components/graficoIndicador.js';
+        import { carregarMapaODS16 } from '../js/components/mapaOds16.js';
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // Inicializa o dashboard com a configuração específica do ODS 16
+                const resultado = await inicializarDashboard('#dashboard-ods16', configODS16);
+                
+                if (resultado) {
+                    console.log('Dashboard ODS 16 inicializado com sucesso');
+                    
+                    // Remove o spinner de carregamento
+                    const loadingElement = document.querySelector('.loading-container');
+                    if (loadingElement) {
+                        loadingElement.style.display = 'none';
+                    }
+                    
+                    // Inicializa o gráfico comparativo
+                    const ctx = document.getElementById('grafico-comparativo').getContext('2d');
+                    const labels = ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'];
+                    const dados = [38.2, 42.5, 45.1, 47.8, 51.2, 53.5, 56.7, 59.1, 62.3];
+                    
+                    const graficoComparativo = criarGraficoIndicador(ctx, labels, dados, {
+                        titulo: 'Índice de Segurança Pública Sergipano',
+                        corPrimaria: '#00689D',
+                        formatoValor: 'pontos'
+                    });
+                    
+                    // Inicializa o mapa geográfico
+                    const dadosMunicipios = {
+                        'Aracaju': 76.5,
+                        'São Cristóvão': 62.3,
+                        'Nossa Senhora do Socorro': 55.7,
+                        'Lagarto': 48.2,
+                        'Estância': 51.9,
+                        'Itabaiana': 54.1,
+                        // Mais dados seriam carregados dinamicamente
+                    };
+                    
+                    await carregarMapaODS16('mapa-sergipe', dadosMunicipios);
+                    
+                    // Configuração dos botões de período do gráfico
+                    document.querySelectorAll('.botao-periodo').forEach(botao => {
+                        botao.addEventListener('click', function() {
+                            document.querySelectorAll('.botao-periodo').forEach(b => b.classList.remove('ativo'));
+                            this.classList.add('ativo');
+                            
+                            // Aqui atualizaria o gráfico baseado no período selecionado
+                            // A função abaixo seria implementada no módulo graficoIndicador.js
+                            // atualizarGraficoPorPeriodo(graficoComparativo, this.dataset.periodo);
+                        });
+                    });
+                    
+                    // Configuração do botão de filtros
+                    document.getElementById('aplicar-filtros').addEventListener('click', function() {
+                        const regiao = document.getElementById('filtro-regiao').value;
+                        const periodo = document.getElementById('filtro-periodo').value;
+                        const indicador = document.getElementById('filtro-indicador').value;
+                        
+                        console.log('Filtros aplicados:', { regiao, periodo, indicador });
+                        // Aqui atualizaria os dados com base nos filtros
+                        // atualizarDadosFiltrados(regiao, periodo, indicador);
+                    });
+                    
+                    // Modal de denúncia
+                    const modal = document.getElementById("modal-denuncia");
+                    const btnAbrirModal = document.getElementById("btn-abrir-denuncia");
+                    const btnFecharModal = document.getElementById("fechar-modal");
+                    const formDenuncia = document.getElementById("form-denuncia");
+                    
+                    btnAbrirModal.addEventListener("click", () => {
+                        modal.style.display = "block";
+                        modal.setAttribute("aria-hidden", "false");
+                        document.body.style.overflow = "hidden"; // Impede rolagem da página
+                    });
+                    
+                    btnFecharModal.addEventListener("click", () => {
+                        modal.style.display = "none";
+                        modal.setAttribute("aria-hidden", "true");
+                        document.body.style.overflow = "auto";
+                    });
+                    
+                    window.addEventListener("click", (e) => {
+                        if (e.target === modal) {
+                            modal.style.display = "none";
+                            modal.setAttribute("aria-hidden", "true");
+                            document.body.style.overflow = "auto";
+                        }
+                    });
+                    
+                    formDenuncia.addEventListener("submit", (e) => {
+                        e.preventDefault();
+                        // Aqui processaria o envio do formulário
+                        alert("Denúncia enviada com sucesso. Obrigado pela sua contribuição.");
+                        modal.style.display = "none";
+                        modal.setAttribute("aria-hidden", "true");
+                        document.body.style.overflow = "auto";
+                        formDenuncia.reset();
+                    });
+                    
+                    // Inicializa tooltips para melhor experiência do usuário
+                    tippy('[data-tippy-content]', {
+                        theme: 'light-border',
+                        animation: 'scale',
+                        placement: 'top',
+                    });
+                }
+            } catch (erro) {
+                console.error('Erro ao inicializar dashboard ODS 16:', erro);
+                
+                // Exibe mensagem de erro
+                document.getElementById('dashboard-ods16').innerHTML = `
+                    <div class="erro-dashboard" role="alert">
+                        <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+                        <h2>Não foi possível carregar o dashboard</h2>
+                        <p>Ocorreu um erro ao carregar os dados: ${erro.message}</p>
+                        <button onclick="window.location.reload()" class="btn-reload">
+                            <i class="fas fa-sync" aria-hidden="true"></i> Recarregar
+                        </button>
+                    </div>
+                `;
+            }
+        });
+    </script>
+    
+    <style>
+        /* Estilos para modal de denúncia e seção de participação cidadã */
+        .secao-participacao {
+            margin: 30px 0;
+            background-color: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .descricao-participacao {
+            max-width: 800px;
+            margin: 0 auto 20px;
+            font-size: 1.1rem;
+        }
+        
+        .opcoes-participacao {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .btn-contribuir {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 25px;
+            color: white;
+            background-color: var(--ods16);
+            text-decoration: none;
+            border-radius: 4px;
+            gap: 8px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-contribuir:hover {
+            background-color: #005380;
+        }
+        
+        .btn-participativo {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 25px;
+            color: #333;
+            background-color: #f0f0f0;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            gap: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-participativo:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Modal de denúncia */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            overflow-y: auto;
+        }
+        
+        .modal-conteudo {
+            background-color: #fff;
+            width: 80%;
+            max-width: 600px;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .fechar-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #777;
+        }
+        
+        .fechar-modal:hover {
+            color: black;
+        }
+        
+        .info-box {
+            display: flex;
+            background-color: #e6f6ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            gap: 15px;
+            align-items: flex-start;
+        }
+        
+        .info-box i {
+            color: #0277bd;
+            font-size: 20px;
+            margin-top: 2px;
+        }
+        
+        .info-box p {
+            margin: 0;
+            color: #0277bd;
+        }
+
+        .form-grupo {
+            margin-bottom: 20px;
+        }
+        
+        .form-grupo label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-grupo input[type="text"],
+        .form-grupo input[type="email"],
+        .form-grupo select,
+        .form-grupo textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-grupo textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .form-grupo select {
+            background-color: white;
+        }
+        
+        .form-contato {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .form-contato p {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .form-contato div {
+            margin-bottom: 10px;
+        }
+        
+        .form-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .form-checkbox input {
+            margin: 0;
+        }
+        
+        .form-acoes {
+            margin-top: 25px;
+            text-align: center;
+        }
+        
+        .btn-enviar-denuncia {
+            background-color: var(--ods16);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+        
+        .btn-enviar-denuncia:hover {
+            background-color: #005380;
+        }
+        
+        .btn-enviar-denuncia i {
+            margin-right: 8px;
+        }
+        
+        /* Botões de compartilhamento social */
+        .botoes-sociais {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .btn-social {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            color: #555;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+        
+        .btn-social:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
+        .btn-social.twitter {
+            background-color: #1DA1F2;
+            color: white;
+        }
+        
+        .btn-social.facebook {
+            background-color: #4267B2;
+            color: white;
+        }
+        
+        .btn-social.whatsapp {
+            background-color: #25D366;
+            color: white;
+        }
+        
+        .btn-social.email {
+            background-color: #DB4437;
+            color: white;
+        }
+
+        .links-documentos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+            justify-content: center;
+        }
+        
+        .link-documento-oficial {
+            display: inline-flex;
+            align-items: center;
+            color: var(--ods16);
+            padding: 8px 15px;
+            border: 1px solid var(--ods16);
+            border-radius: 4px;
+            font-size: 0.9rem;
+            text-decoration: none;
+            gap: 5px;
+        }
+        
+        .link-documento-oficial:hover {
+            background-color: var(--ods16-light);
+        }
+        
+        .destaque-info {
+            display: flex;
+            align-items: center;
+            background-color: rgba(0, 104, 157, 0.1);
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            gap: 15px;
+        }
+        
+        .destaque-info i {
+            font-size: 2rem;
+            color: #00689D;
+        }
+
+        /* Melhoria de foco para acessibilidade */
+        a:focus,
+        button:focus,
+        input:focus,
+        select:focus,
+        textarea:focus {
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 1rem;
+    }
+    
+    .btn-enviar-denuncia:hover {
+      background-color: #005380;
+    }
+    
+    .feedback-mensagem {
+      margin-top: 20px;
+      padding: 15px;
+      text-align: center;
+      border-radius: 4px;
+      background-color: #e8f4f8;
+      color: #0056b3;
+    }
+    
+    /* Classes para acessibilidade */
+    .screen-reader-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+    
+    .pular-link {
+      position: absolute;
+      left: -999px;
+      width: 1px;
+      height: 1px;
+      top: auto;
+      background-color: #00689D;
+      color: white;
+      padding: 10px 15px;
+      z-index: 999;
+      transition: left 0s;
+    }
+    
+    .pular-link:focus {
+      left: 10px;
+      top: 10px;
+      width: auto;
+      height: auto;
+    }
+    
+    /* Melhoria de foco para acessibilidade */
+    a:focus,
+    button:focus,
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: 3px solid rgba(0, 104, 157, 0.5);
+      outline-offset: 2px;
+    }
+    
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .botoes-sociais, .opcoes-participacao {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .btn-social, .btn-contribuir, .btn-participativo {
+        width: 80%;
+      }
+      
+      .modal-conteudo {
+        width: 95%;
+        margin: 10% auto;
+        padding: 20px;
+      }
+      
+      .destaque-info {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .links-documentos {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+
+  <!-- Script de tratamento de erros e modal -->
+  <script>
+    // Inicialização de tratamento de erros para componentes críticos
+    document.addEventListener('DOMContentLoaded', () => {
+      // Tratamento global de erros
+      window.addEventListener('error', (event) => {
+        console.error('Erro capturado globalmente:', event.error);
+        const errorMessage = document.getElementById('error-message');
+        if (errorMessage) {
+          errorMessage.textContent = 'Ocorreu um erro ao carregar os dados. Por favor, recarregue a página ou tente novamente mais tarde.';
+          errorMessage.style.display = 'block';
+          document.getElementById('loading-indicator').style.display = 'none';
+        }
+      });
+      
+      // Simular tempo limite para carregamento
+      setTimeout(() => {
+        const loadingIndicator = document.getElementById('loading-indicator');
+        if (loadingIndicator && loadingIndicator.style.display !== 'none') {
+          loadingIndicator.style.display = 'none';
+          document.getElementById('error-message').textContent = 'Tempo limite excedido ao carregar os dados. Verifique sua conexão ou tente novamente mais tarde.';
+          document.getElementById('error-message').style.display = 'block';
+        }
+      }, 30000); // 30 segundos de timeout
+
+      // Funcionalidade do modal de denúncia
+      const modalDenuncia = document.getElementById('modal-denuncia');
+      const btnDenunciar = document.getElementById('btn-denunciar');
+      const btnFecharDenuncia = document.getElementById('fechar-denuncia');
+      const formDenuncia = document.getElementById('form-denuncia');
+      const feedbackDenuncia = document.getElementById('feedback-denuncia');
+      const checkAnonima = document.getElementById('anonima');
+      
+      // Abrir modal ao clicar no botão
+      if (btnDenunciar) {
+        btnDenunciar.addEventListener('click', () => {
+          modalDenuncia.style.display = 'block';
+          document.querySelector('#modal-denuncia h2').focus();
+        });
+      }
+      
+      // Fechar modal ao clicar no X
+      if (btnFecharDenuncia) {
+        btnFecharDenuncia.addEventListener('click', () => {
+          modalDenuncia.style.display = 'none';
+        });
+      }
+      
+      // Fechar modal ao clicar fora dele
+      window.addEventListener('click', (event) => {
+        if (event.target === modalDenuncia) {
+          modalDenuncia.style.display = 'none';
+        }
+      });
+      
+      // Alternar campos de contato ao marcar como anônima
+      if (checkAnonima) {
+        const camposContato = document.querySelector('.form-contato');
+        
+        checkAnonima.addEventListener('change', () => {
+          if (checkAnonima.checked) {
+            camposContato.style.opacity = '0.5';
+            camposContato.style.pointerEvents = 'none';
+            document.getElementById('nome-denunciante').value = '';
+            document.getElementById('email-denunciante').value = '';
+          } else {
+            camposContato.style.opacity = '1';
+            camposContato.style.pointerEvents = 'auto';
+          }
+        });
+      }
+      
+      // Submeter formulário de denúncia
+      if (formDenuncia) {
+        formDenuncia.addEventListener('submit', (event) => {
+          event.preventDefault();
+          
+          // Simulação de envio bem-sucedido (em produção, você enviaria para o servidor)
+          formDenuncia.style.display = 'none';
+          feedbackDenuncia.textContent = 'Obrigado por sua denúncia! Ela foi registrada e será analisada pelos órgãos competentes.';
+          feedbackDenuncia.style.display = 'block';
+          
+          // Fechar modal após 5 segundos
+          setTimeout(() => {
+            modalDenuncia.style.display = 'none';
+            formDenuncia.style.display = 'block';
+            feedbackDenuncia.style.display = 'none';
+            formDenuncia.reset();
+          }, 5000);
+        });
+      }
+      
+      // Botão do fórum de discussão
+      const btnForum = document.getElementById('btn-forum');
+      if (btnForum) {
+        btnForum.addEventListener('click', () => {
+          // Redirecionamento para o fórum (em produção)
+          // window.location.href = '/forum/paz-justica';
+          
+          // Simulação de alerta para este exemplo
+          alert('Você será redirecionado para o fórum de discussão sobre Paz e Justiça.');
+        });
+      }
+    });
+  </script>
+</body>
+</html>

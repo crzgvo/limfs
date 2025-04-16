@@ -1,0 +1,30 @@
+/**
+ * Arquivo principal de estilos do Painel ODS Sergipe
+ * Importa e organiza todos os outros arquivos CSS
+ */
+
+/* Reset e base */
+@import './reset.css';
+
+/* Estilos principais */
+@import './main.css';
+
+/* Componentes */
+@import './components/buttons.css';
+@import './components/cards.css';
+@import './components/charts.css';
+@import './components/forms.css';
+@import './components/navigation.css';
+
+/* Páginas específicas */
+@import './pages/home.css';
+@import './pages/dashboard.css';
+@import './pages/ods-specific.css';
+@import './pages/comparative.css';
+
+/* Utilitários */
+@import './utils.css';
+
+/* Temas e acessibilidade */
+@import './themes.css';
+@import './accessibility.css';

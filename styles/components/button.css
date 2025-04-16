@@ -1,0 +1,42 @@
+/* Componente de Botão Reutilizável LIMFS */
+.button {
+  display: inline-block;
+  padding: 0.6em 1.5em;
+  border-radius: 4px;
+  border: none;
+  background: var(--cor-primaria);
+  color: var(--cor-texto-invertido);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  text-align: center;
+  text-decoration: none;
+}
+.button:hover, .button:focus {
+  background: var(--cor-secundaria);
+  color: var(--cor-texto-invertido);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+.button--secundario {
+  background: var(--cor-secundaria);
+  color: var(--cor-texto-invertido);
+}
+.button--sucesso {
+  background: var(--cor-sucesso);
+  color: var(--cor-texto-invertido);
+}
+.button--erro {
+  background: var(--cor-erro);
+  color: var(--cor-texto-invertido);
+}
+.button--cinza {
+  background: var(--cinza-300);
+  color: var(--cor-texto);
+}
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

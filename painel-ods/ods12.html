@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Dashboard ODS 12 - Consumo e Produção Responsáveis | LIMFS - Laboratório de Indicadores para Monitoramento das Famílias Sergipanas">
+  <meta name="description" content="Dashboard ODS12 - Consumo e Produção Responsáveis | LIMFS - Laboratório de Indicadores para Monitoramento das Famílias Sergipanas">
   <!-- Content Security Policy adicionada -->
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
@@ -19,20 +19,34 @@
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="Referrer-Policy" content="no-referrer">
-  <title>ODS 12 - Consumo e Produção Responsáveis | LIMFS</title>
+  <title>ODS12 - Consumo e Produção Responsáveis | LIMFS</title>
+  
+  <!-- CSS Global e Específico -->
+  <link rel="stylesheet" href="../styles/global-fonts.css">
   <link rel="stylesheet" href="../styles/global-variables.css">
+  <link rel="stylesheet" href="../styles/components/ods-layout-global.css">
+  <link rel="stylesheet" href="../styles/components/ods12-colors.css">
   <link rel="stylesheet" href="../styles/painel-ods.css">
+  
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  
+  <!-- Fonte Public Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script type="module" src="../js/painel-ods.js"></script>
+  
   <!-- Metadados para compartilhamento social -->
-  <meta property="og:title" content="ODS 12 - Consumo e Produção Responsáveis | LIMFS">
-  <meta property="og:description" content="Conheça os indicadores de consumo e produção sustentáveis em Sergipe">
+  <meta property="og:title" content="ODS12 - Consumo e Produção Responsáveis | LIMFS">
+  <meta property="og:description" content="Conheça os indicadores de Consumo e Produção Responsáveis em Sergipe">
   <meta property="og:image" content="../img/logo-icons-coloridos-12.png">
   <meta property="og:url" content="https://www.mosaicosfuturos.com/painel-ods/ods12.html">
-  <meta name="twitter:card" content="summary_large_image">
-</head>
-<body data-pagina="ods12">
+  <meta name="twitter:card" content="summary_large_image"></head>
+<body data-pagina="ods12" class="ods12-page ods12-page ods-page">
   <a href="#conteudo-principal" class="pular-link">Pular para o conteúdo principal</a>
   <header>
     <div class="container">
@@ -48,8 +62,8 @@
   </header>
 
   <main id="conteudo-principal" role="main" class="container">
-    <div class="ods-header">
-      <img src="../img/logo-icons-coloridos-12.png" alt="Ícone ODS 12" class="ods-icon">
+    <div class="ods-header header-ods12">
+      <img src="../img/logo-icons-coloridos-12.png" alt="Ícone ODS 12" class="ods-icon" width="80" height="80" loading="eager">
       <div>
         <h1 id="ods-titulo">ODS 12 - Consumo e Produção Responsáveis</h1>
         <p id="ods-descricao">Assegurar padrões de produção e de consumo sustentáveis</p>
@@ -59,7 +73,7 @@
 
     <!-- Seção explicativa sobre o ODS 12 -->
     <section class="ods-explicativo">
-      <div class="card info-card">
+      <div class="info-card">
         <h2>
           Sobre o ODS 12
         </h2>
@@ -78,59 +92,85 @@
     <div id="error-message" class="error" style="display: none;" role="alert" aria-live="assertive"></div>
 
     <section class="dashboard-container">
-      <div class="card valor-principal-card">
-        <h2>Indicador Principal</h2>
+      <div class="indicador-principal" id="indicador-consumo">
+        <h3>Indicador Principal</h3>
         <div class="valor-principal-container">
-          <span id="valor-principal" class="valor-principal" aria-live="polite">--</span>
-          <span id="valor-descricao" class="valor-descricao" aria-live="polite">Carregando...</span>
+          <span id="valor-principal" class="valor-indicador" aria-live="polite">--</span>
+          <span id="valor-descricao" class="texto-indicador" aria-live="polite">Carregando...</span>
+        </div>
+        <div class="texto-indicador-complementar">
+          <p>O percentual de resíduos sólidos urbanos reciclados é um indicador central para monitorar o progresso do ODS 12 em Sergipe</p>
         </div>
       </div>
 
-      <div class="card grafico-card">
-        <h2>Evolução Histórica</h2>
-        <div class="grafico-container" style="height: 300px;">
+      <div class="visualizacao-comparativa">
+        <h3>Evolução Histórica</h3>
+        <div class="grafico-comparativo-container">
           <canvas id="grafico-principal" role="img" aria-label="Gráfico de evolução histórica do indicador principal do ODS 12 sobre consumo e produção sustentáveis"></canvas>
         </div>
         <p id="grafico-descricao" class="screen-reader-only">Este gráfico mostra a evolução histórica dos indicadores relacionados à resíduos reciclados e consumo sustentável em Sergipe ao longo dos anos.</p>
-        <button id="btn-exportar" class="btn-exportar" aria-label="Exportar dados em CSV">
-          <i class="fas fa-download" aria-hidden="true"></i> Exportar Dados (CSV)
-        </button>
+        <div class="controles-grafico">
+          <button id="btn-exportar" class="btn-exportar" aria-label="Exportar dados em CSV">
+            <i class="fas fa-download" aria-hidden="true"></i> Exportar Dados (CSV)
+          </button>
+        </div>
       </div>
     </section>
 
     <section class="indicadores-detalhados-container">
       <h2>Indicadores Detalhados</h2>
       <div id="indicadores-detalhados" class="indicadores-grid" aria-live="polite">
-        <!-- Os indicadores detalhados serão injetados dinamicamente aqui -->
+        <!-- Template para indicadores que serão adicionados dinamicamente -->
+        <template id="indicador-template">
+          <div class="indicador-card animado">
+            <span class="ods-badge">ODS 12</span>
+            <h3 class="titulo-indicador"></h3>
+            <div class="valor-container">
+              <span class="valor"></span>
+              <span class="unidade"></span>
+            </div>
+            <p class="descricao-indicador"></p>
+            <button class="botao-exportar-indicador" aria-label="Exportar dados deste indicador">
+              <i class="fas fa-download" aria-hidden="true"></i>
+            </button>
+          </div>
+        </template>
       </div>
     </section>
 
-    <section class="acoes-impacto">
+    <section class="secao-acoes-impacto">
       <h2>Ações de Impacto</h2>
-      <div class="acoes-grid">
-        <div class="acao-card">
+      <div class="lista-acoes">
+        <div class="card-acao">
           <h3>Compras Públicas Sustentáveis</h3>
           <p>Programa de implementação de critérios de sustentabilidade nas compras e contratações do setor público sergipano, promovendo a demanda por produtos e serviços ambientalmente responsáveis.</p>
-          <a href="#" class="btn-saiba-mais" aria-label="Saiba mais sobre Compras Públicas Sustentáveis">Saiba mais</a>
+          <a href="#" class="link-acao" aria-label="Saiba mais sobre Compras Públicas Sustentáveis">
+            Saiba mais <i class="fas fa-arrow-right" aria-hidden="true"></i>
+          </a>
         </div>
-        <div class="acao-card">
+        <div class="card-acao">
           <h3>Ecoinovação Empresarial</h3>
           <p>Programa de incentivo à inovação sustentável para pequenas e médias empresas sergipanas, com foco em processos produtivos mais eficientes e produtos com menor impacto ambiental.</p>
-          <a href="#" class="btn-saiba-mais" aria-label="Saiba mais sobre Ecoinovação Empresarial">Saiba mais</a>
+          <a href="#" class="link-acao" aria-label="Saiba mais sobre Ecoinovação Empresarial">
+            Saiba mais <i class="fas fa-arrow-right" aria-hidden="true"></i>
+          </a>
         </div>
-        <div class="acao-card">
+        <div class="card-acao">
           <h3>Gestão de Resíduos Sólidos</h3>
           <p>Iniciativa para melhorar a gestão integrada de resíduos sólidos nos municípios sergipanos, ampliando coleta seletiva, reciclagem e compostagem, além da inclusão produtiva de catadores.</p>
-          <a href="#" class="btn-saiba-mais" aria-label="Saiba mais sobre Gestão de Resíduos Sólidos">Saiba mais</a>
+          <a href="#" class="link-acao" aria-label="Saiba mais sobre Gestão de Resíduos Sólidos">
+            Saiba mais <i class="fas fa-arrow-right" aria-hidden="true"></i>
+          </a>
         </div>
       </div>
     </section>
 
-    <section class="recomendacoes-politicas">
+    <!-- Seção de recomendações políticas com as classes corretas -->
+    <section class="secao-recomendacoes">
       <h2>Recomendações de Políticas Públicas</h2>
-      <div class="recomendacoes-lista">
-        <div class="recomendacao-item">
-          <h3>1. Economia Circular</h3>
+      <div class="lista-recomendacoes">
+        <div class="card-recomendacao">
+          <h4>1. Economia Circular</h4>
           <p>Desenvolver uma política estadual de economia circular, com incentivos fiscais para empresas que adotem modelos de negócios circulares, investindo em design de produtos para durabilidade, reparabilidade e reciclabilidade.</p>
           <div class="links-documentos">
             <a href="#" class="link-documento-oficial" aria-label="Ver diretrizes para políticas de economia circular">
@@ -141,15 +181,15 @@
             </a>
           </div>
         </div>
-        <div class="recomendacao-item">
-          <h3>2. Educação para o Consumo Responsável</h3>
+        <div class="card-recomendacao">
+          <h4>2. Educação para o Consumo Responsável</h4>
           <p>Fortalecer programas educacionais sobre consumo consciente e sustentável nas escolas, universidades e comunidades, promovendo mudanças de comportamento relacionadas à redução do desperdício e escolhas de produtos mais sustentáveis.</p>
           <a href="#" class="link-documento-oficial" aria-label="Ver documento oficial sobre Educação para o Consumo Responsável">
             <i class="fas fa-file-pdf" aria-hidden="true"></i> Ver documento oficial
           </a>
         </div>
-        <div class="recomendacao-item">
-          <h3>3. Redução do Desperdício Alimentar</h3>
+        <div class="card-recomendacao">
+          <h4>3. Redução do Desperdício Alimentar</h4>
           <p>Implementar políticas para reduzir o desperdício de alimentos em toda a cadeia produtiva, desde a produção agrícola até o consumo final, incluindo sistemas de doação e aproveitamento integral de alimentos.</p>
           <a href="#" class="link-documento-oficial" aria-label="Ver documento oficial sobre Redução do Desperdício Alimentar">
             <i class="fas fa-file-pdf" aria-hidden="true"></i> Ver documento oficial
@@ -177,8 +217,8 @@
       </div>
     </section>
 
-    <!-- Nova seção de compartilhamento social -->
-    <section class="compartilhamento-social">
+    <!-- Seção de compartilhamento social com classes atualizadas -->
+    <section class="compartilhamento">
       <h2>Compartilhe Estes Dados</h2>
       <p>Ajude a promover a conscientização sobre consumo e produção responsáveis em Sergipe</p>
       <div class="botoes-sociais">
@@ -197,7 +237,7 @@
       </div>
     </section>
 
-    <!-- Nova seção de participação cidadã -->
+    <!-- Seção de participação cidadã com classes atualizadas -->
     <section class="participacao-cidada">
       <h2>Sua Opinião Importa</h2>
       <p>Ajude-nos a melhorar os padrões de consumo e produção sustentáveis em Sergipe</p>
@@ -273,526 +313,6 @@
     </div>
   </div>
 
-  <style>
-    /* Estilo específico para o ODS 12 com sua cor oficial (marrom dourado) */
-    .valor-principal, .indicador-card h3 {
-      color: #BF8B2E;
-    }
-    
-    .acao-card {
-      border-left: 4px solid #BF8B2E;
-    }
-    
-    .acao-card h3 {
-      color: #BF8B2E;
-    }
-    
-    .btn-saiba-mais {
-      background-color: #BF8B2E;
-    }
-    
-    .btn-saiba-mais:hover {
-      background-color: #A67826;
-    }
-    
-    .recomendacao-item {
-      border-left: 4px solid #BF8B2E;
-    }
-
-    /* Seção explicativa do ODS */
-    .ods-explicativo {
-      margin: 20px 0 30px;
-    }
-    
-    .info-card {
-      background-color: #f8f9fa;
-      border-radius: 8px;
-      padding: 25px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      border-left: 4px solid #BF8B2E;
-    }
-    
-    .destaque-info {
-      display: flex;
-      align-items: center;
-      background-color: rgba(191, 139, 46, 0.1);
-      padding: 15px;
-      border-radius: 6px;
-      margin-top: 15px;
-      gap: 15px;
-    }
-    
-    .destaque-info i {
-      font-size: 2rem;
-      color: #BF8B2E;
-    }
-
-    /* Indicadores grid */
-    .indicadores-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
-    }
-    
-    .indicador-card {
-      background-color: #f8f9fa;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    
-    .indicador-card h3 {
-      font-size: 1.1rem;
-      margin-bottom: 15px;
-    }
-    
-    .valor-grande {
-      font-size: 2rem;
-      font-weight: 700;
-      margin: 10px 0;
-    }
-    
-    .tendencia {
-      font-size: 0.9rem;
-      color: #555;
-    }
-    
-    .acoes-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
-    }
-    
-    .acao-card {
-      background-color: #fff;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    
-    .btn-saiba-mais {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 8px 16px;
-      color: white;
-      text-decoration: none;
-      border-radius: 4px;
-      font-size: 0.9rem;
-    }
-    
-    .recomendacoes-lista {
-      margin-top: 20px;
-    }
-    
-    .recomendacao-item {
-      background-color: #f8f9fa;
-      border-radius: 8px;
-      padding: 15px 20px;
-      margin-bottom: 15px;
-    }
-    
-    .recomendacao-item h3 {
-      font-size: 1.1rem;
-      color: #333;
-      margin-bottom: 8px;
-    }
-
-    /* Documentos links */
-    .links-documentos {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin-top: 12px;
-    }
-
-    .link-documento-oficial {
-      display: inline-flex;
-      align-items: center;
-      color: #BF8B2E;
-      font-size: 0.9rem;
-      text-decoration: none;
-      gap: 5px;
-    }
-
-    .link-documento-oficial:hover {
-      text-decoration: underline;
-    }
-
-    /* Mapa interativo */
-    .mapa-interativo {
-      margin: 30px 0;
-      background-color: #fff;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    
-    .mapa-container {
-      width: 100%;
-      height: 400px;
-      background-color: #f5f5f5;
-      margin: 20px 0;
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    
-    .mapa-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: #777;
-    }
-    
-    .mapa-placeholder i {
-      font-size: 4rem;
-      margin-bottom: 15px;
-      color: #BF8B2E;
-    }
-    
-    .mapa-legenda {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 10px;
-      flex-wrap: wrap;
-    }
-    
-    .legenda-item {
-      display: flex;
-      align-items: center;
-      font-size: 0.9rem;
-    }
-    
-    .cor-legenda {
-      display: inline-block;
-      width: 16px;
-      height: 16px;
-      margin-right: 5px;
-      border-radius: 3px;
-    }
-    
-    .coleta-seletiva {
-      background-color: #4CAF50;
-    }
-    
-    .cooperativas {
-      background-color: #FF9800;
-    }
-    
-    .ecopontos {
-      background-color: #03A9F4;
-    }
-    
-    .compostagem {
-      background-color: #8BC34A;
-    }
-
-    /* Estilos para compartilhamento social */
-    .compartilhamento-social,
-    .participacao-cidada {
-      margin: 30px 0;
-      background-color: #f9f9f9;
-      padding: 20px;
-      border-radius: 8px;
-      text-align: center;
-    }
-    
-    .botoes-sociais {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 15px;
-      flex-wrap: wrap;
-    }
-    
-    .btn-social {
-      display: inline-flex;
-      align-items: center;
-      padding: 10px 20px;
-      color: white;
-      text-decoration: none;
-      border-radius: 4px;
-      gap: 8px;
-      transition: opacity 0.3s;
-    }
-    
-    .btn-social:hover {
-      opacity: 0.9;
-    }
-    
-    .btn-twitter {
-      background-color: #1DA1F2;
-    }
-    
-    .btn-facebook {
-      background-color: #4267B2;
-    }
-    
-    .btn-linkedin {
-      background-color: #0077B5;
-    }
-    
-    .btn-whatsapp {
-      background-color: #25D366;
-    }
-
-    /* Estilo para a seção de participação cidadã */
-    .opcoes-participacao {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 15px;
-      flex-wrap: wrap;
-    }
-
-    .btn-contribuir {
-      display: inline-flex;
-      align-items: center;
-      padding: 12px 25px;
-      color: white;
-      background-color: #BF8B2E;
-      text-decoration: none;
-      border-radius: 4px;
-      gap: 8px;
-      font-weight: 500;
-      transition: background-color 0.3s;
-    }
-    
-    .btn-contribuir:hover {
-      background-color: #A67826;
-    }
-    
-    .btn-participativo {
-      display: inline-flex;
-      align-items: center;
-      padding: 12px 25px;
-      color: #333;
-      background-color: #f0f0f0;
-      border: none;
-      border-radius: 4px;
-      font-size: 1rem;
-      gap: 8px;
-      cursor: pointer;
-      font-weight: 500;
-      transition: background-color 0.3s;
-    }
-    
-    .btn-participativo:hover {
-      background-color: #e0e0e0;
-    }
-
-    /* Modal de compartilhamento */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.5);
-      overflow: auto;
-    }
-    
-    .modal-conteudo {
-      background-color: white;
-      margin: 5% auto;
-      padding: 30px;
-      width: 90%;
-      max-width: 600px;
-      border-radius: 8px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-      position: relative;
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-    
-    .fechar-modal {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      font-size: 24px;
-      cursor: pointer;
-      color: #777;
-    }
-    
-    .fechar-modal:hover {
-      color: black;
-    }
-    
-    .info-box {
-      display: flex;
-      background-color: #e6f6ff;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      gap: 15px;
-      align-items: flex-start;
-    }
-    
-    .info-box i {
-      color: #0277bd;
-      font-size: 20px;
-      margin-top: 2px;
-    }
-    
-    .info-box p {
-      margin: 0;
-      color: #0277bd;
-    }
-
-    .form-grupo {
-      margin-bottom: 20px;
-    }
-    
-    .form-grupo label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 500;
-    }
-    
-    .form-grupo input[type="text"],
-    .form-grupo input[type="email"],
-    .form-grupo select,
-    .form-grupo textarea {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 1rem;
-    }
-    
-    .form-grupo textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-    
-    .form-grupo select {
-      background-color: white;
-    }
-    
-    .form-contato {
-      background-color: #f8f9fa;
-      padding: 15px;
-      border-radius: 8px;
-    }
-    
-    .form-contato p {
-      margin-top: 0;
-      margin-bottom: 10px;
-      font-weight: 500;
-    }
-    
-    .form-contato div {
-      margin-bottom: 10px;
-    }
-    
-    .form-acoes {
-      margin-top: 25px;
-      text-align: center;
-    }
-    
-    .btn-enviar-denuncia {
-      background-color: #BF8B2E;
-      color: white;
-      padding: 12px 25px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: 500;
-      font-size: 1rem;
-    }
-    
-    .btn-enviar-denuncia:hover {
-      background-color: #A67826;
-    }
-    
-    .feedback-mensagem {
-      margin-top: 20px;
-      padding: 15px;
-      text-align: center;
-      border-radius: 4px;
-      background-color: #e8f4f8;
-      color: #0056b3;
-    }
-    
-    /* Classes para acessibilidade */
-    .screen-reader-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border-width: 0;
-    }
-    
-    .pular-link {
-      position: absolute;
-      left: -999px;
-      width: 1px;
-      height: 1px;
-      top: auto;
-      background-color: #BF8B2E;
-      color: white;
-      padding: 10px 15px;
-      z-index: 999;
-      transition: left 0s;
-    }
-    
-    .pular-link:focus {
-      left: 10px;
-      top: 10px;
-      width: auto;
-      height: auto;
-    }
-    
-    /* Melhoria de foco para acessibilidade */
-    a:focus,
-    button:focus,
-    input:focus,
-    select:focus,
-    textarea:focus {
-      outline: 3px solid rgba(191, 139, 46, 0.5);
-      outline-offset: 2px;
-    }
-    
-    /* Responsividade */
-    @media (max-width: 768px) {
-      .botoes-sociais, .opcoes-participacao {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .btn-social, .btn-contribuir, .btn-participativo {
-        width: 80%;
-      }
-      
-      .modal-conteudo {
-        width: 95%;
-        margin: 10% auto;
-        padding: 20px;
-      }
-      
-      .destaque-info {
-        flex-direction: column;
-        text-align: center;
-      }
-      
-      .links-documentos {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-  </style>
-
   <!-- Script de tratamento de erros e modal -->
   <script>
     // Inicialização de tratamento de erros para componentes críticos
@@ -843,6 +363,13 @@
       // Fechar modal ao clicar fora dele
       window.addEventListener('click', (event) => {
         if (event.target === modalDenuncia) {
+          modalDenuncia.style.display = 'none';
+        }
+      });
+      
+      // Fechar modal com a tecla ESC para melhorar acessibilidade
+      window.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && modalDenuncia.style.display === 'block') {
           modalDenuncia.style.display = 'none';
         }
       });

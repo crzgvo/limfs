@@ -1,0 +1,130 @@
+/**
+ * Estilos específicos para ODS 1 - Erradicação da Pobreza
+ * Cor oficial: #E5243B (vermelho)
+ */
+
+/* Classes específicas para o ODS 1 */
+body[data-pagina="ods1"] {
+  --cor-ods-atual: var(--ods1-cor-primaria);
+  --cor-ods-secundaria: var(--ods1-cor-secundaria);
+  --sombra-ods-hover: var(--ods1-sombra-hover);
+}
+
+.ods1-page .valor-principal, 
+.ods1-page .indicador-card h3 {
+  color: var(--ods1-cor-primaria);
+}
+
+.ods1-page .acao-card {
+  border-left: 4px solid var(--ods1-cor-primaria);
+}
+
+.ods1-page .btn-saiba-mais {
+  background-color: var(--ods1-cor-primaria);
+}
+
+.ods1-page .btn-saiba-mais:hover {
+  background-color: #d41c30;
+  box-shadow: var(--ods1-sombra-hover);
+}
+
+.ods1-page .recomendacao-item {
+  border-left: 4px solid var(--ods1-cor-primaria);
+}
+
+/* Cabeçalho específico */
+.ods1-page .ods-header {
+  background: linear-gradient(135deg, var(--ods1-cor-primaria) 0%, #f34a5e 100%);
+  padding: 30px 20px;
+  color: white;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 10px rgba(229, 36, 59, 0.3);
+}
+
+.ods1-header {
+  background: var(--ods1);
+  color: var(--white);
+  font-family: var(--font-primary);
+}
+
+/* Estilização do modal específico */
+.ods1-page .modal-conteudo {
+  border-top: 5px solid var(--ods1-cor-primaria);
+}
+
+.ods1-page .btn-enviar-denuncia,
+.ods1-page .btn-enviar-enquete {
+  background-color: var(--ods1-cor-primaria);
+}
+
+.ods1-page .btn-enviar-denuncia:hover,
+.ods1-page .btn-enviar-enquete:hover {
+  background-color: #d41c30;
+}
+
+/* Estilos de acessibilidade */
+.ods1-page .pular-link {
+  background-color: var(--ods1-cor-primaria);
+}
+
+.ods1-page a:focus,
+.ods1-page button:focus,
+.ods1-page input:focus,
+.ods1-page select:focus,
+.ods1-page textarea:focus {
+  outline: 3px solid rgba(229, 36, 59, 0.5);
+  outline-offset: 2px;
+}
+
+/* Estilização dos indicadores */
+.ods1-page .texto-indicador-complementar {
+  background-color: var(--ods1-cor-secundaria);
+  border-left: 3px solid var(--ods1-cor-primaria);
+}
+
+/* Estilo de destaque informativo */
+.ods1-page .destaque-info {
+  display: flex;
+  align-items: center;
+  background-color: var(--ods1-cor-secundaria);
+  padding: 15px;
+  border-radius: 6px;
+  margin-top: 15px;
+  gap: 15px;
+}
+
+.ods1-page .destaque-info i {
+  font-size: 2rem;
+  color: var(--ods1-cor-primaria);
+}
+
+.ods1-content {
+  background: var(--cinza-100);
+  color: var(--cor-texto);
+  font-family: var(--font-primary);
+}
+
+/* Tema escuro (opcional para usuários com preferência de tema escuro) */
+@media (prefers-color-scheme: dark) {
+  .ods1-page {
+    --cor-texto: #f0f0f0;
+    --cor-fundo: #121212;
+  }
+
+  .ods1-page .card-indicador,
+  .ods1-page .grafico-card,
+  .ods1-page .acao-card,
+  .ods1-page .modal-conteudo {
+    background-color: #222;
+    color: #f0f0f0;
+  }
+
+  .ods1-page .texto-indicador {
+    color: #e0e0e0;
+  }
+  
+  .ods1-page .destaque-info {
+    background-color: rgba(229, 36, 59, 0.2);
+  }
+}

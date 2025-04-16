@@ -1,0 +1,46 @@
+{
+  "meta": {
+    "titulo": "ODS 6 - Água Potável e Saneamento",
+    "descricao": "Assegurar a disponibilidade e gestão sustentável da água e saneamento para todas e todos",
+    "ultima_atualizacao": "2025-04-12"
+  },
+  "dados": {
+    "valor": 54.2,
+    "unidade": "%",
+    "descricao": "Taxa de cobertura de esgotamento sanitário"
+  },
+  "historico": [
+    {"ano": 2017, "valor": 31.2},
+    {"ano": 2018, "valor": 32.8},
+    {"ano": 2019, "valor": 34.2},
+    {"ano": 2020, "valor": 35.1},
+    {"ano": 2021, "valor": 36.2},
+    {"ano": 2022, "valor": 54.2}
+  ],
+  "indicadores_detalhados": [
+    {
+      "nome": "Acesso à água tratada",
+      "valor": 92.8,
+      "unidade": "%",
+      "tendencia": "crescente"
+    },
+    {
+      "nome": "Coleta de resíduos sólidos",
+      "valor": 89.5,
+      "unidade": "%",
+      "tendencia": "crescente"
+    },
+    {
+      "nome": "Tratamento de esgoto",
+      "valor": 48.3,
+      "unidade": "%",
+      "tendencia": "crescente"
+    },
+    {
+      "nome": "Áreas com risco de contaminação hídrica",
+      "valor": 7.2,
+      "unidade": "%",
+      "tendencia": "decrescente"
+    }
+  ]
+}

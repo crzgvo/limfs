@@ -1,0 +1,42 @@
+/**
+ * Mosaicos Futuros - Sistema de importação modular
+ */
+
+/* Fontes */
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Roboto:wght@400;700&display=swap');
+
+/* Reset e Variáveis Globais */
+@import url('./reset.css');
+@import url('./styles/global-variables.css');
+@import url('./styles/typography.css');
+
+/* Cores e estilos ODS */
+@import url('./styles/components/ods-colors.css');
+@import url('./styles/components/acessibilidade-focus.css');
+@import url('./styles/components/animacoes.css');
+
+/* Componentes Base */
+@import url('./styles/menu.css');
+@import url('./styles/footer.css');
+
+/* Páginas */
+@import url('./styles/home.css');
+@import url('./styles/sobre.css');
+@import url('./styles/servicos.css');
+@import url('./styles/contato.css');
+@import url('./styles/painel-ods.css');
+
+/* Evita scroll quando menu mobile está aberto */
+.menu-aberto {
+    overflow: hidden;
+}
+
+/* Estilos globais */
+body {
+    margin: 0;
+    background-color: var(--cor-fundo);
+}
+
+main {
+    padding-top: 68px; /* Compensa altura do cabeçalho fixo */
+}

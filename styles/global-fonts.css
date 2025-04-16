@@ -1,0 +1,31 @@
+/**
+ * Definições globais de fontes para o sistema LIMFS
+ * 
+ * Este arquivo define a tipografia padrão para todo o sistema,
+ * garantindo consistência visual em todos os ODS e páginas
+ */
+
+/* Importação da fonte Public Sans do Google Fonts (caso não esteja disponível localmente) */
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap');
+
+/* Aplicação global da fonte */
+html, 
+body {
+  font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+}
+
+/* Aplicação específica para páginas ODS */
+.ods-page,
+.ods-page * {
+  font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+}
+
+/* Garantir que inputs, buttons e selects também usem a fonte padrão */
+input,
+button,
+select,
+textarea,
+.btn,
+.button {
+  font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+}

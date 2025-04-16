@@ -1,0 +1,138 @@
+/* Melhorias de acessibilidade - WCAG 2.1 AA */
+
+:root {
+  /* Cores melhoradas para contraste adequado */
+  --ods13-dark: #2b5a30; /* Verde mais escuro para melhor contraste */
+  --ods13-focus: rgba(63, 126, 68, 0.8); /* Cor de foco mais visível */
+  
+  /* Outras variáveis de cores para ODS com melhor contraste */
+  --focus-outline-color: #0056b3;
+  --focus-outline-width: 3px;
+}
+
+/* Melhorias para indicadores de foco */
+:focus {
+  outline: var(--focus-outline-width) solid var(--focus-outline-color) !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.4) !important;
+}
+
+/* Foco para elementos específicos */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: var(--focus-outline-width) solid var(--focus-outline-color) !important;
+  outline-offset: 3px !important;
+}
+
+/* Melhorias específicas para ODS 13 */
+.ods13-page a:focus,
+.ods13-page button:focus,
+.ods13-page input:focus,
+.ods13-page select:focus,
+.ods13-page textarea:focus {
+  outline-color: var(--ods13-dark) !important;
+  box-shadow: 0 0 0 3px rgba(63, 126, 68, 0.4) !important;
+}
+
+/* Botões com melhor contraste */
+.ods13-page .botao-filtrar,
+.ods13-page .btn-contribuir,
+.ods13-page .botao-periodo.ativo {
+  background-color: var(--ods13-dark);
+  font-weight: 600;
+}
+
+/* Links com melhor visibilidade */
+.ods13-page .link-acao,
+.ods13-page .btn-saiba-mais {
+  color: var(--ods13-dark);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* Skip link aprimorado para acessibilidade */
+.pular-link {
+  background: #ffffff;
+  color: #0056b3;
+  font-weight: 700;
+  left: 50%;
+  padding: 8px;
+  position: absolute;
+  transform: translateY(-100%) translateX(-50%);
+  transition: transform 0.3s;
+  z-index: 1001;
+  text-decoration: underline;
+  border: 2px solid #0056b3;
+}
+
+.pular-link:focus {
+  transform: translateY(0) translateX(-50%);
+  outline: 3px solid #0056b3 !important;
+  outline-offset: 3px;
+}
+
+/* Classe para conteúdo visível apenas para leitores de tela */
+.visually-hidden,
+.screen-reader-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Mensagens de erro acessíveis para formulários */
+.erro-mensagem {
+  color: #d32f2f;
+  font-size: 0.875rem;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* Melhorias para campos de formulário com erro */
+input.has-error,
+select.has-error,
+textarea.has-error {
+  border: 2px solid #d32f2f;
+}
+
+/* Campo obrigatório */
+.required {
+  color: #d32f2f;
+}
+
+/* Descrições de campos para acessibilidade */
+.campo-descricao {
+  font-size: 0.875rem;
+  color: #555;
+  margin-top: 4px;
+}
+
+/* Torna o mapa acessível via teclado */
+.map-container:focus {
+  outline: 3px solid var(--ods13-dark) !important;
+}
+
+/* Melhora contraste da legenda do mapa */
+.mapa-legenda .legenda-item {
+  font-weight: 500;
+  padding: 3px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mapa-legenda .cor-legenda {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}

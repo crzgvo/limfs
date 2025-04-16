@@ -1,0 +1,10 @@
+{
+  "fonte": "energia_solar",
+  "ultimaAtualizacao": "2025-04-12",
+  "dados": {
+    "valor": 11.3,
+    "capacidadeKW": 355000,
+    "instalacoes": 14200,
+    "ano": 2024
+  }
+}

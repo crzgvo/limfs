@@ -1,0 +1,56 @@
+/**
+ * Variáveis globais do sistema - Design Tokens
+ */
+
+ :root {
+  /* Cores principais */
+  --primary-blue: #1E386A;
+  --secondary-green: #05B056;
+  --white: #FFFFFF;
+  --yellow: #FDB731;
+  
+  /* Cores funcionais */
+  --cor-botao-hover: #0056b3;
+  --cor-fundo: #FFFFFF;
+  --cor-texto: #333333;
+  --cor-destaque: #FDB731;
+  --cor-alerta: #F47429;
+  --cor-link: #005394;
+  
+  /* Tipografia */
+  --font-primary: 'Public Sans', sans-serif;
+  --font-secondary: 'Roboto', sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-size-titulo: 3rem;
+  --font-size-subtitulo: 2rem;
+  --font-size-texto: 1rem;
+  --line-height-padrao: 1.6;
+  
+  /* Espaçamento */
+  --padding-padrao: 20px;
+  --gap-padrao: 20px;
+  
+  /* Layout */
+  --max-width-container: 1200px;
+  --border-radius: 5px;
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  /* Transições */
+  --transition-padrao: all 0.3s ease;
+}
+
+/* Classe de acessibilidade para esconder visualmente elementos */
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap;
+}

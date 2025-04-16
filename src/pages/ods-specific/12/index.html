@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dashboard ODS 12 - Consumo e Produção Responsáveis | LIMFS - Laboratório de Indicadores para Monitoramento das Famílias Sergipanas">
+  <!-- Content Security Policy adicionada -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://cdnjs.cloudflare.com;
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com https://fonts.googleapis.com;
+    img-src 'self' data:;
+    font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com;
+    connect-src 'self' https://api.mosaicosfuturos.com;
+    object-src 'none';
+    frame-ancestors 'none';
+  ">
+  <!-- Headers HTTP adicionais de segurança -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="no-referrer">
+  <title>ODS 12 - Consumo e Produção Responsáveis | LIMFS</title>
+  <link rel="stylesheet" href="../styles/global-variables.css">
+  <link rel="stylesheet" href="../styles/ods-colors.css">
+  <link rel="stylesheet" href="../styles/typography.css">
+  <link rel="stylesheet" href="../styles/components/dashboard-ods.css">
+  <link rel="stylesheet" href="../styles/components/ods12.css">
+  <link rel="stylesheet" href="../styles/painel-ods.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module" src="../js/painel-ods.js"></script>
+  <!-- Metadados para compartilhamento social -->
+  <meta property="og:title" content="ODS 12 - Consumo e Produção Responsáveis | LIMFS">
+  <meta property="og:description" content="Conheça os indicadores de consumo e produção sustentáveis em Sergipe">
+  <meta property="og:image" content="../img/logo-icons-coloridos-12.png">
+  <meta property="og:url" content="https://www.mosaicosfuturos.com/painel-ods/ods12.html">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+<body data-pagina="ods12" class="ods12-page ods-page">
+  <a href="#conteudo-principal" class="pular-link">Pular para o conteúdo principal</a>
+  <header>
+    <div class="container">
+      <h1>Laboratório de Indicadores para Monitoramento das Famílias Sergipanas</h1>
+      <nav aria-label="Menu principal">
+        <ul role="menubar">
+          <li role="menuitem"><a href="../index.html">Início</a></li>
+          <li role="menuitem"><a href="../painel-ods/index.html">Painel Geral</a></li>
+          <li role="menuitem"><a href="../sobre/index.html">Sobre</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo-principal" role="main" class="container">
+    <div class="ods-header header-ods12">
+      <img src="../img/logo-icons-coloridos-12.png" alt="Ícone ODS 12" class="ods-icon" width="80" height="80" loading="eager">
+      <div>
+        <h1 id="ods-titulo">ODS 12 - Consumo e Produção Responsáveis</h1>
+        <p id="ods-descricao">Assegurar padrões de produção e de consumo sustentáveis</p>
+        <p id="ultima-atualizacao" class="small">Carregando informações...</p>
+      </div>
+    </div>
+
+    <!-- Seção explicativa sobre o ODS 12 -->
+    <section class="ods-explicativo">
+      <div class="info-card">
+        <h2>
+          Sobre o ODS 12
+        </h2>
+        <p>O Objetivo de Desenvolvimento Sustentável 12 busca garantir padrões sustentáveis de produção e consumo. Este objetivo visa promover a eficiência dos recursos, reduzir o desperdício e criar cadeias produtivas mais sustentáveis em todos os setores econômicos.</p>
+        <div class="destaque-info">
+          <i class="fas fa-recycle" aria-hidden="true"></i>
+          <div>
+            <strong>Economia Circular:</strong> 
+            <span>A transição para uma economia circular é essencial para alcançar o ODS 12, reduzindo resíduos e promovendo o reuso, recuperação e reciclagem de materiais.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="loading-indicator" class="loader" role="status" aria-live="polite">Carregando dados...</div>
+    <div id="error-message" class="error" style="display: none;" role="alert" aria-live="assertive"></div>
+
+    <section class="dashboard-container">
+      <div class="indicador-principal" id="indicador-consumo">
+        <h3>Indicador Principal</h3>
+        <div class="valor-principal-container">
+          <span id="valor-principal" class="valor-indicador" aria-live="polite">--</span>
+          <span id="valor-descricao" class="texto-indicador" aria-live="polite">Carregando...</span>
+        </div>
+        <div class="texto-indicador-complementar">
+          <p>O percentual de resíduos sólidos urbanos reciclados é um indicador central para monitorar o progresso do ODS 12 em Sergipe</p>
+        </div>
+      </div>
+
+      <div class="visualizacao-comparativa">
+        <h3>Evolução Histórica</h3>
+        <div class="grafico-comparativo-container">
+          <canvas id="grafico-principal" role="img" aria-label="Gráfico de evolução histórica do indicador principal do ODS 12 sobre consumo e produção sustentáveis"></canvas>
+        </div>
+        <p id="grafico-descricao" class="screen-reader-only">Este gráfico mostra a evolução histórica dos indicadores relacionados à resíduos reciclados e consumo sustentável em Sergipe ao longo dos anos.</p>
+        <div class="controles-grafico">
+          <button id="btn-exportar" class="btn-exportar" aria-label="Exportar dados em CSV">
+            <i class="fas fa-download" aria-hidden="true"></i> Exportar Dados (CSV)
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="indicadores-detalhados-container">
+      <h2>Indicadores Detalhados</h2>
+      <div id="indicadores-detalhados" class="indicadores-grid" aria-live="polite">
+        <!-- Template para indicadores que serão adicionados dinamicamente -->
+        <template id="indicador-template">
+          <div class="indicador-card animado">
+            <span class="ods-badge">ODS 12</span>
+            <h3 class="titulo-indicador"></h3>
+            <div class="valor-container">
+              <span class="valor"></span>
+              <span class="unidade"></span>
+            </div>
+            <p class="descricao-indicador"></p>
+            <button class="botao-exportar-indicador" aria-label="Exportar dados deste indicador">
+              <i class="fas fa-download" aria-hidden="true"></i>
+            </button>
+          </div>
+        </template>
+      </div>
+    </section>
+
+    <section class="secao-acoes-impacto">
+      <h2>Ações de Impacto</h2>
+      <div class="lista-acoes">
+        <div class="card-acao">
+          <h3>Compras Públicas Sustentáveis</h3>
+          <p>Programa de implementação de critérios de sustentabilidade nas compras e contratações do setor público sergipano, promovendo a demanda por produtos e serviços ambientalmente responsáveis.</p>
+          <a href="#" class="link-acao" aria-label="Saiba mais sobre Compras Públicas Sustentáveis">
+            Saiba mais <i class="fas fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="card-acao">
+          <h3>Ecoinovação Empresarial</h3>
+          <p>Programa de incentivo à inovação sustentável para pequenas e médias empresas sergipanas, com foco em processos produtivos mais eficientes e produtos com menor impacto ambiental.</p>
+          <a href="#" class="link-acao" aria-label="Saiba mais sobre Ecoinovação Empresarial">
+            Saiba mais <i class="fas fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="card-acao">
+          <h3>Gestão de Resíduos Sólidos</h3>
+          <p>Iniciativa para melhorar a gestão integrada de resíduos sólidos nos municípios sergipanos, ampliando coleta seletiva, reciclagem e compostagem, além da inclusão produtiva de catadores.</p>
+          <a href="#" class="link-acao" aria-label="Saiba mais sobre Gestão de Resíduos Sólidos">
+            Saiba mais <i class="fas fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção de recomendações políticas com as classes corretas -->
+    <section class="secao-recomendacoes">
+      <h2>Recomendações de Políticas Públicas</h2>
+      <div class="lista-recomendacoes">
+        <div class="card-recomendacao">
+          <h4>1. Economia Circular</h4>
+          <p>Desenvolver uma política estadual de economia circular, com incentivos fiscais para empresas que adotem modelos de negócios circulares, investindo em design de produtos para durabilidade, reparabilidade e reciclabilidade.</p>
+          <div class="links-documentos">
+            <a href="#" class="link-documento-oficial" aria-label="Ver diretrizes para políticas de economia circular">
+              <i class="fas fa-file-pdf" aria-hidden="true"></i> Diretrizes Técnicas
+            </a>
+            <a href="#" class="link-documento-oficial" aria-label="Ver legislação relacionada à economia circular">
+              <i class="fas fa-gavel" aria-hidden="true"></i> Marco Legal
+            </a>
+          </div>
+        </div>
+        <div class="card-recomendacao">
+          <h4>2. Educação para o Consumo Responsável</h4>
+          <p>Fortalecer programas educacionais sobre consumo consciente e sustentável nas escolas, universidades e comunidades, promovendo mudanças de comportamento relacionadas à redução do desperdício e escolhas de produtos mais sustentáveis.</p>
+          <a href="#" class="link-documento-oficial" aria-label="Ver documento oficial sobre Educação para o Consumo Responsável">
+            <i class="fas fa-file-pdf" aria-hidden="true"></i> Ver documento oficial
+          </a>
+        </div>
+        <div class="card-recomendacao">
+          <h4>3. Redução do Desperdício Alimentar</h4>
+          <p>Implementar políticas para reduzir o desperdício de alimentos em toda a cadeia produtiva, desde a produção agrícola até o consumo final, incluindo sistemas de doação e aproveitamento integral de alimentos.</p>
+          <a href="#" class="link-documento-oficial" aria-label="Ver documento oficial sobre Redução do Desperdício Alimentar">
+            <i class="fas fa-file-pdf" aria-hidden="true"></i> Ver documento oficial
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção de mapa interativo -->
+    <section class="mapa-interativo">
+      <h2>Mapa da Reciclagem em Sergipe</h2>
+      <p>Explore dados sobre a infraestrutura de coleta seletiva e reciclagem nos municípios sergipanos</p>
+      <div class="mapa-container" id="mapa-reciclagem">
+        <!-- O mapa será carregado dinamicamente via JavaScript -->
+        <div class="mapa-placeholder" aria-label="Mapa de infraestrutura de reciclagem em Sergipe">
+          <i class="fas fa-map-marked-alt" aria-hidden="true"></i>
+          <p>Carregando mapa interativo...</p>
+        </div>
+      </div>
+      <div class="mapa-legenda">
+        <span class="legenda-item"><span class="cor-legenda coleta-seletiva"></span> Coleta Seletiva</span>
+        <span class="legenda-item"><span class="cor-legenda cooperativas"></span> Cooperativas de Reciclagem</span>
+        <span class="legenda-item"><span class="cor-legenda ecopontos"></span> Ecopontos</span>
+        <span class="legenda-item"><span class="cor-legenda compostagem"></span> Unidades de Compostagem</span>
+      </div>
+    </section>
+
+    <!-- Seção de compartilhamento social com classes atualizadas -->
+    <section class="compartilhamento">
+      <h2>Compartilhe Estes Dados</h2>
+      <p>Ajude a promover a conscientização sobre consumo e produção responsáveis em Sergipe</p>
+      <div class="botoes-sociais">
+        <a href="https://twitter.com/intent/tweet?text=Confira%20os%20indicadores%20do%20ODS%2012%20-%20Consumo%20e%20Produção%20Responsáveis%20em%20Sergipe&url=https://www.mosaicosfuturos.com/painel-ods/ods12.html" target="_blank" rel="noopener noreferrer" class="btn-social btn-twitter" aria-label="Compartilhar no Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i> Twitter
+        </a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.mosaicosfuturos.com/painel-ods/ods12.html" target="_blank" rel="noopener noreferrer" class="btn-social btn-facebook" aria-label="Compartilhar no Facebook">
+          <i class="fab fa-facebook-f" aria-hidden="true"></i> Facebook
+        </a>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://www.mosaicosfuturos.com/painel-ods/ods12.html&title=ODS%2012%20-%20Consumo%20e%20Produção%20Responsáveis%20em%20Sergipe" target="_blank" rel="noopener noreferrer" class="btn-social btn-linkedin" aria-label="Compartilhar no LinkedIn">
+          <i class="fab fa-linkedin-in" aria-hidden="true"></i> LinkedIn
+        </a>
+        <a href="https://api.whatsapp.com/send?text=Confira%20os%20indicadores%20do%20ODS%2012%20-%20Consumo%20e%20Produção%20Responsáveis%20em%20Sergipe:%20https://www.mosaicosfuturos.com/painel-ods/ods12.html" target="_blank" rel="noopener noreferrer" class="btn-social btn-whatsapp" aria-label="Compartilhar no WhatsApp">
+          <i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp
+        </a>
+      </div>
+    </section>
+
+    <!-- Seção de participação cidadã com classes atualizadas -->
+    <section class="participacao-cidada">
+      <h2>Sua Opinião Importa</h2>
+      <p>Ajude-nos a melhorar os padrões de consumo e produção sustentáveis em Sergipe</p>
+      <div class="opcoes-participacao">
+        <a href="/contato/?assunto=Feedback%20ODS%2012" class="btn-contribuir" aria-label="Contribuir com feedback sobre o ODS 12">
+          <i class="fas fa-comment-alt" aria-hidden="true"></i> Enviar Feedback
+        </a>
+        <button class="btn-participativo" id="btn-denunciar" aria-label="Compartilhar iniciativa sustentável">
+          <i class="fas fa-lightbulb" aria-hidden="true"></i> Compartilhar Iniciativa
+        </button>
+        <button class="btn-participativo" id="btn-forum" aria-label="Participar do fórum de discussão">
+          <i class="fas fa-users" aria-hidden="true"></i> Fórum de Discussão
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 LIMFS - Laboratório de Indicadores para Monitoramento das Famílias Sergipanas</p>
+      <p>Dados atualizados em <span id="data-atualizacao">Abril de 2025</span></p>
+      <p><a href="/acessibilidade.html">Política de Acessibilidade</a> | <a href="/privacidade.html">Política de Privacidade</a></p>
+    </div>
+  </footer>
+
+  <!-- Modal de compartilhamento de iniciativas -->
+  <div id="modal-denuncia" class="modal" role="dialog" aria-labelledby="titulo-denuncia" aria-hidden="true">
+    <div class="modal-conteudo">
+      <span class="fechar-modal" id="fechar-denuncia" aria-label="Fechar">&times;</span>
+      <h2 id="titulo-denuncia">Compartilhar Iniciativa Sustentável</h2>
+      <div id="info-denuncia" class="info-box">
+        <i class="fas fa-info-circle" aria-hidden="true"></i>
+        <p>Conhece algum projeto ou iniciativa de consumo e produção sustentáveis em Sergipe? Compartilhe conosco para ajudar a inspirar outras pessoas e organizações!</p>
+      </div>
+      <form id="form-denuncia" action="/api/iniciativa-sustentavel" method="post">
+        <div class="form-grupo">
+          <label for="tipo-denuncia">Tipo de iniciativa:</label>
+          <select id="tipo-denuncia" name="tipo" required>
+            <option value="">Selecione...</option>
+            <option value="reciclagem">Reciclagem/Reutilização</option>
+            <option value="residuo-zero">Resíduo Zero</option>
+            <option value="economia-circular">Economia Circular</option>
+            <option value="alimentos">Combate ao Desperdício de Alimentos</option>
+            <option value="energia">Eficiência Energética</option>
+            <option value="agua">Conservação de Água</option>
+            <option value="outro">Outro</option>
+          </select>
+        </div>
+        <div class="form-grupo">
+          <label for="descricao-denuncia">Descrição da iniciativa:</label>
+          <textarea id="descricao-denuncia" name="descricao" rows="4" required placeholder="Descreva a iniciativa, seus objetivos e resultados alcançados"></textarea>
+        </div>
+        <div class="form-grupo">
+          <label for="local-denuncia">Local da iniciativa:</label>
+          <input type="text" id="local-denuncia" name="local" required placeholder="Ex: nome da organização, município, etc">
+        </div>
+        <div class="form-grupo form-contato">
+          <p>Dados para contato (opcional):</p>
+          <div>
+            <label for="nome-denunciante">Nome:</label>
+            <input type="text" id="nome-denunciante" name="nome" placeholder="Seu nome (opcional)">
+          </div>
+          <div>
+            <label for="email-denunciante">Email para retorno:</label>
+            <input type="email" id="email-denunciante" name="email" placeholder="seu@email.com (opcional)">
+          </div>
+        </div>
+        <div class="form-acoes">
+          <button type="submit" class="btn-enviar-denuncia">Enviar Iniciativa</button>
+        </div>
+      </form>
+      <div id="feedback-denuncia" class="feedback-mensagem" style="display: none;"></div>
+    </div>
+  </div>
+
+  <!-- Script de tratamento de erros e modal -->
+  <script>
+    // Inicialização de tratamento de erros para componentes críticos
+    document.addEventListener('DOMContentLoaded', () => {
+      // Tratamento global de erros
+      window.addEventListener('error', (event) => {
+        console.error('Erro capturado globalmente:', event.error);
+        const errorMessage = document.getElementById('error-message');
+        if (errorMessage) {
+          errorMessage.textContent = 'Ocorreu um erro ao carregar os dados. Por favor, recarregue a página ou tente novamente mais tarde.';
+          errorMessage.style.display = 'block';
+          document.getElementById('loading-indicator').style.display = 'none';
+        }
+      });
+      
+      // Simular tempo limite para carregamento
+      setTimeout(() => {
+        const loadingIndicator = document.getElementById('loading-indicator');
+        if (loadingIndicator && loadingIndicator.style.display !== 'none') {
+          loadingIndicator.style.display = 'none';
+          document.getElementById('error-message').textContent = 'Tempo limite excedido ao carregar os dados. Verifique sua conexão ou tente novamente mais tarde.';
+          document.getElementById('error-message').style.display = 'block';
+        }
+      }, 30000); // 30 segundos de timeout
+
+      // Funcionalidade do modal de compartilhamento
+      const modalDenuncia = document.getElementById('modal-denuncia');
+      const btnDenunciar = document.getElementById('btn-denunciar');
+      const btnFecharDenuncia = document.getElementById('fechar-denuncia');
+      const formDenuncia = document.getElementById('form-denuncia');
+      const feedbackDenuncia = document.getElementById('feedback-denuncia');
+      
+      // Abrir modal ao clicar no botão
+      if (btnDenunciar) {
+        btnDenunciar.addEventListener('click', () => {
+          modalDenuncia.style.display = 'block';
+          document.querySelector('#modal-denuncia h2').focus();
+        });
+      }
+      
+      // Fechar modal ao clicar no X
+      if (btnFecharDenuncia) {
+        btnFecharDenuncia.addEventListener('click', () => {
+          modalDenuncia.style.display = 'none';
+        });
+      }
+      
+      // Fechar modal ao clicar fora dele
+      window.addEventListener('click', (event) => {
+        if (event.target === modalDenuncia) {
+          modalDenuncia.style.display = 'none';
+        }
+      });
+      
+      // Fechar modal com a tecla ESC para melhorar acessibilidade
+      window.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && modalDenuncia.style.display === 'block') {
+          modalDenuncia.style.display = 'none';
+        }
+      });
+      
+      // Submeter formulário de compartilhamento
+      if (formDenuncia) {
+        formDenuncia.addEventListener('submit', (event) => {
+          event.preventDefault();
+          
+          // Simulação de envio bem-sucedido (em produção, você enviaria para o servidor)
+          formDenuncia.style.display = 'none';
+          feedbackDenuncia.textContent = 'Obrigado por compartilhar essa iniciativa! Ela será revisada e publicada em nosso banco de iniciativas sustentáveis.';
+          feedbackDenuncia.style.display = 'block';
+          
+          // Fechar modal após 5 segundos
+          setTimeout(() => {
+            modalDenuncia.style.display = 'none';
+            formDenuncia.style.display = 'block';
+            feedbackDenuncia.style.display = 'none';
+            formDenuncia.reset();
+          }, 5000);
+        });
+      }
+      
+      // Botão do fórum de discussão
+      const btnForum = document.getElementById('btn-forum');
+      if (btnForum) {
+        btnForum.addEventListener('click', () => {
+          // Redirecionamento para o fórum (em produção)
+          // window.location.href = '/forum/consumo-sustentavel';
+          
+          // Simulação de alerta para este exemplo
+          alert('Você será redirecionado para o fórum de discussão sobre Consumo e Produção Sustentáveis.');
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+{
+  "odsId": "ods7",
+  "titulo": "Energia Limpa e Acessível",
+  "descricao": "Garantir o acesso a fontes de energia fiáveis, sustentáveis e modernas para todos",
+  "corPrimaria": "#FCC30B",
+  "dataAtualizacao": "2025-04-10",
+  "indicadorPrincipal": {
+    "descricao": "Percentual de domicílios com acesso à energia elétrica",
+    "valor": "98,5%",
+    "tendencia": "positiva"
+  },
+  "historico": [
+    {"ano": "2018", "valor": 93.8, "meta": 95.0},
+    {"ano": "2019", "valor": 94.5, "meta": 96.0},
+    {"ano": "2020", "valor": 95.2, "meta": 97.0},
+    {"ano": "2021", "valor": 96.8, "meta": 98.0},
+    {"ano": "2022", "valor": 97.6, "meta": 99.0},
+    {"ano": "2023", "valor": 98.5, "meta": 99.5},
+    {"ano": "2024", "valor": 99.1, "meta": 100.0}
+  ],
+  "indicadoresDetalhados": [
+    {
+      "titulo": "Cobertura de Energia Solar Residencial",
+      "valor": "12,3%",
+      "unidade": "%",
+      "tendencia": "positiva",
+      "descricaoTendencia": "Crescimento de 24% em relação ao ano anterior",
+      "temHistorico": true,
+      "historico": [
+        {"ano": "2020", "valor": 5.2},
+        {"ano": "2021", "valor": 7.8},
+        {"ano": "2022", "valor": 9.9},
+        {"ano": "2023", "valor": 12.3}
+      ]
+    },
+    {
+      "titulo": "Capacidade Instalada de Energia Eólica",
+      "valor": "312 MW",
+      "unidade": "MW",
+      "tendencia": "positiva",
+      "descricaoTendencia": "Aumento de 45 MW no último ano",
+      "temHistorico": true,
+      "historico": [
+        {"ano": "2020", "valor": 150},
+        {"ano": "2021", "valor": 198},
+        {"ano": "2022", "valor": 267},
+        {"ano": "2023", "valor": 312}
+      ]
+    },
+    {
+      "titulo": "Consumo de Energia por Habitante",
+      "valor": "2.483 kWh",
+      "unidade": "kWh",
+      "tendencia": "estavel",
+      "descricaoTendencia": "Flutuação de apenas 1,2% em relação ao ano anterior",
+      "temHistorico": true,
+      "historico": [
+        {"ano": "2020", "valor": 2325},
+        {"ano": "2021", "valor": 2410},
+        {"ano": "2022", "valor": 2455},
+        {"ano": "2023", "valor": 2483}
+      ]
+    },
+    {
+      "titulo": "Eficiência Energética em Edificações Públicas",
+      "valor": "68,7%",
+      "unidade": "%",
+      "tendencia": "positiva",
+      "descricaoTendencia": "Crescimento contínuo devido a programas de modernização",
+      "temHistorico": true,
+      "historico": [
+        {"ano": "2020", "valor": 45.0},
+        {"ano": "2021", "valor": 53.2},
+        {"ano": "2022", "valor": 61.5},
+        {"ano": "2023", "valor": 68.7}
+      ]
+    },
+    {
+      "titulo": "Percentual de Energia de Fontes Renováveis",
+      "valor": "34,6%",
+      "unidade": "%",
+      "tendencia": "positiva",
+      "descricaoTendencia": "Crescimento constante na matriz energética do estado",
+      "temHistorico": true,
+      "historico": [
+        {"ano": "2020", "valor": 22.1},
+        {"ano": "2021", "valor": 25.8},
+        {"ano": "2022", "valor": 29.4},
+        {"ano": "2023", "valor": 34.6}
+      ]
+    }
+  ],
+  "indicadoresRegionais": {
+    "Aracaju": {"valor": 99.8},
+    "Nossa Senhora do Socorro": {"valor": 99.5},
+    "Lagarto": {"valor": 97.5},
+    "Itabaiana": {"valor": 98.2},
+    "Estância": {"valor": 98.9},
+    "São Cristóvão": {"valor": 99.1},
+    "Tobias Barreto": {"valor": 96.8},
+    "Propriá": {"valor": 97.3},
+    "Simão Dias": {"valor": 95.9},
+    "Capela": {"valor": 96.4}
+  },
+  "subindicadores": [
+    {
+      "titulo": "Energia Solar",
+      "historico": [
+        {"ano": "2018", "valor": 2.1},
+        {"ano": "2019", "valor": 3.5},
+        {"ano": "2020", "valor": 5.2},
+        {"ano": "2021", "valor": 7.8},
+        {"ano": "2022", "valor": 9.9},
+        {"ano": "2023", "valor": 12.3},
+        {"ano": "2024", "valor": 15.1}
+      ]
+    },
+    {
+      "titulo": "Energia Eólica",
+      "historico": [
+        {"ano": "2018", "valor": 1.2},
+        {"ano": "2019", "valor": 1.8},
+        {"ano": "2020", "valor": 3.1},
+        {"ano": "2021", "valor": 4.5},
+        {"ano": "2022", "valor": 6.3},
+        {"ano": "2023", "valor": 8.5},
+        {"ano": "2024", "valor": 10.7}
+      ]
+    },
+    {
+      "titulo": "Biomassa",
+      "historico": [
+        {"ano": "2018", "valor": 6.5},
+        {"ano": "2019", "valor": 7.2},
+        {"ano": "2020", "valor": 8.4},
+        {"ano": "2021", "valor": 9.1},
+        {"ano": "2022", "valor": 10.5},
+        {"ano": "2023", "valor": 11.8},
+        {"ano": "2024", "valor": 12.4}
+      ]
+    },
+    {
+      "titulo": "Hidrelétrica",
+      "historico": [
+        {"ano": "2018", "valor": 1.8},
+        {"ano": "2019", "valor": 1.9},
+        {"ano": "2020", "valor": 2.0},
+        {"ano": "2021", "valor": 2.1},
+        {"ano": "2022", "valor": 2.1},
+        {"ano": "2023", "valor": 2.0},
+        {"ano": "2024", "valor": 2.2}
+      ]
+    }
+  ]
+}

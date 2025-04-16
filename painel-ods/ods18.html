@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Dashboard ODS 18 - Igualdade Racial | LIMFS - Laboratório de Indicadores para Monitoramento das Famílias Sergipanas">
+  <meta name="description" content="Dashboard ODS18 - ODS Local | LIMFS - Laboratório de Indicadores para Monitoramento das Famílias Sergipanas">
   <!-- Content Security Policy adicionada -->
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
@@ -19,34 +19,39 @@
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="Referrer-Policy" content="no-referrer">
-  <title>ODS 18 - Igualdade Racial | LIMFS</title>
+  <title>ODS18 - ODS Local | LIMFS</title>
+  
+  <!-- CSS Global e Específico -->
+  <link rel="stylesheet" href="../styles/global-fonts.css">
   <link rel="stylesheet" href="../styles/global-variables.css">
+  <link rel="stylesheet" href="../styles/components/ods-layout-global.css">
+  <link rel="stylesheet" href="../styles/components/ods18-colors.css">
   <link rel="stylesheet" href="../styles/painel-ods.css">
+  
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  
+  <!-- Fonte Public Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script type="module" src="../js/painel-ods.js"></script>
+  
   <!-- Metadados para compartilhamento social -->
-  <meta property="og:title" content="ODS 18 - Igualdade Racial | LIMFS">
-  <meta property="og:description" content="Conheça o ODS brasileiro para igualdade racial, combate ao racismo e promoção da equidade étnico-racial em Sergipe">
+  <meta property="og:title" content="ODS18 - ODS Local | LIMFS">
+  <meta property="og:description" content="Conheça os indicadores de ODS Local em Sergipe">
   <meta property="og:image" content="../img/logo-icons-coloridos-18.png">
   <meta property="og:url" content="https://www.mosaicosfuturos.com/painel-ods/ods18.html">
-  <meta name="twitter:card" content="summary_large_image">
-</head>
-<body data-pagina="ods18">
-  <a href="#conteudo-principal" class="pular-link">Pular para o conteúdo principal</a>
+  <meta name="twitter:card" content="summary_large_image"></head>
+<body class="ods18-page" data-pagina="ods18">
   <header>
-    <div class="container">
-      <h1>Laboratório de Indicadores para Monitoramento das Famílias Sergipanas</h1>
-      <nav aria-label="Menu principal">
-        <ul role="menubar">
-          <li role="menuitem"><a href="../index.html">Início</a></li>
-          <li role="menuitem"><a href="../painel-ods/index.html">Painel Geral</a></li>
-          <li role="menuitem"><a href="../sobre/index.html">Sobre</a></li>
-        </ul>
-      </nav>
-    </div>
+    <div id="menu-container"></div>
   </header>
-
+  <a href="#conteudo-principal" class="pular-link">Pular para o conteúdo principal</a>
+  
   <main id="conteudo-principal" role="main" class="container">
     <div class="ods-header">
       <img src="../img/logo-icons-coloridos-18.png" alt="Ícone ODS 18" class="ods-icon">
@@ -274,6 +279,7 @@
     </div>
   </div>
 
+  <script src="../js/menu.js" type="module"></script>
   <style>
     /* Estilo específico para o ODS 18 com sua cor oficial (roxo) */
     .valor-principal, .indicador-card h3 {

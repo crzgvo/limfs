@@ -3,6 +3,18 @@
  */
 
 /* Layout principal */
+body, .painel-ods-container {
+    font-family: var(--font-primary);
+    color: var(--cor-texto);
+    background: var(--cor-fundo);
+}
+
+h1, h2, h3 {
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-bold);
+    color: var(--cor-primaria);
+}
+
 #painel-ods-principal {
     padding: 80px 0;
     background-color: var(--primary-blue);
@@ -72,6 +84,11 @@
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border-top: 4px solid var(--primary-blue);
+}
+
+.card {
+    background: var(--cinza-100);
+    color: var(--cor-texto);
 }
 
 /* Cores específicas para cada ODS */

@@ -1,0 +1,278 @@
+/**
+ * Animações e Transições - LIMFS
+ * Arquivo centralizado para animações e transições utilizadas no painel ODS
+ * 
+ * Última atualização: 14/04/2025
+ */
+
+/* === VARIÁVEIS DE ANIMAÇÃO === */
+:root {
+  --transition-padrao: all 0.3s ease;
+  --transition-rapida: all 0.2s ease;
+  --transition-lenta: all 0.5s ease;
+  
+  /* Duração das animações */
+  --animacao-rapida: 0.3s;
+  --animacao-media: 0.5s;
+  --animacao-lenta: 0.8s;
+  
+  /* Timing functions */
+  --timing-suave: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --timing-elastico: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --timing-enfase: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* === ANIMAÇÕES BÁSICAS === */
+
+/* Fade In */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn var(--animacao-media) var(--timing-suave) forwards;
+}
+
+/* Fade In e move para cima */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp var(--animacao-media) var(--timing-suave) forwards;
+}
+
+/* Fade In e move para baixo */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-down {
+  animation: fadeInDown var(--animacao-media) var(--timing-suave) forwards;
+}
+
+/* Fade In e move da esquerda */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in-left {
+  animation: fadeInLeft var(--animacao-media) var(--timing-suave) forwards;
+}
+
+/* Fade In e move da direita */
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in-right {
+  animation: fadeInRight var(--animacao-media) var(--timing-suave) forwards;
+}
+
+/* Pulsar */
+@keyframes pulsar {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.pulsar {
+  animation: pulsar var(--animacao-media) ease-in-out infinite;
+}
+
+/* Spinner de carregamento */
+@keyframes girar {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.girar {
+  animation: girar var(--animacao-lenta) linear infinite;
+}
+
+/* Aparecer com efeito de escala */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.scale-in {
+  animation: scaleIn var(--animacao-media) var(--timing-enfase) forwards;
+}
+
+/* === TRANSIÇÕES PARA ELEMENTOS UI === */
+
+/* Transição padrão para cards */
+.card-indicador,
+.card-acao,
+.card-info {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card-indicador:hover, 
+.card-acao:hover, 
+.card-info:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Transição para botões sociais */
+.btn-social {
+  transition: transform 0.2s ease-out;
+}
+
+.btn-social:hover {
+  transform: scale(1.05);
+}
+
+/* Transição para botões de ação */
+.botao-primario, 
+.botao-secundario,
+.botao-exportar {
+  transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.botao-primario:hover, 
+.botao-secundario:hover,
+.botao-exportar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.botao-primario:active, 
+.botao-secundario:active,
+.botao-exportar:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Links com animação de sublinhado */
+.link-animado {
+  position: relative;
+  text-decoration: none;
+}
+
+.link-animado::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+
+.link-animado:hover::after {
+  width: 100%;
+}
+
+/* Transição para ícones em links e botões */
+.link-com-icone i,
+.botao-com-icone i {
+  transition: transform 0.2s ease;
+}
+
+.link-com-icone:hover i,
+.botao-com-icone:hover i {
+  transform: translateX(3px);
+}
+
+/* === ANIMAÇÕES PARA GRÁFICOS === */
+
+/* Entrada de gráficos */
+.grafico-container {
+  opacity: 0;
+}
+
+.grafico-container.carregado {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Loader para carregamento de dados */
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left: 4px solid var(--primary-blue, #0056b3);
+  border-radius: 50%;
+  animation: girar 1s linear infinite;
+}
+
+/* === COMPATIBILIDADE COM PREFERÊNCIAS DE USUÁRIO === */
+
+/* Respeito à preferência do usuário por movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .card-indicador:hover,
+  .card-acao:hover,
+  .card-info:hover,
+  .botao-primario:hover,
+  .botao-secundario:hover,
+  .botao-exportar:hover,
+  .link-com-icone:hover i,
+  .botao-com-icone:hover i {
+    transform: none !important;
+  }
+  
+  .link-animado::after {
+    transition: none !important;
+  }
+}

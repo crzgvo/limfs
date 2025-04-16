@@ -1,0 +1,229 @@
+/**
+ * Melhorias de acessibilidade e foco - LIMFS
+ * Arquivo específico para estilos que melhoram a acessibilidade de navegação por teclado
+ * 
+ * Última atualização: 14/04/2025
+ */
+
+/* Estilos para foco padrão melhorado */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+[tabindex]:focus {
+  outline: var(--foco-outline-largura, 3px) solid var(--primary-blue, #0056b3);
+  outline-offset: var(--foco-outline-offset, 3px);
+  box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.25);
+  transition: outline-offset 0.2s ease;
+}
+
+/* Estilos específicos de foco para cada ODS */
+.ods1-page a:focus, .ods1-page button:focus, .ods1-page input:focus {
+  outline-color: var(--ods1, #E5243B);
+  box-shadow: 0 0 0 3px rgba(229, 36, 59, 0.25);
+}
+
+.ods2-page a:focus, .ods2-page button:focus, .ods2-page input:focus {
+  outline-color: var(--ods2, #DDA63A);
+  box-shadow: 0 0 0 3px rgba(221, 166, 58, 0.25);
+}
+
+.ods3-page a:focus, .ods3-page button:focus, .ods3-page input:focus {
+  outline-color: var(--ods3, #4C9F38);
+  box-shadow: 0 0 0 3px rgba(76, 159, 56, 0.25);
+}
+
+.ods4-page a:focus, .ods4-page button:focus, .ods4-page input:focus {
+  outline-color: var(--ods4, #C5192D);
+  box-shadow: 0 0 0 3px rgba(197, 25, 45, 0.25);
+}
+
+.ods5-page a:focus, .ods5-page button:focus, .ods5-page input:focus {
+  outline-color: var(--ods5, #FF3A21);
+  box-shadow: 0 0 0 3px rgba(255, 58, 33, 0.25);
+}
+
+.ods6-page a:focus, .ods6-page button:focus, .ods6-page input:focus {
+  outline-color: var(--ods6, #26BDE2);
+  box-shadow: 0 0 0 3px rgba(38, 189, 226, 0.25);
+}
+
+.ods7-page a:focus, .ods7-page button:focus, .ods7-page input:focus {
+  outline-color: var(--ods7, #FCC30B);
+  box-shadow: 0 0 0 3px rgba(252, 195, 11, 0.25);
+}
+
+.ods8-page a:focus, .ods8-page button:focus, .ods8-page input:focus {
+  outline-color: var(--ods8, #A21942);
+  box-shadow: 0 0 0 3px rgba(162, 25, 66, 0.25);
+}
+
+.ods9-page a:focus, .ods9-page button:focus, .ods9-page input:focus {
+  outline-color: var(--ods9, #FD6925);
+  box-shadow: 0 0 0 3px rgba(253, 105, 37, 0.25);
+}
+
+.ods10-page a:focus, .ods10-page button:focus, .ods10-page input:focus {
+  outline-color: var(--ods10, #DD1367);
+  box-shadow: 0 0 0 3px rgba(221, 19, 103, 0.25);
+}
+
+.ods11-page a:focus, .ods11-page button:focus, .ods11-page input:focus {
+  outline-color: var(--ods11, #FD9D24);
+  box-shadow: 0 0 0 3px rgba(253, 157, 36, 0.25);
+}
+
+.ods12-page a:focus, .ods12-page button:focus, .ods12-page input:focus {
+  outline-color: var(--ods12, #BF8B2E);
+  box-shadow: 0 0 0 3px rgba(191, 139, 46, 0.25);
+}
+
+.ods13-page a:focus, .ods13-page button:focus, .ods13-page input:focus {
+  outline-color: var(--ods13, #3F7E44);
+  box-shadow: 0 0 0 3px rgba(63, 126, 68, 0.25);
+}
+
+.ods14-page a:focus, .ods14-page button:focus, .ods14-page input:focus {
+  outline-color: var(--ods14, #0A97D9);
+  box-shadow: 0 0 0 3px rgba(10, 151, 217, 0.25);
+}
+
+.ods15-page a:focus, .ods15-page button:focus, .ods15-page input:focus {
+  outline-color: var(--ods15, #56C02B);
+  box-shadow: 0 0 0 3px rgba(86, 192, 43, 0.25);
+}
+
+.ods16-page a:focus, .ods16-page button:focus, .ods16-page input:focus {
+  outline-color: var(--ods16, #00689D);
+  box-shadow: 0 0 0 3px rgba(0, 104, 157, 0.25);
+}
+
+.ods17-page a:focus, .ods17-page button:focus, .ods17-page input:focus {
+  outline-color: var(--ods17, #19486A);
+  box-shadow: 0 0 0 3px rgba(25, 72, 106, 0.25);
+}
+
+.ods18-page a:focus, .ods18-page button:focus, .ods18-page input:focus {
+  outline-color: var(--ods18, #6F1D78);
+  box-shadow: 0 0 0 3px rgba(111, 29, 120, 0.25);
+}
+
+/* Link para pular a navegação (acessibilidade) */
+.pular-link {
+  position: absolute;
+  top: -50px;
+  left: 0;
+  padding: 10px 15px;
+  background: var(--primary-blue, #0056b3);
+  color: #fff;
+  z-index: 9999;
+  transition: top 0.3s;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 0 0 4px 0;
+}
+
+.pular-link:focus {
+  top: 0;
+}
+
+/* Área de foco para cartões e componentes maiores */
+.card-indicador:focus-within,
+.acoes-card:focus-within,
+.grafico-container:focus-within {
+  box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.25);
+  transition: box-shadow 0.3s ease;
+}
+
+/* Verificar suporte a prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Suporte a alto contraste */
+@media (forced-colors: active) {
+  a:focus,
+  button:focus,
+  input:focus,
+  select:focus,
+  textarea:focus,
+  [tabindex]:focus {
+    outline: 3px solid CanvasText !important;
+    forced-color-adjust: none;
+  }
+  
+  .card-indicador,
+  .acoes-card,
+  .grafico-container {
+    border: 1px solid CanvasText;
+  }
+}
+
+/* Melhorar tamanho de alvo de toque em dispositivos móveis (WCAG 2.1 - 2.5.5) */
+@media (max-width: 768px) {
+  button,
+  .btn,
+  .botao-primario,
+  .botao-secundario,
+  a.btn,
+  input[type="button"],
+  input[type="submit"] {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 10px 15px;
+  }
+}
+
+/* Classe para elementos apenas para leitores de tela */
+.screen-reader-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Garantir que as legendas de gráficos sejam acessíveis */
+.grafico-legenda {
+  margin-top: 10px;
+  text-align: center;
+  color: #666;
+}
+
+/* Estilos para alertas e mensagens de feedback */
+.alerta-acessibilidade {
+  border-left: 4px solid;
+  padding: 10px 15px;
+  margin: 15px 0;
+  border-radius: 0 4px 4px 0;
+}
+
+.alerta-info {
+  border-color: var(--ods14, #0A97D9);
+  background-color: rgba(10, 151, 217, 0.1);
+}
+
+.alerta-sucesso {
+  border-color: var(--ods3, #4C9F38);
+  background-color: rgba(76, 159, 56, 0.1);
+}
+
+.alerta-aviso {
+  border-color: var(--ods7, #FCC30B);
+  background-color: rgba(252, 195, 11, 0.1);
+}
+
+.alerta-erro {
+  border-color: var(--ods1, #E5243B);
+  background-color: rgba(229, 36, 59, 0.1);
+}

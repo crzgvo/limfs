@@ -1,0 +1,49 @@
+{
+  "meta": {
+    "titulo": "ODS 9 - Indústria, Inovação e Infraestrutura",
+    "descricao": "Construir infraestruturas resilientes, promover a industrialização inclusiva e sustentável e fomentar a inovação",
+    "ultima_atualizacao": "2025-04-12",
+    "cor_primaria": "#FD6925",
+    "cor_secundaria": "rgba(253, 105, 37, 0.2)"
+  },
+  "dados": {
+    "valor": 23.8,
+    "unidade": "%",
+    "descricao": "Participação da indústria no PIB estadual"
+  },
+  "historico": [
+    {"ano": 2018, "valor": 20.2},
+    {"ano": 2019, "valor": 20.8},
+    {"ano": 2020, "valor": 19.7},
+    {"ano": 2021, "valor": 21.5},
+    {"ano": 2022, "valor": 22.4},
+    {"ano": 2023, "valor": 23.2},
+    {"ano": 2024, "valor": 23.8}
+  ],
+  "indicadores_detalhados": [
+    {
+      "nome": "Acesso à internet banda larga",
+      "valor": 78.5,
+      "unidade": "%",
+      "tendencia": "crescente"
+    },
+    {
+      "nome": "Investimento em P&D",
+      "valor": 1.2,
+      "unidade": "% do PIB",
+      "tendencia": "crescente"
+    },
+    {
+      "nome": "Patentes registradas",
+      "valor": 42,
+      "unidade": "por milhão",
+      "tendencia": "crescente"
+    },
+    {
+      "nome": "Infraestrutura de transportes",
+      "valor": 64.3,
+      "unidade": "índice",
+      "tendencia": "crescente"
+    }
+  ]
+}

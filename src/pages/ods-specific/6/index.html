@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dashboard ODS 6 - Água Potável e Saneamento | LIMFS - Laboratório de Indicadores para Monitoramento das Famílias Sergipanas">
+  <title>ODS 6 - Água Potável e Saneamento | LIMFS</title>
+  <link rel="stylesheet" href="../styles/global-variables.css">
+  <link rel="stylesheet" href="../styles/painel-ods.css">
+  <link rel="stylesheet" href="../styles/components/ods6.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module" src="../js/painel-ods.js"></script>
+</head>
+<body data-pagina="ods6">
+  <header>
+    <div class="container">
+      <h1>Laboratório de Indicadores para Monitoramento das Famílias Sergipanas</h1>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Início</a></li>
+          <li><a href="../painel-ods/index.html">Painel Geral</a></li>
+          <li><a href="../sobre/index.html">Sobre</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="ods-header">
+      <img src="../img/logo-icons-coloridos-06.png" alt="ODS 6" class="ods-icon">
+      <div>
+        <h1 id="ods-titulo">ODS 6 - Água Potável e Saneamento</h1>
+        <p id="ods-descricao">Assegurar a disponibilidade e gestão sustentável da água e saneamento para todas e todos</p>
+        <p id="ultima-atualizacao" class="small">Carregando informações...</p>
+      </div>
+    </div>
+
+    <div id="loading-indicator" class="loader">Carregando dados...</div>
+    <div id="error-message" class="error" style="display: none;"></div>
+
+    <section class="dashboard-container">
+      <div class="card valor-principal-card">
+        <h2>Indicador Principal</h2>
+        <div class="valor-principal-container">
+          <span id="valor-principal" class="valor-principal">--</span>
+          <span id="valor-descricao" class="valor-descricao">Carregando...</span>
+        </div>
+      </div>
+
+      <div class="card grafico-card">
+        <h2>Evolução Histórica</h2>
+        <div class="grafico-container" style="height: 300px;">
+          <canvas id="grafico-principal"></canvas>
+        </div>
+        <button id="btn-exportar" class="btn-exportar">
+          <i class="fas fa-download"></i> Exportar Dados (CSV)
+        </button>
+      </div>
+    </section>
+
+    <section class="indicadores-detalhados-container">
+      <h2>Indicadores Detalhados</h2>
+      <div id="indicadores-detalhados" class="indicadores-grid">
+        <!-- Os indicadores detalhados serão injetados dinamicamente aqui -->
+      </div>
+    </section>
+
+    <section class="mapa-saneamento">
+      <h2>Mapa de Cobertura de Saneamento</h2>
+      <p>Visualize a distribuição da cobertura de saneamento básico nos municípios de Sergipe:</p>
+      <div class="mapa-container" id="mapa-saneamento">
+        <!-- O mapa será carregado dinamicamente via JavaScript -->
+        <img src="../img/mapa-placeholder.jpg" alt="Mapa de cobertura de saneamento" class="mapa-placeholder">
+      </div>
+      <div class="mapa-legenda">
+        <span class="legenda-item"><span class="cor-legenda nivel-alto"></span> Acima de 70%</span>
+        <span class="legenda-item"><span class="cor-legenda nivel-medio"></span> Entre 40% e 70%</span>
+        <span class="legenda-item"><span class="cor-legenda nivel-baixo"></span> Abaixo de 40%</span>
+      </div>
+    </section>
+
+    <section class="acoes-impacto">
+      <h2>Ações de Impacto</h2>
+      <div class="acoes-grid">
+        <div class="acao-card">
+          <h3>Água para Todos</h3>
+          <p>Programa de expansão da rede de abastecimento de água em comunidades rurais, com implementação de 150 sistemas simplificados de captação e tratamento.</p>
+          <a href="#" class="btn-saiba-mais">Saiba mais</a>
+        </div>
+        <div class="acao-card">
+          <h3>Saneamento Básico Universal</h3>
+          <p>Projeto de ampliação da rede coletora de esgoto sanitário em áreas periféricas, beneficiando mais de 100 mil famílias sergipanas.</p>
+          <a href="#" class="btn-saiba-mais">Saiba mais</a>
+        </div>
+        <div class="acao-card">
+          <h3>Preservação de Mananciais</h3>
+          <p>Iniciativa para proteção e recuperação de áreas de mananciais, com reflorestamento de matas ciliares e monitoramento de qualidade da água.</p>
+          <a href="#" class="btn-saiba-mais">Saiba mais</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="recomendacoes-politicas">
+      <h2>Recomendações de Políticas Públicas</h2>
+      <div class="recomendacoes-lista">
+        <div class="recomendacao-item">
+          <h3>1. Ampliar os investimentos em saneamento</h3>
+          <p>Aumentar o percentual de recursos destinados à infraestrutura de água e esgoto no orçamento estadual, priorizando municípios com menor IDH.</p>
+        </div>
+        <div class="recomendacao-item">
+          <h3>2. Incrementar fiscalização da qualidade da água</h3>
+          <p>Fortalecer a capacidade de monitoramento da qualidade da água distribuída à população, especialmente em áreas rurais e periféricas.</p>
+        </div>
+        <div class="recomendacao-item">
+          <h3>3. Incentivos fiscais para reúso de água</h3>
+          <p>Implementar programa de incentivos fiscais para empresas que adotem sistemas de reúso de água e tratamento de efluentes além dos padrões mínimos exigidos.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 LIMFS - Laboratório de Indicadores para Monitoramento das Famílias Sergipanas</p>
+      <p>Dados atualizados em <span id="data-atualizacao">Abril de 2025</span></p>
+    </div>
+  </footer>
+</body>
+</html>

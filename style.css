@@ -10,6 +10,11 @@
 @import url('./styles/global-variables.css');
 @import url('./styles/typography.css');
 
+/* Cores e estilos ODS */
+@import url('./styles/components/ods-colors.css');
+@import url('./styles/components/acessibilidade-focus.css');
+@import url('./styles/components/animacoes.css');
+
 /* Componentes Base */
 @import url('./styles/menu.css');
 @import url('./styles/footer.css');
@@ -34,4 +39,49 @@ body {
 
 main {
     padding-top: 68px; /* Compensa altura do cabeçalho fixo */
+}
+
+/* Padrão global para botões sociais e opções de participação */
+.botoes-sociais {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  margin: 1.5rem 0;
+}
+
+.botoes-sociais a, .botoes-sociais button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cor-primaria, #0072ce);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.botoes-sociais a:hover, .botoes-sociais button:hover {
+  background: var(--cor-secundaria, #005fa3);
+}
+
+.opcoes-participacao {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  margin: 1.5rem 0;
+}
+
+@media (max-width: 600px) {
+  .botoes-sociais, .opcoes-participacao {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
 }

@@ -1,0 +1,472 @@
+/**
+ * Estilos para o dashboard comparativo de ODS
+ * Fornece visualização integrada de indicadores entre diferentes ODS
+ */
+
+.dashboard-comparativo-container {
+  background-color: var(--white, #fff);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 2rem 0;
+  padding: 1.5rem;
+  position: relative;
+}
+
+.dashboard-titulo {
+  color: var(--primary-blue, #0056b3);
+  margin-top: 0;
+  text-align: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--light-gray, #e9ecef);
+}
+
+/* Estilos para controles */
+.controles-dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: var(--lightest-gray, #f8f9fa);
+  border-radius: 6px;
+}
+
+.selector-tipo-grafico,
+.selector-periodo,
+.checkbox-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.selector-tipo-grafico label,
+.selector-periodo label {
+  font-weight: 600;
+  color: var(--dark-gray, #343a40);
+}
+
+.opcoes-tipo {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-tipo {
+  background-color: var(--white, #fff);
+  border: 1px solid var(--light-gray, #ced4da);
+  border-radius: 4px;
+  color: var(--dark-gray, #495057);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s;
+}
+
+.btn-tipo:hover {
+  background-color: var(--lightest-blue, #e6f2ff);
+  border-color: var(--light-blue, #b8daff);
+}
+
+.btn-tipo.ativo {
+  background-color: var(--primary-blue, #0056b3);
+  border-color: var(--primary-blue, #0056b3);
+  color: var(--white, #fff);
+}
+
+.btn-tipo i {
+  font-size: 1rem;
+}
+
+.controle-periodo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.controle-periodo select {
+  padding: 0.5rem;
+  border: 1px solid var(--light-gray, #ced4da);
+  border-radius: 4px;
+  background-color: var(--white, #fff);
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+/* Área de gráficos */
+.grafico-comparativo-area {
+  height: 400px;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+/* Loading e mensagens de erro */
+.loading-comparativo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  font-style: italic;
+  color: var(--gray, #6c757d);
+}
+
+.erro-comparativo {
+  background-color: #fff3f3;
+  border-left: 4px solid #dc3545;
+  color: #dc3545;
+  margin: 1rem 0;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.erro-comparativo i {
+  font-size: 1.5rem;
+}
+
+/* Tabela de dados comparativos */
+.tabela-dados-comparativos {
+  margin: 2rem 0;
+  padding: 1rem;
+  background-color: var(--lightest-gray, #f8f9fa);
+  border-radius: 6px;
+}
+
+.tabela-dados-comparativos h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--dark-gray, #343a40);
+}
+
+.tabela-indicadores {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.tabela-indicadores th {
+  text-align: left;
+  padding: 0.75rem;
+  background-color: var(--light-gray, #e9ecef);
+  border-bottom: 3px solid var(--primary-blue, #0056b3);
+}
+
+.tabela-indicadores td {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--light-gray, #dee2e6);
+}
+
+.tabela-indicadores tr:nth-child(even) {
+  background-color: var(--lightest-gray, #f8f9fa);
+}
+
+.tabela-indicadores .sem-dados {
+  color: var(--gray, #6c757d);
+  font-style: italic;
+  text-align: center;
+}
+
+.btn-exportar {
+  background-color: var(--success-green, #28a745);
+  border: none;
+  border-radius: 4px;
+  color: var(--white, #fff);
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  margin-left: auto;
+}
+
+.btn-exportar:hover {
+  background-color: #218838;
+}
+
+/* Área de correlação */
+.correlacao-area {
+  margin: 2rem 0;
+  padding: 1rem;
+  background-color: var(--lightest-gray, #f8f9fa);
+  border-radius: 6px;
+}
+
+.correlacao-area h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--dark-gray, #343a40);
+}
+
+.tabela-correlacao-container {
+  overflow-x: auto;
+}
+
+.tabela-correlacao {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.tabela-correlacao th,
+.tabela-correlacao td {
+  padding: 0.5rem;
+  text-align: center;
+  border: 1px solid var(--light-gray, #dee2e6);
+}
+
+.tabela-correlacao th {
+  background-color: var(--light-gray, #e9ecef);
+}
+
+.tabela-correlacao td:first-child {
+  text-align: left;
+  font-weight: 600;
+}
+
+/* Cores das correlações */
+.correlacao-forte-positiva {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.correlacao-media-positiva {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.correlacao-fraca {
+  background-color: #f8f9fa;
+  color: #6c757d;
+}
+
+.correlacao-media-negativa {
+  background-color: #ffeaef;
+  color: #7d2e46;
+}
+
+.correlacao-forte-negativa {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Legenda de correlação */
+.legenda-correlacao {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+  justify-content: center;
+  font-size: 0.85rem;
+}
+
+.legenda-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legenda-item .cor {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+}
+
+.legenda-item .correlacao-forte-positiva {
+  background-color: #d4edda;
+}
+
+.legenda-item .correlacao-media-positiva {
+  background-color: #e8f5e9;
+}
+
+.legenda-item .correlacao-fraca {
+  background-color: #f8f9fa;
+}
+
+.legenda-item .correlacao-media-negativa {
+  background-color: #ffeaef;
+}
+
+.legenda-item .correlacao-forte-negativa {
+  background-color: #f8d7da;
+}
+
+/* Área de informação dos ODS */
+.info-comparativa-area {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.carta-ods {
+  background-color: var(--white, #fff);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  border-top: 5px solid;
+}
+
+.carta-ods h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: var(--dark-gray, #343a40);
+}
+
+.ods-descricao {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--gray, #6c757d);
+  margin-bottom: 1rem;
+}
+
+.ods-indicadores-principais {
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.ods-indicadores-principais ul {
+  margin-top: 0.5rem;
+  padding-left: 1.5rem;
+}
+
+.ods-indicadores-principais li {
+  margin-bottom: 0.25rem;
+}
+
+.btn-ver-mais {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: var(--primary-blue, #0056b3);
+  color: var(--white, #fff);
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  text-align: center;
+  transition: background-color 0.2s;
+}
+
+.btn-ver-mais:hover {
+  background-color: #004494;
+}
+
+/* Responsividade */
+@media (max-width: 992px) {
+  .controles-dashboard {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .selector-tipo-grafico,
+  .selector-periodo,
+  .checkbox-container {
+    width: 100%;
+  }
+  
+  .grafico-comparativo-area {
+    height: 350px;
+  }
+  
+  .info-comparativa-area {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-comparativo-container {
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+  
+  .grafico-comparativo-area {
+    height: 300px;
+  }
+  
+  .opcoes-tipo {
+    flex-wrap: wrap;
+  }
+  
+  .tabela-indicadores {
+    font-size: 0.9rem;
+  }
+  
+  .legenda-correlacao {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Estilos de acessibilidade */
+.btn-tipo:focus-visible,
+.controle-periodo select:focus-visible,
+.btn-exportar:focus-visible,
+.btn-ver-mais:focus-visible {
+  outline: 3px solid var(--focus-outline, #4a90e2);
+  outline-offset: 2px;
+}
+
+/* Alto contraste */
+.alto-contraste .dashboard-comparativo-container {
+  background-color: #000;
+  border: 1px solid #fff;
+}
+
+.alto-contraste .dashboard-titulo {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+.alto-contraste .controles-dashboard,
+.alto-contraste .tabela-dados-comparativos,
+.alto-contraste .correlacao-area {
+  background-color: #000;
+  border: 1px solid #fff;
+}
+
+.alto-contraste .btn-tipo {
+  background-color: #000;
+  border-color: #fff;
+  color: #fff;
+}
+
+.alto-contraste .btn-tipo.ativo {
+  background-color: #ffff00;
+  color: #000;
+}
+
+.alto-contraste .tabela-indicadores th {
+  background-color: #000;
+  color: #fff;
+  border-bottom-color: #ffff00;
+}
+
+.alto-contraste .tabela-indicadores td {
+  border-bottom-color: #fff;
+}
+
+.alto-contraste .tabela-indicadores tr:nth-child(even) {
+  background-color: #111;
+}
+
+.alto-contraste .carta-ods {
+  background-color: #000;
+  border-color: #fff !important;
+  box-shadow: none;
+}
+
+.alto-contraste .ods-descricao {
+  color: #fff;
+}
+
+.alto-contraste .btn-exportar,
+.alto-contraste .btn-ver-mais {
+  background-color: #ffff00;
+  color: #000;
+}

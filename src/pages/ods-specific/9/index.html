@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dashboard ODS 9 - Indústria, Inovação e Infraestrutura | LIMFS - Laboratório de Indicadores para Monitoramento das Famílias Sergipanas">
+  <!-- Content Security Policy adicionada -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://cdnjs.cloudflare.com;
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com https://fonts.googleapis.com;
+    img-src 'self' data:;
+    font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com;
+    connect-src 'self' https://api.mosaicosfuturos.com;
+    object-src 'none';
+    frame-ancestors 'none';
+  ">
+  <title>ODS 9 - Indústria, Inovação e Infraestrutura | LIMFS</title>
+  <link rel="stylesheet" href="../styles/global-variables.css">
+  <link rel="stylesheet" href="../styles/painel-ods.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="../styles/components/ods9.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module" src="../js/painel-ods.js"></script>
+  <!-- Metadados para compartilhamento social -->
+  <meta property="og:title" content="ODS 9 - Indústria, Inovação e Infraestrutura | LIMFS">
+  <meta property="og:description" content="Conheça os indicadores e ações de impacto relacionados à indústria, inovação e infraestrutura em Sergipe">
+  <meta property="og:image" content="../img/logo-icons-coloridos-09.png">
+  <meta property="og:url" content="https://www.mosaicosfuturos.com/painel-ods/ods9.html">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+<body data-pagina="ods9">
+  <a href="#conteudo-principal" class="pular-link">Pular para o conteúdo principal</a>
+  <header>
+    <div class="container">
+      <h1>Laboratório de Indicadores para Monitoramento das Famílias Sergipanas</h1>
+      <nav aria-label="Menu principal">
+        <ul role="menubar">
+          <li role="menuitem"><a href="../index.html">Início</a></li>
+          <li role="menuitem"><a href="../painel-ods/index.html">Painel Geral</a></li>
+          <li role="menuitem"><a href="../sobre/index.html">Sobre</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo-principal" role="main" class="container">
+    <div class="ods-header">
+      <img src="../img/logo-icons-coloridos-09.png" alt="Ícone ODS 9" class="ods-icon">
+      <div>
+        <h1 id="ods-titulo">ODS 9 - Indústria, Inovação e Infraestrutura</h1>
+        <p id="ods-descricao">Construir infraestruturas resilientes, promover a industrialização inclusiva e sustentável e fomentar a inovação</p>
+        <p id="ultima-atualizacao" class="small">Carregando informações...</p>
+      </div>
+    </div>
+
+    <div id="loading-indicator" class="loader" role="status" aria-live="polite">Carregando dados...</div>
+    <div id="error-message" class="error" style="display: none;" role="alert" aria-live="assertive"></div>
+
+    <section class="dashboard-container">
+      <div class="card valor-principal-card">
+        <h2>Indicador Principal</h2>
+        <div class="valor-principal-container">
+          <span id="valor-principal" class="valor-principal" aria-live="polite">--</span>
+          <span id="valor-descricao" class="valor-descricao" aria-live="polite">Carregando...</span>
+        </div>
+      </div>
+
+      <div class="card grafico-card">
+        <h2>Evolução Histórica</h2>
+        <div class="grafico-container" style="height: 300px;">
+          <canvas id="grafico-principal" role="img" aria-label="Gráfico de evolução histórica do indicador principal do ODS 9"></canvas>
+        </div>
+        <p id="grafico-descricao" class="screen-reader-only">Este gráfico mostra a evolução histórica dos indicadores relacionados ao ODS 9 em Sergipe ao longo dos anos.</p>
+        <button id="btn-exportar" class="btn-exportar" aria-label="Exportar dados em CSV">
+          <i class="fas fa-download" aria-hidden="true"></i> Exportar Dados (CSV)
+        </button>
+      </div>
+    </section>
+
+    <section class="indicadores-detalhados-container">
+      <h2>Indicadores Detalhados</h2>
+      <div id="indicadores-detalhados" class="indicadores-grid" aria-live="polite">
+        <!-- Os indicadores detalhados serão injetados dinamicamente aqui -->
+      </div>
+    </section>
+
+    <section class="acoes-impacto">
+      <h2>Ações de Impacto</h2>
+      <div class="acoes-grid">
+        <div class="acao-card">
+          <h3>Polo Tecnológico Sergipano</h3>
+          <p>Desenvolvimento de polo tecnológico integrado para incentivar startups e empresas de base tecnológica em Sergipe, com ênfase em soluções digitais para o setor público e agroindustrial.</p>
+          <a href="#" class="btn-saiba-mais" aria-label="Saiba mais sobre o Polo Tecnológico Sergipano">Saiba mais</a>
+        </div>
+        <div class="acao-card">
+          <h3>Internet para Todos</h3>
+          <p>Projeto de expansão da conectividade em áreas rurais e periféricas, utilizando tecnologia de baixo custo e parcerias público-privadas para garantir acesso universal à internet.</p>
+          <a href="#" class="btn-saiba-mais" aria-label="Saiba mais sobre o projeto Internet para Todos">Saiba mais</a>
+        </div>
+        <div class="acao-card">
+          <h3>Inovação Industrial Sustentável</h3>
+          <p>Programa de modernização industrial com foco em eficiência energética e economia circular, adaptando indústrias tradicionais sergipanas aos padrões da Indústria 4.0.</p>
+          <a href="#" class="btn-saiba-mais" aria-label="Saiba mais sobre Inovação Industrial Sustentável">Saiba mais</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="recomendacoes-politicas">
+      <h2>Recomendações de Políticas Públicas</h2>
+      <div class="recomendacoes-lista">
+        <div class="recomendacao-item">
+          <h3>1. Investimento em Infraestrutura Digital</h3>
+          <p>Criar programa estadual de investimentos em fibra óptica e centros de dados regionais, para garantir infraestrutura resiliente e de alta capacidade em toda Sergipe.</p>
+        </div>
+        <div class="recomendacao-item">
+          <h3>2. Incentivos para P&D</h3>
+          <p>Implementar incentivos fiscais e linhas de crédito específicas para empresas que invistam em pesquisa e desenvolvimento, especialmente em soluções para desafios locais.</p>
+        </div>
+        <div class="recomendacao-item">
+          <h3>3. Parcerias Universidade-Empresa</h3>
+          <p>Fortalecer a colaboração entre universidades e empresas através de programas de extensão tecnológica e incubadoras, facilitando a transferência de conhecimento e inovação.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nova seção de compartilhamento social -->
+    <section class="compartilhamento-social">
+      <h2>Compartilhe Estes Dados</h2>
+      <p>Ajude a promover a conscientização sobre o ODS 9 em Sergipe</p>
+      <div class="botoes-sociais">
+        <a href="https://twitter.com/intent/tweet?text=Confira%20os%20indicadores%20do%20ODS%209%20em%20Sergipe&url=https://www.mosaicosfuturos.com/painel-ods/ods9.html" target="_blank" rel="noopener noreferrer" class="btn-social btn-twitter" aria-label="Compartilhar no Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i> Twitter
+        </a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.mosaicosfuturos.com/painel-ods/ods9.html" target="_blank" rel="noopener noreferrer" class="btn-social btn-facebook" aria-label="Compartilhar no Facebook">
+          <i class="fab fa-facebook-f" aria-hidden="true"></i> Facebook
+        </a>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://www.mosaicosfuturos.com/painel-ods/ods9.html&title=ODS%209%20em%20Sergipe" target="_blank" rel="noopener noreferrer" class="btn-social btn-linkedin" aria-label="Compartilhar no LinkedIn">
+          <i class="fab fa-linkedin-in" aria-hidden="true"></i> LinkedIn
+        </a>
+      </div>
+    </section>
+
+    <!-- Nova seção de participação cidadã -->
+    <section class="participacao-cidada">
+      <h2>Sua Opinião Importa</h2>
+      <p>Ajude-nos a melhorar os indicadores do ODS 9 em Sergipe compartilhando sua perspectiva</p>
+      <a href="/contato/?assunto=Feedback%20ODS%209" class="btn-contribuir" aria-label="Contribuir com feedback sobre o ODS 9">
+        <i class="fas fa-comment-alt" aria-hidden="true"></i> Enviar Feedback
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 LIMFS - Laboratório de Indicadores para Monitoramento das Famílias Sergipanas</p>
+      <p>Dados atualizados em <span id="data-atualizacao">Abril de 2025</span></p>
+      <p><a href="/acessibilidade.html">Política de Acessibilidade</a> | <a href="/privacidade.html">Política de Privacidade</a></p>
+    </div>
+  </footer>
+
+  <!-- Script de tratamento de erros -->
+  <script>
+    // Inicialização de tratamento de erros para componentes críticos
+    document.addEventListener('DOMContentLoaded', () => {
+      window.addEventListener('error', (event) => {
+        console.error('Erro capturado globalmente:', event.error);
+        const errorMessage = document.getElementById('error-message');
+        if (errorMessage) {
+          errorMessage.textContent = 'Ocorreu um erro ao carregar os dados. Por favor, recarregue a página ou tente novamente mais tarde.';
+          errorMessage.style.display = 'block';
+          document.getElementById('loading-indicator').style.display = 'none';
+        }
+      });
+      
+      // Simular tempo limite para carregamento
+      setTimeout(() => {
+        const loadingIndicator = document.getElementById('loading-indicator');
+        if (loadingIndicator && loadingIndicator.style.display !== 'none') {
+          loadingIndicator.style.display = 'none';
+          document.getElementById('error-message').textContent = 'Tempo limite excedido ao carregar os dados. Verifique sua conexão ou tente novamente mais tarde.';
+          document.getElementById('error-message').style.display = 'block';
+        }
+      }, 30000); // 30 segundos de timeout
+    });
+  </script>
+</body>
+</html>

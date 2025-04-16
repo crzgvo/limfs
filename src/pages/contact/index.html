@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Entre em contato com a LIMFS e saiba como podemos ajudar sua empresa ou município a implementar a Agenda 2030.">
+  <meta name="keywords" content="Contato, LIMFS, Sustentabilidade, Agenda 2030">
+  <meta name="author" content="LIMFS">
+  <meta property="og:title" content="Mosaicos Futuros - Contato">
+  <meta property="og:description"
+    content="Entre em contato conosco e descubra soluções sustentáveis alinhadas aos ODS.">
+  <meta property="og:image" content="../img/logo-icons-coloridos_Prancheta 1.png">
+  <meta property="og:url" content="https://www.mosaicosfuturos.com/contato.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Mosaicos Futuros - Contato</title>
+
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../styles/contato.css">
+  <link rel="icon" type="image/png" href="../img/logo-icons-coloridos_Prancheta 1.png">
+</head>
+
+<body>
+  <a href="#conteudo-principal" class="pular-link">Pular para o conteúdo principal</a>
+  <header class="cabecalho">
+    <div class="container-cabecalho">
+      <div class="conteudo-centralizado">
+        <div class="secao-logo">
+          <img src="../img/logo-icons-branco_Prancheta 1.png" alt="Logo LIMFS" class="logo" loading="lazy">
+          <h1>LIMFS</h1>
+        </div>
+        <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-principal">
+          <span class="hamburger"></span>
+          <span class="visually-hidden">Menu fechado</span>
+        </button>
+        <nav role="navigation" aria-label="Menu principal" class="navegacao" id="menu-principal">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/sobre/">Sobre</a></li>
+            <li><a href="/servicos/">Serviços</a></li>
+            <li><a href="/contato/" aria-current="page">Contato</a></li>
+            <li><a href="/painel-ods/">Painel ODS</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="conteudo-principal" role="main">
+    <section id="contato-principal">
+      <div class="container-principal">
+        <h1>Entre em Contato</h1>
+        <p>
+          Estamos à disposição para ajudar sua empresa ou município a implementar estratégias alinhadas à Agenda 2030.
+          Preencha o formulário abaixo para iniciar uma conversa sobre como podemos transformar desafios em
+          oportunidades sustentáveis.
+        </p>
+      </div>
+    </section>
+
+    <section id="secao-formulario">
+      <div class="container">
+        <div class="info-contato">
+          <div class="item-info">
+            <h3>Email</h3>
+            <a href="mailto:contato@mosaicosfuturos.com">contato@mosaicosfuturos.com</a>
+          </div>
+          <div class="item-info">
+            <h3>Telefone</h3>
+            <a href="tel:+557998094165">(79) 99809-4165</a>
+          </div>
+          <div class="item-info">
+            <h3>Redes Sociais</h3>
+            <a href="https://www.linkedin.com/company/mosaicosfuturos" target="_blank"
+              rel="noopener noreferrer">LinkedIn</a>
+            |
+            <a href="https://instagram.com/mosaicosfuturos" target="_blank" rel="noopener noreferrer">Instagram</a>
+          </div>
+        </div>
+
+        <form id="formulario-contato" class="formulario-contato" novalidate>
+          <div class="grupo-campo">
+            <label for="nome">Nome <span>*</span></label>
+            <input type="text" id="nome" name="nome" required aria-describedby="erro-nome">
+            <span id="erro-nome" class="mensagem-erro" role="alert"></span>
+          </div>
+
+          <div class="grupo-campo">
+            <label for="email">Email <span>*</span></label>
+            <input type="email" id="email" name="email" required aria-describedby="erro-email">
+            <span id="erro-email" class="mensagem-erro" role="alert"></span>
+          </div>
+
+          <div class="grupo-campo">
+            <label for="telefone">Telefone</label>
+            <input type="tel" id="telefone" name="telefone" placeholder="(99) 99999-9999"
+              aria-describedby="erro-telefone">
+            <span id="erro-telefone" class="mensagem-erro" role="alert"></span>
+          </div>
+
+          <div class="grupo-campo">
+            <label for="assunto">Assunto <span>*</span></label>
+            <input type="text" id="assunto" name="assunto" required aria-describedby="erro-assunto">
+            <span id="erro-assunto" class="mensagem-erro" role="alert"></span>
+          </div>
+
+          <div class="grupo-campo">
+            <label for="mensagem">Mensagem <span>*</span></label>
+            <textarea id="mensagem" name="mensagem" rows="5" required aria-describedby="erro-mensagem"></textarea>
+            <span id="erro-mensagem" class="mensagem-erro" role="alert"></span>
+          </div>
+
+          <button type="submit" class="botao-primario">Enviar Mensagem</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <!-- O conteúdo será inserido pelo script footer.js -->
+  </footer>
+
+  <script>
+    document.getElementById('formulario-contato').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const formulario = event.target;
+      const dadosFormulario = new FormData(formulario);
+      let eValido = true;
+
+      // Limpa todas as mensagens de erro anteriores
+      formulario.querySelectorAll('.mensagem-erro').forEach(el => el.textContent = '');
+
+      // Validação do nome
+      const nome = dadosFormulario.get('nome');
+      if (!nome || nome.length < 3 || !/^[A-Za-zÀ-ÿ\s]+$/.test(nome)) {
+        document.getElementById('erro-nome').textContent = 'Por favor, insira um nome válido (mínimo 3 caracteres).';
+        eValido = false;
+      }
+
+      // Validação do email
+      const email = dadosFormulario.get('email');
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        document.getElementById('erro-email').textContent = 'Por favor, insira um email válido.';
+        eValido = false;
+      }
+
+      // Validação do telefone (opcional, mas deve ser válido se preenchido)
+      const telefone = dadosFormulario.get('telefone');
+      if (telefone && !/^[\d\s()-]+$/.test(telefone)) {
+        document.getElementById('erro-telefone').textContent = 'Por favor, insira um telefone válido.';
+        eValido = false;
+      }
+
+      // Validação do assunto
+      const assunto = dadosFormulario.get('assunto');
+      if (!assunto || assunto.length < 3) {
+        document.getElementById('erro-assunto').textContent = 'Por favor, insira um assunto válido.';
+        eValido = false;
+      }
+
+      // Validação da mensagem
+      const mensagem = dadosFormulario.get('mensagem');
+      if (!mensagem || mensagem.length < 10) {
+        document.getElementById('erro-mensagem').textContent = 'Por favor, insira uma mensagem com pelo menos 10 caracteres.';
+        eValido = false;
+      }
+
+      // Se os dados são válidos, simula o envio do formulário
+      if (eValido) {
+        // Em um ambiente real, aqui seria feita uma requisição para um backend
+        // Por enquanto, apenas simulamos o envio bem-sucedido
+        formulario.innerHTML = `
+          <div class="mensagem-sucesso-formulario">
+            <h3>Mensagem enviada com sucesso!</h3>
+            <p>Obrigado por entrar em contato conosco. Retornaremos em breve.</p>
+          </div>
+        `;
+      }
+    });
+  </script>
+  <script src="../js/menu.js"></script>
+  <script src="../js/footer.js"></script>
+</body>
+
+</html>

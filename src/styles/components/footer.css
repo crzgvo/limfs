@@ -1,0 +1,105 @@
+/**
+ * Estilos para o rodapé do site
+ */
+
+.rodape {
+    background-color: var(--dark-blue);
+    color: var(--white);
+    padding: 40px 0 30px;
+    text-align: center;
+}
+
+.container-rodape {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.secao-rodape {
+    margin-bottom: 20px;
+}
+
+.info-institucional {
+    flex: 1;
+    min-width: 300px;
+    text-align: left;
+    padding-right: 20px;
+}
+
+.fontes-dados {
+    flex: 1;
+    min-width: 300px;
+    text-align: left;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    padding-left: 20px;
+}
+
+.fontes-dados h4 {
+    margin-top: 0;
+    font-size: 1rem;
+    color: var(--light-blue);
+    margin-bottom: 15px;
+}
+
+.fontes-dados ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.fontes-dados ul li {
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+    opacity: 0.8;
+}
+
+.fontes-dados ul li:before {
+    content: "•";
+    color: var(--light-blue);
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+.rodape p {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+.rodape a {
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    padding: 3px;
+}
+
+.rodape a:hover {
+    color: var(--light-blue);
+}
+
+.rodape a:focus {
+    outline: 2px solid var(--light-blue);
+    outline-offset: 2px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container-rodape {
+        flex-direction: column;
+    }
+    
+    .info-institucional {
+        padding-right: 0;
+        margin-bottom: 30px;
+    }
+    
+    .fontes-dados {
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        padding-left: 0;
+        padding-top: 20px;
+    }
+}

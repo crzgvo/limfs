@@ -1,0 +1,75 @@
+/**
+ * Cores específicas e personalizações para o ODS2 - Fome Zero e Agricultura Sustentável
+ * Este arquivo contém apenas as cores e personalizações específicas para o ODS2
+ * Para ser usado em conjunto com o ods-layout-global.css
+ */
+
+:root {
+  --ods2: #dda63a;
+  --ods2-light: #f7ecd5;
+  --ods2-dark: #b4871f;
+  --ods2-gradient: linear-gradient(135deg, #dda63a 0%, #b4871f 100%);
+}
+
+/* Cabeçalho específico para ODS2 */
+.header-ods2 {
+  background-color: var(--ods2);
+  background-image: var(--ods2-gradient);
+}
+
+/* Botões e elementos de destaque */
+.botao-filtrar.ods2-botao,
+.btn-contribuir.ods2-botao,
+.btn-atualizar.ods2-botao,
+.btn-exportar.ods2-botao {
+  background-color: var(--ods2);
+}
+
+.botao-filtrar.ods2-botao:hover,
+.btn-contribuir.ods2-botao:hover,
+.btn-atualizar.ods2-botao:hover,
+.btn-exportar.ods2-botao:hover {
+  background-color: var(--ods2-dark);
+}
+
+/* Botão período ativo */
+.botao-periodo.ativo.ods2-periodo {
+  background-color: var(--ods2);
+  color: white;
+}
+
+/* Cores para títulos de seções */
+.secao-recomendacoes h2.ods2-titulo, 
+.secao-acoes-impacto h3.ods2-titulo,
+.visualizacao-comparativa h3.ods2-titulo {
+  color: var(--ods2);
+}
+
+/* Cores para links e elementos destacados */
+.link-acao.ods2-link {
+  color: var(--ods2);
+}
+
+/* Elementos visuais específicos */
+.case-tag.ods2-tag {
+  background-color: var(--ods2-light);
+  color: var(--ods2);
+}
+
+.metric-value.ods2-metric {
+  color: var(--ods2);
+}
+
+/* Foco para acessibilidade específico para ODS2 */
+.ods2-page a:focus,
+.ods2-page button:focus,
+.ods2-page input:focus,
+.ods2-page select:focus,
+.ods2-page textarea:focus {
+  outline: 3px solid rgba(221, 166, 58, 0.5);
+}
+
+/* Classes específicas para melhor identificação ODS2 */
+.ods2-background { background-color: var(--ods2); }
+.ods2-color { color: var(--ods2); }
+.ods2-border { border-color: var(--ods2); }

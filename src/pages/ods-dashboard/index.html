@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Painel ODS Sergipe - Dashboard de monitoramento dos Objetivos de Desenvolvimento Sustentável em Sergipe">
+  <title>Dashboard ODS Sergipe - LIMFS</title>
+  
+  <!-- Estilos -->
+  <link rel="stylesheet" href="../../styles/global/reset.css">
+  <link rel="stylesheet" href="../../styles/global/typography.css">
+  <link rel="stylesheet" href="../../styles/global/global-variables.css">
+  <link rel="stylesheet" href="../../styles/components/menu.css">
+  <link rel="stylesheet" href="../../styles/components/footer.css">
+  <link rel="stylesheet" href="../../styles/components/ods-colors.css">
+  <link rel="stylesheet" href="../../styles/pages/painel-ods.css">
+  
+  <!-- Bibliotecas externas -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+</head>
+<body>
+  <header id="header">
+    <!-- Menu será carregado dinamicamente pelo JavaScript -->
+  </header>
+
+  <main>
+    <section class="dashboard-header">
+      <div class="container">
+        <div class="header-content">
+          <h1>Dashboard ODS Sergipe</h1>
+          <p>Monitoramento dos Objetivos de Desenvolvimento Sustentável em Sergipe</p>
+        </div>
+        
+        <div class="header-actions">
+          <div class="filter-controls">
+            <div class="filter-group">
+              <label for="filtro-dimensao">Dimensão:</label>
+              <select id="filtro-dimensao">
+                <option value="todas">Todas</option>
+                <option value="social">Social</option>
+                <option value="ambiental">Ambiental</option>
+                <option value="economica">Econômica</option>
+                <option value="institucional">Institucional</option>
+              </select>
+            </div>
+            
+            <div class="filter-group">
+              <label for="filtro-ano">Ano:</label>
+              <select id="filtro-ano">
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
+                <option value="2017">2017</option>
+                <option value="2016">2016</option>
+                <option value="2015">2015</option>
+              </select>
+            </div>
+            
+            <div class="filter-group">
+              <label for="filtro-regiao">Região:</label>
+              <select id="filtro-regiao">
+                <option value="sergipe">Todo o Estado</option>
+                <option value="grande-aracaju">Grande Aracaju</option>
+                <option value="agreste">Agreste Sergipano</option>
+                <option value="sertao">Sertão Sergipano</option>
+                <option value="leste">Leste Sergipano</option>
+                <option value="sul">Sul Sergipano</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="action-buttons">
+            <button id="btn-exportar-todos" class="btn btn-primary">
+              <span class="icon">📊</span> Exportar Dados
+            </button>
+            <button id="btn-atualizar" class="btn btn-outline">
+              <span class="icon">🔄</span> Atualizar
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ods-grid-section">
+      <div class="container">
+        <h2>Objetivos de Desenvolvimento Sustentável</h2>
+        <div class="ods-grid">
+          <!-- Os 17 ODS com seus ícones serão carregados dinamicamente aqui -->
+        </div>
+      </div>
+    </section>
+
+    <section class="featured-indicators">
+      <div class="container">
+        <h2>Indicadores em Destaque</h2>
+        <div class="indicators-grid" id="indicadores-destaque">
+          <!-- Indicadores em destaque serão carregados dinamicamente aqui -->
+          <div class="loading-placeholder">
+            <p>Carregando indicadores...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="comparative-charts">
+      <div class="container">
+        <h2>Análise Comparativa</h2>
+        <div class="chart-selector">
+          <button class="chart-tab active" data-chart="social">Indicadores Sociais</button>
+          <button class="chart-tab" data-chart="ambiental">Indicadores Ambientais</button>
+          <button class="chart-tab" data-chart="economica">Indicadores Econômicos</button>
+        </div>
+        
+        <div class="chart-container" id="grafico-comparativo-container">
+          <div class="chart-wrapper" id="grafico-comparativo-social" style="display: block;">
+            <!-- Gráfico comparativo social será renderizado aqui -->
+          </div>
+          <div class="chart-wrapper" id="grafico-comparativo-ambiental" style="display: none;">
+            <!-- Gráfico comparativo ambiental será renderizado aqui -->
+          </div>
+          <div class="chart-wrapper" id="grafico-comparativo-economica" style="display: none;">
+            <!-- Gráfico comparativo econômico será renderizado aqui -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="data-integrity">
+      <div class="container">
+        <div class="integrity-info">
+          <h2>Integridade dos Dados</h2>
+          <div class="update-info">
+            <p>Última atualização: <span id="data-atualizacao">Carregando...</span></p>
+            <p>Fonte de dados: IBGE, PNAD, ANEEL, SNIS, DATASUS</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer">
+    <!-- Footer será carregado dinamicamente pelo JavaScript -->
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="../../components/layout/menu.js"></script>
+  <script type="module" src="../../components/layout/footer.js"></script>
+  <script type="module" src="./dashboard.js"></script>
+</body>
+</html>

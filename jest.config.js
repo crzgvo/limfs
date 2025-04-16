@@ -1,15 +1,25 @@
 export default {
   testEnvironment: 'jsdom',
-  transform: {
-    '^.+\\.(js|jsx)$': 'babel-jest',
-  },
-  moduleFileExtensions: ['js', 'jsx', 'json'],
-  testPathIgnorePatterns: ['/node_modules/'],
-  setupFilesAfterEnv: ['./jest.setup.js'],
-  transformIgnorePatterns: [
-    '/node_modules/(?!node-fetch).+\\.js$'
-  ],
+  roots: ['<rootDir>/src', '<rootDir>/tests'],
   moduleNameMapper: {
-    '\\.(css|less|scss|sss|styl)$': '<rootDir>/node_modules/jest-css-modules'
+    '^@/(.*)$': '<rootDir>/src/$1',
+    '^@components/(.*)$': '<rootDir>/src/components/$1',
+    '^@services/(.*)$': '<rootDir>/src/services/$1',
+    '^@utils/(.*)$': '<rootDir>/src/utils/$1',
+    '^@data/(.*)$': '<rootDir>/src/data/$1',
+    '^@styles/(.*)$': '<rootDir>/src/styles/$1',
+    '^@assets/(.*)$': '<rootDir>/src/assets/$1'
+  },
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  testMatch: [
+    '<rootDir>/tests/**/*.test.js',
+    '<rootDir>/src/**/*.test.js'
+  ],
+  collectCoverageFrom: [
+    'src/**/*.js',
+    '!src/**/*.test.js'
+  ],
+  transform: {
+    '^.+\\.js$': 'babel-jest'
   }
 };

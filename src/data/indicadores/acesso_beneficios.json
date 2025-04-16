@@ -1,0 +1,20 @@
+{
+  "indicador": "Acesso a Programas Sociais",
+  "unidade": "%",
+  "descricao": "Percentual da população beneficiada por programas de transferência de renda",
+  "fonte": "Ministério da Cidadania",
+  "data_atualizacao": "2025-03-15T14:30:00Z",
+  "valor": 28.4,
+  "ano_atual": 2024,
+  "meta_ods": 35.0,
+  "explicacao": "Representa o percentual da população que recebe algum tipo de benefício social de transferência de renda.",
+  "tendencia": "crescente",
+  "dados": [
+    { "ano": 2019, "valor": 24.1 },
+    { "ano": 2020, "valor": 29.8 },
+    { "ano": 2021, "valor": 30.2 },
+    { "ano": 2022, "valor": 29.5 },
+    { "ano": 2023, "valor": 28.9 },
+    { "ano": 2024, "valor": 28.4 }
+  ]
+}

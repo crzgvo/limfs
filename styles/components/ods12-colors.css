@@ -1,0 +1,75 @@
+/**
+ * Cores específicas e personalizações para o ODS12 - Consumo e Produção Responsáveis
+ * Este arquivo contém apenas as cores e personalizações específicas para o ODS12
+ * Para ser usado em conjunto com o ods-layout-global.css
+ */
+
+:root {
+  --ods12: #bf8b2e;
+  --ods12-light: #efe6d1;
+  --ods12-dark: #996f25;
+  --ods12-gradient: linear-gradient(135deg, #bf8b2e 0%, #996f25 100%);
+}
+
+/* Cabeçalho específico para ODS12 */
+.header-ods12 {
+  background-color: var(--ods12);
+  background-image: var(--ods12-gradient);
+}
+
+/* Botões e elementos de destaque */
+.botao-filtrar.ods12-botao,
+.btn-contribuir.ods12-botao,
+.btn-atualizar.ods12-botao,
+.btn-exportar.ods12-botao {
+  background-color: var(--ods12);
+}
+
+.botao-filtrar.ods12-botao:hover,
+.btn-contribuir.ods12-botao:hover,
+.btn-atualizar.ods12-botao:hover,
+.btn-exportar.ods12-botao:hover {
+  background-color: var(--ods12-dark);
+}
+
+/* Botão período ativo */
+.botao-periodo.ativo.ods12-periodo {
+  background-color: var(--ods12);
+  color: white;
+}
+
+/* Cores para títulos de seções */
+.secao-recomendacoes h2.ods12-titulo, 
+.secao-acoes-impacto h3.ods12-titulo,
+.visualizacao-comparativa h3.ods12-titulo {
+  color: var(--ods12);
+}
+
+/* Cores para links e elementos destacados */
+.link-acao.ods12-link {
+  color: var(--ods12);
+}
+
+/* Elementos visuais específicos */
+.case-tag.ods12-tag {
+  background-color: var(--ods12-light);
+  color: var(--ods12);
+}
+
+.metric-value.ods12-metric {
+  color: var(--ods12);
+}
+
+/* Foco para acessibilidade específico para ODS12 */
+.ods12-page a:focus,
+.ods12-page button:focus,
+.ods12-page input:focus,
+.ods12-page select:focus,
+.ods12-page textarea:focus {
+  outline: 3px solid rgba(191, 139, 46, 0.5);
+}
+
+/* Classes específicas para melhor identificação ODS12 */
+.ods12-background { background-color: var(--ods12); }
+.ods12-color { color: var(--ods12); }
+.ods12-border { border-color: var(--ods12); }

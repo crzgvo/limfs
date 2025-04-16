@@ -1,0 +1,29 @@
+{
+  "indicador": "Taxa de Pobreza",
+  "descricao": "Percentual da população abaixo da linha de pobreza em Sergipe",
+  "fonte": "IBGE/PNAD Contínua",
+  "unidade": "%",
+  "meta_ods": 3.0,
+  "valor": 8.1,
+  "ano": 2024,
+  "data_atualizacao": "2025-04-12T14:30:00",
+  "dados": [
+    { "ano": 2018, "valor": 14.2 },
+    { "ano": 2019, "valor": 13.5 },
+    { "ano": 2020, "valor": 15.7 },
+    { "ano": 2021, "valor": 12.3 },
+    { "ano": 2022, "valor": 10.8 },
+    { "ano": 2023, "valor": 9.4 },
+    { "ano": 2024, "valor": 8.1 }
+  ],
+  "tendencia": "decrescente",
+  "explicacao": "A taxa de pobreza em Sergipe apresenta tendência de queda nos últimos anos, refletindo o impacto positivo das políticas de transferência de renda e inclusão social.",
+  "detalhamento": {
+    "urbana": 7.2,
+    "rural": 12.6,
+    "mulheres": 9.3,
+    "homens": 6.9,
+    "criancas": 12.5,
+    "idosos": 4.7
+  }
+}

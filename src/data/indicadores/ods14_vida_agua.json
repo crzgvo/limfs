@@ -1,0 +1,49 @@
+{
+  "meta": {
+    "titulo": "ODS 14 - Vida na Água",
+    "descricao": "Conservação e uso sustentável dos oceanos, dos mares e dos recursos marinhos para o desenvolvimento sustentável",
+    "ultima_atualizacao": "2025-04-12",
+    "cor_primaria": "#0A97D9",
+    "cor_secundaria": "rgba(10, 151, 217, 0.2)"
+  },
+  "dados": {
+    "valor": 24.7,
+    "unidade": "%",
+    "descricao": "Áreas costeiras protegidas"
+  },
+  "historico": [
+    {"ano": 2018, "valor": 18.2},
+    {"ano": 2019, "valor": 19.6},
+    {"ano": 2020, "valor": 21.0},
+    {"ano": 2021, "valor": 22.3},
+    {"ano": 2022, "valor": 23.1},
+    {"ano": 2023, "valor": 24.2},
+    {"ano": 2024, "valor": 24.7}
+  ],
+  "indicadores_detalhados": [
+    {
+      "nome": "Pesca sustentável",
+      "valor": 42.8,
+      "unidade": "%",
+      "tendencia": "crescente"
+    },
+    {
+      "nome": "Qualidade das águas costeiras",
+      "valor": 76.2,
+      "unidade": "índice",
+      "tendencia": "crescente"
+    },
+    {
+      "nome": "Redução de poluição marinha",
+      "valor": 18.3,
+      "unidade": "%",
+      "tendencia": "crescente"
+    },
+    {
+      "nome": "Comunidades pesqueiras sustentáveis",
+      "valor": 56.4,
+      "unidade": "%",
+      "tendencia": "crescente"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+.ods2-header {
+  background: var(--ods2);
+  color: var(--white);
+  font-family: var(--font-primary);
+}
+
+.ods2-content {
+  background: var(--cinza-100);
+  color: var(--cor-texto);
+  font-family: var(--font-primary);
+}

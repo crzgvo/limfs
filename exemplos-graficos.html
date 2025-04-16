@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplos de Gráficos Responsivos - LIMFS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="styles/global-variables.css">
+    <link rel="stylesheet" href="styles/components/ods-colors.css">
+    <style>
+        /* ===== ESTILOS BASE ===== */
+        body {
+            font-family: 'Public Sans', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            padding: 0;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* ===== CONTAINER PRINCIPAL ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .intro h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+
+        .intro p {
+            max-width: 800px;
+            margin: 0 auto 20px;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+        }
+
+        /* ===== GRID DE GRÁFICOS ===== */
+        .graficos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        /* Contêiner para cada gráfico */
+        .grafico-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            transition: var(--transition-padrao);
+        }
+
+        .grafico-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Cabeçalho de cada gráfico */
+        .grafico-header {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .grafico-header h3 {
+            font-size: clamp(1.2rem, 2vw, 1.4rem);
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .grafico-header p {
+            color: #666;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+        
+        /* Área do gráfico */
+        .grafico-content {
+            position: relative;
+            height: 350px;
+            margin-bottom: 20px;
+        }
+
+        /* Rodapé de cada gráfico */
+        .grafico-rodape {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #777;
+            padding-top: 15px;
+            border-top: 1px dashed #f0f0f0;
+        }
+
+        .grafico-rodape-opcoes {
+            display: flex;
+            gap: 20px;
+        }
+
+        .grafico-source {
+            font-style: italic;
+        }
+
+        /* Mensagem de responsividade */
+        .responsive-message {
+            padding: 15px;
+            background-color: rgba(10, 151, 217, 0.1);
+            border-left: 4px solid var(--ods14);
+            margin: 30px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .responsive-message h3 {
+            font-size: 1.2rem;
+            color: var(--ods14);
+            margin-bottom: 10px;
+        }
+
+        .responsive-message p {
+            margin: 0;
+        }
+
+        /* Classes de layout */
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* Controles de tema */
+        .controles {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .btn-tema {
+            padding: 10px 20px;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 0 10px 10px;
+            cursor: pointer;
+            font-family: 'Public Sans', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: var(--transition-rapida);
+            min-height: 44px;
+            min-width: 100px;
+        }
+
+        .btn-tema:hover {
+            background-color: #e0e0e0;
+        }
+
+        .btn-tema.active {
+            background-color: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+
+        .btn-tema:focus {
+            outline: var(--foco-outline-largura, 3px) solid rgba(30, 56, 106, 0.5);
+            outline-offset: var(--foco-outline-offset, 3px);
+        }
+
+        /* Informações de acessibilidade */
+        .acessibilidade-info {
+            background-color: rgba(76, 159, 56, 0.1);
+            border-left: 4px solid var(--ods3);
+            padding: 15px;
+            margin: 30px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .acessibilidade-info h3 {
+            color: var(--ods3);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .acessibilidade-info ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .acessibilidade-info li {
+            margin-bottom: 8px;
+        }
+
+        .legenda {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #f0f0f0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Link para pular navegação (acessibilidade) */
+        .pular-link {
+            position: absolute;
+            top: -50px;
+            left: 0;
+            padding: 10px 15px;
+            background: var(--primary-blue);
+            color: #fff;
+            z-index: 9999;
+            transition: top 0.3s;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .pular-link:focus {
+            top: 0;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .graficos-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .grafico-content {
+                height: 300px;
+            }
+            
+            .grafico-rodape {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .controles {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+            
+            .btn-tema {
+                margin: 0;
+            }
+        }
+
+        /* Telas muito pequenas */
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .grafico-container {
+                padding: 15px;
+            }
+            
+            .grafico-content {
+                height: 250px;
+            }
+        }
+
+        /* Tema escuro */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #1a1a1a;
+                color: #eee;
+            }
+            
+            .grafico-container {
+                background-color: #2a2a2a;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            }
+            
+            .grafico-header {
+                border-bottom: 1px solid #3a3a3a;
+            }
+            
+            .grafico-header h3 {
+                color: #eee;
+            }
+            
+            .grafico-header p,
+            .grafico-rodape {
+                color: #bbb;
+            }
+            
+            .grafico-rodape {
+                border-top: 1px dashed #3a3a3a;
+            }
+            
+            .responsive-message {
+                background-color: rgba(10, 151, 217, 0.15);
+            }
+            
+            .btn-tema {
+                background-color: #3a3a3a;
+                border-color: #444;
+                color: #eee;
+            }
+            
+            .btn-tema:hover {
+                background-color: #444;
+            }
+            
+            .acessibilidade-info {
+                background-color: rgba(76, 159, 56, 0.15);
+            }
+            
+            .legenda {
+                border-top: 1px solid #3a3a3a;
+                color: #bbb;
+            }
+        }
+
+        /* Suporte a movimento reduzido */
+        @media (prefers-reduced-motion: reduce) {
+            .grafico-container {
+                transition: none;
+            }
+            
+            .grafico-container:hover {
+                transform: none;
+            }
+            
+            .pular-link {
+                transition: none;
+            }
+        }
+
+        /* Alto contraste */
+        @media (forced-colors: active) {
+            .grafico-container {
+                border: 1px solid CanvasText;
+            }
+            
+            .btn-tema.active {
+                forced-color-adjust: none;
+                border: 2px solid CanvasText;
+            }
+        }
+    </style>
+    <!-- Importação do Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- Importação do plugin de rótulos de dados -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+    <!-- Importação do módulo de exemplos -->
+    <script type="module" src="js/components/exemplosGraficos.js"></script>
+</head>
+<body>
+    <a href="#main-content" class="pular-link">Pular para o conteúdo principal</a>
+    
+    <div class="header">
+        <h1>Exemplos de Gráficos Responsivos</h1>
+        <p>Demonstração de visualizações de dados para o Painel ODS</p>
+    </div>
+
+    <div id="main-content" class="container">
+        <div class="intro">
+            <h2>Visualização de Dados</h2>
+            <p>Os gráficos abaixo demonstram as diferentes possibilidades de visualização de dados disponíveis no módulo <code>graficoResponsivo.js</code>. Todos são completamente responsivos, acessíveis e adaptados para temas claro e escuro.</p>
+            <div class="controles">
+                <button class="btn-tema" data-tema="light" aria-pressed="false">Tema Claro</button>
+                <button class="btn-tema" data-tema="dark" aria-pressed="false">Tema Escuro</button>
+                <button class="btn-tema" data-tema="high-contrast" aria-pressed="false">Alto Contraste</button>
+            </div>
+        </div>
+
+        <div class="responsive-message">
+            <h3><i class="fas fa-info-circle" aria-hidden="true"></i> Teste a responsividade</h3>
+            <p>Redimensione a janela do navegador para ver como os gráficos se adaptam automaticamente a diferentes tamanhos de tela.</p>
+        </div>
+
+        <div class="graficos-grid">
+            <!-- Gráfico de linha -->
+            <div class="grafico-container fade-in-up">
+                <div class="grafico-header">
+                    <h3>Gráfico de Linha</h3>
+                    <p>Evolução da taxa de pobreza ao longo do tempo</p>
+                </div>
+                <div class="grafico-content">
+                    <canvas id="grafico-linha-exemplo" aria-label="Gráfico de linha mostrando a evolução da taxa de pobreza" role="img"></canvas>
+                </div>
+                <div class="grafico-rodape">
+                    <span class="grafico-source">Fonte: Dados simulados</span>
+                    <div class="grafico-rodape-opcoes">
+                        <span class="text-ods1">ODS 1</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gráfico de barras -->
+            <div class="grafico-container fade-in-up" style="animation-delay: 0.1s;">
+                <div class="grafico-header">
+                    <h3>Gráfico de Barras</h3>
+                    <p>Acesso à água potável por região</p>
+                </div>
+                <div class="grafico-content">
+                    <canvas id="grafico-barra-exemplo" aria-label="Gráfico de barras mostrando acesso à água potável por região" role="img"></canvas>
+                </div>
+                <div class="grafico-rodape">
+                    <span class="grafico-source">Fonte: Dados simulados</span>
+                    <div class="grafico-rodape-opcoes">
+                        <span class="text-ods6">ODS 6</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gráfico de Pizza -->
+            <div class="grafico-container fade-in-up" style="animation-delay: 0.2s;">
+                <div class="grafico-header">
+                    <h3>Gráfico de Pizza</h3>
+                    <p>Matriz energética brasileira por fonte</p>
+                </div>
+                <div class="grafico-content">
+                    <canvas id="grafico-pizza-exemplo" aria-label="Gráfico de pizza mostrando a matriz energética brasileira" role="img"></canvas>
+                </div>
+                <div class="grafico-rodape">
+                    <span class="grafico-source">Fonte: Dados simulados</span>
+                    <div class="grafico-rodape-opcoes">
+                        <span class="text-ods7">ODS 7</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gráfico de Donut -->
+            <div class="grafico-container fade-in-up" style="animation-delay: 0.3s;">
+                <div class="grafico-header">
+                    <h3>Gráfico de Donut</h3>
+                    <p>Composição da matriz energética (renovável x não renovável)</p>
+                </div>
+                <div class="grafico-content">
+                    <canvas id="grafico-donut-exemplo" aria-label="Gráfico de donut mostrando fontes renováveis e não renováveis" role="img"></canvas>
+                </div>
+                <div class="grafico-rodape">
+                    <span class="grafico-source">Fonte: Dados simulados</span>
+                    <div class="grafico-rodape-opcoes">
+                        <span class="text-ods7">ODS 7</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gráfico de Radar -->
+            <div class="grafico-container fade-in-up" style="animation-delay: 0.4s;">
+                <div class="grafico-header">
+                    <h3>Gráfico de Radar</h3>
+                    <p>Índices de qualidade de vida</p>
+                </div>
+                <div class="grafico-content">
+                    <canvas id="grafico-radar-exemplo" aria-label="Gráfico de radar mostrando métricas de qualidade de vida" role="img"></canvas>
+                </div>
+                <div class="grafico-rodape">
+                    <span class="grafico-source">Fonte: Dados simulados</span>
+                    <div class="grafico-rodape-opcoes">
+                        <span class="text-ods3">ODS 3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gráfico Comparativo (Full Width) -->
+            <div class="grafico-container full-width fade-in-up" style="animation-delay: 0.5s;">
+                <div class="grafico-header">
+                    <h3>Gráfico Comparativo</h3>
+                    <p>Comparativo de taxas de escolarização por nível educacional (2015-2024)</p>
+                </div>
+                <div class="grafico-content">
+                    <canvas id="grafico-comparativo-exemplo" aria-label="Gráfico comparativo mostrando taxas de escolarização por nível" role="img"></canvas>
+                </div>
+                <div class="grafico-rodape">
+                    <span class="grafico-source">Fonte: Dados simulados</span>
+                    <div class="grafico-rodape-opcoes">
+                        <span class="text-ods4">ODS 4</span>
+                    </div>
+                </div>
+                <div class="legenda">
+                    Este gráfico demonstra a capacidade de visualizar múltiplos conjuntos de dados simultaneamente, permitindo comparações entre diferentes métricas ao longo do tempo.
+                </div>
+            </div>
+
+            <!-- Gráfico de Barras Comparativo (Full Width) -->
+            <div class="grafico-container full-width fade-in-up" style="animation-delay: 0.6s;">
+                <div class="grafico-header">
+                    <h3>Gráfico de Barras Comparativo</h3>
+                    <p>Evolução do IDH por região (2010 vs 2024)</p>
+                </div>
+                <div class="grafico-content">
+                    <canvas id="grafico-barras-comparativo-exemplo" aria-label="Gráfico de barras comparando IDH por região entre 2010 e 2024" role="img"></canvas>
+                </div>
+                <div class="grafico-rodape">
+                    <span class="grafico-source">Fonte: Dados simulados</span>
+                    <div class="grafico-rodape-opcoes">
+                        <span class="text-ods10">ODS 10</span>
+                    </div>
+                </div>
+                <div class="legenda">
+                    Este gráfico permite comparar valores entre diferentes períodos para cada região, destacando a evolução do Índice de Desenvolvimento Humano.
+                </div>
+            </div>
+        </div>
+
+        <div class="acessibilidade-info">
+            <h3><i class="fas fa-universal-access" aria-hidden="true"></i> Recursos de Acessibilidade</h3>
+            <ul>
+                <li><strong>Descrições alternativas:</strong> Cada gráfico possui texto alternativo para leitores de tela.</li>
+                <li><strong>Contraste adequado:</strong> Cores com contraste suficiente para garantir legibilidade.</li>
+                <li><strong>Responsividade:</strong> Adaptação automática para diferentes dispositivos e tamanhos de tela.</li>
+                <li><strong>Respeito a preferências do usuário:</strong> Suporte ao modo escuro, alto contraste e preferências de movimento reduzido.</li>
+                <li><strong>Navegação por teclado:</strong> Todos os elementos interativos podem receber foco e ser operados via teclado.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Script para alternar entre temas
+        document.addEventListener('DOMContentLoaded', () => {
+            const botoesTema = document.querySelectorAll('.btn-tema');
+            
+            // Define tema inicial com base nas preferências do usuário
+            const prefereDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const prefereAltoContraste = window.matchMedia('(forced-colors: active)').matches;
+            
+            let temaAtual = 'light';
+            if (prefereAltoContraste) {
+                temaAtual = 'high-contrast';
+            } else if (prefereDarkMode) {
+                temaAtual = 'dark';
+            }
+            
+            // Aplica tema inicial
+            document.documentElement.setAttribute('data-theme', temaAtual);
+            botoesTema.forEach(botao => {
+                if (botao.dataset.tema === temaAtual) {
+                    botao.classList.add('active');
+                    botao.setAttribute('aria-pressed', 'true');
+                } else {
+                    botao.classList.remove('active');
+                    botao.setAttribute('aria-pressed', 'false');
+                }
+            });
+            
+            // Adiciona listeners para os botões de tema
+            botoesTema.forEach(botao => {
+                botao.addEventListener('click', () => {
+                    const novoTema = botao.dataset.tema;
+                    document.documentElement.setAttribute('data-theme', novoTema);
+                    
+                    // Atualiza classe ativa e estado aria
+                    botoesTema.forEach(b => {
+                        b.classList.remove('active');
+                        b.setAttribute('aria-pressed', 'false');
+                    });
+                    botao.classList.add('active');
+                    botao.setAttribute('aria-pressed', 'true');
+                    
+                    // Dispara evento personalizado para atualizar os gráficos
+                    document.dispatchEvent(new CustomEvent('tema-alterado', {
+                        detail: { tema: novoTema }
+                    }));
+                });
+            });
+            
+            // Desabilita animações se o usuário preferir movimento reduzido
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelectorAll('.fade-in-up').forEach(el => {
+                    el.style.animation = 'none';
+                    el.style.opacity = '1';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

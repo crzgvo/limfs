@@ -1,0 +1,268 @@
+/**
+ * Paleta de cores oficiais dos ODS - Sistema LIMFS
+ * Centralização das cores para uso consistente em todo o sistema
+ *
+ * @version 1.0.0
+ * @lastUpdate 14/04/2025
+ */
+
+:root {
+  /* Cores principais dos ODS - Padrão ONU */
+  --ods1: #E5243B; /* Erradicação da Pobreza */
+  --ods2: #DDA63A; /* Fome Zero */
+  --ods3: #4C9F38; /* Saúde e Bem-Estar */
+  --ods4: #C5192D; /* Educação de Qualidade */
+  --ods5: #FF3A21; /* Igualdade de Gênero */
+  --ods6: #26BDE2; /* Água Potável e Saneamento */
+  --ods7: #FCC30B; /* Energia Limpa e Acessível */
+  --ods8: #A21942; /* Trabalho Decente */
+  --ods9: #FD6925; /* Indústria, Inovação e Infraestrutura */
+  --ods10: #DD1367; /* Redução das Desigualdades */
+  --ods11: #FD9D24; /* Cidades e Comunidades Sustentáveis */
+  --ods12: #BF8B2E; /* Consumo e Produção Responsáveis */
+  --ods13: #3F7E44; /* Ação Contra a Mudança Global do Clima */
+  --ods14: #0A97D9; /* Vida na Água */
+  --ods15: #56C02B; /* Vida Terrestre */
+  --ods16: #00689D; /* Paz, Justiça e Instituições Eficazes */
+  --ods17: #19486A; /* Parcerias e Meios de Implementação */
+  --ods18: #6F1D78; /* Igualdade Racial (Brasil) - Adicional */
+
+  /* Variantes com transparência (para backgrounds, hover, etc.) */
+  --ods1-light: rgba(229, 36, 59, 0.15);
+  --ods2-light: rgba(221, 166, 58, 0.15);
+  --ods3-light: rgba(76, 159, 56, 0.15);
+  --ods4-light: rgba(197, 25, 45, 0.15);
+  --ods5-light: rgba(255, 58, 33, 0.15);
+  --ods6-light: rgba(38, 189, 226, 0.15);
+  --ods7-light: rgba(252, 195, 11, 0.15);
+  --ods8-light: rgba(162, 25, 66, 0.15);
+  --ods9-light: rgba(253, 105, 37, 0.15);
+  --ods10-light: rgba(221, 19, 103, 0.15);
+  --ods11-light: rgba(253, 157, 36, 0.15);
+  --ods12-light: rgba(191, 139, 46, 0.15);
+  --ods13-light: rgba(63, 126, 68, 0.15);
+  --ods14-light: rgba(10, 151, 217, 0.15);
+  --ods15-light: rgba(86, 192, 43, 0.15);
+  --ods16-light: rgba(0, 104, 157, 0.15);
+  --ods17-light: rgba(25, 72, 106, 0.15);
+  --ods18-light: rgba(111, 29, 120, 0.15);
+  
+  /* Variantes médias (para borders, elementos de destaque) */
+  --ods1-medium: rgba(229, 36, 59, 0.5);
+  --ods2-medium: rgba(221, 166, 58, 0.5);
+  --ods3-medium: rgba(76, 159, 56, 0.5);
+  --ods4-medium: rgba(197, 25, 45, 0.5);
+  --ods5-medium: rgba(255, 58, 33, 0.5);
+  --ods6-medium: rgba(38, 189, 226, 0.5);
+  --ods7-medium: rgba(252, 195, 11, 0.5);
+  --ods8-medium: rgba(162, 25, 66, 0.5);
+  --ods9-medium: rgba(253, 105, 37, 0.5);
+  --ods10-medium: rgba(221, 19, 103, 0.5);
+  --ods11-medium: rgba(253, 157, 36, 0.5);
+  --ods12-medium: rgba(191, 139, 46, 0.5);
+  --ods13-medium: rgba(63, 126, 68, 0.5);
+  --ods14-medium: rgba(10, 151, 217, 0.5);
+  --ods15-medium: rgba(86, 192, 43, 0.5);
+  --ods16-medium: rgba(0, 104, 157, 0.5);
+  --ods17-medium: rgba(25, 72, 106, 0.5);
+  --ods18-medium: rgba(111, 29, 120, 0.5);
+
+  /* Gradientes para elementos visuais */
+  --ods1-gradient: linear-gradient(135deg, var(--ods1) 0%, var(--ods1-medium) 100%);
+  --ods2-gradient: linear-gradient(135deg, var(--ods2) 0%, var(--ods2-medium) 100%);
+  --ods3-gradient: linear-gradient(135deg, var(--ods3) 0%, var(--ods3-medium) 100%);
+  --ods4-gradient: linear-gradient(135deg, var(--ods4) 0%, var(--ods4-medium) 100%);
+  --ods5-gradient: linear-gradient(135deg, var(--ods5) 0%, var(--ods5-medium) 100%);
+  --ods6-gradient: linear-gradient(135deg, var(--ods6) 0%, var(--ods6-medium) 100%);
+  --ods7-gradient: linear-gradient(135deg, var(--ods7) 0%, var(--ods7-medium) 100%);
+  --ods8-gradient: linear-gradient(135deg, var(--ods8) 0%, var(--ods8-medium) 100%);
+  --ods9-gradient: linear-gradient(135deg, var(--ods9) 0%, var(--ods9-medium) 100%);
+  --ods10-gradient: linear-gradient(135deg, var(--ods10) 0%, var(--ods10-medium) 100%);
+  --ods11-gradient: linear-gradient(135deg, var(--ods11) 0%, var(--ods11-medium) 100%);
+  --ods12-gradient: linear-gradient(135deg, var(--ods12) 0%, var(--ods12-medium) 100%);
+  --ods13-gradient: linear-gradient(135deg, var(--ods13) 0%, var(--ods13-medium) 100%);
+  --ods14-gradient: linear-gradient(135deg, var(--ods14) 0%, var(--ods14-medium) 100%);
+  --ods15-gradient: linear-gradient(135deg, var(--ods15) 0%, var(--ods15-medium) 100%);
+  --ods16-gradient: linear-gradient(135deg, var(--ods16) 0%, var(--ods16-medium) 100%);
+  --ods17-gradient: linear-gradient(135deg, var(--ods17) 0%, var(--ods17-medium) 100%);
+  --ods18-gradient: linear-gradient(135deg, var(--ods18) 0%, var(--ods18-medium) 100%);
+
+  /* Sombras personalizadas para cada ODS */
+  --ods1-shadow: 0 8px 16px rgba(229, 36, 59, 0.2);
+  --ods2-shadow: 0 8px 16px rgba(221, 166, 58, 0.2);
+  --ods3-shadow: 0 8px 16px rgba(76, 159, 56, 0.2);
+  --ods4-shadow: 0 8px 16px rgba(197, 25, 45, 0.2);
+  --ods5-shadow: 0 8px 16px rgba(255, 58, 33, 0.2);
+  --ods6-shadow: 0 8px 16px rgba(38, 189, 226, 0.2);
+  --ods7-shadow: 0 8px 16px rgba(252, 195, 11, 0.2);
+  --ods8-shadow: 0 8px 16px rgba(162, 25, 66, 0.2);
+  --ods9-shadow: 0 8px 16px rgba(253, 105, 37, 0.2);
+  --ods10-shadow: 0 8px 16px rgba(221, 19, 103, 0.2);
+  --ods11-shadow: 0 8px 16px rgba(253, 157, 36, 0.2);
+  --ods12-shadow: 0 8px 16px rgba(191, 139, 46, 0.2);
+  --ods13-shadow: 0 8px 16px rgba(63, 126, 68, 0.2);
+  --ods14-shadow: 0 8px 16px rgba(10, 151, 217, 0.2);
+  --ods15-shadow: 0 8px 16px rgba(86, 192, 43, 0.2);
+  --ods16-shadow: 0 8px 16px rgba(0, 104, 157, 0.2);
+  --ods17-shadow: 0 8px 16px rgba(25, 72, 106, 0.2);
+  --ods18-shadow: 0 8px 16px rgba(111, 29, 120, 0.2);
+
+  /* Sombras para efeito hover em cards */
+  --ods1-shadow-hover: 0 12px 24px rgba(229, 36, 59, 0.25);
+  --ods2-shadow-hover: 0 12px 24px rgba(221, 166, 58, 0.25);
+  --ods3-shadow-hover: 0 12px 24px rgba(76, 159, 56, 0.25);
+  --ods4-shadow-hover: 0 12px 24px rgba(197, 25, 45, 0.25);
+  --ods5-shadow-hover: 0 12px 24px rgba(255, 58, 33, 0.25);
+  --ods6-shadow-hover: 0 12px 24px rgba(38, 189, 226, 0.25);
+  --ods7-shadow-hover: 0 12px 24px rgba(252, 195, 11, 0.25);
+  --ods8-shadow-hover: 0 12px 24px rgba(162, 25, 66, 0.25);
+  --ods9-shadow-hover: 0 12px 24px rgba(253, 105, 37, 0.25);
+  --ods10-shadow-hover: 0 12px 24px rgba(221, 19, 103, 0.25);
+  --ods11-shadow-hover: 0 12px 24px rgba(253, 157, 36, 0.25);
+  --ods12-shadow-hover: 0 12px 24px rgba(191, 139, 46, 0.25);
+  --ods13-shadow-hover: 0 12px 24px rgba(63, 126, 68, 0.25);
+  --ods14-shadow-hover: 0 12px 24px rgba(10, 151, 217, 0.25);
+  --ods15-shadow-hover: 0 12px 24px rgba(86, 192, 43, 0.25);
+  --ods16-shadow-hover: 0 12px 24px rgba(0, 104, 157, 0.25);
+  --ods17-shadow-hover: 0 12px 24px rgba(25, 72, 106, 0.25);
+  --ods18-shadow-hover: 0 12px 24px rgba(111, 29, 120, 0.25);
+
+  /* Cores globais adicionais para o sistema LIMFS */
+  --cor-primaria: #00689D;
+  --cor-secundaria: #E0147D;
+  --cor-fundo: #f8f9fa;
+  --cor-fundo-claro: #fff;
+  --cor-fundo-escuro: #222;
+  --cor-texto: #222;
+  --cor-texto-invertido: #fff;
+  --cor-sucesso: #4CAF50;
+  --cor-alerta: #FFC107;
+  --cor-erro: #F44336;
+  --cinza-100: #f5f5f5;
+  --cinza-200: #eeeeee;
+  --cinza-300: #e0e0e0;
+  --cinza-400: #bdbdbd;
+  --cinza-500: #9e9e9e;
+  --cinza-600: #757575;
+  --cinza-700: #616161;
+  --cinza-800: #424242;
+  --cinza-900: #212121;
+}
+
+/* Classes utilitárias para aplicação rápida das cores */
+.cor-ods1 { color: var(--ods1); }
+.cor-ods2 { color: var(--ods2); }
+.cor-ods3 { color: var(--ods3); }
+.cor-ods4 { color: var(--ods4); }
+.cor-ods5 { color: var(--ods5); }
+.cor-ods6 { color: var(--ods6); }
+.cor-ods7 { color: var(--ods7); }
+.cor-ods8 { color: var(--ods8); }
+.cor-ods9 { color: var(--ods9); }
+.cor-ods10 { color: var(--ods10); }
+.cor-ods11 { color: var(--ods11); }
+.cor-ods12 { color: var(--ods12); }
+.cor-ods13 { color: var(--ods13); }
+.cor-ods14 { color: var(--ods14); }
+.cor-ods15 { color: var(--ods15); }
+.cor-ods16 { color: var(--ods16); }
+.cor-ods17 { color: var(--ods17); }
+.cor-ods18 { color: var(--ods18); }
+
+.bg-ods1 { background-color: var(--ods1); }
+.bg-ods2 { background-color: var(--ods2); }
+.bg-ods3 { background-color: var(--ods3); }
+.bg-ods4 { background-color: var(--ods4); }
+.bg-ods5 { background-color: var(--ods5); }
+.bg-ods6 { background-color: var(--ods6); }
+.bg-ods7 { background-color: var(--ods7); }
+.bg-ods8 { background-color: var(--ods8); }
+.bg-ods9 { background-color: var(--ods9); }
+.bg-ods10 { background-color: var(--ods10); }
+.bg-ods11 { background-color: var(--ods11); }
+.bg-ods12 { background-color: var(--ods12); }
+.bg-ods13 { background-color: var(--ods13); }
+.bg-ods14 { background-color: var(--ods14); }
+.bg-ods15 { background-color: var(--ods15); }
+.bg-ods16 { background-color: var(--ods16); }
+.bg-ods17 { background-color: var(--ods17); }
+.bg-ods18 { background-color: var(--ods18); }
+
+.bg-ods1-light { background-color: var(--ods1-light); }
+.bg-ods2-light { background-color: var(--ods2-light); }
+.bg-ods3-light { background-color: var(--ods3-light); }
+.bg-ods4-light { background-color: var(--ods4-light); }
+.bg-ods5-light { background-color: var(--ods5-light); }
+.bg-ods6-light { background-color: var(--ods6-light); }
+.bg-ods7-light { background-color: var(--ods7-light); }
+.bg-ods8-light { background-color: var(--ods8-light); }
+.bg-ods9-light { background-color: var(--ods9-light); }
+.bg-ods10-light { background-color: var(--ods10-light); }
+.bg-ods11-light { background-color: var(--ods11-light); }
+.bg-ods12-light { background-color: var(--ods12-light); }
+.bg-ods13-light { background-color: var(--ods13-light); }
+.bg-ods14-light { background-color: var(--ods14-light); }
+.bg-ods15-light { background-color: var(--ods15-light); }
+.bg-ods16-light { background-color: var(--ods16-light); }
+.bg-ods17-light { background-color: var(--ods17-light); }
+.bg-ods18-light { background-color: var(--ods18-light); }
+
+/* Classes para aplicação de bordas */
+.borda-ods1 { border-color: var(--ods1); }
+.borda-ods2 { border-color: var(--ods2); }
+.borda-ods3 { border-color: var(--ods3); }
+.borda-ods4 { border-color: var(--ods4); }
+.borda-ods5 { border-color: var(--ods5); }
+.borda-ods6 { border-color: var(--ods6); }
+.borda-ods7 { border-color: var(--ods7); }
+.borda-ods8 { border-color: var(--ods8); }
+.borda-ods9 { border-color: var(--ods9); }
+.borda-ods10 { border-color: var(--ods10); }
+.borda-ods11 { border-color: var(--ods11); }
+.borda-ods12 { border-color: var(--ods12); }
+.borda-ods13 { border-color: var(--ods13); }
+.borda-ods14 { border-color: var(--ods14); }
+.borda-ods15 { border-color: var(--ods15); }
+.borda-ods16 { border-color: var(--ods16); }
+.borda-ods17 { border-color: var(--ods17); }
+.borda-ods18 { border-color: var(--ods18); }
+
+/* Classes para aplicação de gradientes */
+.gradiente-ods1 { background-image: var(--ods1-gradient); }
+.gradiente-ods2 { background-image: var(--ods2-gradient); }
+.gradiente-ods3 { background-image: var(--ods3-gradient); }
+.gradiente-ods4 { background-image: var(--ods4-gradient); }
+.gradiente-ods5 { background-image: var(--ods5-gradient); }
+.gradiente-ods6 { background-image: var(--ods6-gradient); }
+.gradiente-ods7 { background-image: var(--ods7-gradient); }
+.gradiente-ods8 { background-image: var(--ods8-gradient); }
+.gradiente-ods9 { background-image: var(--ods9-gradient); }
+.gradiente-ods10 { background-image: var(--ods10-gradient); }
+.gradiente-ods11 { background-image: var(--ods11-gradient); }
+.gradiente-ods12 { background-image: var(--ods12-gradient); }
+.gradiente-ods13 { background-image: var(--ods13-gradient); }
+.gradiente-ods14 { background-image: var(--ods14-gradient); }
+.gradiente-ods15 { background-image: var(--ods15-gradient); }
+.gradiente-ods16 { background-image: var(--ods16-gradient); }
+.gradiente-ods17 { background-image: var(--ods17-gradient); }
+.gradiente-ods18 { background-image: var(--ods18-gradient); }
+
+/* Classes para aplicação de sombras */
+.sombra-ods1 { box-shadow: var(--ods1-shadow); }
+.sombra-ods2 { box-shadow: var(--ods2-shadow); }
+.sombra-ods3 { box-shadow: var(--ods3-shadow); }
+.sombra-ods4 { box-shadow: var(--ods4-shadow); }
+.sombra-ods5 { box-shadow: var(--ods5-shadow); }
+.sombra-ods6 { box-shadow: var(--ods6-shadow); }
+.sombra-ods7 { box-shadow: var(--ods7-shadow); }
+.sombra-ods8 { box-shadow: var(--ods8-shadow); }
+.sombra-ods9 { box-shadow: var(--ods9-shadow); }
+.sombra-ods10 { box-shadow: var(--ods10-shadow); }
+.sombra-ods11 { box-shadow: var(--ods11-shadow); }
+.sombra-ods12 { box-shadow: var(--ods12-shadow); }
+.sombra-ods13 { box-shadow: var(--ods13-shadow); }
+.sombra-ods14 { box-shadow: var(--ods14-shadow); }
+.sombra-ods15 { box-shadow: var(--ods15-shadow); }
+.sombra-ods16 { box-shadow: var(--ods16-shadow); }
+.sombra-ods17 { box-shadow: var(--ods17-shadow); }
+.sombra-ods18 { box-shadow: var(--ods18-shadow); }

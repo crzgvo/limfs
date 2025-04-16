@@ -1,0 +1,97 @@
+/**
+ * Cores específicas e personalizações para o ODS 13 - Ação Contra a Mudança Global do Clima
+ * Este arquivo contém apenas as cores e personalizações específicas para o ODS 13
+ * Para ser usado em conjunto com o ods-layout-global.css
+ */
+
+:root {
+  --ods13: #3f7e44;
+  --ods13-light: #d4e5d6;
+  --ods13-dark: #326536;
+  --ods13-gradient: linear-gradient(135deg, #3f7e44 0%, #326536 100%);
+  --ods13-complementary: #7e443f;
+}
+
+/* Cabeçalho específico para ODS 13 */
+.header-ods13 {
+  background-color: var(--ods13);
+  background-image: var(--ods13-gradient);
+}
+
+/* Botões e elementos de destaque */
+.botao-filtrar.ods13-botao,
+.btn-contribuir.ods13-botao,
+.btn-atualizar.ods13-botao,
+.btn-exportar.ods13-botao {
+  background-color: var(--ods13);
+}
+
+.botao-filtrar.ods13-botao:hover,
+.btn-contribuir.ods13-botao:hover,
+.btn-atualizar.ods13-botao:hover,
+.btn-exportar.ods13-botao:hover {
+  background-color: var(--ods13-dark);
+}
+
+/* Botão período ativo */
+.botao-periodo.ativo.ods13-periodo {
+  background-color: var(--ods13);
+  color: white;
+}
+
+/* Cores para títulos de seções */
+.secao-recomendacoes h2.ods13-titulo, 
+.secao-acoes-impacto h3.ods13-titulo,
+.visualizacao-comparativa h3.ods13-titulo {
+  color: var(--ods13);
+}
+
+/* Cores para links e elementos destacados */
+.link-acao.ods13-link {
+  color: var(--ods13);
+}
+
+/* Elementos visuais específicos */
+.case-tag.ods13-tag {
+  background-color: var(--ods13-light);
+  color: var(--ods13);
+}
+
+.metric-value.ods13-metric {
+  color: var(--ods13);
+}
+
+/* Estilos para o mapa de vulnerabilidade climática */
+.mapa-legenda .cor-legenda {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  border-radius: 3px;
+}
+
+.mapa-legenda .alta-vulnerabilidade {
+  background-color: #d32f2f;
+}
+
+.mapa-legenda .media-vulnerabilidade {
+  background-color: #ffa000;
+}
+
+.mapa-legenda .baixa-vulnerabilidade {
+  background-color: var(--ods13);
+}
+
+/* Foco para acessibilidade específico para ODS 13 */
+.ods13-page a:focus,
+.ods13-page button:focus,
+.ods13-page input:focus,
+.ods13-page select:focus,
+.ods13-page textarea:focus {
+  outline: 3px solid rgba(63, 126, 68, 0.5); /* Cor do ODS 13 */
+}
+
+/* Classes específicas para melhor identificação ODS 13 */
+.ods13-background { background-color: var(--ods13); }
+.ods13-color { color: var(--ods13); }
+.ods13-border { border-color: var(--ods13); }

@@ -20,26 +20,40 @@ O **Painel ODS Sergipe** é uma plataforma interativa desenvolvida pelo **Labora
 - **Frontend:**
   - HTML5, CSS3, JavaScript (ES6+).
   - Bibliotecas: [Chart.js](https://www.chartjs.org/) para gráficos, [Tippy.js](https://atomiks.github.io/tippyjs/) para tooltips.
-- **Backend:**
-  - Dados estáticos em formato JSON.
+- **Bundler:**
+  - [Vite](https://vitejs.dev/) para desenvolvimento rápido e build otimizado.
 - **SEO e Dados Estruturados:**
   - Schema.org para melhorar a indexação e visibilidade nos motores de busca.
 
-## 📂 Estrutura do Projeto
+## 📂 Nova Estrutura do Projeto
 ```
 /workspaces/limfs
-├── dados/                # Dados JSON para os indicadores
-├── docs/                 # Documentação técnica
-├── img/                  # Imagens e ícones
-├── js/                   # Scripts JavaScript
+├── src/                  # Código fonte principal do projeto
 │   ├── components/       # Componentes reutilizáveis
-│   ├── services/         # Serviços para manipulação de dados
-│   ├── utils/            # Utilitários (cache, retry, etc.)
-├── styles/               # Arquivos CSS
-│   ├── components/       # Estilos de componentes
-│   ├── pages/            # Estilos específicos de páginas
-├── painel-ods/           # Páginas HTML do painel
-├── __tests__/            # Testes unitários
+│   │   ├── charts/       # Componentes de gráficos
+│   │   ├── layout/       # Layout (menus, footers)
+│   │   ├── indicators/   # Componentes de indicadores
+│   │   ├── accessibility/# Componentes de acessibilidade
+│   │   └── ui/           # Componentes de UI genéricos
+│   ├── services/         # Serviços para lógica de negócio
+│   │   ├── api/          # Serviços de API
+│   │   ├── cache/        # Gerenciamento de cache
+│   │   ├── monitoring/   # Monitoramento e telemetria
+│   │   └── validation/   # Validação de dados
+│   ├── utils/            # Utilitários e funções auxiliares
+│   ├── styles/           # Estilos CSS organizados
+│   │   ├── components/   # Estilos específicos de componentes
+│   │   └── pages/        # Estilos específicos de páginas
+│   ├── data/             # Dados JSON estáticos
+│   ├── constants/        # Constantes e configurações
+│   ├── assets/           # Recursos estáticos (imagens)
+│   └── tests/            # Testes automatizados
+│       ├── unit/         # Testes unitários 
+│       └── integration/  # Testes de integração
+├── public/               # Arquivos públicos
+├── docs/                 # Documentação técnica
+│   └── NOVA_ESTRUTURA.md # Detalhes sobre a nova estrutura
+├── scripts/              # Scripts de automação
 └── README.md             # Documentação do projeto
 ```
 
@@ -52,13 +66,31 @@ O **Painel ODS Sergipe** é uma plataforma interativa desenvolvida pelo **Labora
    ```bash
    cd limfs
    ```
-3. Abra o arquivo `index.html` no navegador para visualizar o painel.
+3. Instale as dependências:
+   ```bash
+   npm install
+   ```
+4. Execute em modo de desenvolvimento:
+   ```bash
+   npm run dev
+   ```
+5. Para build de produção:
+   ```bash
+   npm run build
+   ```
 
 ## 🧪 Testes
-- Os testes unitários estão localizados na pasta `__tests__/` e cobrem funcionalidades como validação de APIs, manipulação de cache e lógica de gráficos.
-- Para executar os testes, utilize o framework [Jest](https://jestjs.io/):
+- Os testes foram reorganizados para a pasta `src/tests/` com separação entre unitários e de integração
+- Para executar os testes:
   ```bash
+  # Todos os testes
   npm test
+  
+  # Apenas testes unitários
+  npm run test:unit
+  
+  # Apenas testes de integração
+  npm run test:integration
   ```
 
 ## 📊 Indicadores Monitorados
@@ -77,6 +109,9 @@ Os dados utilizados no painel são provenientes de fontes confiáveis, como:
 - **DATASUS:** Informações de Saúde Pública.
 
 ## 🔒 Boas Práticas Implementadas
+- **Arquitetura Organizada:**
+  - Separação clara de responsabilidades
+  - Módulos coesos com alta coesão e baixo acoplamento
 - **Acessibilidade:**
   - Uso de atributos `aria-*` e navegação por teclado.
 - **Desempenho:**
@@ -84,6 +119,19 @@ Os dados utilizados no painel são provenientes de fontes confiáveis, como:
   - Estratégias de fallback para dados indisponíveis.
 - **Segurança:**
   - Sanitização de dados antes de renderizar no DOM.
+
+## 🔄 Migração para Nova Estrutura
+O projeto passou por uma reorganização para melhorar a manutenibilidade e evolução do código:
+
+1. Para migrar automaticamente os arquivos da estrutura antiga para a nova:
+   ```bash
+   npm run migrate
+   ```
+
+2. Para mais detalhes sobre a nova estrutura, consulte:
+   ```
+   docs/NOVA_ESTRUTURA.md
+   ```
 
 ## 📌 Contribuição
 Contribuições são bem-vindas! Siga as diretrizes no arquivo `CONTRIBUTING.md` para enviar sugestões ou corrigir problemas.

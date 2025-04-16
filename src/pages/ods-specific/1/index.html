@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ODS 1 - Erradicação da Pobreza - Painel ODS Sergipe">
+  <title>ODS 1: Erradicação da Pobreza | Painel ODS Sergipe</title>
+  
+  <!-- Estilos -->
+  <link rel="stylesheet" href="../../../styles/global/reset.css">
+  <link rel="stylesheet" href="../../../styles/global/typography.css">
+  <link rel="stylesheet" href="../../../styles/global/global-variables.css">
+  <link rel="stylesheet" href="../../../styles/components/menu.css">
+  <link rel="stylesheet" href="../../../styles/components/footer.css">
+  <link rel="stylesheet" href="../../../styles/components/ods-colors.css">
+  <link rel="stylesheet" href="./ods1.css">
+</head>
+<body class="ods-page ods1-theme">
+  <header id="header">
+    <!-- Menu será carregado dinamicamente pelo JavaScript -->
+  </header>
+
+  <main>
+    <section class="ods-header">
+      <div class="container">
+        <div class="ods-header-content">
+          <div class="ods-icon">
+            <img src="../../../assets/images/logo-icons-coloridos-01.png" alt="Ícone ODS 1">
+          </div>
+          <div class="ods-title">
+            <h1>ODS 1: Erradicação da Pobreza</h1>
+            <p>Acabar com a pobreza em todas as suas formas, em todos os lugares</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ods-indicators">
+      <div class="container">
+        <h2>Indicadores Principais</h2>
+        
+        <div class="indicators-grid">
+          <div class="indicator-card">
+            <h3>Taxa de Extrema Pobreza</h3>
+            <div class="indicator-value" id="taxa-pobreza">
+              <div class="loading-spinner"></div>
+            </div>
+            <div class="indicator-chart" id="chart-pobreza">
+              <!-- Gráfico será carregado dinamicamente -->
+            </div>
+            <div class="indicator-metadata">
+              <p>Fonte: IBGE</p>
+              <p>Última atualização: <span id="atualizacao-pobreza">...</span></p>
+            </div>
+          </div>
+          
+          <div class="indicator-card">
+            <h3>Taxa de Pobreza</h3>
+            <div class="indicator-value" id="taxa-pobreza-total">
+              <div class="loading-spinner"></div>
+            </div>
+            <div class="indicator-chart" id="chart-pobreza-total">
+              <!-- Gráfico será carregado dinamicamente -->
+            </div>
+            <div class="indicator-metadata">
+              <p>Fonte: IBGE</p>
+              <p>Última atualização: <span id="atualizacao-pobreza-total">...</span></p>
+            </div>
+          </div>
+          
+          <div class="indicator-card">
+            <h3>Índice de Gini</h3>
+            <div class="indicator-value" id="indice-gini">
+              <div class="loading-spinner"></div>
+            </div>
+            <div class="indicator-chart" id="chart-gini">
+              <!-- Gráfico será carregado dinamicamente -->
+            </div>
+            <div class="indicator-metadata">
+              <p>Fonte: IBGE</p>
+              <p>Última atualização: <span id="atualizacao-gini">...</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ods-analysis">
+      <div class="container">
+        <h2>Análise e Contexto</h2>
+        
+        <div class="analysis-content">
+          <p>O ODS 1 visa erradicar a pobreza em todas as suas formas até 2030. Em Sergipe, a taxa de extrema pobreza apresenta tendência de <span id="tendencia-pobreza">...</span> nos últimos anos.</p>
+          
+          <p>Os principais desafios enfrentados pelo estado incluem a desigualdade regional, com municípios do alto sertão apresentando índices mais elevados de pobreza, e os impactos socioeconômicos da pandemia de COVID-19, que reverteram alguns dos avanços anteriores.</p>
+          
+          <h3>Iniciativas em Destaque</h3>
+          <ul class="initiatives-list">
+            <li>Programa Estadual de Transferência de Renda</li>
+            <li>Projeto de Inclusão Produtiva Rural</li>
+            <li>Capacitação Profissional para Populações Vulneráveis</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="ods-map">
+      <div class="container">
+        <h2>Distribuição Geográfica</h2>
+        <div id="map-ods1" class="map-container">
+          <!-- Mapa será carregado dinamicamente -->
+          <p class="map-loading">Carregando mapa...</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="ods-related">
+      <div class="container">
+        <h2>ODS Relacionados</h2>
+        <div class="related-ods">
+          <a href="../2/" class="related-ods-item">
+            <img src="../../../assets/images/logo-icons-coloridos-02.png" alt="ODS 2">
+            <span>ODS 2: Fome Zero</span>
+          </a>
+          <a href="../8/" class="related-ods-item">
+            <img src="../../../assets/images/logo-icons-coloridos-08.png" alt="ODS 8">
+            <span>ODS 8: Trabalho Decente</span>
+          </a>
+          <a href="../10/" class="related-ods-item">
+            <img src="../../../assets/images/logo-icons-coloridos-10.png" alt="ODS 10">
+            <span>ODS 10: Redução das Desigualdades</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer">
+    <!-- Footer será carregado dinamicamente pelo JavaScript -->
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="../../../components/layout/menu.js"></script>
+  <script type="module" src="../../../components/layout/footer.js"></script>
+  <script type="module" src="./ods1.js"></script>
+</body>
+</html>

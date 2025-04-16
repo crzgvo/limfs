@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dashboard ODS 7 - Energia Limpa e Acessível | LIMFS - Laboratório de Indicadores para Monitoramento das Famílias Sergipanas">
+  <!-- Content Security Policy adicionada -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://cdnjs.cloudflare.com;
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com https://fonts.googleapis.com;
+    img-src 'self' data:;
+    font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com;
+    connect-src 'self' https://api.mosaicosfuturos.com;
+    object-src 'none';
+    frame-ancestors 'none';
+  ">
+  <!-- Headers HTTP adicionais de segurança -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="no-referrer">
+  <title>ODS 7 - Energia Limpa e Acessível | LIMFS</title>
+  <link rel="stylesheet" href="../styles/global-variables.css">
+  <link rel="stylesheet" href="../styles/painel-ods.css">
+  <link rel="stylesheet" href="../styles/components/ods7.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module" src="../js/painel-ods.js"></script>
+  <!-- Metadados para compartilhamento social -->
+  <meta property="og:title" content="ODS 7 - Energia Limpa e Acessível | LIMFS">
+  <meta property="og:description" content="Conheça os indicadores de Energia Limpa e Acessível em Sergipe e contribua para um futuro sustentável">
+  <meta property="og:image" content="../img/logo-icons-coloridos-07.png">
+  <meta property="og:url" content="https://www.mosaicosfuturos.com/painel-ods/ods7.html">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+<body data-pagina="ods7">
+  <a href="#conteudo-principal" class="pular-link">Pular para o conteúdo principal</a>
+  <header>
+    <div class="container">
+      <h1>Laboratório de Indicadores para Monitoramento das Famílias Sergipanas</h1>
+      <nav aria-label="Menu principal">
+        <ul role="menubar">
+          <li role="menuitem"><a href="../index.html">Início</a></li>
+          <li role="menuitem"><a href="../painel-ods/index.html">Painel Geral</a></li>
+          <li role="menuitem"><a href="../sobre/index.html">Sobre</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo-principal" role="main" class="container">
+    <div class="ods-header">
+      <img src="../img/logo-icons-coloridos-07.png" alt="Ícone ODS 7" class="ods-icon">
+      <div>
+        <h1 id="ods-titulo">ODS 7 - Energia Limpa e Acessível</h1>
+        <p id="ods-descricao">Garantir o acesso a fontes de energia fiáveis, sustentáveis e modernas para todos</p>
+        <p id="ultima-atualizacao" class="small">Carregando informações...</p>
+      </div>
+    </div>
+
+    <!-- Seção explicativa sobre o ODS 7 -->
+    <section class="ods-explicativo">
+      <div class="card info-card">
+        <h2>Energia Limpa e Acessível em Sergipe</h2>
+        <p>O ODS 7 busca garantir acesso à energia moderna, confiável, sustentável e com preço acessível para todos. Em Sergipe, os esforços se concentram na expansão das energias renováveis, especialmente solar e eólica, e no acesso universal à eletricidade.</p>
+        <div class="destaque-info">
+          <i class="fas fa-lightbulb" aria-hidden="true"></i>
+          <div>
+            <strong>Potencial Energético:</strong> 
+            <span>Sergipe tem alto potencial para energia solar, com média de 280 dias ensolarados por ano, e energia eólica em regiões específicas do litoral norte.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="loading-indicator" class="loader" role="status" aria-live="polite">Carregando dados...</div>
+    <div id="error-message" class="error" style="display: none;" role="alert" aria-live="assertive"></div>
+
+    <section class="dashboard-container">
+      <div class="card valor-principal-card">
+        <h2>Indicador Principal</h2>
+        <div class="valor-principal-container">
+          <span id="valor-principal" class="valor-principal" aria-live="polite">--</span>
+          <span id="valor-descricao" class="valor-descricao" aria-live="polite">Carregando...</span>
+        </div>
+      </div>
+
+      <div class="card grafico-card">
+        <h2>Evolução Histórica e Metas</h2>
+        <div class="grafico-container" style="height: 300px;">
+          <canvas id="grafico-principal" role="img" aria-label="Gráfico de evolução histórica do acesso à energia elétrica em Sergipe"></canvas>
+        </div>
+        <p id="grafico-descricao" class="screen-reader-only">Este gráfico mostra a evolução da cobertura de energia elétrica em Sergipe em comparação com as metas estabelecidas.</p>
+        <button id="btn-exportar" class="btn-exportar" aria-label="Exportar dados em CSV">
+          <i class="fas fa-download" aria-hidden="true"></i> Exportar Dados (CSV)
+        </button>
+      </div>
+    </section>
+
+    <section class="indicadores-detalhados-container">
+      <h2>Indicadores Detalhados</h2>
+      <div id="indicadores-detalhados" class="indicadores-grid" aria-live="polite">
+        <!-- Os indicadores detalhados serão injetados dinamicamente aqui -->
+      </div>
+    </section>
+
+    <!-- Seção de matriz energética -->
+    <section class="matriz-energetica">
+      <h2>Matriz Energética de Sergipe</h2>
+      <p class="descricao-matriz">Composição e evolução da matriz energética do estado por fonte de energia</p>
+      <div class="grafico-container" style="height: 400px;">
+        <canvas id="grafico-comparativo" 
+                aria-label="Gráfico de evolução comparativa das fontes de energia em Sergipe"
+                role="img"></canvas>
+      </div>
+      <div class="legenda-matriz">
+        <span class="legenda-item"><span class="cor-legenda solar"></span> Energia Solar</span>
+        <span class="legenda-item"><span class="cor-legenda eolica"></span> Energia Eólica</span>
+        <span class="legenda-item"><span class="cor-legenda biomassa"></span> Biomassa</span>
+        <span class="legenda-item"><span class="cor-legenda hidro"></span> Hidrelétrica</span>
+      </div>
+    </section>
+
+    <section class="desafios-oportunidades">
+      <h2>Desafios e Oportunidades</h2>
+      <div class="cards-container">
+        <div class="desafio-card">
+          <h3><i class="fas fa-exclamation-triangle"></i> Desafios</h3>
+          <ul>
+            <li>Ampliação da infraestrutura para comunidades rurais isoladas</li>
+            <li>Redução do custo da energia para população de baixa renda</li>
+            <li>Diversificação da matriz energética ainda dependente de fontes não renováveis</li>
+            <li>Implementação de políticas de incentivo às energias renováveis</li>
+          </ul>
+        </div>
+        <div class="oportunidade-card">
+          <h3><i class="fas fa-lightbulb"></i> Oportunidades</h3>
+          <ul>
+            <li>Alto potencial solar com mais de 280 dias de sol por ano</li>
+            <li>Desenvolvimento de projetos de energia eólica no litoral</li>
+            <li>Reaproveitamento de resíduos da cana-de-açúcar para biomassa</li>
+            <li>Potencial para geração distribuída em pequenas propriedades rurais</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="acoes-impacto">
+      <h2>Ações de Impacto</h2>
+      <div class="acoes-grid">
+        <div class="acao-card">
+          <h3>Energia Solar nas Escolas</h3>
+          <p>Instalação de painéis solares em escolas públicas estaduais, gerando economia orçamentária e servindo como laboratório prático para educação ambiental.</p>
+          <a href="#" class="btn-saiba-mais" aria-label="Saiba mais sobre o programa Energia Solar nas Escolas">Saiba mais</a>
+        </div>
+        <div class="acao-card">
+          <h3>Luz para Todos Rural</h3>
+          <p>Expansão do acesso à energia elétrica para comunidades rurais isoladas, com prioridade para sistemas autônomos de geração renovável em locais sem acesso à rede.</p>
+          <a href="#" class="btn-saiba-mais" aria-label="Saiba mais sobre o programa Luz para Todos Rural">Saiba mais</a>
+        </div>
+        <div class="acao-card">
+          <h3>Eficiência Energética</h3>
+          <p>Programa de substituição de equipamentos antigos por modelos mais eficientes em prédios públicos e residências de baixa renda, gerando economia de 30% no consumo.</p>
+          <a href="#" class="btn-saiba-mais" aria-label="Saiba mais sobre o programa de Eficiência Energética">Saiba mais</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="recomendacoes-politicas">
+      <h2>Recomendações de Políticas Públicas</h2>
+      <div class="recomendacoes-lista">
+        <div class="recomendacao-item">
+          <h3>1. Incentivo à Energia Solar Distribuída</h3>
+          <p>Implementar programa estadual de incentivo à instalação de sistemas solares fotovoltaicos residenciais, com linhas de financiamento específicas e redução tributária para equipamentos de energia limpa.</p>
+          <div class="links-documentos">
+            <a href="#" class="link-documento-oficial" aria-label="Ver estudo de viabilidade para energia solar distribuída">
+              <i class="fas fa-file-pdf" aria-hidden="true"></i> Estudo de Viabilidade
+            </a>
+            <a href="#" class="link-documento-oficial" aria-label="Ver proposta de legislação para incentivos fiscais">
+              <i class="fas fa-gavel" aria-hidden="true"></i> Proposta de Legislação
+            </a>
+          </div>
+        </div>
+        <div class="recomendacao-item">
+          <h3>2. Ampliação da Rede de Carregamento para Veículos Elétricos</h3>
+          <p>Criar infraestrutura básica de carregadores elétricos em vias públicas principais e estabelecer parcerias com shopping centers e supermercados para instalação de pontos de recarga.</p>
+          <a href="#" class="link-documento-oficial" aria-label="Ver plano de mobilidade elétrica para Sergipe">
+            <i class="fas fa-file-pdf" aria-hidden="true"></i> Plano de Mobilidade Elétrica
+          </a>
+        </div>
+        <div class="recomendacao-item">
+          <h3>3. Programa de Capacitação em Energias Renováveis</h3>
+          <p>Desenvolver cursos técnicos e superiores específicos para formação de mão-de-obra qualificada em instalação e manutenção de sistemas de energia renovável, com foco em solar e eólica.</p>
+          <a href="#" class="link-documento-oficial" aria-label="Ver proposta de grade curricular para cursos técnicos">
+            <i class="fas fa-file-pdf" aria-hidden="true"></i> Proposta Curricular
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nova seção de compartilhamento social -->
+    <section class="compartilhamento-social">
+      <h2>Compartilhe Estes Dados</h2>
+      <p>Ajude a promover a conscientização sobre energia limpa e acessível em Sergipe</p>
+      <div class="botoes-sociais">
+        <a href="#" target="_blank" rel="noopener noreferrer" class="btn-social btn-twitter" id="twitter-share" aria-label="Compartilhar no Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i> Twitter
+        </a>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="btn-social btn-facebook" id="facebook-share" aria-label="Compartilhar no Facebook">
+          <i class="fab fa-facebook-f" aria-hidden="true"></i> Facebook
+        </a>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="btn-social btn-linkedin" id="linkedin-share" aria-label="Compartilhar no LinkedIn">
+          <i class="fab fa-linkedin-in" aria-hidden="true"></i> LinkedIn
+        </a>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="btn-social btn-whatsapp" id="whatsapp-share" aria-label="Compartilhar no WhatsApp">
+          <i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp
+        </a>
+      </div>
+    </section>
+
+    <!-- Nova seção de participação cidadã -->
+    <section class="participacao-cidada">
+      <h2>Sua Opinião Importa</h2>
+      <p>Ajude-nos a melhorar os indicadores de energia limpa e acessível em Sergipe</p>
+      <form id="form-enquete" class="form-enquete">
+        <fieldset>
+          <legend>Na sua opinião, qual deve ser a prioridade para o desenvolvimento energético de Sergipe?</legend>
+          <div class="opcoes-enquete">
+            <div class="opcao-radio">
+              <input type="radio" id="opcao1" name="avaliacao" value="solar">
+              <label for="opcao1">Ampliar instalações de energia solar</label>
+            </div>
+            <div class="opcao-radio">
+              <input type="radio" id="opcao2" name="avaliacao" value="eolica">
+              <label for="opcao2">Investir em parques eólicos</label>
+            </div>
+            <div class="opcao-radio">
+              <input type="radio" id="opcao3" name="avaliacao" value="biomassa">
+              <label for="opcao3">Desenvolver usinas de biomassa</label>
+            </div>
+            <div class="opcao-radio">
+              <input type="radio" id="opcao4" name="avaliacao" value="acesso">
+              <label for="opcao4">Garantir acesso universal à energia</label>
+            </div>
+            <div class="opcao-radio">
+              <input type="radio" id="opcao5" name="avaliacao" value="eficiencia">
+              <label for="opcao5">Melhorar a eficiência energética</label>
+            </div>
+          </div>
+          <button type="submit" class="btn-enviar">Enviar Resposta</button>
+        </fieldset>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 LIMFS - Laboratório de Indicadores para Monitoramento das Famílias Sergipanas</p>
+      <p>Dados atualizados em <span id="data-atualizacao">Abril de 2025</span></p>
+      <p><a href="/acessibilidade.html">Política de Acessibilidade</a> | <a href="/privacidade.html">Política de Privacidade</a></p>
+    </div>
+  </footer>
+</body>
+</html>

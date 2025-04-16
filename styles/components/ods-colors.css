@@ -1,0 +1,216 @@
+/**
+ * Cores oficiais dos Objetivos de Desenvolvimento Sustentável (ODS)
+ * Paleta centralizada para uso em todo o sistema LIMFS
+ * 
+ * Última atualização: 14/04/2025
+ */
+
+:root {
+  /* Cores primárias dos ODS conforme padrão oficial da ONU */
+  --ods1: #E5243B; /* Erradicação da Pobreza */
+  --ods2: #DDA63A; /* Fome Zero */
+  --ods3: #4C9F38; /* Saúde e Bem-Estar */
+  --ods4: #C5192D; /* Educação de Qualidade */
+  --ods5: #FF3A21; /* Igualdade de Gênero */
+  --ods6: #26BDE2; /* Água Potável e Saneamento */
+  --ods7: #FCC30B; /* Energia Limpa e Acessível */
+  --ods8: #A21942; /* Trabalho Decente e Crescimento Econômico */
+  --ods9: #FD6925; /* Indústria, Inovação e Infraestrutura */
+  --ods10: #DD1367; /* Redução das Desigualdades */
+  --ods11: #FD9D24; /* Cidades e Comunidades Sustentáveis */
+  --ods12: #BF8B2E; /* Consumo e Produção Responsáveis */
+  --ods13: #3F7E44; /* Ação Contra a Mudança Global do Clima */
+  --ods14: #0A97D9; /* Vida na Água */
+  --ods15: #56C02B; /* Vida Terrestre */
+  --ods16: #00689D; /* Paz, Justiça e Instituições Eficazes */
+  --ods17: #19486A; /* Parcerias e Meios de Implementação */
+  --ods18: #6F1D78; /* Igualdade Racial (Brasil) */
+  
+  /* Versões com transparência para uso em backgrounds e overlays */
+  --ods1-light: rgba(229, 36, 59, 0.15);
+  --ods2-light: rgba(221, 166, 58, 0.15);
+  --ods3-light: rgba(76, 159, 56, 0.15);
+  --ods4-light: rgba(197, 25, 45, 0.15);
+  --ods5-light: rgba(255, 58, 33, 0.15);
+  --ods6-light: rgba(38, 189, 226, 0.15);
+  --ods7-light: rgba(252, 195, 11, 0.15);
+  --ods8-light: rgba(162, 25, 66, 0.15);
+  --ods9-light: rgba(253, 105, 37, 0.15);
+  --ods10-light: rgba(221, 19, 103, 0.15);
+  --ods11-light: rgba(253, 157, 36, 0.15);
+  --ods12-light: rgba(191, 139, 46, 0.15);
+  --ods13-light: rgba(63, 126, 68, 0.15);
+  --ods14-light: rgba(10, 151, 217, 0.15);
+  --ods15-light: rgba(86, 192, 43, 0.15);
+  --ods16-light: rgba(0, 104, 157, 0.15);
+  --ods17-light: rgba(25, 72, 106, 0.15);
+  --ods18-light: rgba(111, 29, 120, 0.15);
+  
+  /* Versões para hover e estados ativos */
+  --ods1-hover: #c71c30;
+  --ods2-hover: #c58b21;
+  --ods3-hover: #3d8329;
+  --ods4-hover: #a61525;
+  --ods5-hover: #dd2607;
+  --ods6-hover: #1ea2c2;
+  --ods7-hover: #e0ac06;
+  --ods8-hover: #871536;
+  --ods9-hover: #e55511;
+  --ods10-hover: #ba1056;
+  --ods11-hover: #eb8710;
+  --ods12-hover: #a67625;
+  --ods13-hover: #336939;
+  --ods14-hover: #0880b8;
+  --ods15-hover: #47a323;
+  --ods16-hover: #005583;
+  --ods17-hover: #133857;
+  --ods18-hover: #5a1763;
+  
+  /* Cores para texto em fundos de cada ODS (garantindo contraste) */
+  --ods-text-light: #ffffff;
+  --ods-text-dark: #333333;
+  
+  /* Atribui texto claro/escuro para cada ODS (para garantir acessibilidade) */
+  --ods1-text: var(--ods-text-light);
+  --ods2-text: var(--ods-text-dark);
+  --ods3-text: var(--ods-text-light);
+  --ods4-text: var(--ods-text-light);
+  --ods5-text: var(--ods-text-light);
+  --ods6-text: var(--ods-text-dark);
+  --ods7-text: var(--ods-text-dark);
+  --ods8-text: var(--ods-text-light);
+  --ods9-text: var(--ods-text-dark);
+  --ods10-text: var(--ods-text-light);
+  --ods11-text: var(--ods-text-dark);
+  --ods12-text: var(--ods-text-light);
+  --ods13-text: var(--ods-text-light);
+  --ods14-text: var(--ods-text-light);
+  --ods15-text: var(--ods-text-dark);
+  --ods16-text: var(--ods-text-light);
+  --ods17-text: var(--ods-text-light);
+  --ods18-text: var(--ods-text-light);
+}
+
+/* Classes para aplicar cores de ODS como background */
+.bg-ods1 { background-color: var(--ods1); color: var(--ods1-text); }
+.bg-ods2 { background-color: var(--ods2); color: var(--ods2-text); }
+.bg-ods3 { background-color: var(--ods3); color: var(--ods3-text); }
+.bg-ods4 { background-color: var(--ods4); color: var(--ods4-text); }
+.bg-ods5 { background-color: var(--ods5); color: var(--ods5-text); }
+.bg-ods6 { background-color: var(--ods6); color: var(--ods6-text); }
+.bg-ods7 { background-color: var(--ods7); color: var(--ods7-text); }
+.bg-ods8 { background-color: var(--ods8); color: var(--ods8-text); }
+.bg-ods9 { background-color: var(--ods9); color: var(--ods9-text); }
+.bg-ods10 { background-color: var(--ods10); color: var(--ods10-text); }
+.bg-ods11 { background-color: var(--ods11); color: var(--ods11-text); }
+.bg-ods12 { background-color: var(--ods12); color: var(--ods12-text); }
+.bg-ods13 { background-color: var(--ods13); color: var(--ods13-text); }
+.bg-ods14 { background-color: var(--ods14); color: var(--ods14-text); }
+.bg-ods15 { background-color: var(--ods15); color: var(--ods15-text); }
+.bg-ods16 { background-color: var(--ods16); color: var(--ods16-text); }
+.bg-ods17 { background-color: var(--ods17); color: var(--ods17-text); }
+.bg-ods18 { background-color: var(--ods18); color: var(--ods18-text); }
+
+/* Classes para aplicar cores de ODS como cor de texto */
+.text-ods1 { color: var(--ods1); }
+.text-ods2 { color: var(--ods2); }
+.text-ods3 { color: var(--ods3); }
+.text-ods4 { color: var(--ods4); }
+.text-ods5 { color: var(--ods5); }
+.text-ods6 { color: var(--ods6); }
+.text-ods7 { color: var(--ods7); }
+.text-ods8 { color: var(--ods8); }
+.text-ods9 { color: var(--ods9); }
+.text-ods10 { color: var(--ods10); }
+.text-ods11 { color: var(--ods11); }
+.text-ods12 { color: var(--ods12); }
+.text-ods13 { color: var(--ods13); }
+.text-ods14 { color: var(--ods14); }
+.text-ods15 { color: var(--ods15); }
+.text-ods16 { color: var(--ods16); }
+.text-ods17 { color: var(--ods17); }
+.text-ods18 { color: var(--ods18); }
+
+/* Classes para aplicar cores de ODS como borda */
+.border-ods1 { border-color: var(--ods1); }
+.border-ods2 { border-color: var(--ods2); }
+.border-ods3 { border-color: var(--ods3); }
+.border-ods4 { border-color: var(--ods4); }
+.border-ods5 { border-color: var(--ods5); }
+.border-ods6 { border-color: var(--ods6); }
+.border-ods7 { border-color: var(--ods7); }
+.border-ods8 { border-color: var(--ods8); }
+.border-ods9 { border-color: var(--ods9); }
+.border-ods10 { border-color: var(--ods10); }
+.border-ods11 { border-color: var(--ods11); }
+.border-ods12 { border-color: var(--ods12); }
+.border-ods13 { border-color: var(--ods13); }
+.border-ods14 { border-color: var(--ods14); }
+.border-ods15 { border-color: var(--ods15); }
+.border-ods16 { border-color: var(--ods16); }
+.border-ods17 { border-color: var(--ods17); }
+.border-ods18 { border-color: var(--ods18); }
+
+/* Classes para aplicar backgrounds com opacidade */
+.bg-ods1-light { background-color: var(--ods1-light); }
+.bg-ods2-light { background-color: var(--ods2-light); }
+.bg-ods3-light { background-color: var(--ods3-light); }
+.bg-ods4-light { background-color: var(--ods4-light); }
+.bg-ods5-light { background-color: var(--ods5-light); }
+.bg-ods6-light { background-color: var(--ods6-light); }
+.bg-ods7-light { background-color: var(--ods7-light); }
+.bg-ods8-light { background-color: var(--ods8-light); }
+.bg-ods9-light { background-color: var(--ods9-light); }
+.bg-ods10-light { background-color: var(--ods10-light); }
+.bg-ods11-light { background-color: var(--ods11-light); }
+.bg-ods12-light { background-color: var(--ods12-light); }
+.bg-ods13-light { background-color: var(--ods13-light); }
+.bg-ods14-light { background-color: var(--ods14-light); }
+.bg-ods15-light { background-color: var(--ods15-light); }
+.bg-ods16-light { background-color: var(--ods16-light); }
+.bg-ods17-light { background-color: var(--ods17-light); }
+.bg-ods18-light { background-color: var(--ods18-light); }
+
+/* Gradientes com cores ODS */
+.gradient-ods1 { background: linear-gradient(135deg, var(--ods1) 0%, var(--ods1-hover) 100%); color: var(--ods1-text); }
+.gradient-ods2 { background: linear-gradient(135deg, var(--ods2) 0%, var(--ods2-hover) 100%); color: var(--ods2-text); }
+.gradient-ods3 { background: linear-gradient(135deg, var(--ods3) 0%, var(--ods3-hover) 100%); color: var(--ods3-text); }
+.gradient-ods4 { background: linear-gradient(135deg, var(--ods4) 0%, var(--ods4-hover) 100%); color: var(--ods4-text); }
+.gradient-ods5 { background: linear-gradient(135deg, var(--ods5) 0%, var(--ods5-hover) 100%); color: var(--ods5-text); }
+.gradient-ods6 { background: linear-gradient(135deg, var(--ods6) 0%, var(--ods6-hover) 100%); color: var(--ods6-text); }
+.gradient-ods7 { background: linear-gradient(135deg, var(--ods7) 0%, var(--ods7-hover) 100%); color: var(--ods7-text); }
+.gradient-ods8 { background: linear-gradient(135deg, var(--ods8) 0%, var(--ods8-hover) 100%); color: var(--ods8-text); }
+.gradient-ods9 { background: linear-gradient(135deg, var(--ods9) 0%, var(--ods9-hover) 100%); color: var(--ods9-text); }
+.gradient-ods10 { background: linear-gradient(135deg, var(--ods10) 0%, var(--ods10-hover) 100%); color: var(--ods10-text); }
+.gradient-ods11 { background: linear-gradient(135deg, var(--ods11) 0%, var(--ods11-hover) 100%); color: var(--ods11-text); }
+.gradient-ods12 { background: linear-gradient(135deg, var(--ods12) 0%, var(--ods12-hover) 100%); color: var(--ods12-text); }
+.gradient-ods13 { background: linear-gradient(135deg, var(--ods13) 0%, var(--ods13-hover) 100%); color: var(--ods13-text); }
+.gradient-ods14 { background: linear-gradient(135deg, var(--ods14) 0%, var(--ods14-hover) 100%); color: var(--ods14-text); }
+.gradient-ods15 { background: linear-gradient(135deg, var(--ods15) 0%, var(--ods15-hover) 100%); color: var(--ods15-text); }
+.gradient-ods16 { background: linear-gradient(135deg, var(--ods16) 0%, var(--ods16-hover) 100%); color: var(--ods16-text); }
+.gradient-ods17 { background: linear-gradient(135deg, var(--ods17) 0%, var(--ods17-hover) 100%); color: var(--ods17-text); }
+.gradient-ods18 { background: linear-gradient(135deg, var(--ods18) 0%, var(--ods18-hover) 100%); color: var(--ods18-text); }
+
+/* Alto contraste para acessibilidade */
+@media (prefers-contrast: more) {
+  :root {
+    --ods1: #c40f26;
+    --ods2: #b58518;
+    --ods3: #357625;
+    --ods4: #ad0d1f;
+    --ods5: #e00d00;
+    --ods6: #0f9bc0;
+    --ods7: #e3a800;
+    --ods8: #8f0d31;
+    --ods9: #e64008;
+    --ods10: #c40055;
+    --ods11: #e37e00;
+    --ods12: #a67211;
+    --ods13: #2a632f;
+    --ods14: #0077b3;
+    --ods15: #3da814;
+    --ods16: #005585;
+    --ods17: #0c3658;
+    --ods18: #5f0968;
+  }
+}

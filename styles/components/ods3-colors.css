@@ -1,0 +1,75 @@
+/**
+ * Cores específicas e personalizações para o ODS3 - Saúde e Bem-Estar
+ * Este arquivo contém apenas as cores e personalizações específicas para o ODS3
+ * Para ser usado em conjunto com o ods-layout-global.css
+ */
+
+:root {
+  --ods3: #4c9f38;
+  --ods3-light: #d8e6d3;
+  --ods3-dark: #3b7c2c;
+  --ods3-gradient: linear-gradient(135deg, #4c9f38 0%, #3b7c2c 100%);
+}
+
+/* Cabeçalho específico para ODS3 */
+.header-ods3 {
+  background-color: var(--ods3);
+  background-image: var(--ods3-gradient);
+}
+
+/* Botões e elementos de destaque */
+.botao-filtrar.ods3-botao,
+.btn-contribuir.ods3-botao,
+.btn-atualizar.ods3-botao,
+.btn-exportar.ods3-botao {
+  background-color: var(--ods3);
+}
+
+.botao-filtrar.ods3-botao:hover,
+.btn-contribuir.ods3-botao:hover,
+.btn-atualizar.ods3-botao:hover,
+.btn-exportar.ods3-botao:hover {
+  background-color: var(--ods3-dark);
+}
+
+/* Botão período ativo */
+.botao-periodo.ativo.ods3-periodo {
+  background-color: var(--ods3);
+  color: white;
+}
+
+/* Cores para títulos de seções */
+.secao-recomendacoes h2.ods3-titulo, 
+.secao-acoes-impacto h3.ods3-titulo,
+.visualizacao-comparativa h3.ods3-titulo {
+  color: var(--ods3);
+}
+
+/* Cores para links e elementos destacados */
+.link-acao.ods3-link {
+  color: var(--ods3);
+}
+
+/* Elementos visuais específicos */
+.case-tag.ods3-tag {
+  background-color: var(--ods3-light);
+  color: var(--ods3);
+}
+
+.metric-value.ods3-metric {
+  color: var(--ods3);
+}
+
+/* Foco para acessibilidade específico para ODS3 */
+.ods3-page a:focus,
+.ods3-page button:focus,
+.ods3-page input:focus,
+.ods3-page select:focus,
+.ods3-page textarea:focus {
+  outline: 3px solid rgba(76, 159, 56, 0.5);
+}
+
+/* Classes específicas para melhor identificação ODS3 */
+.ods3-background { background-color: var(--ods3); }
+.ods3-color { color: var(--ods3); }
+.ods3-border { border-color: var(--ods3); }

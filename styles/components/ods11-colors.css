@@ -1,0 +1,75 @@
+/**
+ * Cores específicas e personalizações para o ODS11 - Cidades e Comunidades Sustentáveis
+ * Este arquivo contém apenas as cores e personalizações específicas para o ODS11
+ * Para ser usado em conjunto com o ods-layout-global.css
+ */
+
+:root {
+  --ods11: #fd9d24;
+  --ods11-light: #feebd1;
+  --ods11-dark: #ca7e1d;
+  --ods11-gradient: linear-gradient(135deg, #fd9d24 0%, #ca7e1d 100%);
+}
+
+/* Cabeçalho específico para ODS11 */
+.header-ods11 {
+  background-color: var(--ods11);
+  background-image: var(--ods11-gradient);
+}
+
+/* Botões e elementos de destaque */
+.botao-filtrar.ods11-botao,
+.btn-contribuir.ods11-botao,
+.btn-atualizar.ods11-botao,
+.btn-exportar.ods11-botao {
+  background-color: var(--ods11);
+}
+
+.botao-filtrar.ods11-botao:hover,
+.btn-contribuir.ods11-botao:hover,
+.btn-atualizar.ods11-botao:hover,
+.btn-exportar.ods11-botao:hover {
+  background-color: var(--ods11-dark);
+}
+
+/* Botão período ativo */
+.botao-periodo.ativo.ods11-periodo {
+  background-color: var(--ods11);
+  color: white;
+}
+
+/* Cores para títulos de seções */
+.secao-recomendacoes h2.ods11-titulo, 
+.secao-acoes-impacto h3.ods11-titulo,
+.visualizacao-comparativa h3.ods11-titulo {
+  color: var(--ods11);
+}
+
+/* Cores para links e elementos destacados */
+.link-acao.ods11-link {
+  color: var(--ods11);
+}
+
+/* Elementos visuais específicos */
+.case-tag.ods11-tag {
+  background-color: var(--ods11-light);
+  color: var(--ods11);
+}
+
+.metric-value.ods11-metric {
+  color: var(--ods11);
+}
+
+/* Foco para acessibilidade específico para ODS11 */
+.ods11-page a:focus,
+.ods11-page button:focus,
+.ods11-page input:focus,
+.ods11-page select:focus,
+.ods11-page textarea:focus {
+  outline: 3px solid rgba(253, 157, 36, 0.5);
+}
+
+/* Classes específicas para melhor identificação ODS11 */
+.ods11-background { background-color: var(--ods11); }
+.ods11-color { color: var(--ods11); }
+.ods11-border { border-color: var(--ods11); }

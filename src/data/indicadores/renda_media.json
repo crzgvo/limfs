@@ -1,0 +1,37 @@
+{
+    "id": "renda_media",
+    "nome": "Renda média per capita",
+    "descricao": "Renda média per capita mensal dos brasileiros",
+    "fonte": "IBGE/PNAD Contínua",
+    "unidade": "R$",
+    "ultimaAtualizacao": "2023-12-15",
+    "periodicidade": "anual",
+    "dados": [
+        {"ano": "2015", "valor": "1,241", "regiao": "Brasil"},
+        {"ano": "2016", "valor": "1,226", "regiao": "Brasil"},
+        {"ano": "2017", "valor": "1,285", "regiao": "Brasil"},
+        {"ano": "2018", "valor": "1,337", "regiao": "Brasil"},
+        {"ano": "2019", "valor": "1,406", "regiao": "Brasil"},
+        {"ano": "2020", "valor": "1,349", "regiao": "Brasil"},
+        {"ano": "2021", "valor": "1,367", "regiao": "Brasil"},
+        {"ano": "2022", "valor": "1,435", "regiao": "Brasil"},
+        {"ano": "2023", "valor": "1,585", "regiao": "Brasil"}
+    ],
+    "dadosRegionais": [
+        {"ano": "2023", "regiao": "Norte", "valor": "1,096"},
+        {"ano": "2023", "regiao": "Nordeste", "valor": "1,015"},
+        {"ano": "2023", "regiao": "Sudeste", "valor": "1,893"},
+        {"ano": "2023", "regiao": "Sul", "valor": "1,923"},
+        {"ano": "2023", "regiao": "Centro-Oeste", "valor": "1,842"}
+    ],
+    "metadados": {
+        "metodologia": "Calculado a partir da divisão da soma de todos os rendimentos de trabalho e não trabalho pelo total de indivíduos da população.",
+        "limitacoes": "Não considera desigualdades intrarregionais e outros aspectos da distribuição de renda.",
+        "interpretacao": "Valores mais altos indicam maior renda média da população."
+    },
+    "indicadorODS": {
+        "objetivo": 1,
+        "meta": "1.2",
+        "indicador": "1.2.1"
+    }
+}

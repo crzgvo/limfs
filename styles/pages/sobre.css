@@ -1,5 +1,22 @@
 /* Removendo importação redundante de fontes - já está em style.css */
 
+body, .sobre-container {
+  font-family: var(--font-primary);
+  color: var(--cor-texto);
+  background: var(--cor-fundo);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-semibold);
+  color: var(--cor-primaria);
+}
+
+.section {
+  background: var(--cinza-100);
+  color: var(--cor-texto);
+}
+
 /* Seção principal sobre */
 #sobre-principal {
   padding: 80px 0;

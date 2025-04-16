@@ -1,0 +1,172 @@
+{
+  "ods1": {
+    "titulo": "Erradicação da pobreza",
+    "descricao": "Acabar com a pobreza em todas as suas formas, em todos os lugares",
+    "corPrimaria": "#e5243b",
+    "corSecundaria": "#f4a7b0",
+    "endpoints": {
+      "principais": "/api/v1/ods/ods1/principais",
+      "detalhados": "/api/v1/ods/ods1/detalhados"
+    },
+    "indicadorPrincipal": {
+      "chave": "taxaPobrezaExtrema",
+      "titulo": "População em situação de pobreza extrema",
+      "unidade": "%",
+      "historicoChave": "historicoPobreza"
+    },
+    "graficoPrincipal": {
+      "tipo": "linha",
+      "titulo": "Taxa de pobreza extrema (%)",
+      "unidade": "porcentagem"
+    }
+  },
+  "ods4": {
+    "titulo": "Educação de qualidade",
+    "descricao": "Garantir educação inclusiva e equitativa de qualidade",
+    "corPrimaria": "#c5192d",
+    "corSecundaria": "#f0a5ad",
+    "endpoints": {
+      "principais": "/api/v1/ods/ods4/principais",
+      "detalhados": "/api/v1/ods/ods4/detalhados"
+    },
+    "indicadorPrincipal": {
+      "chave": "taxaAlfabetizacao",
+      "titulo": "Taxa de alfabetização",
+      "unidade": "%",
+      "historicoChave": "historicoAlfabetizacao"
+    },
+    "graficoPrincipal": {
+      "tipo": "linha",
+      "titulo": "Taxa de alfabetização (%)",
+      "unidade": "porcentagem"
+    }
+  },
+  "ods6": {
+    "titulo": "Água potável e saneamento",
+    "descricao": "Garantir disponibilidade e gestão sustentável da água e saneamento para todos",
+    "corPrimaria": "#26bde2",
+    "corSecundaria": "#a3e4f3",
+    "endpoints": {
+      "principais": "/api/v1/ods/ods6/principais",
+      "detalhados": "/api/v1/ods/ods6/detalhados"
+    },
+    "indicadorPrincipal": {
+      "chave": "coberturaSaneamento",
+      "titulo": "População com acesso a saneamento básico",
+      "unidade": "%",
+      "historicoChave": "historicoSaneamento"
+    },
+    "graficoPrincipal": {
+      "tipo": "linha",
+      "titulo": "Cobertura de saneamento básico (%)",
+      "unidade": "porcentagem"
+    }
+  },
+  "ods7": {
+    "titulo": "Energia limpa e acessível",
+    "descricao": "Garantir acesso à energia barata, confiável, sustentável e moderna para todos",
+    "corPrimaria": "#fcc30b",
+    "corSecundaria": "#fde5a6",
+    "endpoints": {
+      "principais": "/api/v1/ods/ods7/principais",
+      "detalhados": "/api/v1/ods/ods7/detalhados"
+    },
+    "indicadorPrincipal": {
+      "chave": "percentualEnergiaSolar",
+      "titulo": "Percentual de energia solar na matriz energética",
+      "unidade": "%",
+      "historicoChave": "historicoEnergiaSolar"
+    },
+    "graficoPrincipal": {
+      "tipo": "linha",
+      "titulo": "Percentual de energia solar (%)",
+      "unidade": "porcentagem"
+    }
+  },
+  "ods8": {
+    "titulo": "Trabalho decente e crescimento econômico",
+    "descricao": "Promover o crescimento econômico sustentado, inclusivo e sustentável",
+    "corPrimaria": "#a21942",
+    "corSecundaria": "#e3a4b5",
+    "endpoints": {
+      "principais": "/api/v1/ods/ods8/principais",
+      "detalhados": "/api/v1/ods/ods8/detalhados"
+    },
+    "indicadorPrincipal": {
+      "chave": "taxaDesemprego",
+      "titulo": "Taxa de desemprego",
+      "unidade": "%",
+      "historicoChave": "historicoDesemprego"
+    },
+    "graficoPrincipal": {
+      "tipo": "linha",
+      "titulo": "Taxa de desemprego (%)",
+      "unidade": "porcentagem"
+    }
+  },
+  "ods12": {
+    "titulo": "Consumo e produção responsáveis",
+    "descricao": "Garantir padrões de produção e de consumo sustentáveis",
+    "corPrimaria": "#cf8d2a",
+    "corSecundaria": "#ecd7af",
+    "endpoints": {
+      "principais": "/api/v1/ods/ods12/principais",
+      "detalhados": "/api/v1/ods/ods12/detalhados"
+    },
+    "indicadorPrincipal": {
+      "chave": "percentualResiduosReciclados",
+      "titulo": "Percentual de resíduos sólidos reciclados",
+      "unidade": "%",
+      "historicoChave": "historicoResiduos"
+    },
+    "graficoPrincipal": {
+      "tipo": "linha",
+      "titulo": "Taxa de reciclagem (%)",
+      "unidade": "porcentagem"
+    }
+  },
+  "ods13": {
+    "titulo": "Ação contra a mudança global do clima",
+    "descricao": "Tomar medidas urgentes para combater a mudança do clima e seus impactos",
+    "corPrimaria": "#3f7e44",
+    "corSecundaria": "#b2d0b6",
+    "endpoints": {
+      "principais": "/api/v1/ods/ods13/principais",
+      "detalhados": "/api/v1/ods/ods13/detalhados",
+      "mapaVulnerabilidade": "/api/v1/ods/ods13/mapa-vulnerabilidade"
+    },
+    "indicadorPrincipal": {
+      "chave": "emissoesCO2",
+      "titulo": "Emissões de CO₂",
+      "unidade": "toneladas",
+      "historicoChave": "historicoEmissoes"
+    },
+    "graficoPrincipal": {
+      "tipo": "linha",
+      "titulo": "Emissões de CO₂ (ton)",
+      "unidade": "toneladas"
+    },
+    "mapaConfig": {
+      "enabled": true,
+      "center": [-10.9, -37.4],
+      "zoom": 8,
+      "estilos": {
+        "alta": {
+          "color": "#388e3c",
+          "weight": 1,
+          "fillOpacity": 0.7
+        },
+        "media": {
+          "color": "#81c784",
+          "weight": 1,
+          "fillOpacity": 0.6
+        },
+        "baixa": {
+          "color": "#c8e6c9",
+          "weight": 1,
+          "fillOpacity": 0.5
+        }
+      }
+    }
+  }
+}

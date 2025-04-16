@@ -1,0 +1,117 @@
+/* Removendo importação redundante de fontes - já está em style.css */
+
+/* Seção principal sobre */
+#sobre-principal {
+  padding: 80px 0;
+  background-color: var(--primary-blue);
+  color: var(--white);
+  text-align: center;
+}
+
+#sobre-principal .container-principal {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+#sobre-principal h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+#sobre-principal p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Seção de cartões sobre */
+#cartoes-sobre {
+  padding: 60px 0;
+  background-color: #f9f9f9;
+}
+
+#cartoes-sobre .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.grade-sobre {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.item-sobre {
+  background-color: var(--cor-fundo);
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 40px 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.item-sobre h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: var(--primary-blue);
+  text-align: center;
+}
+
+.item-sobre p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--cor-texto);
+  text-align: center;
+}
+
+.item-sobre:hover {
+  background-color: var(--primary-blue);
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.item-sobre:hover h2,
+.item-sobre:hover p {
+  color: var(--white);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  #sobre-principal h1 {
+    font-size: 2.5rem;
+  }
+
+  #sobre-principal p {
+    font-size: 1.1rem;
+  }
+
+  .grade-sobre {
+    gap: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  #sobre-principal {
+    padding: 60px 0;
+  }
+
+  #sobre-principal h1 {
+    font-size: 2rem;
+  }
+
+  #sobre-principal p {
+    font-size: 1rem;
+  }
+
+  .item-sobre {
+    padding: 30px 20px;
+  }
+
+  .item-sobre h2 {
+    font-size: 1.5rem;
+  }
+}
